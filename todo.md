@@ -151,3 +151,101 @@
 - [x] Create the `extension/` surface with manifest, service worker, content bridge, popup or control surface and shared protocol contracts.
 - [x] Add deterministic extension tests without browser credentials or network access.
 - [x] Integrate extension exports and documentation without coupling the core to Chrome or another vendor.
+
+## Master ecosystem plan
+
+The following blocks are the execution order for the complete ecosystem. A block becomes complete only when its contracts, implementation, deterministic tests, documentation and release impact are all checked.
+
+### Block 1 — audit and governance
+
+- [ ] Reconcile the supplied `README.md`, `README(2).md`, and `other.md` with the current code and remove claims that are not executable.
+- [ ] Maintain the comparative audit with primary sources for browser agents, scrapers, MCP, storage, workflow and extension projects.
+- [ ] Keep `docs/gapmatrix.md` current with implemented, partial, deferred and unsafe-by-design states.
+- [ ] Define criteria for public API stability, adapter ownership, credentials, permissions, persistence and recovery.
+
+### Block 2 — browser agent foundation
+
+- [ ] Add accessibility or structured page snapshots with snapshot identifiers and stable references.
+- [ ] Add stale reference, overlay obstruction, navigation and frame errors.
+- [ ] Add tab, frame, window and browser session identity contracts.
+- [ ] Add action results for navigation, click, type, fill, key, scroll, upload and screenshot.
+- [ ] Add deterministic event recording and replay with snapshot boundaries.
+
+### Block 3 — extension runtime
+
+- [x] Add the first Manifest V3 extension surface with popup, content bridge, service worker and protocol.
+- [ ] Add durable pending commands and rehydration after service worker termination.
+- [ ] Add optional host permission escalation with explicit user consent.
+- [ ] Add snapshot diffing, tab/frame metadata and resumable command records.
+- [ ] Add deterministic extension packaging and unpacked validation.
+- [ ] Add Firefox, Edge and WebExtension-compatible adapter profiles.
+
+### Block 4 — working set and storage
+
+- [ ] Complete chunk manifests with resume, checksum, range reads and partial sync.
+- [ ] Add content-addressed storage indexes and deduplication across backends.
+- [ ] Add cache tiers with ETag, stale-while-revalidate, invalidation and bounded memory.
+- [ ] Add storage capability negotiation for local, forge, S3-compatible, dataset and extension storage.
+- [ ] Add conflict detection and merge policy for concurrent artifact writes.
+
+### Block 5 — runners and execution
+
+- [ ] Add provider health, capacity, cost, quota and capability reporting.
+- [ ] Add workflow trigger contracts for manual, webhook, schedule, repository dispatch and retry events.
+- [ ] Add resumable remote run records with cancellation, timeout and heartbeat semantics.
+- [ ] Add cron or alarm manifests without binding the core to a single forge or host.
+- [ ] Add execution sandbox capability reports for Node, browser, container and binary modes.
+
+### Block 6 — scraping and agent context
+
+- [ ] Add structured accessibility and semantic extraction alongside HTML extraction.
+- [ ] Add schema validation, content-type detection and safe normalization for JSON, XML, Markdown and binary results.
+- [ ] Add crawl frontier priorities, per-domain budgets, sitemap refresh and persistence metrics.
+- [ ] Add RAG chunk lineage, embeddings adapter contracts and retrieval result provenance.
+- [ ] Add token accounting and model context policies without hardcoded provider prices.
+
+### Block 7 — API, MCP and security
+
+- [ ] Complete HTTP and Web Request/Response server routes for scrape, crawl, batch, jobs, health and artifacts.
+- [ ] Add versioned API envelopes, request ids, structured error responses and content negotiation.
+- [ ] Add MCP browser snapshot and browser action tools over JSONL and HTTP transports.
+- [ ] Expand SSRF defenses to redirects, DNS rebinding, IPv6, metadata endpoints and proxy dispatch.
+- [ ] Add authentication, authorization, rate limits and audit events as caller-owned adapters.
+
+### Block 8 — bots, apps and integrations
+
+- [ ] Complete GitHub, GitLab, Forgejo, Gitea, Codeberg, Hugging Face, Discord, Telegram and generic webhook adapters.
+- [ ] Add app installation, OAuth, bot token and webhook lifecycle contracts without storing secrets in the library.
+- [ ] Add command permissions, idempotent command execution and platform-neutral status reporting.
+- [ ] Add notification and artifact delivery adapters with retry and dead-letter behavior.
+- [ ] Add integration conformance tests using fake transports only.
+
+### Block 9 — packaging and distribution
+
+- [ ] Add extension zip, desktop bundle, mobile manifest, n8n package and binary artifact plans with real build checks.
+- [ ] Add reproducible SBOM, provenance, checksum and release asset generation.
+- [ ] Verify all registry workflows from a new version tag without exposing credentials.
+- [ ] Add install and smoke-test instructions for npm, GitHub Packages, GHCR, Maven, NuGet and RubyGems.
+- [ ] Publish only after namespace, visibility, license and artifact contents are confirmed.
+
+### Block 10 — product surfaces and operations
+
+- [ ] Add caller-owned desktop, mobile, n8n and web control surfaces around the same contracts.
+- [ ] Add operator controls for jobs, sessions, storage, runners, permissions, logs and artifacts.
+- [ ] Add observability for latency, retries, queue depth, runner selection, storage bytes and failures.
+- [ ] Add migration, backup, restore and data retention policies for persistent adapters.
+- [ ] Add threat model, abuse boundaries, terms-of-service guidance and security release process.
+
+### Block 11 — cross-runtime compatibility
+
+- [ ] Validate root library operation in Node, browser worker, Deno, Bun and extension contexts where supported.
+- [ ] Keep Node-only filesystem and HTTP adapters outside the transport-neutral core.
+- [ ] Add capability detection and graceful unsupported-mode errors.
+- [ ] Add import, export, tree-shaking and package surface tests for every declared subpath.
+
+### Block 12 — release gates
+
+- [ ] Require deterministic tests, format audit, syntax checks, package dry-run and security scan for every block.
+- [ ] Require documentation and changelog updates for every public contract.
+- [ ] Require a clean working tree and reviewed diff before each push.
+- [ ] Create a versioned release only after all claims in the README match code or are explicitly marked planned or deferred.
