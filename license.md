@@ -1,58 +1,78 @@
-SADDLE PROPRIETARY LICENSE - VIEW ONLY
-Version 1.0, August 2026
-Based on Creative Commons 4.0 International Legal Code Structure
+                    SADDLE PROPRIETARY LICENSE - VIEW ONLY
+                       Version 1.0, August 2026
 
-Copyright (c) August 2026 devthink, nathlan, iakadion, nathu filho, allan neris, andraneris. All Rights Reserved.
-Project: saddle
+ Copyright (C) August 2026 devthink, nathlan, iakadion, nathu filho, allan neris, andraneris
+ Everyone is permitted to view this document, but changing it
+ is not allowed. This document is part of Project saddle.
 
-SPDX-License-Identifier: LicenseRef-Saddle-Proprietary-CC40
+                            Preamble
 
-Section 1 – Definitions.
+  This License governs the source code made available by the Licensor
+  for Project saddle. Unlike free software licenses such as the GNU GPL,
+  this is a proprietary, source-available license.
 
-  a. Licensed Material means Project saddle source code, documentation
-     and associated files.
-  b. Licensor means devthink, nathlan, iakadion, nathu filho, allan neris, andraneris.
-  c. You means the individual viewing the Licensed Material.
-  d. View means reading via web browser without local copy beyond cache.
+  The Software is made visible for transparency and verification
+  purposes only. It is NOT free software. It is NOT open source.
 
-Section 2 – Scope.
+  When we speak of proprietary, we are referring to full ownership and
+  restriction, not freedom. This License is intended to guarantee that
+  the Software remains the exclusive property of its authors and that
+  no rights beyond viewing are granted.
 
-  a. License grant.
+                       TERMS AND CONDITIONS
 
-     1. Licensor grants You a limited, non-exclusive, non-transferable,
-     revocable license to VIEW the Licensed Material for evaluation only.
+  0. Definitions.
 
-     2. You have NO right to reproduce, share, adapt, use, execute,
-     distribute, or create derivative works.
+  "This License" refers to version 1.0 of the Saddle Proprietary License.
 
-  b. All rights not expressly granted are reserved.
+  "The Software" refers to any copyrightable work licensed under this
+  License, including source code, documentation, and assets for Project
+  saddle.
 
-Section 3 – License Conditions.
+  "Licensor" refers to: devthink, nathlan, iakadion, nathu filho, allan neris, andraneris.
 
-  a. Attribution.
+  To "view" means to read via web browser without creating local copy
+  beyond cache.
 
-     You must retain copyright notice:
-     Copyright (c) August 2026 devthink, nathlan, iakadion, nathu filho, allan neris, andraneris. All Rights Reserved. Project: saddle
+  1. Ownership.
 
-  b. No Sharing and No Adaptation.
+  The Software is and shall remain exclusive property of the Licensor.
+  All rights reserved.
 
-     You may NOT share or adapt the Licensed Material.
+  2. Grant - VIEW ONLY.
 
-  c. No Use.
+  Licensor grants you limited, non-exclusive, non-transferable, revocable
+  license solely to VIEW the Software for personal evaluation.
 
-     Any commercial or non-commercial use is PROHIBITED without written permission.
+  You have NO right to use, copy, modify, distribute, or create derivative
+  works.
 
-Section 4 – Disclaimer.
+  3. Prohibitions.
 
-  THE LICENSED MATERIAL IS PROVIDED AS-IS WITHOUT WARRANTY.
+  You are STRICTLY PROHIBITED from:
 
-Section 5 – Term and Termination.
+    a) Copying or reproducing;
+    b) Modifying or creating derivatives;
+    c) Distributing or sublicensing;
+    d) Using for any purpose, including SaaS or AI training;
+    e) Removing copyright notices;
+    f) Reverse engineering.
 
-  This License terminates automatically upon breach. Upon termination,
-  you must destroy cached copies.
+  4. No Warranty.
 
-Section 6 – Other Terms.
+  THE SOFTWARE IS PROVIDED AS-IS WITHOUT WARRANTY.
 
-  No additional terms apply unless expressly agreed in writing by Licensor.
+  5. Limitation of Liability.
 
-                       END OF TERMS AND CONDITIONS
+  IN NO EVENT SHALL LICENSOR BE LIABLE FOR ANY DAMAGES ARISING FROM
+  VIEWING OR INABILITY TO VIEW THE PROGRAM.
+
+  6. Termination.
+
+  License terminates automatically upon breach. Destroy cached copies.
+
+  7. Governing Law.
+
+  Governed by laws of Brazil.
+
+                     END OF TERMS AND CONDITIONS

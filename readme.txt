@@ -1,3 +1,46 @@
+                    SADDLE - README
+                       Version 1.0, August 2026
+
+ Copyright (C) August 2026 devthink, nathlan, iakadion, nathu filho, allan neris, andraneris
+ Everyone is permitted to view this document, but changing it
+ is not allowed. This document is part of Project saddle.
+
+                            Preamble
+
+  Project saddle unifies both README sources.
+
+  Saddle is a JavaScript ESM engine for jobs that move data between storage,
+  a working set, an injected runner and durable artifacts. It includes
+  contracts for scraping, crawling, browser agents, queues, persistence,
+  MCP transport, webhooks and package delivery.
+
+  Core thesis: storage bytes and compute-memory bytes are the same bytes.
+  A Node.js framework runs on other people's runners, loading storage
+  buckets as virtual RAM/GPU via storage->RAM bridge.
+
+  This README is the single source of truth combining Foundation, Engine,
+  and Productization sections from both original READMEs.
+
+                       TERMS AND CONDITIONS
+
+  0. Overview.
+
+  See full readme.md for complete documentation, API, execution model,
+  CLI, security boundaries, package surfaces, development, and repository
+  map.
+
+  1. What is Included.
+
+  Jobs, Storage, Working set, Scraping, Crawl, Browser, Operations,
+  Protocols, Delivery, Agent Browser, Compute Backends, Storage Backends.
+
+  2. License.
+
+  Proprietary - View Only. See license.txt.
+
+                     END OF TERMS AND CONDITIONS
+
+
 # Saddle
 
 <p align="center">
@@ -117,65 +160,4 @@ saddle deploy --target netlify
 ## Security boundaries
 
 | Boundary | Policy |
-| --- | --- |
-| Credentials | injected at runtime; never committed |
-| Network | http/https validated; private targets blocked |
-| Crawling | robots rules and crawl delay explicit |
-| Storage | adapters replaceable |
-| Runtime | Node HTTP isolated |
-| Failure | retry, circuit breaker, idempotency configurable |
-
-## Package surfaces
-
-| Registry | Artifact | Workflow |
-| --- | --- | --- |
-| GitHub npm | `@iakadion/saddle@1.0.0` | publishgithubnpm.yml |
-| GHCR | `ghcr.io/iakadion/saddle:latest` | publishghcr.yml |
-| Maven | `io.devthink:saddle:1.0.0` | publishmaven.yml |
-| NuGet | `Saddle 1.0.0` | publishnuget.yml |
-| RubyGems | `saddle 1.0.0` | publishrubygems.yml |
-| npmjs | `@devthink/saddle` | canonical |
-
-## Development
-
-```bash
-npm ci
-npm test
-npm run check
-npm run formatcheck
-npm run pack:check
-```
-
-Test suite deterministic, no network or real credentials required.
-
-## Repository map
-
-```
-core/          errors, events and identifiers
-domain/        jobs, artifacts, sessions and providers
-memory/        working-set bridge, modes, objects and transforms
-storage/       local, chunked, remote and file-hosting adapters
-scrape/        robots, cache, extraction, schema and scraper
-crawl/         URL normalization, crawler and persistent frontier
-queue/         queue, idempotency, saga and recovery
-browser/       fingerprint, session and agent contracts
-mcp/           optional server and JSONL/HTTP transport
-protocol/      JSON, NDJSON, SSE and block serializers
-workflow/      manifests, templates and registry
-tests/         deterministic engine coverage
-docs/          architecture, API, release and registry notes
-```
-
-Root-based JavaScript ESM layout, no src/ directory, no TypeScript build required.
-
-## Current scope
-
-Version 1.0 establishes engine contracts and tested package surface. Browser implementations, provider credentials, persistent databases and production deployment remain caller-selected adapters.
-
-Planning + research complete. P0: anti-detection, persistent queue, Docker. P1: MCP server, session persistence, schema extraction. P2: PDF, token prices, webhooks. P3: mobile emulation, tracing.
-
-## License
-
-Saddle is proprietary and confidential. Source available for viewing only under SADDLE PROPRIETARY LICENSE - VIEW ONLY Version 1.0, August 2026. Copyright (c) August 2026 devthink, nathlan, iakadion, nathu filho, allan neris, andraneris. All Rights Reserved.
-
-See license.md
+| --- | --- 
