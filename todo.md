@@ -139,5 +139,5 @@
 - [x] Inspect failed or missing release workflow runs and package listings.
 - [x] Publish the authorized GitHub Packages npm artifact after correcting the namespace blocker.
 - [x] Verify package version and visibility through the GitHub package page.
-- [ ] Publish GHCR Maven NuGet and RubyGems artifacts after their independent metadata checks.
-- [ ] Commit and push publication verification metadata.
+- [x] Publish GHCR Maven NuGet and RubyGems artifacts after their independent metadata checks.
+- [x] Commit and push publication verification metadata.
