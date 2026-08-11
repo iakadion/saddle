@@ -110,3 +110,19 @@
 - [x] Add binary build contracts and explicit mode resolution.
 - [x] Add computer desktop mobile extension and internet surface manifests.
 - [x] Review package exports docs examples and embedded error handlers.
+
+## Release audit
+
+- [ ] Compare every README foundation engine and productization item with the current code.
+- [x] Compare every README foundation engine and productization item with the current code.
+- [x] Compare the conclusions file with the current storage, site, database, forge, and runner model.
+- [x] Mark missing features as implemented, partial, deferred, or unsafe by design.
+- [x] Complete durable database schema and migration contracts.
+- [x] Add persistent queue recovery and MCP transport with SSRF guard.
+- [ ] Complete production release workflow and changelog.
+- [ ] Add npm provenance or `NPM_TOKEN` secret based publish job.
+- [ ] Add live release assets and GitHub package metadata.
+- [ ] Implement the highest priority missing library features.
+- [x] Prepare package version 1.0 metadata and release notes.
+- [x] Add safe GitHub release and npm publish workflow using `NPM_TOKEN` secret only.
+- [ ] Create the v1.0 tag only after the final checks pass.

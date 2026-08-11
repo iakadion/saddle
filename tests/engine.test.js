@@ -2,7 +2,7 @@
  * local tests prove the core contract without network or credentials.
  */
 import assert from "node:assert/strict";
-import { mkdtemp } from "node:fs/promises";
+import { mkdtemp, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import { test } from "node:test";
@@ -48,7 +48,7 @@ import { targetfactory, targeturi } from "../memory/targets.js";
 import { normalizeurl } from "../crawl/normalize.js";
 import { crawl } from "../crawl/crawler.js";
 import { saddleservice } from "../api/service.js";
-import { persistentqueue } from "../crawl/persistent.js";
+import { persistentqueue as crawlqueue } from "../crawl/persistent.js";
 import { filesessions } from "../sessions/file.js";
 import { extractwithschema } from "../scrape/schema.js";
 import { mcpserver } from "../mcp/server.js";
@@ -81,6 +81,10 @@ import { modecatalog, operationmodes, validatemode } from "../modes/matrix.js";
 import { resolvemode, withmode } from "../modes/resolve.js";
 import { binaryplan as portablebinaryplan, binarymanifest, buildbinary } from "../binary/build.js";
 import { targetcatalog, targetmanifest } from "../surfaces/targets.js";
+import { persistentqueue } from "../queue/persistent.js";
+import { migrationplan, latestmigration } from "../persistence/migrations.js";
+import { mcptransport } from "../mcp/transport.js";
+import { ispublicurl } from "../api/security.js";
 
 test("runs a job through prepare process sync and commit", async () => {
   const root = await mkdtemp(join(tmpdir(), "saddletest"));
@@ -175,7 +179,7 @@ test("provides neutral persistence schemas and memory persistence", async () => 
   await persistence.saveevent({ id: "event1", jobid: "job1", type: "jobrunning", at: 1, data: {} });
   assert.equal((await persistence.getjob("job1")).status, "running");
   assert.equal((await persistence.listevents("job1")).length, 1);
-  assert.equal(schemasql({ dialect: "mysql" }).length, 5);
+  assert.equal(schemasql({ dialect: "mysql" }).length, 6);
   assert.equal(prismaschema().includes("model job"), true);
 });
 
@@ -351,11 +355,11 @@ test("serves universal api routes with web request response objects", async () =
 test("restores persistent crawl queue and completes entries", async () => {
   const saved = new Map();
   const store = { list: async () => [...saved.values()], save: async (item) => saved.set(item.url, item), update: async (key, item) => saved.set(key, item) };
-  const queue = persistentqueue({ store });
+  const queue = crawlqueue({ store });
   await queue.add({ url: "https://example.com", depth: 0 });
   const item = await queue.next();
   await queue.complete(item.url);
-  const restored = persistentqueue({ store });
+  const restored = crawlqueue({ store });
   await restored.restore();
   assert.equal(restored.list().length, 0);
 });
@@ -542,4 +546,30 @@ test("plans binary builds and open platform targets", async () => {
   assert.equal(await buildbinary(plan, async (manifest) => manifest.target), "wasm");
   assert.equal(targetmanifest("desktopapp").capabilities.includes("file"), true);
   assert.equal(targetcatalog().extension.runtime, "browser");
+});
+
+test("restores a persistent queue and maps migration versions", async () => {
+  const root = await mkdtemp(join(tmpdir(), "saddlequeue"));
+  const path = join(root, "queue.json");
+  await writeFile(path, JSON.stringify({ version: 1, items: [{ id: "job1", payload: { ok: true }, status: "running", attempts: 1 }] }));
+  const queue = persistentqueue({ path, maxattempts: 3 });
+  assert.equal((await queue.list("queued")).length, 1);
+  const item = await queue.claim();
+  await queue.fail(item.id, { retryable: true, message: "temporary" });
+  assert.equal((await queue.list("queued")).length, 1);
+  await queue.complete(item.id, { ok: true });
+  assert.equal((await queue.list("completed")).length, 1);
+  assert.equal(latestmigration(), 3);
+  assert.equal(migrationplan({ current: 1, dialect: "postgres" }).length, 2);
+});
+
+test("frames MCP JSONL and blocks private network targets", async () => {
+  const server = mcpserver({ scrape: async (url) => ({ url }) });
+  const transport = mcptransport(server);
+  const line = await transport.handleline(JSON.stringify({ jsonrpc: "2.0", id: 1, method: "tools/list" }));
+  assert.equal(JSON.parse(line).result.tools.length > 0, true);
+  const response = await transport.handlehttp(new Request("https://service.example/mcp", { method: "POST", body: JSON.stringify({ jsonrpc: "2.0", id: 2, method: "tools/list" }) }));
+  assert.equal(response.status, 200);
+  assert.equal(ispublicurl("https://example.com"), true);
+  assert.equal(ispublicurl("http://127.0.0.1"), false);
 });

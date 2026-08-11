@@ -1,9 +1,10 @@
 {
   "name": "@devthink/saddle",
-  "version": "0.2.0",
+  "version": "1.0.0",
   "description": "binary computing engine that turns distributed storage into a publishable working set",
   "type": "module",
   "license": "MIT",
+  "publishConfig": { "access": "public" },
   "repository": { "type": "git", "url": "https://github.com/iakadion/saddle.git" },
   "bugs": { "url": "https://github.com/iakadion/saddle/issues" },
   "homepage": "https://github.com/iakadion/saddle#readme",

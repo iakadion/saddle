@@ -7,6 +7,7 @@ export const schemadefinition = Object.freeze({
   sessions: { id: "text primary key", version: "integer", agentname: "text", originurl: "text", seed: "text", status: "text", startedat: "integer", finishedat: "integer", events: "json" },
   artifacts: { key: "text primary key", sizebytes: "bigint", sha256: "text", contenttype: "text", createdat: "integer", metadata: "json" },
   chunks: { id: "text primary key", artifactkey: "text", index: "integer", offset: "bigint", sizebytes: "integer", sha256: "text", storagekey: "text" }
+  ,queueitems: { id: "text primary key", status: "text", attempts: "integer", payload: "json", result: "json", error: "json", createdat: "bigint", updatedat: "bigint" }
 });
 
 export function schemasql(options = {}) {
@@ -19,6 +20,7 @@ export function schemasql(options = {}) {
     `create table if not exists sessions (id text primary key, version integer not null, agentname text not null, originurl text not null, seed text not null, status text not null, startedat ${bigint} not null, finishedat ${bigint}, events ${json} not null)`,
     `create table if not exists artifacts (key text primary key, sizebytes ${bigint} not null, sha256 text not null, contenttype text not null, createdat ${bigint} not null, metadata ${json} not null)`,
     `create table if not exists chunks (id text primary key, artifactkey text not null, chunkindex integer not null, byteoffset ${bigint} not null, sizebytes integer not null, sha256 text not null, storagekey text not null)`
+    ,`create table if not exists queueitems (id text primary key, status text not null, attempts integer not null, payload ${json} not null, result ${json}, error ${json}, createdat ${bigint} not null, updatedat ${bigint} not null)`
   ];
 }
 
