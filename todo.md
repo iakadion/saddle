@@ -81,3 +81,13 @@
 - [x] Adicionar servidor MCP opcional com ferramentas scrape, crawl, batch, extract e serialize.
 - [x] Criar Dockerfile seguro e docker compose parametrizado.
 - [x] Adicionar runtime universal sem exigir fs, process ou Buffer no núcleo.
+
+## Roadmap P2 e P3
+
+- [x] Criar perfil de fingerprint coerente por sessão sem patch stealth automático.
+- [x] Implementar pool de proxy com health score, rotate e revive.
+- [x] Adicionar contrato de captcha solver manual ou externo com evidências.
+- [x] Implementar token estimate, chunk markdown e RAG manifest.
+- [x] Gerar llms.txt e llms-full.txt a partir de páginas estruturadas.
+- [x] Adicionar webhooks HMAC e eventos de job.
+- [x] Criar manifests para browser extension, desktop, mobile e n8n.

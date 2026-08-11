@@ -55,6 +55,20 @@ import { mcpserver } from "../mcp/server.js";
 import { runtimename, runtimefeatures } from "../runtime/detect.js";
 import { deadline } from "../runtime/abort.js";
 import { publishplan, registrymanifest } from "../packager/publish.js";
+import { fingerprintfor, fingerprintvalidate } from "../browser/fingerprint.js";
+import { browsersession } from "../browser/session.js";
+import { proxypool } from "../proxy/pool.js";
+import { captchacontract } from "../captcha/contract.js";
+import { evidence } from "../captcha/evidence.js";
+import { captchaguard } from "../captcha/guard.js";
+import { estimatetokens, fitscontext, tokenbudget } from "../ai/tokens.js";
+import { chunkmarkdown } from "../ai/chunk.js";
+import { ragmanifest, vectorrecord } from "../ai/rag.js";
+import { llmstxt, llmsfull } from "../ai/llmstxt.js";
+import { webhooksig, webhookverify } from "../webhook/signature.js";
+import { webhookreceiver } from "../webhook/receiver.js";
+import { surfacemanifest, surfacebundle } from "../surfaces/manifest.js";
+import { n8nnode, n8nexecute } from "../surfaces/n8n.js";
 
 test("runs a job through prepare process sync and commit", async () => {
   const root = await mkdtemp(join(tmpdir(), "saddletest"));
@@ -366,4 +380,70 @@ test("creates registry and CDN publication plans without publishing", () => {
   assert.equal(plan.package.command, "npm publish --access public");
   assert.equal(plan.cdn[0].url.includes("jsdelivr"), true);
   assert.equal(registrymanifest(manifest).surfaces.includes("container"), true);
+});
+
+test("keeps a coherent browser fingerprint bound to a session", () => {
+  const fingerprint = fingerprintfor("session1");
+  assert.equal(fingerprintvalidate(fingerprint), true);
+  const session = browsersession({ id: "session1", fingerprint, proxy: { id: "proxy1" } });
+  session.record({ t: 0, type: "move", x: 1, y: 2 });
+  assert.equal(session.manifest().proxy, "proxy1");
+  assert.equal(session.events().length, 1);
+});
+
+test("rotates proxy entries by usage and moves repeated failures to graveyard", () => {
+  const pool = proxypool({ proxies: [{ id: "proxy1" }, { id: "proxy2" }], failurethreshold: 2, recoverytime: 100000 });
+  const first = pool.choose();
+  pool.report(first.id, { ok: false });
+  pool.report(first.id, { ok: false });
+  assert.equal(pool.list().find((item) => item.id === first.id).status, "graveyard");
+  assert.notEqual(pool.choose().id, first.id);
+});
+
+test("keeps captcha solving explicit and evidence auditable", async () => {
+  const contract = captchacontract({ detect: async () => ({ kind: "hcaptcha", detected: true, sitekey: "site" }), solve: async () => ({ passed: true, solver: "external", token: "token" }) });
+  const guard = captchaguard({ contract });
+  const check = await guard.check({ url: "https://example.com" });
+  assert.equal(check.allowed, false);
+  assert.equal(check.action, "reviewrequired");
+  const solved = await contract.solve({ kind: "hcaptcha" });
+  assert.equal(contract.assert(solved).passed, true);
+  assert.equal(evidence({ kind: "hcaptcha", passed: true, data: "proof" }).sha256.length, 64);
+});
+
+test("chunks markdown and builds a deduplicated rag manifest", async () => {
+  const markdown = "# Intro\n\nSaddle engine content.\n\n## Detail\n\nMore content.";
+  const chunks = chunkmarkdown(markdown, { maxtokens: 20 });
+  assert.equal(chunks[0].headingpath[0], "Intro");
+  const manifest = await ragmanifest({ source: "https://example.com/doc", chunks: [...chunks, ...chunks], embeddingmodel: "test" });
+  assert.equal(manifest.chunks.length, chunks.length);
+  assert.equal(vectorrecord(manifest.chunks[0], [0.1, 0.2]).vector.length, 2);
+});
+
+test("estimates token budgets and generates llms text", () => {
+  assert.equal(estimatetokens("1234"), 1);
+  assert.equal(fitscontext("1234", 1), true);
+  assert.equal(tokenbudget("12345678", { context: 1 }).fits, false);
+  const pages = [{ title: "Docs", url: "https://example.com/docs", description: "API docs", content: "Saddle API" }];
+  assert.equal(llmstxt({ title: "Saddle", pages }).includes("https://example.com/docs"), true);
+  assert.equal(llmsfull({ pages }).includes("Saddle API"), true);
+});
+
+test("verifies signed webhooks and drops duplicate deliveries", async () => {
+  let calls = 0;
+  const body = JSON.stringify({ event: "push" });
+  const signature = webhooksig(body, "secret");
+  assert.equal(webhookverify(body, signature, "secret"), true);
+  const receiver = webhookreceiver({ secret: "secret", handle: async () => { calls += 1; return { ok: true }; } });
+  assert.equal((await receiver.receive({ body, signature, deliveryid: "delivery1", event: "push" })).accepted, true);
+  assert.equal((await receiver.receive({ body, signature, deliveryid: "delivery1", event: "push" })).duplicate, true);
+  assert.equal(calls, 1);
+});
+
+test("creates packaging surfaces for n8n and browser targets", async () => {
+  const manifest = surfacemanifest({ target: "n8n", capabilities: ["scrape"] });
+  assert.equal(surfacebundle(manifest).install, "n8n import");
+  const node = n8nnode({ name: "saddle" });
+  const output = await n8nexecute(node, { command: "status" }, async ({ input }) => input.command);
+  assert.equal(output, "status");
 });
