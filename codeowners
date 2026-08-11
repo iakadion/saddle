@@ -1,0 +1,7 @@
+# SADDLE - CODEOWNERS
+# Version 1.0, August 2026
+# Copyright (c) August 2026 devthink, nathlan, akadion, nathu filho, alllan neris, andraneris. All Rights Reserved.
+# Project: saddle
+
+# All files owned by licensors
+*       @devthink @nathlan @akadion
