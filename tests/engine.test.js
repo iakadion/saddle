@@ -77,6 +77,10 @@ import { circuitbreaker } from "../retry/circuit.js";
 import { nodeserver } from "../server/node.js";
 import { githubcontents } from "../storage/githubcontents.js";
 import { filehosting } from "../storage/filehosting.js";
+import { modecatalog, operationmodes, validatemode } from "../modes/matrix.js";
+import { resolvemode, withmode } from "../modes/resolve.js";
+import { binaryplan as portablebinaryplan, binarymanifest, buildbinary } from "../binary/build.js";
+import { targetcatalog, targetmanifest } from "../surfaces/targets.js";
 
 test("runs a job through prepare process sync and commit", async () => {
   const root = await mkdtemp(join(tmpdir(), "saddletest"));
@@ -520,4 +524,22 @@ test("keeps remote storage adapters injectable", async () => {
   await remote.put({ key: "file.bin", data: new Uint8Array([1, 2]) });
   await remote.get("file.bin");
   assert.deepEqual(requested, ["put", "get"]);
+});
+
+test("resolves open library and binary mode profiles", async () => {
+  assert.equal(validatemode("execution", "binary"), true);
+  assert.equal(operationmodes.includes("librarywithout"), true);
+  assert.equal(modecatalog().axes.memory.includes("vectorized"), true);
+  const profile = resolvemode({ execution: "browser", runtime: "browser", memory: "external", pair: "with" });
+  assert.equal(profile.capabilities.browser, true);
+  assert.equal(profile.capabilities.externalmemory, true);
+  assert.equal(await withmode({ execution: "cli", memory: "physical" }, (value) => value.execution), "cli");
+});
+
+test("plans binary builds and open platform targets", async () => {
+  const plan = portablebinaryplan({ target: "wasm", entry: "index.js", externaldependencies: ["socket"] });
+  assert.equal(binarymanifest(plan).reproducible, true);
+  assert.equal(await buildbinary(plan, async (manifest) => manifest.target), "wasm");
+  assert.equal(targetmanifest("desktopapp").capabilities.includes("file"), true);
+  assert.equal(targetcatalog().extension.runtime, "browser");
 });

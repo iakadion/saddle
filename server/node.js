@@ -3,9 +3,11 @@
  */
 import { createServer } from "node:http";
 
+/** Creates a Node HTTP adapter with explicit host, port, and request handler. */
 export function nodeserver(options = {}) {
   if (!options.host || !Number.isInteger(options.port) || options.port < 1) throw new TypeError("node server requires host and port");
   if (typeof options.handle !== "function") throw new TypeError("node server requires handle");
+  /* Request translation stays inside the Node adapter. */
   const server = createServer(async (request, response) => {
     try {
       const chunks = [];
@@ -17,7 +19,16 @@ export function nodeserver(options = {}) {
       response.statusCode = result.status;
       result.headers.forEach((value, key) => response.setHeader(key, value));
       response.end(Buffer.from(await result.arrayBuffer()));
-    } catch (error) { response.statusCode = 500; response.setHeader("content-type", "application/json"); response.end(JSON.stringify({ error: error.message })); }
+    } catch (error) {
+      response.statusCode = 500;
+      response.setHeader("content-type", "application/json");
+      response.end(JSON.stringify({ error: error.message }));
+    }
   });
-  return { server, listen() { return new Promise((resolve, reject) => { server.once("error", reject); server.listen(options.port, options.host, () => resolve({ host: options.host, port: options.port })); }); }, close() { return new Promise((resolve, reject) => server.close((error) => error ? reject(error) : resolve())); } };
+  /* Lifecycle methods keep the server optional for library consumers. */
+  return {
+    server,
+    listen() { return new Promise((resolve, reject) => { server.once("error", reject); server.listen(options.port, options.host, () => resolve({ host: options.host, port: options.port })); }); },
+    close() { return new Promise((resolve, reject) => server.close((error) => error ? reject(error) : resolve())); }
+  };
 }

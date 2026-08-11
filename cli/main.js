@@ -13,10 +13,14 @@ import { scheduler } from "../runners/scheduler.js";
 import { engine } from "../runtime/engine.js";
 import { localstorage } from "../storage/local.js";
 import { mcpserver } from "../mcp/server.js";
+import { modecatalog } from "../modes/matrix.js";
 
+/** Runs one CLI command and keeps external services behind adapters. */
 export async function main(args = argv.slice(2)) {
   const command = args[0] ?? "help";
-  if (["help", "--help", "-h"].includes(command)) { console.log("saddle <command>\n\ncommands\n  help\n  runexample"); return; }
+  /* Help stays short and lists only stable local commands. */
+  if (["help", "--help", "-h"].includes(command)) { console.log("saddle <command>\n\ncommands\n  help\n  modes\n  runexample\n  mcp"); return; }
+  if (command === "modes") { console.log(JSON.stringify(modecatalog(), null, 2)); return; }
   if (command === "runexample") {
     const root = await mkdtemp(join(tmpdir(), "saddlecli"));
     const events = eventbus();

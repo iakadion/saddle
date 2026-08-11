@@ -17,18 +17,20 @@
     "./storage": "./storage/adapter.js",
     "./runners": "./runners/scheduler.js",
     "./sessions": "./domain/sessions.js",
-    "./modes": "./memory/modes.js",
+    "./modes": "./modes/resolve.js",
+    "./mode": "./modes/matrix.js",
     "./browser": "./browser/agent.js",
     "./bot": "./bot/bot.js",
     "./captcha": "./captcha/contract.js",
     "./deploy": "./deploy/index.js"
   },
-  "files": ["core", "domain", "memory", "runners", "runtime", "storage", "sessions", "modes", "adapters", "persistence", "queue", "dispatch", "scrape", "crawl", "api", "mcp", "browser", "proxy", "captcha", "ai", "webhook", "surfaces", "library", "errors", "retry", "server", "packager", "bot", "protocol", "workflow", "cli", "index.js", "docs", "examples", "README.md", "LICENSE"],
+  "files": ["core", "domain", "memory", "runners", "runtime", "storage", "sessions", "modes", "adapters", "persistence", "queue", "dispatch", "scrape", "crawl", "api", "mcp", "browser", "proxy", "captcha", "ai", "webhook", "surfaces", "library", "errors", "retry", "server", "binary", "format", "packager", "bot", "protocol", "workflow", "cli", "index.js", "docs", "examples", "README.md", "LICENSE"],
   "scripts": {
     "check": "node --check index.js && node --check runtime/engine.js && node --check cli/main.js",
+    "formatcheck": "node format/check.js",
     "test": "node --test tests/*.test.js",
     "run": "node cli/main.js",
-    "pack:check": "npm run check && npm test && npm pack --dry-run",
+    "pack:check": "npm run check && npm run formatcheck && npm test && npm pack --dry-run",
     "prepublishOnly": "npm run pack:check"
   }
 }

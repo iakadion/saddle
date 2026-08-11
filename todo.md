@@ -102,3 +102,11 @@
 - [x] Criar servidor Node parametrizado com host e port recebidos por configuração.
 - [x] Adicionar adapters de storage remoto para GitHub Contents e file hosting.
 - [x] Atualizar documentação, exports, exemplo público e superfície deploy.
+
+## Format and mode consolidation
+
+- [x] Audit all public modules for English JSDoc section comments.
+- [x] Add a mode matrix for library application browser cli binary and memory.
+- [x] Add binary build contracts and explicit mode resolution.
+- [x] Add computer desktop mobile extension and internet surface manifests.
+- [x] Review package exports docs examples and embedded error handlers.
