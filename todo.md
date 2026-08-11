@@ -132,7 +132,7 @@
 - [x] Add NuGet GitHub Packages workflow and minimal project metadata.
 - [x] Add RubyGems GitHub Packages workflow and minimal gem metadata.
 - [x] Validate workflows locally without publishing or exposing credentials.
-- [ ] Implement the highest priority missing library features.
+- [x] Implement the highest priority missing library features.
 - [x] Prepare package version 1.0 metadata and release notes.
 - [x] Add safe GitHub release validation and npmjs publish workflow using OIDC Trusted Publishing.
 - [x] Create the v1.0 tag only after the final checks pass.
@@ -141,3 +141,13 @@
 - [x] Verify package version and visibility through the GitHub package page.
 - [x] Publish GHCR Maven NuGet and RubyGems artifacts after their independent metadata checks.
 - [x] Commit and push publication verification metadata.
+
+## Comparative audit and extension surface
+
+- [x] Compare browser-agent, scraper, automation, MCP, storage and workflow libraries using primary repository or documentation sources.
+- [x] Compare browser extension architectures and record permission, content-script, service-worker and messaging gaps.
+- [x] Reconcile the three supplied README or conclusions documents with the current root-based engine.
+- [x] Create a prioritized feature gap matrix with evidence and implementation status.
+- [x] Create the `extension/` surface with manifest, service worker, content bridge, popup or control surface and shared protocol contracts.
+- [x] Add deterministic extension tests without browser credentials or network access.
+- [x] Integrate extension exports and documentation without coupling the core to Chrome or another vendor.

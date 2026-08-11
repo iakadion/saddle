@@ -1,9 +1,9 @@
 {
   "name": "@devthink/saddle",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "binary computing engine that turns distributed storage into a publishable working set",
   "type": "module",
-  "license": "MIT",
+  "license": "GPL-3.0-only",
   "publishConfig": { "access": "public" },
   "repository": { "type": "git", "url": "https://github.com/iakadion/saddle.git" },
   "bugs": { "url": "https://github.com/iakadion/saddle/issues" },
@@ -23,11 +23,12 @@
     "./browser": "./browser/agent.js",
     "./bot": "./bot/bot.js",
     "./captcha": "./captcha/contract.js",
-    "./deploy": "./deploy/index.js"
+    "./deploy": "./deploy/index.js",
+    "./extension": "./extension/index.js"
   },
-  "files": ["core", "domain", "memory", "runners", "runtime", "storage", "sessions", "modes", "adapters", "persistence", "queue", "dispatch", "scrape", "crawl", "api", "mcp", "browser", "proxy", "captcha", "ai", "webhook", "surfaces", "library", "errors", "retry", "server", "binary", "format", "packager", "bot", "protocol", "workflow", "cli", "index.js", "docs", "examples", "README.md", "LICENSE"],
+  "files": ["core", "domain", "memory", "runners", "runtime", "storage", "sessions", "modes", "adapters", "persistence", "queue", "dispatch", "scrape", "crawl", "api", "mcp", "browser", "proxy", "captcha", "ai", "webhook", "surfaces", "library", "errors", "retry", "server", "binary", "format", "packager", "bot", "protocol", "workflow", "cli", "extension", "index.js", "docs", "examples", "README.md", "LICENSE"],
   "scripts": {
-    "check": "node --check index.js && node --check runtime/engine.js && node --check cli/main.js",
+    "check": "node --check index.js && node --check runtime/engine.js && node --check cli/main.js && node --check extension/protocol.js && node --check extension/serviceworker.js && node --check extension/worker.js && node --check extension/content.js && node --check extension/popup.js",
     "formatcheck": "node format/check.js",
     "test": "node --test tests/*.test.js",
     "run": "node cli/main.js",

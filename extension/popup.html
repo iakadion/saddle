@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Saddle</title>
+    <link rel="stylesheet" href="popup.css" />
+  </head>
+  <body>
+    <main>
+      <header>
+        <span class="mark">S</span>
+        <div><strong>Saddle</strong><small>page bridge</small></div>
+      </header>
+      <p id="status" role="status">Choose a read action for the active tab.</p>
+      <div class="actions">
+        <button data-command="snapshot">Snapshot</button>
+        <button data-command="readpage">Read page</button>
+      </div>
+      <pre id="output">No request yet.</pre>
+    </main>
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>

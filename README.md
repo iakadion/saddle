@@ -9,7 +9,7 @@
   <strong>Binary computing agent, agent browser, computer-use, scraper and packager.</strong><br/>
   <a href="https://github.com/iakadion/saddle/actions/workflows/ci.yml"><img src="https://github.com/iakadion/saddle/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
   <a href="https://github.com/iakadion/saddle/releases/tag/v1.0.0"><img src="https://img.shields.io/badge/release-v1.0.0-d35d3d" alt="Release 1.0.0" /></a>
-  <a href="https://github.com/iakadion/saddle/blob/main/license.md"><img src="https://img.shields.io/badge/license-Proprietary--View--Only-202a2f" alt="Proprietary View Only" /></a>
+  <a href="https://github.com/iakadion/saddle/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-GPL--3.0-202a2f" alt="GPL 3.0 license" /></a>
 </p>
 
 > **Core idea:** storage is the durable side of the working set; the runner is replaceable; the artifact is the boundary. **Storage == Compute** — RAM and disk are the same construct, differing only by usage flag.
@@ -57,6 +57,7 @@ node examples/publicapi.js
 | Agent Browser | capture & replay, stealth, fingerprint | Brave capture, movement replay, session recording |
 | Compute Backends | github-actions, huggingface, gitlab-ci, kaggle, oracle-cloud | free runners chain |
 | Storage Backends | HF, Kaggle, Terabox, R2, Telegram, Discord via rclone | unlimited disk as RAM |
+| Extension | Manifest V3 bridge, snapshot protocol, popup and service worker | user initiated browser control |
 
 ## Public API
 
@@ -101,6 +102,19 @@ const result = await run.run(
 );
 ```
 
+The caller still chooses how to provide `fetcher`, browser transport, persistence, proxy pool, captcha solver, webhook secret and remote credentials. Saddle does not embed secrets, fixed hosts or a mandatory cloud vendor.
+
+## Browser extension
+
+Version 1.1 includes a pure JavaScript Manifest V3 reference surface in [`extension/`](extension/). It is deliberately narrow: the user invokes the action, the popup sends a versioned command, the service worker routes it, and an isolated content bridge returns bounded page metadata, visible text or a user initiated action result.
+
+```bash
+# load the unpacked extension from chrome://extensions
+ls extension/manifest.json extension/worker.js extension/content.js extension/popup.html
+```
+
+The extension requests `activeTab`, `scripting` and `storage`; it does not request broad host permissions, cookies, `webRequest`, debugger access or arbitrary page code execution. Its public contracts are available from `@devthink/saddle/extension`. See [`extension/README.md`](extension/README.md) for the unpacked development flow.
+
 ## CLI
 
 ```bash
@@ -108,10 +122,6 @@ saddle help
 saddle modes
 saddle runexample
 saddle mcp
-saddle capture --url <url>
-saddle bot --platform github --token $SBOT_TOKEN
-saddle memory --load repo://owner/repo/path/file.json
-saddle deploy --target netlify
 ```
 
 ## Security boundaries
@@ -129,7 +139,7 @@ saddle deploy --target netlify
 
 | Registry | Artifact | Workflow |
 | --- | --- | --- |
-| GitHub npm | `@iakadion/saddle@1.0.0` | publishgithubnpm.yml |
+| GitHub npm | `@iakadion/saddle@1.1.0` | publishgithubnpm.yml |
 | GHCR | `ghcr.io/iakadion/saddle:latest` | publishghcr.yml |
 | Maven | `io.devthink:saddle:1.0.0` | publishmaven.yml |
 | NuGet | `Saddle 1.0.0` | publishnuget.yml |
@@ -170,12 +180,8 @@ Root-based JavaScript ESM layout, no src/ directory, no TypeScript build require
 
 ## Current scope
 
-Version 1.0 establishes engine contracts and tested package surface. Browser implementations, provider credentials, persistent databases and production deployment remain caller-selected adapters.
-
-Planning + research complete. P0: anti-detection, persistent queue, Docker. P1: MCP server, session persistence, schema extraction. P2: PDF, token prices, webhooks. P3: mobile emulation, tracing.
+Version 1.1 establishes the engine contracts and the first tested extension bridge. Browser implementations, provider credentials, persistent databases and production deployment remain caller-selected adapters. The next improvements should extend those contracts without coupling the core to one forge, registry, browser or storage vendor.
 
 ## License
 
-Saddle is proprietary and confidential. Source available for viewing only under SADDLE PROPRIETARY LICENSE - VIEW ONLY Version 1.0, August 2026. Copyright (c) August 2026 devthink, nathlan, iakadion, nathu filho, allan neris, andraneris. All Rights Reserved.
-
-See license.md
+Saddle is distributed under the [GNU General Public License v3.0](LICENSE).

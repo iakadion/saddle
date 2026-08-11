@@ -31,3 +31,5 @@ The `fetcher`, browser adapter, persistence adapter, proxy pool, captcha solver,
 ## package surfaces
 
 The package exposes explicit subpaths for `./browser`, `./bot`, `./captcha`, `./memory-engine`, and `./deploy`. The root entry remains the complete JavaScript API for consumers that prefer one import.
+
+Version 1.1 adds `./extension`, which exposes browser-neutral message, snapshot and service-worker routing contracts. The concrete Manifest V3 files live in `extension/`; they are not imported by the core at runtime and do not require Chrome when the library is used as a Node package.

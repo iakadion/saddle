@@ -1,0 +1,13 @@
+/* popup keeps the extension surface compact, readable and free of remote assets. */
+:root { color-scheme: light; font-family: system-ui, sans-serif; background: #f7f1e8; color: #202a2f; }
+body { width: 320px; margin: 0; }
+main { padding: 16px; }
+header { display: flex; align-items: center; gap: 10px; }
+.mark { display: grid; place-items: center; width: 28px; height: 28px; border-radius: 9px; background: #d35d3d; color: #fff; font-weight: 800; }
+header strong, header small { display: block; }
+header small { color: #6d7777; font-size: 11px; letter-spacing: .08em; text-transform: uppercase; }
+#status { color: #596663; font-size: 12px; line-height: 1.4; }
+.actions { display: flex; gap: 8px; }
+button { border: 0; border-radius: 8px; padding: 8px 10px; background: #202a2f; color: #fff; cursor: pointer; font: inherit; font-size: 12px; }
+button:hover { background: #d35d3d; }
+pre { max-height: 260px; overflow: auto; margin: 14px 0 0; padding: 10px; border-radius: 8px; background: #fff; color: #394446; font: 11px/1.45 ui-monospace, monospace; white-space: pre-wrap; }
