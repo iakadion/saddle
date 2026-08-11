@@ -1,6 +1,6 @@
 {
   "name": "@devthink/saddle",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "binary computing engine that turns distributed storage into a publishable working set",
   "type": "module",
   "license": "GPL-3.0-only",
@@ -20,7 +20,7 @@
     "./sessions": "./domain/sessions.js",
     "./modes": "./modes/resolve.js",
     "./mode": "./modes/matrix.js",
-    "./browser": "./browser/agent.js",
+    "./browser": "./browser/index.js",
     "./bot": "./bot/bot.js",
     "./captcha": "./captcha/contract.js",
     "./deploy": "./deploy/index.js",

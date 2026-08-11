@@ -13,6 +13,11 @@ The public API is designed around injected transports. Consumers can use the sam
 | `batchscrape` | run bounded parallel scrape jobs with progress callbacks |
 | `crawlurl` | run the same crawl contract through the public surface |
 | `browseragent` | adapt navigate, click, type, screenshot, DOM, scroll, and commands |
+| `pagesnapshot` / `snapshotref` | create bounded page state and stable element references |
+| `assertfreshsnapshot` / `snapshotdiff` | reject stale actions and compare page state |
+| `browsercontext` | track tabs, frames and active browser context without a vendor client |
+| `actionbatch` / `actionresult` | execute bounded adapter actions with structured outcomes |
+| `actionrecorder` | record snapshot boundaries and action provenance for replay |
 | `nodeserver` | expose a Web Request/Response handler through Node HTTP |
 
 ```js
@@ -32,4 +37,4 @@ The `fetcher`, browser adapter, persistence adapter, proxy pool, captcha solver,
 
 The package exposes explicit subpaths for `./browser`, `./bot`, `./captcha`, `./memory-engine`, and `./deploy`. The root entry remains the complete JavaScript API for consumers that prefer one import.
 
-Version 1.1 adds `./extension`, which exposes browser-neutral message, snapshot and service-worker routing contracts. The concrete Manifest V3 files live in `extension/`; they are not imported by the core at runtime and do not require Chrome when the library is used as a Node package.
+Version 1.1 adds `./extension`, which exposes browser-neutral message, snapshot and service-worker routing contracts. The concrete Manifest V3 files live in `extension/`; they are not imported by the core at runtime and do not require Chrome when the library is used as a Node package. The browser surface also exposes snapshots, tab/frame context, action results, bounded action batches and recording through `./browser`.

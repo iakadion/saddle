@@ -71,6 +71,10 @@ import { surfacemanifest, surfacebundle } from "../surfaces/manifest.js";
 import { n8nnode, n8nexecute } from "../surfaces/n8n.js";
 import { scrapeurl, scrapehtml, serializeresult, formatforagent, batchscrape } from "../library/public.js";
 import { browseragent } from "../browser/agent.js";
+import { actionbatch, actionfailure, actionresult } from "../browser/actions.js";
+import { browsercontext } from "../browser/context.js";
+import { actionrecorder } from "../browser/recorder.js";
+import { assertfreshsnapshot, pagesnapshot, snapshotdiff, snapshotref } from "../browser/snapshot.js";
 import { webscrapeerror, classifyerror } from "../errors/taxonomy.js";
 import { retrypolicy } from "../retry/policy.js";
 import { circuitbreaker } from "../retry/circuit.js";
@@ -572,4 +576,47 @@ test("frames MCP JSONL and blocks private network targets", async () => {
   assert.equal(response.status, 200);
   assert.equal(ispublicurl("https://example.com"), true);
   assert.equal(ispublicurl("http://127.0.0.1"), false);
+});
+
+test("binds browser action references to fresh snapshots and reports diffs", () => {
+  const first = pagesnapshot({ snapshotid: "snap1", tabid: "tab1", frameid: "main", url: "https://example.com", elements: [{ ref: "e1", role: "button", name: "Run" }] });
+  const second = pagesnapshot({ snapshotid: "snap2", tabid: "tab1", frameid: "main", url: "https://example.com", elements: [{ ref: "e1", role: "button", name: "Running" }, { ref: "e2", role: "link", name: "Docs" }] });
+  const reference = snapshotref(first, { ref: "e1" });
+  assert.equal(assertfreshsnapshot(first, reference), true);
+  assert.throws(() => assertfreshsnapshot(second, reference), (error) => error.code === "STALE_SNAPSHOT");
+  const diff = snapshotdiff(first, second);
+  assert.equal(diff.added[0].ref, "e2");
+  assert.equal(diff.changed[0].name, "Running");
+});
+
+test("tracks browser tabs and frames without owning a browser", () => {
+  const context = browsercontext({ sessionid: "session1" });
+  context.opentab({ id: "tab1", url: "https://example.com", active: true });
+  context.opentab({ id: "tab2", url: "https://example.org" });
+  context.openframe("tab1", { id: "frame1", url: "https://example.com/frame" });
+  assert.equal(context.activetab().id, "tab1");
+  assert.equal(context.describe().tabs[0].frames[0].id, "frame1");
+  context.setactive("tab2");
+  assert.equal(context.activetab().id, "tab2");
+  assert.equal(context.closetab("tab1"), true);
+});
+
+test("normalizes action results and continues or stops bounded batches", async () => {
+  const adapter = { click: async (value) => `clicked:${value}`, type: async (value) => `typed:${value}` };
+  const results = await actionbatch(adapter, [{ action: "click", value: "e1" }, { action: "missing", value: "e2" }, { action: "type", value: "ok" }]);
+  assert.equal(results[0].ok, true);
+  assert.equal(results[1].code, "UNSUPPORTED_ACTION");
+  assert.equal(results[2].value, "typed:ok");
+  assert.equal(actionresult("click", { value: "e1" }).ok, true);
+  assert.equal(actionfailure("click", new Error("covered")).ok, false);
+});
+
+test("records snapshot boundaries and action provenance", () => {
+  const recorder = actionrecorder({ startedat: 100 });
+  recorder.snapshot({ snapshotid: "snap1", tabid: "tab1", frameid: "main" });
+  recorder.action({ action: "click", payload: { ref: "e1" }, tabid: "tab1" });
+  const manifest = recorder.manifest();
+  assert.equal(manifest.eventcount, 2);
+  assert.equal(manifest.events[1].snapshotid, "snap1");
+  assert.equal(manifest.events[1].payload.ref, "e1");
 });

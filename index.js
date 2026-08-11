@@ -68,7 +68,7 @@ export * from "./runtime/abort.js";
 export * from "./packager/publish.js";
 export * from "./browser/fingerprint.js";
 export * from "./browser/session.js";
-export * from "./browser/agent.js";
+export * from "./browser/index.js";
 export * from "./proxy/pool.js";
 export * from "./captcha/contract.js";
 export * from "./captcha/evidence.js";

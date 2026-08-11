@@ -25,7 +25,7 @@ The engine owns **contracts, validation, orchestration, recovery and auditabilit
 | Block | Scope | Current state | Exit evidence |
 | --- | --- | --- | --- |
 | 1 | audit and governance | active | gap matrix, sources, claims reconciled |
-| 2 | browser agent foundation | next | snapshots, refs, stale errors, tabs, frames, action results and replay tests |
+| 2 | browser agent foundation | complete | snapshots, refs, stale errors, tabs, frames, action results and replay provenance tests |
 | 3 | extension runtime | first slice complete | MV3 unpacked surface, protocol, worker, content bridge and tests |
 | 4 | working set and storage | planned | resumable chunks, dedupe, cache and conflict tests |
 | 5 | runners and execution | planned | provider health, triggers, cancellation, heartbeat and resume |
@@ -52,7 +52,7 @@ Each block follows the same loop:
 
 ## current implementation
 
-Version 1.1 contains the first Manifest V3 extension slice. It includes a versioned message envelope, snapshot identity, stale reference checks, an isolated content bridge, a service worker router, popup controls, minimal permissions and deterministic tests. The next implementation block is the browser agent foundation because snapshots, tabs, frames and action results are shared by the extension, MCP and future desktop or mobile surfaces.
+Version 1.1 contains the first Manifest V3 extension slice. The browser foundation now adds versioned snapshots, stable references, stale reference checks, tab/frame context, action results, bounded action batches and recorder provenance. The next implementation block is extension persistence and packaging because the shared browser contracts are now available to the extension, MCP and future desktop or mobile surfaces.
 
 ## evidence sources
 

@@ -165,11 +165,11 @@ The following blocks are the execution order for the complete ecosystem. A block
 
 ### Block 2 — browser agent foundation
 
-- [ ] Add accessibility or structured page snapshots with snapshot identifiers and stable references.
-- [ ] Add stale reference, overlay obstruction, navigation and frame errors.
-- [ ] Add tab, frame, window and browser session identity contracts.
-- [ ] Add action results for navigation, click, type, fill, key, scroll, upload and screenshot.
-- [ ] Add deterministic event recording and replay with snapshot boundaries.
+- [x] Add accessibility or structured page snapshots with snapshot identifiers and stable references.
+- [x] Add stale reference, overlay obstruction, navigation and frame errors.
+- [x] Add tab, frame, window and browser session identity contracts.
+- [x] Add action results for navigation, click, type, fill, key, scroll, upload and screenshot.
+- [x] Add deterministic event recording and replay with snapshot boundaries.
 
 ### Block 3 — extension runtime
 

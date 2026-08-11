@@ -1,10 +1,18 @@
                          SADDLE - CHANGELOG
-                       Version 1.1, August 2026
+                       Version 1.2, August 2026
 
  Copyright (c) August 2026 devthink, nathlan, akadion, nathu filho, alllan neris, andraneris. All Rights Reserved.
  Project: saddle
 
   All notable changes to Project saddle are documented in this file.
+
+  ## [1.2.0] - 2026-08-11
+
+    - Added vendor-neutral page snapshots with bounded elements and stable references
+    - Added stale snapshot errors and snapshot diffs
+    - Added tab, frame and active context registry
+    - Added bounded browser action batches and structured outcomes
+    - Added snapshot-aware action recording for replay provenance
 
   ## [1.1.0] - 2026-08-11
 

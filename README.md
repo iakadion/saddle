@@ -50,7 +50,7 @@ node examples/publicapi.js
 | Working set | memory bridge, modes, objects, transforms | storage-to-compute and compute-to-storage |
 | Scraping | robots, cache, extraction, schema, scraper | text, metadata, links and structured output |
 | Crawl | normalization, BFS crawler, persistent frontier | bounded domain-aware crawling |
-| Browser | fingerprint, session, replay and injected agent | browser actions without vendor lock-in |
+| Browser | snapshots, tabs, frames, actions, fingerprint, session, replay and injected agent | browser actions without vendor lock-in |
 | Operations | queues, idempotency, saga, retry, circuit breaker | controlled execution and recovery |
 | Protocols | JSON, NDJSON, SSE, blocks and MCP | transport-neutral messages |
 | Delivery | manifests, workflow registry, binary/container plans | package and runner surfaces |
@@ -169,6 +169,7 @@ scrape/        robots, cache, extraction, schema and scraper
 crawl/         URL normalization, crawler and persistent frontier
 queue/         queue, idempotency, saga and recovery
 browser/       fingerprint, session and agent contracts
+browser/       snapshots, tabs, frames, actions and recorder contracts
 mcp/           optional server and JSONL/HTTP transport
 protocol/      JSON, NDJSON, SSE and block serializers
 workflow/      manifests, templates and registry
@@ -180,7 +181,7 @@ Root-based JavaScript ESM layout, no src/ directory, no TypeScript build require
 
 ## Current scope
 
-Version 1.1 establishes the engine contracts and the first tested extension bridge. Browser implementations, provider credentials, persistent databases and production deployment remain caller-selected adapters. The next improvements should extend those contracts without coupling the core to one forge, registry, browser or storage vendor.
+Version 1.2 establishes the engine contracts, browser snapshot foundation and the first tested extension bridge. Browser implementations, provider credentials, persistent databases and production deployment remain caller-selected adapters. The next improvements should extend those contracts without coupling the core to one forge, registry, browser or storage vendor.
 
 ## License
 
