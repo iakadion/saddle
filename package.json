@@ -18,7 +18,7 @@
     "./sessions": "./domain/sessions.js",
     "./modes": "./memory/modes.js"
   },
-  "files": ["core", "domain", "memory", "runners", "runtime", "storage", "sessions", "modes", "adapters", "persistence", "queue", "dispatch", "scrape", "packager", "cli", "index.js", "docs", "examples", "README.md", "LICENSE"],
+  "files": ["core", "domain", "memory", "runners", "runtime", "storage", "sessions", "modes", "adapters", "persistence", "queue", "dispatch", "scrape", "packager", "bot", "protocol", "workflow", "cli", "index.js", "docs", "examples", "README.md", "LICENSE"],
   "scripts": {
     "check": "node --check index.js && node --check runtime/engine.js && node --check cli/main.js",
     "test": "node --test tests/*.test.js",

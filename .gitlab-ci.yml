@@ -1,0 +1,12 @@
+stages:
+  - verify
+verify:
+  stage: verify
+  image: node:22
+  script:
+    - npm ci
+    - npm test
+  artifacts:
+    when: always
+    paths:
+      - results/

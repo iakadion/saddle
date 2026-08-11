@@ -1,0 +1,9 @@
+when:
+  - event: push
+  - event: manual
+steps:
+  process:
+    image: node:22
+    commands:
+      - npm ci
+      - npm test

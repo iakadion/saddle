@@ -30,7 +30,7 @@
 - [x] Migrar o engine de TypeScript para JavaScript ESM.
 - [x] Renomear arquivos internos para lowercase sem underscore ou hyphen.
 - [x] Substituir classes e identificadores públicos por nomes lowercase compatíveis com a skill.
-- [ ] Remover endereços e portas hardcoded do runtime e tornar opções parametrizáveis.
+- [x] Remover endereços e portas hardcoded do runtime e tornar opções parametrizáveis.
 - [x] Manter o pacote `@devthink/saddle` como superfície de distribuição sem travar os adaptadores.
 
 ## Expansão do engine
@@ -44,14 +44,14 @@
 
 ## Próxima frente do engine
 
-- [ ] Criar contratos de persistência para jobs sessions artifacts chunks e providers.
-- [ ] Adicionar schema operacional compatível com Prisma Drizzle e MySQL2 sem impor um driver.
-- [ ] Implementar queue de jobs idempotência retry e saga de compensação.
-- [ ] Adicionar workflow dispatch parametrizado e registro de run.
-- [ ] Adicionar browser session replay abstrato sem acoplar o core a um browser.
-- [ ] Adicionar scraping seguro com robots cache extraction e content types.
-- [ ] Criar packager para binary container e manifest de distribuição.
-- [ ] Adicionar adapters multiforge para GitLab Forgejo Gitea Codeberg e Hugging Face.
+- [x] Criar contratos de persistência para jobs sessions artifacts chunks e providers.
+- [x] Adicionar schema operacional compatível com Prisma Drizzle e MySQL2 sem impor um driver.
+- [x] Implementar queue de jobs idempotência retry e saga de compensação.
+- [x] Adicionar workflow dispatch parametrizado e registro de run.
+- [x] Adicionar browser session replay abstrato sem acoplar o core a um browser.
+- [x] Adicionar scraping seguro com robots cache extraction e content types.
+- [x] Criar packager para binary container e manifest de distribuição.
+- [x] Adicionar adapters multiforge para GitLab Forgejo Gitea Codeberg e Hugging Face.
 - [x] Criar contrato de browser e replay de eventos sem acoplar a um navegador.
 - [x] Implementar parser de robots e respeito ao crawl delay.
 - [x] Implementar cache com ttl e stale while revalidate.
@@ -59,3 +59,12 @@
 - [x] Criar manifest de distribuição para library cli binary e container.
 - [x] Gerar plano de container sem fixar host ou port.
 - [x] Criar adapter genérico de forge e wrappers GitLab Forgejo Gitea Codeberg e Hugging Face.
+
+## Próxima camada operacional
+
+- [x] Criar bot unificado com start stop command webhook schedule e status.
+- [x] Criar parser de comandos e registro de adapters de plataforma.
+- [x] Criar serializadores JSON NDJSON e SSE sem servidor obrigatório.
+- [x] Criar streaming de blocos com backpressure configurável.
+- [x] Adicionar adapter SQL neutro para Drizzle Prisma e MySQL2.
+- [x] Adicionar workflows multiforge e manifests de execução.

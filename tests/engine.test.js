@@ -31,6 +31,18 @@ import { extracthtml } from "../scrape/extract.js";
 import { scraper } from "../scrape/scraper.js";
 import { distributionmanifest, binaryplan, containerplan } from "../packager/manifest.js";
 import { forgejoadapter } from "../adapters/forgejo.js";
+import { parsecommand } from "../bot/commands.js";
+import { saddlebot } from "../bot/bot.js";
+import { jsonencode, jsondecode } from "../protocol/json.js";
+import { ndjsonencode, ndjsondecode } from "../protocol/ndjson.js";
+import { sseencode, ssedecode } from "../protocol/sse.js";
+import { blockstream } from "../protocol/blocks.js";
+import { sqlpersistence, mysql2persistence } from "../persistence/sql.js";
+import { drizzlepersistence } from "../persistence/drizzle.js";
+import { prismapersistence } from "../persistence/prisma.js";
+import { workflowmanifest } from "../workflow/manifest.js";
+import { githubworkflow, gitlabworkflow, woodpeckerworkflow } from "../workflow/templates.js";
+import { workflowregistry } from "../workflow/registry.js";
 
 test("runs a job through prepare process sync and commit", async () => {
   const root = await mkdtemp(join(tmpdir(), "saddletest"));
@@ -199,4 +211,61 @@ test("keeps multiforge adapters injectable", async () => {
   const result = await adapter.dispatch({ path: "/api/workflow", ref: "main", inputs: { jobid: "job1" } });
   assert.equal(result.accepted, true);
   assert.equal(result.body.authorization, "Bearer token");
+});
+
+test("parses bot commands and executes through a platform adapter", async () => {
+  const parsed = parsecommand("deploy --platform forge --ref main");
+  assert.deepEqual(parsed, { command: "deploy", flags: { platform: "forge", ref: "main" } });
+  const bot = saddlebot({ adapters: { forge: { executebot: async (input) => input } } });
+  await bot.start();
+  const result = await bot.executecommand("deploy --platform forge --ref main");
+  assert.equal(result.command, "deploy");
+  assert.equal(bot.getstatus().status, "running");
+  await bot.stop();
+});
+
+test("serializes json ndjson sse and bounded blocks", async () => {
+  assert.deepEqual(jsondecode(jsonencode({ ok: true })), { ok: true });
+  const encoded = [];
+  for await (const line of ndjsonencode([{ id: 1 }, { id: 2 }])) encoded.push(line);
+  const decoded = [];
+  for await (const item of ndjsondecode(encoded)) decoded.push(item);
+  assert.deepEqual(decoded, [{ id: 1 }, { id: 2 }]);
+  const event = sseencode({ id: "event1", event: "job", data: { ok: true } });
+  assert.deepEqual(ssedecode(event), { id: "event1", event: "job", data: { ok: true } });
+  const blocks = [];
+  for await (const block of blockstream(new TextEncoder().encode("abcdef"), { blockbytes: 2 })) blocks.push(block);
+  assert.equal(blocks.length, 3);
+  assert.equal(blocks.at(-1).final, true);
+  assert.equal(new TextDecoder().decode(blocks[1].data), "cd");
+});
+
+test("exposes sql and mysql2 persistence through an injected query", async () => {
+  const calls = [];
+  const query = async (statement, values) => { calls.push({ statement, values }); if (statement.startsWith("select * from jobs where id")) return [[{ id: "job1", name: "test", status: "queued", priority: 0, input: "{}" }], []]; return [{ affectedRows: 1 }, []]; };
+  const sql = sqlpersistence({ query });
+  await sql.savejob({ id: "job1", name: "test", status: "queued", priority: 0, input: {} });
+  assert.equal((await sql.getjob("job1")).id, "job1");
+  assert.equal(calls.length, 2);
+  const mysql = mysql2persistence({ execute: query });
+  await mysql.saveevent({ id: "event1", jobid: "job1", type: "jobqueued", at: 1, data: {} });
+  assert.equal(calls.length, 3);
+});
+
+test("accepts drizzle repositories and prisma delegates", async () => {
+  const names = ["savejob", "getjob", "updatejob", "listjobs", "saveevent", "listevents", "savesession", "readsession", "saveartifact", "getartifact", "savechunk", "getchunks"];
+  const repository = Object.fromEntries(names.map((name) => [name, async (...args) => ({ name, args })]));
+  assert.equal((await drizzlepersistence(repository).getjob("job1")).name, "getjob");
+  const delegate = { upsert: async (value) => value, findUnique: async (value) => value, update: async (value) => value, findMany: async (value) => value, create: async (value) => value };
+  const prisma = prismapersistence({ job: delegate, event: delegate, session: delegate, artifact: delegate, chunk: delegate });
+  assert.equal((await prisma.getjob("job1")).where.id, "job1");
+});
+
+test("renders multiforge workflow manifests", () => {
+  const manifest = workflowmanifest({ name: "process", command: "npm test", platforms: ["github", "gitlab"] });
+  const registry = workflowregistry();
+  registry.register(manifest);
+  assert.equal(registry.render("process", "github").includes("workflow_dispatch"), true);
+  assert.equal(gitlabworkflow(manifest).includes("image: node:22"), true);
+  assert.equal(woodpeckerworkflow(manifest).includes("npm test"), true);
 });
