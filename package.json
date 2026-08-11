@@ -1,28 +1,29 @@
 {
   "name": "@devthink/saddle",
-  "version": "0.1.0",
-  "description": "Binary computing engine that turns distributed storage into a publishable working set.",
+  "version": "0.2.0",
+  "description": "binary computing engine that turns distributed storage into a publishable working set",
   "type": "module",
   "license": "MIT",
   "repository": { "type": "git", "url": "https://github.com/iakadion/saddle.git" },
   "bugs": { "url": "https://github.com/iakadion/saddle/issues" },
   "homepage": "https://github.com/iakadion/saddle#readme",
-  "keywords": ["distributed-computing", "virtual-memory", "runner", "storage", "automation"],
+  "keywords": ["distributed computing", "virtual memory", "runner", "storage", "automation"],
   "engines": { "node": ">=22" },
-  "bin": { "saddle": "./dist/cli/main.js" },
+  "bin": { "saddle": "./cli/main.js" },
   "exports": {
-    ".": { "types": "./dist/index.d.ts", "import": "./dist/index.js" },
-    "./memory": { "types": "./dist/memory/bridge.d.ts", "import": "./dist/memory/bridge.js" },
-    "./storage": { "types": "./dist/storage/adapter.d.ts", "import": "./dist/storage/adapter.js" },
-    "./runners": { "types": "./dist/runners/scheduler.d.ts", "import": "./dist/runners/scheduler.js" }
+    ".": "./index.js",
+    "./memory": "./memory/bridge.js",
+    "./storage": "./storage/adapter.js",
+    "./runners": "./runners/scheduler.js",
+    "./sessions": "./domain/sessions.js",
+    "./modes": "./memory/modes.js"
   },
-  "files": ["dist", "README.md", "LICENSE", "docs"],
+  "files": ["core", "domain", "memory", "runners", "runtime", "storage", "sessions", "modes", "adapters", "cli", "index.js", "docs", "examples", "README.md", "LICENSE"],
   "scripts": {
-    "build": "tsc -p tsconfig.json",
-    "typecheck": "tsc -p tsconfig.json --noEmit",
-    "test": "npm run build && node --test dist/tests/*.test.js",
-    "pack:check": "npm run build && npm pack --dry-run",
-    "prepublishOnly": "npm run test && npm run pack:check"
-  },
-  "devDependencies": { "@types/node": "^22.15.0", "typescript": "^5.8.3" }
+    "check": "node --check index.js && node --check runtime/engine.js && node --check cli/main.js",
+    "test": "node --test tests/*.test.js",
+    "run": "node cli/main.js",
+    "pack:check": "npm run check && npm test && npm pack --dry-run",
+    "prepublishOnly": "npm run pack:check"
+  }
 }

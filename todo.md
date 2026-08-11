@@ -23,3 +23,21 @@
 - [x] Adicionar workflows GitHub Actions sem executar ações destrutivas.
 - [x] Validar tudo localmente e revisar o diff antes do push.
 - [x] Publicar a primeira implementação no repositório GitHub selecionado após confirmação final do diff.
+
+## Migração de arquitetura
+
+- [x] Remover o layout `src` e mover a lógica para módulos root based.
+- [x] Migrar o engine de TypeScript para JavaScript ESM.
+- [x] Renomear arquivos internos para lowercase sem underscore ou hyphen.
+- [x] Substituir classes e identificadores públicos por nomes lowercase compatíveis com a skill.
+- [ ] Remover endereços e portas hardcoded do runtime e tornar opções parametrizáveis.
+- [x] Manter o pacote `@devthink/saddle` como superfície de distribuição sem travar os adaptadores.
+
+## Expansão do engine
+
+- [x] Implementar os modos library, cli, binary, browser, headless e computer como superfícies independentes.
+- [x] Adicionar memória interna, externa, física, vetorizada e de biblioteca como estratégias selecionáveis.
+- [x] Adicionar adapters para GitHub, storage S3 compatible e dispatch de workflow sem credenciais no código.
+- [x] Implementar API de sessão, replay abstrato e persistência JSONL.
+- [x] Adicionar contrato de socket para realtime sem depender de uma plataforma única.
+- [x] Manter alternativas de deploy abertas sem Netlify Functions ou Vercel Functions.
