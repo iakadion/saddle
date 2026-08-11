@@ -91,3 +91,14 @@
 - [x] Gerar llms.txt e llms-full.txt a partir de páginas estruturadas.
 - [x] Adicionar webhooks HMAC e eventos de job.
 - [x] Criar manifests para browser extension, desktop, mobile e n8n.
+
+## Public library layer
+
+- [x] Criar `saddleurl` e `scrapeurl` com formatos configuráveis.
+- [x] Adicionar `extractcontent`, `serializeresult`, `formatforagent`, batch e crawl helpers.
+- [x] Criar Browser Agent abstrato com navigate click type screenshot text html scroll e execute commands.
+- [x] Adicionar taxonomia de erros HTTP e recovery policy.
+- [x] Implementar retry policy e circuit breaker configuráveis.
+- [x] Criar servidor Node parametrizado com host e port recebidos por configuração.
+- [x] Adicionar adapters de storage remoto para GitHub Contents e file hosting.
+- [x] Atualizar documentação, exports, exemplo público e superfície deploy.

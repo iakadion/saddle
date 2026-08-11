@@ -69,6 +69,14 @@ import { webhooksig, webhookverify } from "../webhook/signature.js";
 import { webhookreceiver } from "../webhook/receiver.js";
 import { surfacemanifest, surfacebundle } from "../surfaces/manifest.js";
 import { n8nnode, n8nexecute } from "../surfaces/n8n.js";
+import { scrapeurl, scrapehtml, serializeresult, formatforagent, batchscrape } from "../library/public.js";
+import { browseragent } from "../browser/agent.js";
+import { webscrapeerror, classifyerror } from "../errors/taxonomy.js";
+import { retrypolicy } from "../retry/policy.js";
+import { circuitbreaker } from "../retry/circuit.js";
+import { nodeserver } from "../server/node.js";
+import { githubcontents } from "../storage/githubcontents.js";
+import { filehosting } from "../storage/filehosting.js";
 
 test("runs a job through prepare process sync and commit", async () => {
   const root = await mkdtemp(join(tmpdir(), "saddletest"));
@@ -446,4 +454,70 @@ test("creates packaging surfaces for n8n and browser targets", async () => {
   const node = n8nnode({ name: "saddle" });
   const output = await n8nexecute(node, { command: "status" }, async ({ input }) => input.command);
   assert.equal(output, "status");
+});
+
+test("exposes public scrape formats and batch progress", async () => {
+  const fetcher = async () => ({ ok: true, status: 200, text: async () => "<title>Page</title><p>Content here.</p>" });
+  const result = await scrapeurl("https://example.com", { fetcher, format: "markdown" });
+  assert.equal(result.serialized.includes("# Page"), true);
+  assert.equal(scrapehtml("<title>Page</title><p>Content</p>").content.includes("Content"), true);
+  assert.equal(serializeresult(result, { format: "text" }).includes("Content"), true);
+  assert.equal(formatforagent(result).chunks.length > 0, true);
+  let progress;
+  assert.equal((await batchscrape({ urls: ["https://example.com", "https://example.com/two"], fetcher, onprogress: (value) => { progress = value; } })).length, 2);
+  assert.equal(progress.completed, 2);
+});
+
+test("delegates browser agent methods to an injected adapter", async () => {
+  const calls = [];
+  const adapter = Object.fromEntries(["navigate", "click", "type", "screenshot", "html", "text", "title", "scrolltobottom", "executecommands"].map((name) => [name, async (value) => { calls.push(name); return value; }]));
+  const agent = browseragent(adapter);
+  await agent.navigate({ url: "https://example.com" });
+  await agent.click("#button");
+  assert.deepEqual(calls.slice(0, 2), ["navigate", "click"]);
+});
+
+test("classifies errors and retries only transient failures", async () => {
+  const error = webscrapeerror("ratelimited", "slow down");
+  assert.equal(error.code, "E2001");
+  assert.equal(classifyerror(new Error("timeout")).retryable, true);
+  let attempts = 0;
+  const result = await retrypolicy({ maxattempts: 2, base: 0 }).run(async () => { attempts += 1; if (attempts === 1) throw webscrapeerror("timeout", "retry"); return "ok"; });
+  assert.equal(result, "ok");
+  assert.equal(attempts, 2);
+});
+
+test("opens and resets a circuit breaker", async () => {
+  const breaker = circuitbreaker({ failurethreshold: 2, resettimeout: 100000 });
+  await assert.rejects(() => breaker.execute(async () => { throw new Error("one"); }));
+  await assert.rejects(() => breaker.execute(async () => { throw new Error("two"); }));
+  assert.equal(breaker.status().state, "open");
+  breaker.reset();
+  assert.equal(breaker.status().state, "closed");
+});
+
+test("keeps node server host and port explicit", () => {
+  assert.throws(() => nodeserver({ handle: async () => new Response("ok") }), /host and port/);
+  const server = nodeserver({ host: "127.0.0.1", port: 4123, handle: async () => new Response("ok") });
+  assert.equal(typeof server.listen, "function");
+  assert.equal(typeof server.close, "function");
+});
+
+test("keeps remote storage adapters injectable", async () => {
+  const calls = [];
+  const responses = new Map();
+  const fetcher = async (url, request = {}) => {
+    calls.push({ url: String(url), method: request.method });
+    if (request.method === "GET") return { ok: true, json: async () => responses.get(String(url)) ?? { content: Buffer.from("data").toString("base64"), size: 4, sha: "sha" } };
+    return { ok: true, json: async () => ({ content: { download_url: "https://cdn.example/file" }, commit: { sha: "commit" } }) };
+  };
+  const github = githubcontents({ baseurl: "https://api.example", owner: "owner", repo: "repo", token: async () => "token", fetcher });
+  const stored = await github.put({ key: "file.bin", data: new TextEncoder().encode("data") });
+  assert.equal(stored.key, "file.bin");
+  assert.equal(calls.some((call) => call.method === "PUT"), true);
+  const requested = [];
+  const remote = filehosting({ host: "https://files.example/", request: async (request) => { requested.push(request.method); return { data: new Uint8Array([1, 2]) }; } });
+  await remote.put({ key: "file.bin", data: new Uint8Array([1, 2]) });
+  await remote.get("file.bin");
+  assert.deepEqual(requested, ["put", "get"]);
 });

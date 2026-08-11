@@ -13,12 +13,17 @@
   "exports": {
     ".": "./index.js",
     "./memory": "./memory/bridge.js",
+    "./memory-engine": "./memory/engine.js",
     "./storage": "./storage/adapter.js",
     "./runners": "./runners/scheduler.js",
     "./sessions": "./domain/sessions.js",
-    "./modes": "./memory/modes.js"
+    "./modes": "./memory/modes.js",
+    "./browser": "./browser/agent.js",
+    "./bot": "./bot/bot.js",
+    "./captcha": "./captcha/contract.js",
+    "./deploy": "./deploy/index.js"
   },
-  "files": ["core", "domain", "memory", "runners", "runtime", "storage", "sessions", "modes", "adapters", "persistence", "queue", "dispatch", "scrape", "crawl", "api", "mcp", "browser", "proxy", "captcha", "ai", "webhook", "surfaces", "packager", "bot", "protocol", "workflow", "cli", "index.js", "docs", "examples", "README.md", "LICENSE"],
+  "files": ["core", "domain", "memory", "runners", "runtime", "storage", "sessions", "modes", "adapters", "persistence", "queue", "dispatch", "scrape", "crawl", "api", "mcp", "browser", "proxy", "captcha", "ai", "webhook", "surfaces", "library", "errors", "retry", "server", "packager", "bot", "protocol", "workflow", "cli", "index.js", "docs", "examples", "README.md", "LICENSE"],
   "scripts": {
     "check": "node --check index.js && node --check runtime/engine.js && node --check cli/main.js",
     "test": "node --test tests/*.test.js",
