@@ -1,94 +1,40 @@
-                    SADDLE - TERMS AND CONDITIONS
-                       Version 1.0, August 2026
+SADDLE - TERMS AND CONDITIONS
+Version 1.0, August 2026
 
- Copyright (c) August 2026 devthink, nathlan, akadion, nathu filho, alllan neris, andraneris. All Rights Reserved.
- Project: saddle
+Copyright (c) August 2026 devthink, nathlan, iakadion, nathu filho, allan neris, andraneris. All Rights Reserved.
+Project: saddle
 
-                            Preamble
+1. Acceptance.
 
-  These Terms and Conditions govern your access to and viewing of the
-  Project saddle repositories, source code, documentation, and related
-  materials. By accessing the repository, you agree to be bound by these
-  Terms together with the LICENSE file.
+By accessing the Project saddle repository, you agree to these Terms and
+Conditions and the LICENSE file.
 
-  The Project saddle is proprietary and source-available for viewing only.
-  No open source rights are granted.
+2. Ownership.
 
-                       TERMS AND CONDITIONS
+Project saddle is owned exclusively by devthink, nathlan, iakadion, nathu filho, allan neris, andraneris.
 
-  1. Acceptance of Terms.
+3. Permitted Use.
 
-  By accessing, cloning (for viewing only), browsing, or otherwise
-  interacting with the Project saddle GitHub repository, you acknowledge
-  that you have read, understood, and agree to be bound by these Terms and
-  Conditions, the LICENSE (SADDLE PROPRIETARY LICENSE - VIEW ONLY), and
-  the TERMS OF USE.
+View only via GitHub web interface for evaluation.
 
-  If you do not agree, you must not access the repository.
+4. Prohibited Use.
 
-  2. Ownership.
+No copying, modification, distribution, use, scraping, or AI training.
 
-  The Project saddle, including all source code, binaries, documentation,
-  trademarks, logos, and other materials, is the exclusive property of the
-  Licensor: devthink, nathlan, akadion, nathu filho, alllan neris, andraneris.
+5. No Warranty.
 
-  All right, title, and interest remain with the Licensor.
+Provided AS-IS.
 
-  3. Permitted Conduct – View Only.
+6. Limitation of Liability.
 
-  You may:
+No liability to the maximum extent permitted by law.
 
-    a) View the source code through the GitHub web interface for personal
-       evaluation;
+7. Termination.
 
-    b) Star or watch the repository for notification purposes.
+Access terminates on breach.
 
-  You may NOT clone for use, fork for distribution, or download as ZIP for
-  redistribution.
+8. Governing Law.
 
-  4. Prohibited Conduct.
+Laws of Brazil.
 
-  You agree NOT to:
-
-    a) Copy, reproduce, or cache the repository beyond what is incidental
-       to viewing;
-
-    b) Use the code in any product, service, or project, commercial or not;
-
-    c) Modify, adapt, translate, or create derivative works;
-
-    d) Distribute, sublicense, rent, lease, or lend;
-
-    e) Circumvent any technological measures or access controls;
-
-    f) Use the repository to train AI models, large language models,
-       or for automated scraping;
-
-    g) Remove copyright or proprietary notices.
-
-  5. Intellectual Property.
-
-  All trademarks, service marks, and logos related to saddle are the
-  property of the Licensor. No license to use trademarks is granted.
-
-  6. No Warranty.
-
-  THE PROJECT IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
-  OR IMPLIED, INCLUDING BUT NOT LIMITED TO MERCHANTABILITY, FITNESS FOR A
-  PARTICULAR PURPOSE, AND NONINFRINGEMENT.
-
-  7. Limitation of Liability.
-
-  IN NO EVENT SHALL THE LICENSOR BE LIABLE FOR ANY CLAIM, DAMAGES, OR
-  OTHER LIABILITY ARISING FROM OR IN CONNECTION WITH THE PROJECT.
-
-  8. Termination.
-
-  The Licensor may terminate your access at any time for breach of these
-  Terms. Upon termination, you must destroy any cached copies.
-
-  9. Governing Law.
-
-  These Terms shall be governed by the laws of Brazil.
-
-                     END OF TERMS AND CONDITIONS
+END OF TERMS AND CONDITIONS

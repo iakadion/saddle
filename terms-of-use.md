@@ -1,79 +1,31 @@
-                         SADDLE - TERMS OF USE
-                       Version 1.0, August 2026
+SADDLE - TERMS OF USE
+Version 1.0, August 2026
 
- Copyright (c) August 2026 devthink, nathlan, akadion, nathu filho, alllan neris, andraneris. All Rights Reserved.
- Project: saddle
+Copyright (c) August 2026 devthink, nathlan, iakadion, nathu filho, allan neris, andraneris. All Rights Reserved.
+Project: saddle
 
-  1. Overview.
+1. Overview.
 
-  These Terms of Use ("ToU") govern your use of Project saddle, including
-  its GitHub repository, source code, documentation, and any associated
-  services. This is a proprietary, source-available project. Viewing does
-  not grant usage rights.
+These Terms of Use govern viewing of Project saddle.
 
-  2. Eligibility.
+2. License.
 
-  You must be at least 18 years old and capable of entering into a binding
-  contract. By accessing, you represent that you meet these requirements.
+Rights are defined solely in LICENSE file.
 
-  3. License.
+3. Acceptable Use.
 
-  Your rights are defined solely in the LICENSE file (SADDLE PROPRIETARY
-  LICENSE - VIEW ONLY, Version 1.0, August 2026). No additional rights are
-  granted by these ToU.
+View only. No use, copy, or distribution.
 
-  4. Acceptable Use.
+4. Prohibited Uses.
 
-  Acceptable use is limited to viewing for evaluation. Any other use,
-  including but not limited to running, deploying, copying, or incorporating
-  into other software, is unacceptable.
+Competing products, reverse engineering, malware.
 
-  5. User Accounts and Repository Access.
+5. Disclaimer.
 
-    a) GitHub's own Terms of Service also apply when accessing via GitHub;
+AS-IS, AS-AVAILABLE.
 
-    b) You are responsible for maintaining the confidentiality of your
-       GitHub account;
+6. Contact.
 
-    c) The Licensor is not responsible for unauthorized access resulting
-       from your failure to secure your account.
+For commercial license, open issue titled LICENSE REQUEST.
 
-  6. Prohibited Uses.
-
-  You may not use Project saddle to:
-
-    a) Violate any law or regulation;
-
-    b) Infringe intellectual property rights;
-
-    c) Develop competing products based on viewing the source;
-
-    d) Engage in reverse engineering or decompilation;
-
-    e) Distribute malware or engage in harmful activities.
-
-  7. Feedback.
-
-  Any feedback, suggestions, or ideas you provide about Project saddle
-  become the exclusive property of the Licensor without compensation.
-
-  8. Disclaimer.
-
-  PROJECT SADDLE IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTY.
-
-  9. Limitation of Liability and Indemnification.
-
-  You agree to indemnify and hold harmless the Licensor from any claims
-  arising from your breach of these ToU or unauthorized use.
-
-  10. Changes to Terms.
-
-  The Licensor reserves the right to modify these ToU at any time. Continued
-  use after changes constitutes acceptance.
-
-  11. Contact.
-
-  For permissions beyond viewing, contact the Licensor via the repository
-  contact method.
-
-                         END OF TERMS OF USE
+END OF TERMS OF USE

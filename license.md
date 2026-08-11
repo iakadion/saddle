@@ -2,245 +2,57 @@ SADDLE PROPRIETARY LICENSE - VIEW ONLY
 Version 1.0, August 2026
 Based on Creative Commons 4.0 International Legal Code Structure
 
-Copyright (c) August 2026 devthink, nathlan, akadion, nathu filho, alllan neris, andraneris. All Rights Reserved.
+Copyright (c) August 2026 devthink, nathlan, iakadion, nathu filho, allan neris, andraneris. All Rights Reserved.
 Project: saddle
 
 SPDX-License-Identifier: LicenseRef-Saddle-Proprietary-CC40
-This License is NOT an Open Source License. This License is NOT a Creative Commons License.
-It uses the CC 4.0 structure for familiarity but is fully proprietary.
-
-Creative Commons Corporation ("CC") is not a party to this License. This
-License is based on the structure of CC BY-NC-ND 4.0 for readability,
-but replaces all permissions with restrictions.
 
 Section 1 – Definitions.
 
-  a. Adapted Material means material subject to Copyright and Similar
-  Rights that is derived from or based upon the Licensed Material and
-  in which the Licensed Material is translated, altered, arranged,
-  transformed, or otherwise modified in a manner requiring permission
-  under the Copyright and Similar Rights held by the Licensor.
-
-  b. Copyright and Similar Rights means copyright and/or similar rights
-  closely related thereto including, without limitation, performance,
-  broadcast, sound recording, and Sui Generis Database Rights, without
-  regard to how the rights are labeled or categorized.
-
-  c. Effective Technological Measures means those measures that, in the
-  absence of proper authority, may not be circumvented under laws
-  satisfying obligations under Article 11 of the WIPO Copyright Treaty.
-
-  d. Exceptions and Limitations means fair use, fair dealing, and/or any
-  other exception or limitation to Copyright and Similar Rights.
-
-  e. Licensed Material means the artistic work, database, or other
-  material to which the Licensor applied this Public License, identified
-  as Project saddle, including source code, documentation, assets,
-  and associated files.
-
-  f. Licensed Rights means the rights granted to You subject to the
-  terms and conditions of this License, which are limited to viewing only,
-  as defined in Section 2(a).
-
-  g. Licensor means the individual(s) or entity(ies) granting rights
-  under this License: devthink, nathlan, akadion, nathu filho, alllan neris, andraneris.
-
-  h. NonCommercial and Commercial – ALL USE is prohibited under this
-  License, whether commercial or non-commercial, as defined in Section 3.
-
-  i. Saddle Project means the software project named saddle, version
-  1.0, August 2026.
-
-  j. You means the individual or entity exercising the Licensed Rights
-  under this License.
+  a. Licensed Material means Project saddle source code, documentation
+     and associated files.
+  b. Licensor means devthink, nathlan, iakadion, nathu filho, allan neris, andraneris.
+  c. You means the individual viewing the Licensed Material.
+  d. View means reading via web browser without local copy beyond cache.
 
 Section 2 – Scope.
 
   a. License grant.
 
-       1. Subject to the terms and conditions of this License, the Licensor
-       hereby grants You a limited, non-exclusive, non-transferable,
-       revocable license to VIEW the Licensed Material (Project saddle)
-       in its public repository form solely through a web browser for
-       personal evaluation.
+     1. Licensor grants You a limited, non-exclusive, non-transferable,
+     revocable license to VIEW the Licensed Material for evaluation only.
 
-       2. No other rights are granted. Without limiting the foregoing,
-       You have NO right to:
+     2. You have NO right to reproduce, share, adapt, use, execute,
+     distribute, or create derivative works.
 
-            A. Reproduce, copy, or duplicate the Licensed Material;
-            B. Share, distribute, publish, or make available;
-            C. Adapt, transform, translate, or create derivative works;
-            D. Use, execute, run, deploy, or implement the Licensed Material
-               for any purpose, including production, development, testing,
-               SaaS, or training of artificial intelligence models;
-            E. Exercise any rights in a manner that is primarily intended
-               for or directed toward commercial advantage or monetary
-               compensation, or for any non-commercial purpose.
-
-       3. All rights not expressly granted are reserved by the Licensor.
-
-  b. Other rights.
-
-       1. Moral rights, such as the right of integrity, are not licensed
-       under this License, nor are publicity, privacy, and/or other
-       similar personality rights.
-
-       2. Patent and trademark rights are not licensed under this License.
-
-  c. No endorsement. Nothing in this License constitutes or may be
-  construed as permission to assert or imply that You are, or that Your
-  use of the Licensed Material is, connected with, or sponsored, endorsed,
-  or granted official status by, the Licensor.
+  b. All rights not expressly granted are reserved.
 
 Section 3 – License Conditions.
 
-  Your exercise of the Licensed Rights is expressly made subject to the
-  following conditions.
+  a. Attribution.
 
-  a. Attribution and Proprietary Notice.
-
-       1. If You View the Licensed Material, You must retain the following
-       if it is supplied by the Licensor:
-
-            A. Identification of the creator(s) of the Licensed Material
-               and any others designated to receive attribution, in any
-               reasonable manner requested by the Licensor (including by
-               username if designated): devthink, nathlan, akadion,
-               nathu filho, alllan neris, andraneris;
-
-            B. A copyright notice: Copyright (c) August 2026 devthink,
-               nathlan, akadion, nathu filho, alllan neris, andraneris.
-               All Rights Reserved. Project: saddle;
-
-            C. A notice that refers to this License;
-
-            D. A notice that the Licensed Material is proprietary and
-               may only be viewed, not used, copied, or modified.
+     You must retain copyright notice:
+     Copyright (c) August 2026 devthink, nathlan, iakadion, nathu filho, allan neris, andraneris. All Rights Reserved. Project: saddle
 
   b. No Sharing and No Adaptation.
 
-       1. You may NOT Share or Adapt the Licensed Material, in whole or
-       in part. Sharing means providing material to the public by any
-       means or process that requires permission under the Licensed Rights,
-       such as reproduction, public display, public performance,
-       distribution, dissemination, communication, or importation.
+     You may NOT share or adapt the Licensed Material.
 
-       2. You may NOT produce, reproduce, or Share Adapted Material.
+  c. No Use.
 
-  c. No Commercial and No Non-Commercial Use.
+     Any commercial or non-commercial use is PROHIBITED without written permission.
 
-       1. The Licensed Material is for viewing only. Any use, whether
-       for Commercial or Non-Commercial purposes, is STRICTLY PROHIBITED
-       without prior written permission from the Licensor.
+Section 4 – Disclaimer.
 
-  d. Confidentiality.
+  THE LICENSED MATERIAL IS PROVIDED AS-IS WITHOUT WARRANTY.
 
-       1. The Licensed Material contains confidential information and
-       trade secrets of the Licensor relating to Project saddle.
+Section 5 – Term and Termination.
 
-Section 4 – Sui Generis Database Rights.
+  This License terminates automatically upon breach. Upon termination,
+  you must destroy cached copies.
 
-  Where the Licensed Rights include Sui Generis Database Rights that apply
-  to Your viewing of the Licensed Material:
+Section 6 – Other Terms.
 
-  a. You have no right to extract, reutilize, reproduce, or Share all or a
-  substantial portion of the contents of the database;
-
-  b. All rights are reserved.
-
-Section 5 – Disclaimer of Warranties and Limitation of Liability.
-
-  a. Unless otherwise separately undertaken by the Licensor, to the extent
-  possible, the Licensor offers the Licensed Material as-is and as-available,
-  and makes no representations or warranties of any kind concerning the
-  Licensed Material, whether express, implied, statutory, or other. This
-  includes, without limitation, warranties of title, merchantability,
-  fitness for a particular purpose, non-infringement, absence of latent
-  or other defects, accuracy, or the presence or absence of errors,
-  whether or not known or discoverable.
-
-  b. To the extent possible, in no event will the Licensor be liable to You
-  on any legal theory (including, without limitation, negligence) or otherwise
-  for any direct, special, indirect, incidental, consequential, punitive,
-  exemplary, or other losses, costs, expenses, or damages arising out of
-  this License or use of the Licensed Material, even if the Licensor has
-  been advised of the possibility of such losses, costs, expenses, or damages.
-
-  c. The disclaimer of warranties and limitation of liability provided above
-  shall be interpreted in a manner that, to the extent possible, most closely
-  approximates an absolute disclaimer and waiver of all liability.
-
-Section 6 – Term and Termination.
-
-  a. This License applies for the term of the Copyright and Similar Rights
-  licensed here. However, if You fail to comply with its terms and conditions,
-  then Your rights under this License terminate automatically.
-
-  b. Where Your right to use the Licensed Material has terminated under
-  Section 6(a), it reinstates:
-
-       1. automatically as of the date the violation is cured, provided it is
-       cured within 30 days of Your discovery of the violation; or
-
-       2. upon express reinstatement by the Licensor.
-
-  c. Upon termination, You must cease viewing and destroy any copies, including
-  cached copies, of Project saddle.
-
-Section 7 – Other Terms and Conditions.
-
-  a. The Licensor shall not be bound by any additional or different terms or
-  conditions communicated by You unless expressly agreed.
-
-  b. Any arrangements, understandings, or agreements regarding the Licensed
-  Material not stated herein are separate from and independent of the terms
-  and conditions of this License.
-
-Section 8 – Interpretation.
-
-  a. For the avoidance of doubt, this License does not, and shall not be
-  interpreted to, reduce, limit, restrict, or impose conditions on any use of
-  the Licensed Material that could lawfully be made without permission under
-  this License.
-
-  b. To the extent possible, if any provision of this License is deemed
-  unenforceable, it shall be automatically reformed to the minimum extent
-  necessary to make it enforceable. If the provision cannot be reformed, it
-  shall be severed from this License without affecting the enforceability of
-  the remaining terms and conditions.
-
-  c. No term or condition of this License will be waived and no failure to
-  comply consented to unless expressly agreed to by the Licensor.
-
-  d. Nothing in this License constitutes or may be interpreted as a limitation
-  upon, or waiver of, any privileges and immunities that apply to the Licensor
-  or You, including from the legal processes of any jurisdiction or authority.
+  No additional terms apply unless expressly agreed in writing by Licensor.
 
                        END OF TERMS AND CONDITIONS
-
-       How to Apply This License to Project saddle
-
-  To apply this License to your project saddle, attach the following notice
-  to each source file:
-
-    Project saddle
-    Copyright (C) August 2026 devthink, nathlan, akadion, nathu filho, alllan neris, andraneris
-    All Rights Reserved.
-
-    This file is part of saddle and is proprietary and confidential.
-    It is licensed under the SADDLE PROPRIETARY LICENSE - VIEW ONLY
-    Version 1.0, August 2026. You may view this file for evaluation
-    purposes only. No rights to copy, modify, distribute, or use are granted.
-    See LICENSE file for full terms.
-
-  For NPM / package.json:
-
-    {
-      "name": "saddle",
-      "version": "1.0.0",
-      "license": "UNLICENSED",
-      "private": false
-    }
-
-  You should have received a copy of this License along with Project saddle.
-  If not, see https://github.com/your-org/saddle/blob/main/LICENSE

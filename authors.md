@@ -1,21 +1,17 @@
-                         SADDLE - AUTHORS
-                       Version 1.0, August 2026
+SADDLE - AUTHORS
+Version 1.0, August 2026
 
-  Project: saddle
+Project: saddle
 
-  Copyright (C) August 2026
+Authors and Copyright Holders:
 
-  Authors and Copyright Holders:
+- devthink
+- nathlan
+- iakadion
+- nathu filho
+- allan neris
+- andraneris
 
-    * devthink
-    * nathlan
-    * akadion
-    * nathu filho
-    * alllan neris
-    * andraneris
+All Rights Reserved.
 
-  All Rights Reserved.
-
-  Contact via GitHub repository.
-
-                         END OF AUTHORS
+END OF AUTHORS
