@@ -182,11 +182,11 @@ The following blocks are the execution order for the complete ecosystem. A block
 
 ### Block 4 — working set and storage
 
-- [ ] Complete chunk manifests with resume, checksum, range reads and partial sync.
-- [ ] Add content-addressed storage indexes and deduplication across backends.
-- [ ] Add cache tiers with ETag, stale-while-revalidate, invalidation and bounded memory.
-- [ ] Add storage capability negotiation for local, forge, S3-compatible, dataset and extension storage.
-- [ ] Add conflict detection and merge policy for concurrent artifact writes.
+- [x] Complete chunk manifests with resume, checksum, range reads and partial sync.
+- [x] Add content-addressed storage indexes and deduplication across backends.
+- [x] Add cache tiers with ETag, stale-while-revalidate, invalidation and bounded memory.
+- [x] Add storage capability negotiation for local, forge, S3-compatible, dataset and extension storage.
+- [x] Add conflict detection and merge policy for concurrent artifact writes.
 
 ### Block 5 — runners and execution
 

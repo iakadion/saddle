@@ -46,7 +46,7 @@ node examples/publicapi.js
 | Area | Contract | Result |
 | --- | --- | --- |
 | Jobs | `engine`, `scheduler`, `inprocess` | `prepare → process → sync → cleanup` |
-| Storage | local, chunked, S3-compatible, GitHub Contents, file hosting | durable objects and chunks |
+| Storage | local, chunked, content-addressed, S3-compatible, GitHub Contents, file hosting | durable objects, ranges, dedupe and sync |
 | Working set | memory bridge, modes, objects, transforms | storage-to-compute and compute-to-storage |
 | Scraping | robots, cache, extraction, schema, scraper | text, metadata, links and structured output |
 | Crawl | normalization, BFS crawler, persistent frontier | bounded domain-aware crawling |
@@ -181,7 +181,7 @@ Root-based JavaScript ESM layout, no src/ directory, no TypeScript build require
 
 ## Current scope
 
-Version 1.2 establishes the engine contracts, browser snapshot foundation and the first tested extension bridge. Browser implementations, provider credentials, persistent databases and production deployment remain caller-selected adapters. The next improvements should extend those contracts without coupling the core to one forge, registry, browser or storage vendor.
+Version 1.3 establishes the engine contracts, browser snapshot foundation, storage sync primitives and the first tested extension bridge. Browser implementations, provider credentials, persistent databases and production deployment remain caller-selected adapters. The next improvements should extend those contracts without coupling the core to one forge, registry, browser or storage vendor.
 
 ## License
 

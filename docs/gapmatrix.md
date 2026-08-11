@@ -26,7 +26,7 @@ This matrix turns the supplied README and conclusions into implementation decisi
 | Content isolation | Not implemented | No isolated-world DOM bridge or page-to-extension boundary | P0 | Add a narrow content script that reports page facts through the message contract |
 | Task agent | Partial | Jobs, workflows and bot commands exist, but no browser task planner or tool registry | P1 | Reuse workflow and bot contracts; add browser task commands only after snapshots |
 | MCP | Implemented scrape, crawl, batch, extract and serialize tools with JSON-RPC handling | No browser snapshot or browser action MCP tools | P1 | Add browser tools as an optional adapter over the same snapshot/action contracts |
-| Storage | Implemented local, chunked, S3-compatible, GitHub Contents and file hosting adapters | Extension storage is not mapped to the storage contract | P1 | Add an injected extension storage adapter; do not make Chrome storage mandatory in the core |
+| Storage | Implemented local, chunked, S3-compatible, GitHub Contents and file hosting adapters | Range reads, content dedupe, tiered cache, capabilities and conflict-aware sync were missing | P1 | Use the new neutral storage helpers and keep extension storage injected |
 | Queue | Implemented in-memory and persistent queue contracts | No worker-aware resume protocol for extension commands | P1 | Add resumable command records and idempotency keys to extension transport |
 | Remote execution | Implemented provider, scheduler and workflow dispatch contracts | No permissioned extension-to-runner bridge | P1 | Require explicit caller-provided endpoint and auth; no default remote host |
 | Auth profiles | Session file and replay contracts exist | No extension profile or consent model | P1 | Defer cookie/profile export; support explicit user-owned session references only |
@@ -34,7 +34,7 @@ This matrix turns the supplied README and conclusions into implementation decisi
 | Stealth | Fingerprint contract exists | No automatic stealth patching | deferred | Keep opt-in fingerprint metadata; no hidden anti-detection behavior |
 | Packaging | npm, GHCR, Maven, NuGet and RubyGems workflows are live | No extension zip build or release artifact | P1 | Add a deterministic zip/check workflow after the reference surface is tested |
 | Cross-browser | Target profile declares browser and extension | No Firefox, Edge or Safari manifests/build validation | P2 | Keep WebExtension-compatible contracts and add adapters incrementally |
-| Storage equals compute | Memory bridge and engine implement storage-to-working-set-to-artifact | Remote storage is not physical VRAM and has latency | deferred | Document as a working-set model, never as literal remote VRAM |
+| Storage equals compute | Memory bridge and engine implement storage-to-working-set-to-artifact; sync and capability negotiation now exist | Remote storage is not physical VRAM and has latency | deferred | Document as a working-set model, never as literal remote VRAM |
 | Site/database deployment | Persistence schemas and adapters exist | No hosted site or database is part of the package | deferred | Keep deploy targets caller-owned and outside the library core |
 
 ## first implementation slice

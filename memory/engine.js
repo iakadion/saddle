@@ -3,6 +3,7 @@
  */
 import { memoryobject, tobytes } from "./objects.js";
 import { transformtocompute, transformtostorage } from "./transforms.js";
+import { storagecapabilities, syncbackends } from "../storage/sync.js";
 
 export function memoryengine(options = {}) {
   const backends = options.backends ?? [];
@@ -32,5 +33,13 @@ export function memoryengine(options = {}) {
   }
   function release(key) { values.delete(key); }
   async function safeload(key) { try { return { success: true, data: await load(key) }; } catch (error) { return { success: false, error }; } }
-  return { load, persist, release, safeload, transformtocompute, transformtostorage, list() { return [...values.keys()]; } };
+  async function sync(key, options = {}) {
+    const sourceindex = Number(options.sourceindex ?? 0);
+    const source = backends[sourceindex];
+    if (!source) throw new TypeError("memory sync source backend is missing");
+    const targets = backends.filter((_backend, index) => index !== sourceindex);
+    return syncbackends(source, targets, key, options);
+  }
+  function capabilities() { return backends.map((backend, index) => ({ index, capabilities: storagecapabilities(backend) })); }
+  return { load, persist, release, safeload, sync, capabilities, transformtocompute, transformtostorage, list() { return [...values.keys()]; } };
 }

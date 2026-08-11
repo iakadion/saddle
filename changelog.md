@@ -1,10 +1,18 @@
                          SADDLE - CHANGELOG
-                       Version 1.2, August 2026
+                       Version 1.3, August 2026
 
  Copyright (c) August 2026 devthink, nathlan, akadion, nathu filho, alllan neris, andraneris. All Rights Reserved.
  Project: saddle
 
   All notable changes to Project saddle are documented in this file.
+
+  ## [1.3.0] - 2026-08-11
+
+    - Added bounded range reads to chunked storage
+    - Added content-addressed immutable object storage and logical references
+    - Added tiered hot and cold cache with stale-while-revalidate loading
+    - Added manifest comparison, conflict policy and multi-backend sync
+    - Added memory engine backend capabilities and sync methods
 
   ## [1.2.0] - 2026-08-11
 

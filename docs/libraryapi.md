@@ -18,6 +18,10 @@ The public API is designed around injected transports. Consumers can use the sam
 | `browsercontext` | track tabs, frames and active browser context without a vendor client |
 | `actionbatch` / `actionresult` | execute bounded adapter actions with structured outcomes |
 | `actionrecorder` | record snapshot boundaries and action provenance for replay |
+| `contentstorage` | deduplicate immutable bytes behind logical references |
+| `tieredcache` | serve bounded hot values with persistent cold storage and stale revalidation |
+| `syncobject` / `syncbackends` | compare manifests and copy or resolve updates across adapters |
+| `memoryengine.sync` / `memoryengine.capabilities` | synchronize working set objects and inspect backend capabilities |
 | `nodeserver` | expose a Web Request/Response handler through Node HTTP |
 
 ```js

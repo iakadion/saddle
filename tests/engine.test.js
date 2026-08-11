@@ -14,6 +14,9 @@ import { scheduler } from "../runners/scheduler.js";
 import { engine } from "../runtime/engine.js";
 import { localstorage } from "../storage/local.js";
 import { chunkedstorage } from "../storage/chunked.js";
+import { contentstorage } from "../storage/content.js";
+import { tieredcache } from "../storage/cache.js";
+import { comparemanifests, objectmanifest, storagecapabilities, syncobject } from "../storage/sync.js";
 import { validatesession } from "../domain/sessions.js";
 import { sessionstore } from "../sessions/store.js";
 import { externalmemory, internalmemory, vectorizedmemory } from "../memory/modes.js";
@@ -127,6 +130,50 @@ test("stores and rebuilds chunked artifacts", async () => {
   const rebuilt = await storage.get("large/data");
   assert.equal(manifest.chunks.length, 5);
   assert.equal(new TextDecoder().decode(rebuilt), "saddle engine");
+});
+
+test("reads bounded ranges from chunked storage", async () => {
+  const root = await mkdtemp(join(tmpdir(), "saddlerange"));
+  const storage = chunkedstorage(localstorage(root), { chunkbytes: 3 });
+  await storage.put({ key: "range/data", data: new TextEncoder().encode("saddle engine") });
+  assert.equal(new TextDecoder().decode(await storage.getrange("range/data", 2, 8)), "ddle e");
+});
+
+test("deduplicates immutable bytes while keeping logical content references", async () => {
+  const root = await mkdtemp(join(tmpdir(), "saddlecontent"));
+  const base = localstorage(root);
+  const content = contentstorage(base);
+  const first = await content.put({ key: "one", data: new TextEncoder().encode("same") });
+  const second = await content.put({ key: "two", data: new TextEncoder().encode("same") });
+  assert.equal(first.objectkey, second.objectkey);
+  assert.equal(new TextDecoder().decode(await content.get("two")), "same");
+  assert.equal((await content.head("one")).sha256, first.sha256);
+});
+
+test("serves fresh and stale values through a bounded tiered cache", async () => {
+  let clock = 0;
+  let loads = 0;
+  const cache = tieredcache({ now: () => clock, ttl: 10, stale: 20, maxentries: 2 });
+  await cache.set("key", "old");
+  clock = 15;
+  assert.equal(await cache.getorload("key", async () => { loads += 1; return "new"; }), "old");
+  await new Promise((resolve) => setTimeout(resolve, 0));
+  assert.equal(loads, 1);
+  assert.equal(cache.inspect().stalehits, 1);
+  clock = 40;
+  assert.equal(await cache.get("key"), null);
+});
+
+test("classifies manifests and syncs a newer source with explicit conflict policy", async () => {
+  const sourcevalues = new Map([["key", new TextEncoder().encode("source")]]);
+  const targetvalues = new Map();
+  const source = { head: async () => objectmanifest("key", sourcevalues.get("key"), { updatedat: 2 }), get: async (key) => sourcevalues.get(key) };
+  const target = { head: async () => null, put: async ({ key, data }) => targetvalues.set(key, data) };
+  const result = await syncobject(source, target, "key");
+  assert.equal(result.state, "copied");
+  assert.equal(new TextDecoder().decode(targetvalues.get("key")), "source");
+  assert.equal(comparemanifests({ sha256: "a", updatedat: 1 }, { sha256: "b", updatedat: 2 }).state, "remotenewer");
+  assert.equal(storagecapabilities(target).metadata, true);
 });
 
 test("persists a session as jsonl", async () => {
@@ -327,6 +374,17 @@ test("loads from the first backend and persists to all backends", async () => {
   await memory.persist("new", "saddle");
   assert.equal(new TextDecoder().decode(second.get("new").data), "saddle");
   assert.equal((await memory.safeload("missing")).success, false);
+});
+
+test("syncs a working set object between memory backends with explicit capabilities", async () => {
+  const first = new Map([["sync", { data: new TextEncoder().encode("source"), contenttype: "text/plain", sha256: "source" }]]);
+  const second = new Map();
+  const backend = (values) => ({ get: async (key) => values.get(key)?.data ?? values.get(key) ?? null, head: async (key) => values.get(key) ?? null, put: async ({ key, data, contenttype, metadata }) => values.set(key, { data, contenttype, metadata }), delete: async (key) => values.delete(key), list: async () => [...values.keys()] });
+  const memory = memoryengine({ backends: [backend(first), backend(second)] });
+  const result = await memory.sync("sync");
+  assert.equal(result[0].state, "copied");
+  assert.equal(new TextDecoder().decode(second.get("sync").data), "source");
+  assert.equal(memory.capabilities()[0].capabilities.range, false);
 });
 
 test("builds open memory targets and transforms", () => {
