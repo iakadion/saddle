@@ -1,219 +1,203 @@
-SADDLE PROPRIETARY LICENSE - VIEW ONLY
-Version 1.0, August 2026
-Based on Creative Commons 4.0 International Legal Code Structure
+                    PROPRIETARY SOURCE-AVAILABLE LICENSE - VIEW ONLY
+                       Version 1.0, August 2026
 
-Copyright (c) August 2026 devthink, nathlan, akadion, nathu filho, allan neris, andraneris. All Rights Reserved.
-Project: saddle
+ Copyright (C) August 2026 devthink, nathlan, akadion, nathu filho, allan neris, andraneris
+ Everyone is permitted to view this license document, but changing it
+ is not allowed. This license is NOT an Open Source license.
 
-SPDX-License-Identifier: LicenseRef-Saddle-Proprietary-CC40
-This License is NOT an Open Source License. This License is NOT a Creative Commons License.
-It uses the CC 4.0 structure for familiarity but is fully proprietary.
+                            Preamble
 
-Creative Commons Corporation ("CC") is not a party to this License. This
-License is based on the structure of CC BY-NC-ND 4.0 for readability,
-but replaces all permissions with restrictions.
+  This License governs the source code made available by the Licensor.
+  Unlike free software licenses such as the GNU GPL, this is a
+  proprietary, source-available license.
 
-Section 1 – Definitions.
+  The Software is made visible for transparency and verification
+  purposes only. It is NOT free software. It is NOT open source.
 
-  a. Adapted Material means material subject to Copyright and Similar
-  Rights that is derived from or based upon the Licensed Material and
-  in which the Licensed Material is translated, altered, arranged,
-  transformed, or otherwise modified in a manner requiring permission
-  under the Copyright and Similar Rights held by the Licensor.
+  When we speak of proprietary, we are referring to full ownership and
+  restriction, not freedom. Our intention is to protect the Licensor's
+  exclusive rights to copy, modify, distribute and use the work. By
+  contrast to the GPL which guarantees your freedom to share and change,
+  this License is intended to guarantee that the Software remains the
+  exclusive property of its authors and that no rights beyond viewing
+  are granted.
 
-  b. Copyright and Similar Rights means copyright and/or similar rights
-  closely related thereto including, without limitation, performance,
-  broadcast, sound recording, and Sui Generis Database Rights, without
-  regard to how the rights are labeled or categorized.
+  To protect our rights, we must prevent others from copying, modifying,
+  distributing, or using the Software without permission. Therefore,
+  you have no rights to convey, modify, or use the Software beyond
+  viewing it in its public repository form.
 
-  c. Effective Technological Measures means those measures that, in the
-  absence of proper authority, may not be circumvented under laws
-  satisfying obligations under Article 11 of the WIPO Copyright Treaty.
+  For the authors' protection, this License clearly explains that there
+  is no warranty for this proprietary software and that any unauthorized
+  use will be treated as copyright infringement.
 
-  d. Exceptions and Limitations means fair use, fair dealing, and/or any
-  other exception or limitation to Copyright and Similar Rights.
+  The precise terms and conditions for viewing and restriction follow.
 
-  e. Licensed Material means the artistic work, database, or other
-  material to which the Licensor applied this Public License, identified
-  as Project saddle, including source code, documentation, assets,
-  and associated files.
+                       TERMS AND CONDITIONS
 
-  f. Licensed Rights means the rights granted to You subject to the
-  terms and conditions of this License, which are limited to viewing only,
-  as defined in Section 2(a).
+  0. Definitions.
 
-  g. Licensor means the individual(s) or entity(ies) granting rights
-  under this License: devthink, nathlan, akadion, nathu filho, alllan neris, andraneris.
+  "This License" refers to version 1.0 of the Proprietary Source-Available
+  License - View Only.
 
-  h. NonCommercial and Commercial – ALL USE is prohibited under this
-  License, whether commercial or non-commercial, as defined in Section 3.
+  "Copyright" also means copyright-like laws that apply to other kinds of
+  works.
 
-  i. Saddle Project means the software project named saddle, version
-  1.0, August 2026.
+  "The Program" or "The Software" refers to any copyrightable work licensed
+  under this License, including source code, object code, documentation,
+  and associated files. Each licensee is addressed as "you".
 
-  j. You means the individual or entity exercising the Licensed Rights
-  under this License.
+  "Licensor" refers to the copyright holders: devthink, nathlan, akadion,
+  nathu filho, alllan neris, andraneris.
 
-Section 2 – Scope.
+  To "view" means to read and examine the Software in its public repository
+  form through a web browser, without creating a local copy beyond the
+  temporary cache of your browser.
 
-  a. License grant.
+  To "use" means to execute, run, compile, deploy, host, or otherwise
+  benefit from the functionality of the Software, which is NOT permitted.
 
-Subject to the terms and conditions of this License, the Licensor
-       hereby grants You a limited, non-exclusive, non-transferable,
-       revocable license to VIEW the Licensed Material (Project saddle)
-       in its public repository form solely through a web browser for
-       personal evaluation.
+  1. Ownership and Intellectual Property.
 
-No other rights are granted. Without limiting the foregoing,
-       You have NO right to:
+  The Software is and shall remain the exclusive property of the Licensor.
+  All right, title, and interest in and to the Software, including all
+  copyrights, trademarks, trade secrets, and other intellectual property
+  rights, are owned solely by the Licensor.
 
-            A. Reproduce, copy, or duplicate the Licensed Material;
-            B. Share, distribute, publish, or make available;
-            C. Adapt, transform, translate, or create derivative works;
-            D. Use, execute, run, deploy, or implement the Licensed Material
-               for any purpose, including production, development, testing,
-               SaaS, or training of artificial intelligence models;
-            E. Exercise any rights in a manner that is primarily intended
-               for or directed toward commercial advantage or monetary
-               compensation, or for any non-commercial purpose.
+  No ownership rights, implied or otherwise, are transferred to you under
+  this License. All rights not expressly granted are reserved.
 
-All rights not expressly granted are reserved by the Licensor.
+  2. Grant of Rights - VIEW ONLY.
 
-  b. Other rights.
+  Subject to the terms of this License, Licensor grants you a limited,
+  non-exclusive, non-transferable, revocable license solely to VIEW the
+  Software in its public repository form for personal evaluation.
 
-Moral rights, such as the right of integrity, are not licensed
-       under this License, nor are publicity, privacy, and/or other
-       similar personality rights.
+  This grant DOES NOT include any right to:
 
-Patent and trademark rights are not licensed under this License.
+    a) use, execute, or run the Software;
+    b) copy, reproduce, or duplicate;
+    c) modify, adapt, or create derivative works;
+    d) distribute, publish, sublicense, or sell;
+    e) reverse engineer or decompile.
 
-  c. No endorsement. Nothing in this License constitutes or may be
-  construed as permission to assert or imply that You are, or that Your
-  use of the Licensed Material is, connected with, or sponsored, endorsed,
-  or granted official status by, the Licensor.
+  3. Prohibitions and Restrictions.
 
-Section 3 – License Conditions.
+  You are STRICTLY PROHIBITED from undertaking any of the following
+  without prior written permission from the Licensor:
 
-  Your exercise of the Licensed Rights is expressly made subject to the
-  following conditions.
+    a) Copying, reproducing, duplicating, or storing the Software, in
+    whole or in part, in any medium;
 
-  a. Attribution and Proprietary Notice.
+    b) Modifying, adapting, translating, transforming, or creating
+    derivative works based on the Software;
 
-If You View the Licensed Material, You must retain the following
-       if it is supplied by the Licensor:
+    c) Distributing, publishing, sublicensing, disclosing, or otherwise
+    making the Software available to third parties, whether gratis or
+    for a fee;
 
-            A. Identification of the creator(s) of the Licensed Material
-               and any others designated to receive attribution, in any
-               reasonable manner requested by the Licensor (including by
-               username if designated): devthink, nathlan, akadion,
-               nathu filho, alllan neris, andraneris;
+    d) Using the Software for any purpose, including but not limited to
+    development, production, commercial use, internal business operations,
+    offering as a service (SaaS), or training artificial intelligence
+    models;
 
-            B. A copyright notice: Copyright (c) August 2026 devthink,
-               nathlan, akadion, nathu filho, alllan neris, andraneris.
-               All Rights Reserved. Project: saddle;
+    e) Removing, altering, or obscuring any copyright, proprietary, or
+    license notices contained in the Software;
 
-            C. A notice that refers to this License;
+    f) Reverse engineering, decompiling, disassembling, or attempting to
+    derive the source code of the Software.
 
-            D. A notice that the Licensed Material is proprietary and
-               may only be viewed, not used, copied, or modified.
+  Any use beyond viewing constitutes copyright infringement and will be
+  prosecuted to the fullest extent of the law.
 
-  b. No Sharing and No Adaptation.
+  4. Confidentiality.
 
-You may NOT Share or Adapt the Licensed Material, in whole or
-       in part. Sharing means providing material to the public by any
-       means or process that requires permission under the Licensed Rights,
-       such as reproduction, public display, public performance,
-       distribution, dissemination, communication, or importation.
+  The Software contains confidential information and proprietary trade
+  secrets of the Licensor. Unauthorized access, inspection, or disclosure
+  is strictly prohibited and may result in civil and criminal liability.
 
-You may NOT produce, reproduce, or Share Adapted Material.
+  5. No Warranty.
 
-  c. No Commercial and No Non-Commercial Use.
+  The Software is provided for viewing only and may contain errors or
+  omissions. No support, maintenance, or updates are implied.
 
-The Licensed Material is for viewing only. Any use, whether
-       for Commercial or Non-Commercial purposes, is STRICTLY PROHIBITED
-       without prior written permission from the Licensor.
+  6. Acceptance Not Required for Viewing.
 
-  d. Confidentiality.
+  You are not required to accept this License to view the Software in a
+  web browser. However, any action beyond viewing, such as copying,
+  modifying, or using the Software, requires explicit written permission
+  and a separate license agreement. By doing so without permission, you
+  infringe copyright.
 
-The Licensed Material contains confidential information and
-       trade secrets of the Licensor relating to Project saddle.
+  7. Termination.
 
-Section 4 – Sui Generis Database Rights.
+  This License and all rights granted herein automatically terminate upon
+  any breach of Section 3 by you. Upon termination, you must cease all
+  viewing and destroy all copies, including cached or local copies, of
+  the Software in your possession.
 
-  Where the Licensed Rights include Sui Generis Database Rights that apply
-  to Your viewing of the Licensed Material:
+  Moreover, termination does not terminate the rights of the Licensor
+  to seek damages or injunctive relief.
 
-  a. You have no right to extract, reutilize, reproduce, or Share all or a
-  substantial portion of the contents of the database;
+  8. Disclaimer of Warranty.
 
-  b. All rights are reserved.
+  THERE IS NO WARRANTY FOR THE PROGRAM, TO THE EXTENT PERMITTED BY
+  APPLICABLE LAW. EXCEPT WHEN OTHERWISE STATED IN WRITING THE COPYRIGHT
+  HOLDERS AND/OR OTHER PARTIES PROVIDE THE PROGRAM "AS IS" WITHOUT WARRANTY
+  OF ANY KIND, EITHER EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO,
+  THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
+  PURPOSE. THE ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE PROGRAM
+  IS WITH YOU. SHOULD THE PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF
+  ALL NECESSARY SERVICING, REPAIR OR CORRECTION.
 
-Section 5 – Disclaimer of Warranties and Limitation of Liability.
+  9. Limitation of Liability.
 
-  a. Unless otherwise separately undertaken by the Licensor, to the extent
-  possible, the Licensor offers the Licensed Material as-is and as-available,
-  and makes no representations or warranties of any kind concerning the
-  Licensed Material, whether express, implied, statutory, or other. This
-  includes, without limitation, warranties of title, merchantability,
-  fitness for a particular purpose, non-infringement, absence of latent
-  or other defects, accuracy, or the presence or absence of errors,
-  whether or not known or discoverable.
+  IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING
+  WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO HAS VIEWED THE PROGRAM
+  AS PERMITTED ABOVE, BE LIABLE TO YOU FOR DAMAGES, INCLUDING ANY
+  GENERAL, SPECIAL, INCIDENTAL OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE
+  VIEWING OR INABILITY TO VIEW THE PROGRAM (INCLUDING BUT NOT LIMITED TO LOSS
+  OF DATA OR DATA BEING RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD
+  PARTIES OR A FAILURE OF THE PROGRAM TO OPERATE), EVEN IF SUCH HOLDER OR
+  OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.
 
-  b. To the extent possible, in no event will the Licensor be liable to You
-  on any legal theory (including, without limitation, negligence) or otherwise
-  for any direct, special, indirect, incidental, consequential, punitive,
-  exemplary, or other losses, costs, expenses, or damages arising out of
-  this License or use of the Licensed Material, even if the Licensor has
-  been advised of the possibility of such losses, costs, expenses, or damages.
+  10. Interpretation and Governing Law.
 
-  c. The disclaimer of warranties and limitation of liability provided above
-  shall be interpreted in a manner that, to the extent possible, most closely
-  approximates an absolute disclaimer and waiver of all liability.
+  If the disclaimer of warranty and limitation of liability provided above
+  cannot be given local legal effect according to their terms, reviewing
+  courts shall apply local law that most closely approximates an absolute
+  waiver of all civil liability in connection with the Program, unless a
+  warranty or assumption of liability accompanies a copy of the Program
+  in return for a fee.
 
-Section 6 – Term and Termination.
+  This License shall be governed by the laws of Brazil.
 
-  a. This License applies for the term of the Copyright and Similar Rights
-  licensed here. However, if You fail to comply with its terms and conditions,
-  then Your rights under this License terminate automatically.
+                     END OF TERMS AND CONDITIONS
 
-  b. Where Your right to use the Licensed Material has terminated under
-  Section 6(a), it reinstates:
+            How to Apply These Terms to Your New Programs
 
-automatically as of the date the violation is cured, provided it is
-       cured within 30 days of Your discovery of the violation; or
+  If you develop a new program, and you want it to remain proprietary and
+  fully owned by you, with source visible but with no rights granted, the
+  best way to achieve this is to attach the following notices to the program.
+  It is safest to attach them to the start of each source file.
 
-upon express reinstatement by the Licensor.
+    <one line to give the program's name and a brief idea of what it does.>
+    Copyright (C) August 2026 devthink, nathlan, akadion, nathu filho, alllan neris, andraneris
+    Project ID: <saddle>
 
-  c. Upon termination, You must cease viewing and destroy any copies, including
-  cached copies, of Project saddle.
+    This program is proprietary and confidential: you can view its source
+    code for evaluation purposes only under the terms of the Proprietary
+    Source-Available License - View Only as published by the Licensor.
+    You are not permitted to copy, modify, distribute, or use this program
+    without prior written permission.
 
-Section 7 – Other Terms and Conditions.
+    This program is distributed in the hope that it will be transparent,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+    Proprietary Source-Available License for more details.
 
-  a. The Licensor shall not be bound by any additional or different terms or
-  conditions communicated by You unless expressly agreed.
+    You should have received a copy of the Proprietary Source-Available
+    License along with this program. If not, see
+    <https://github.com/iakadion/saddle/LICENSE>
 
-  b. Any arrangements, understandings, or agreements regarding the Licensed
-  Material not stated herein are separate from and independent of the terms
-  and conditions of this License.
-
-Section 8 – Interpretation.
-
-  a. For the avoidance of doubt, this License does not, and shall not be
-  interpreted to, reduce, limit, restrict, or impose conditions on any use of
-  the Licensed Material that could lawfully be made without permission under
-  this License.
-
-  b. To the extent possible, if any provision of this License is deemed
-  unenforceable, it shall be automatically reformed to the minimum extent
-  necessary to make it enforceable. If the provision cannot be reformed, it
-  shall be severed from this License without affecting the enforceability of
-  the remaining terms and conditions.
-
-  c. No term or condition of this License will be waived and no failure to
-  comply consented to unless expressly agreed to by the Licensor.
-
-  d. Nothing in this License constitutes or may be interpreted as a limitation
-  upon, or waiver of, any privileges and immunities that apply to the Licensor
-  or You, including from the legal processes of any jurisdiction or authority.
-
-                       END OF TERMS AND CONDITIONS
+  Also add information on how to contact you by electronic and paper mail.
