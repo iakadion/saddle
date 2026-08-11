@@ -26,6 +26,12 @@ jobs:
         run: npm ci
       - name: verify
         run: npm run pack:check
+      - name: align github package scope
+        run: npm pkg set name="@${GITHUB_REPOSITORY_OWNER}/saddle"
+        env:
+          GITHUB_REPOSITORY_OWNER: ${{ github.repository_owner }}
+      - name: show github package name
+        run: npm pkg get name
       - name: publish github package
         run: npm publish --registry=https://npm.pkg.github.com --access public
         env:

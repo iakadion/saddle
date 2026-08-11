@@ -136,3 +136,7 @@
 - [x] Prepare package version 1.0 metadata and release notes.
 - [x] Add safe GitHub release validation and npmjs publish workflow using OIDC Trusted Publishing.
 - [x] Create the v1.0 tag only after the final checks pass.
+- [x] Inspect failed or missing release workflow runs and package listings.
+- [ ] Publish the authorized GitHub Packages artifacts after correcting blockers.
+- [ ] Verify package versions and visibility through the GitHub API.
+- [ ] Commit and push publication fixes and verification metadata.
