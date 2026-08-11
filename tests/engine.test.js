@@ -43,6 +43,18 @@ import { prismapersistence } from "../persistence/prisma.js";
 import { workflowmanifest } from "../workflow/manifest.js";
 import { githubworkflow, gitlabworkflow, woodpeckerworkflow } from "../workflow/templates.js";
 import { workflowregistry } from "../workflow/registry.js";
+import { memoryengine } from "../memory/engine.js";
+import { targetfactory, targeturi } from "../memory/targets.js";
+import { normalizeurl } from "../crawl/normalize.js";
+import { crawl } from "../crawl/crawler.js";
+import { saddleservice } from "../api/service.js";
+import { persistentqueue } from "../crawl/persistent.js";
+import { filesessions } from "../sessions/file.js";
+import { extractwithschema } from "../scrape/schema.js";
+import { mcpserver } from "../mcp/server.js";
+import { runtimename, runtimefeatures } from "../runtime/detect.js";
+import { deadline } from "../runtime/abort.js";
+import { publishplan, registrymanifest } from "../packager/publish.js";
 
 test("runs a job through prepare process sync and commit", async () => {
   const root = await mkdtemp(join(tmpdir(), "saddletest"));
@@ -268,4 +280,90 @@ test("renders multiforge workflow manifests", () => {
   assert.equal(registry.render("process", "github").includes("workflow_dispatch"), true);
   assert.equal(gitlabworkflow(manifest).includes("image: node:22"), true);
   assert.equal(woodpeckerworkflow(manifest).includes("npm test"), true);
+});
+
+test("loads from the first backend and persists to all backends", async () => {
+  const first = new Map();
+  const second = new Map();
+  const backend = (values) => ({ get: async (key) => values.get(key) ?? null, put: async (key, value) => values.set(key, value), delete: async (key) => values.delete(key) });
+  first.set("known", { data: new TextEncoder().encode("value"), contenttype: "text/plain" });
+  const memory = memoryengine({ backends: [backend(first), backend(second)] });
+  const loaded = await memory.load("known");
+  assert.equal(new TextDecoder().decode(loaded.buffer), "value");
+  await memory.persist("new", "saddle");
+  assert.equal(new TextDecoder().decode(second.get("new").data), "saddle");
+  assert.equal((await memory.safeload("missing")).success, false);
+});
+
+test("builds open memory targets and transforms", () => {
+  const target = targetfactory("github", { owner: "owner", repo: "repo", path: "file.bin" });
+  assert.equal(targeturi(target), "github://owner/repo/file.bin");
+  const compute = memoryengine().transformtocompute("saddle");
+  const result = memoryengine().transformtostorage(compute);
+  assert.equal(result.mimetype, "application/octet-stream");
+  assert.equal(result.payload.byteLength, 6);
+});
+
+test("crawls breadth first with normalized same domain links", async () => {
+  const pages = { "https://example.com/": { url: "https://example.com/", title: "home", links: ["https://example.com/next?utm_source=x", "https://other.example/skip"] }, "https://example.com/next": { url: "https://example.com/next", title: "next", links: [] } };
+  const result = await crawl("https://example.com/?utm_source=test", { maxdepth: 1, maxpages: 3, samedomain: true, scrape: async (url) => pages[url] });
+  assert.equal(normalizeurl("https://example.com/next?utm_source=x"), "https://example.com/next");
+  assert.equal(result.results.length, 2);
+  assert.equal(result.results[1].title, "next");
+});
+
+test("serves universal api routes with web request response objects", async () => {
+  const service = saddleservice({ scrape: async (url) => ({ url, links: [] }) });
+  const health = await service.handle(new Request("https://api.example.com/health"));
+  assert.equal((await health.json()).healthy, true);
+  const scrape = await service.handle(new Request("https://api.example.com/v1/scrape", { method: "POST", body: JSON.stringify({ url: "https://example.com" }), headers: { "content-type": "application/json" } }));
+  assert.equal((await scrape.json()).url, "https://example.com");
+  const stream = await service.handle(new Request("https://api.example.com/v1/event"));
+  assert.equal(stream.headers.get("content-type").startsWith("text/event-stream"), true);
+});
+
+test("restores persistent crawl queue and completes entries", async () => {
+  const saved = new Map();
+  const store = { list: async () => [...saved.values()], save: async (item) => saved.set(item.url, item), update: async (key, item) => saved.set(key, item) };
+  const queue = persistentqueue({ store });
+  await queue.add({ url: "https://example.com", depth: 0 });
+  const item = await queue.next();
+  await queue.complete(item.url);
+  const restored = persistentqueue({ store });
+  await restored.restore();
+  assert.equal(restored.list().length, 0);
+});
+
+test("saves and loads a validated session file", async () => {
+  const root = await mkdtemp(join(tmpdir(), "saddle-session-file"));
+  const store = filesessions(root);
+  const session = { version: 1, id: "sessionfile", agentname: "test", originurl: "https://example.com", seed: "seed", status: "closed", startedat: 1, events: [] };
+  await store.save(session);
+  assert.equal((await store.load("sessionfile")).id, "sessionfile");
+});
+
+test("extracts fields from a safe schema and serves MCP tools", async () => {
+  const html = "<title>Saddle</title><h1>Engine</h1><a href=\"/docs\">Docs</a>";
+  const extracted = extractwithschema(html, { title: "title", heading: { selector: "h1" } }, "https://example.com");
+  assert.equal(extracted.title, "Saddle");
+  assert.equal(extracted.heading, "Engine");
+  const server = mcpserver({ scrape: async (url) => ({ url, links: [] }) });
+  const response = await server.handle({ jsonrpc: "2.0", id: 1, method: "tools/call", params: { name: "scrape", arguments: { url: "https://example.com" } } });
+  assert.equal(response.result.content[0].type, "text");
+});
+
+test("detects universal runtime capabilities and creates a deadline", () => {
+  assert.equal(runtimename({ process: { versions: { node: "22" } } }), "node");
+  assert.equal(runtimefeatures({ fetch: () => undefined, ReadableStream, WritableStream }).fetch, true);
+  const timer = deadline(1000);
+  assert.equal(timer.signal.aborted, false);
+  timer.cancel();
+});
+
+test("creates registry and CDN publication plans without publishing", () => {
+  const manifest = { name: "@devthink/saddle", version: "0.2.0" };
+  const plan = publishplan(manifest, { repository: "iakadion/saddle" });
+  assert.equal(plan.package.command, "npm publish --access public");
+  assert.equal(plan.cdn[0].url.includes("jsdelivr"), true);
+  assert.equal(registrymanifest(manifest).surfaces.includes("container"), true);
 });

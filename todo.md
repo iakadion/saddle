@@ -68,3 +68,16 @@
 - [x] Criar streaming de blocos com backpressure configurável.
 - [x] Adicionar adapter SQL neutro para Drizzle Prisma e MySQL2.
 - [x] Adicionar workflows multiforge e manifests de execução.
+
+## Roadmap P0 e P1
+
+- [x] Criar memory engine com `memoryobject`, `computeresult`, targets e `safeload`.
+- [x] Implementar transformações storage to compute e compute to storage.
+- [x] Adicionar API universal de scrape, crawl, batch e health com SSE.
+- [x] Adicionar rate limiting global, por usuário e por domínio.
+- [x] Implementar crawling BFS com normalização de URL, sitemap e limite de domínio.
+- [x] Adicionar queue persistente para crawl e fallback em memória.
+- [x] Implementar `save` e `load` de sessões e extraction por schema.
+- [x] Adicionar servidor MCP opcional com ferramentas scrape, crawl, batch, extract e serialize.
+- [x] Criar Dockerfile seguro e docker compose parametrizado.
+- [x] Adicionar runtime universal sem exigir fs, process ou Buffer no núcleo.

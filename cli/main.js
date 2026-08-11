@@ -12,6 +12,7 @@ import { inprocess } from "../runners/inprocess.js";
 import { scheduler } from "../runners/scheduler.js";
 import { engine } from "../runtime/engine.js";
 import { localstorage } from "../storage/local.js";
+import { mcpserver } from "../mcp/server.js";
 
 export async function main(args = argv.slice(2)) {
   const command = args[0] ?? "help";
@@ -24,6 +25,7 @@ export async function main(args = argv.slice(2)) {
     console.log(JSON.stringify({ jobid: result.job.id, artifact: result.artifact, events: events.all().length }, null, 2));
     return;
   }
+  if (command === "mcp") { const server = mcpserver({ scrape: async (url) => ({ url, links: [] }) }); console.log(JSON.stringify({ tools: server.listtools() }, null, 2)); return; }
   throw new Error(`unknown command: ${command}`);
 }
 
