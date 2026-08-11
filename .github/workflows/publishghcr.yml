@@ -1,0 +1,52 @@
+name: publish ghcr
+
+on:
+  release:
+    types: [created]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+env:
+  image: ghcr.io/${{ github.repository_owner }}/saddle
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: login ghcr
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: resolve image tags
+        id: metadata
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "${GITHUB_EVENT_NAME}" == "release" ]]; then
+            version="${{ github.event.release.tag_name }}"
+          else
+            version="${GITHUB_SHA::12}"
+          fi
+          version="${version#v}"
+          {
+            echo "version=${version}"
+            echo 'tags<<EOF'
+            echo "${image}:${version}"
+            echo "${image}:latest"
+            echo 'EOF'
+          } >> "${GITHUB_OUTPUT}"
+      - name: build and push image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: dockerfile.saddle
+          push: true
+          tags: ${{ steps.metadata.outputs.tags }}

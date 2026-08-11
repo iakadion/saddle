@@ -1,4 +1,4 @@
-name: release validation
+name: publish github npm
 
 on:
   release:
@@ -7,10 +7,12 @@ on:
 
 permissions:
   contents: read
+  packages: write
 
 jobs:
-  validate:
+  publish:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: checkout
         uses: actions/checkout@v4
@@ -18,8 +20,13 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 22
-          registry-url: https://registry.npmjs.org
+          registry-url: https://npm.pkg.github.com
+          cache: npm
       - name: install
         run: npm ci
       - name: verify
         run: npm run pack:check
+      - name: publish github package
+        run: npm publish --registry=https://npm.pkg.github.com --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

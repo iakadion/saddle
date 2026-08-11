@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>io.devthink</groupId>
+  <artifactId>saddle</artifactId>
+  <version>1.0.0</version>
+  <packaging>pom</packaging>
+  <name>Saddle</name>
+  <description>Binary computing engine that turns distributed storage into a publishable working set.</description>
+  <url>https://github.com/iakadion/saddle</url>
+  <licenses>
+    <license>
+      <name>MIT License</name>
+      <url>https://opensource.org/license/mit</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <scm>
+    <connection>scm:git:https://github.com/iakadion/saddle.git</connection>
+    <developerConnection>scm:git:ssh://github.com/iakadion/saddle.git</developerConnection>
+    <url>https://github.com/iakadion/saddle</url>
+  </scm>
+  <distributionManagement>
+    <repository>
+      <id>github</id>
+      <name>GitHub Packages</name>
+      <url>https://maven.pkg.github.com/iakadion/saddle</url>
+    </repository>
+  </distributionManagement>
+</project>

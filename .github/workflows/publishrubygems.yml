@@ -1,0 +1,36 @@
+name: publish rubygems
+
+on:
+  release:
+    types: [created]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: setup ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.3
+      - name: configure github credentials
+        shell: bash
+        run: |
+          set -euo pipefail
+          install -d -m 700 "${HOME}/.gem"
+          printf '%s\n' '---' ":github: Bearer ${GITHUB_TOKEN}" > "${HOME}/.gem/credentials"
+          chmod 600 "${HOME}/.gem/credentials"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: build gem
+        run: gem build saddle.gemspec
+      - name: publish gem
+        shell: bash
+        run: gem push saddle-*.gem --key github --host "https://rubygems.pkg.github.com/${GITHUB_REPOSITORY_OWNER}/"
