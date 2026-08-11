@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 360" role="img" aria-labelledby="title desc">
+  <title id="title">Saddle runtime architecture</title>
+  <desc id="desc">Storage enters a bridge, becomes a working set, runs through an injected runner, and returns as an artifact.</desc>
+  <defs>
+    <linearGradient id="paper" x1="0" x2="1" y1="0" y2="1">
+      <stop offset="0" stop-color="#fbf7f0"/>
+      <stop offset="1" stop-color="#efe6d8"/>
+    </linearGradient>
+    <marker id="arrow" markerHeight="8" markerWidth="8" orient="auto" refX="7" refY="4">
+      <path d="M0 0 8 4 0 8Z" fill="#d35d3d"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="360" rx="30" fill="url(#paper)"/>
+  <path d="M60 72H1140M60 286H1140" stroke="#d9cdbc" stroke-dasharray="5 9"/>
+  <g font-family="Arial, Helvetica, sans-serif">
+    <g transform="translate(70 108)">
+      <rect width="205" height="130" rx="18" fill="#202a2f"/>
+      <text x="24" y="38" fill="#f7f1e8" font-size="14" letter-spacing="2">01 · STORAGE</text>
+      <text x="24" y="76" fill="#fff" font-size="23" font-weight="700">Objects</text>
+      <text x="24" y="104" fill="#b8c4c1" font-size="14">local · S3 · forge</text>
+    </g>
+    <path d="M290 173h80" fill="none" stroke="#d35d3d" stroke-width="4" marker-end="url(#arrow)"/>
+    <g transform="translate(390 108)">
+      <rect width="205" height="130" rx="18" fill="#d35d3d"/>
+      <text x="24" y="38" fill="#fff3e7" font-size="14" letter-spacing="2">02 · BRIDGE</text>
+      <text x="24" y="76" fill="#fff" font-size="23" font-weight="700">Working set</text>
+      <text x="24" y="104" fill="#ffe5d5" font-size="14">load · transform · sync</text>
+    </g>
+    <path d="M610 173h80" fill="none" stroke="#d35d3d" stroke-width="4" marker-end="url(#arrow)"/>
+    <g transform="translate(710 108)">
+      <rect width="205" height="130" rx="18" fill="#e5c26f"/>
+      <text x="24" y="38" fill="#4b3d22" font-size="14" letter-spacing="2">03 · RUNNER</text>
+      <text x="24" y="76" fill="#202a2f" font-size="23" font-weight="700">Job cycle</text>
+      <text x="24" y="104" fill="#4b3d22" font-size="14">prepare · process · cleanup</text>
+    </g>
+    <path d="M930 173h80" fill="none" stroke="#d35d3d" stroke-width="4" marker-end="url(#arrow)"/>
+    <g transform="translate(1030 108)">
+      <rect width="100" height="130" rx="18" fill="#fff" stroke="#202a2f" stroke-width="2"/>
+      <text x="18" y="38" fill="#202a2f" font-size="14" letter-spacing="2">04</text>
+      <text x="18" y="74" fill="#202a2f" font-size="20" font-weight="700">Artifact</text>
+      <text x="18" y="102" fill="#6d7777" font-size="13">persist</text>
+    </g>
+    <text x="70" y="319" fill="#6d7777" font-size="14">Saddle owns the contracts. The caller chooses credentials, transports, storage, browser and runner.</text>
+  </g>
+</svg>

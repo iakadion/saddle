@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 180" role="img" aria-labelledby="title desc">
+  <title id="title">Saddle</title>
+  <desc id="desc">Saddle wordmark with a warm ember mark and a storage-to-compute arc.</desc>
+  <rect width="720" height="180" rx="28" fill="#f7f1e8"/>
+  <g transform="translate(42 34)">
+    <path d="M52 10c-27 0-48 20-48 45 0 32 24 57 57 57 19 0 35-8 46-22-13 5-25 7-36 7-23 0-39-17-39-39 0-19 13-35 31-42 12-5 25-6 39-4C90 18 73 10 52 10Z" fill="#d35d3d"/>
+    <path d="M31 76c15 11 33 17 54 17 25 0 44-9 59-28" fill="none" stroke="#202a2f" stroke-linecap="round" stroke-width="8"/>
+    <circle cx="35" cy="45" r="7" fill="#f7f1e8"/>
+    <circle cx="137" cy="65" r="7" fill="#d35d3d"/>
+  </g>
+  <text x="220" y="91" fill="#202a2f" font-family="Arial, Helvetica, sans-serif" font-size="58" font-weight="700" letter-spacing="10">SADDLE</text>
+  <text x="224" y="126" fill="#6d7777" font-family="Arial, Helvetica, sans-serif" font-size="14" letter-spacing="3">STORAGE · WORKING SET · RUNNER</text>
+</svg>
