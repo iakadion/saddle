@@ -33,4 +33,4 @@ jobs:
         run: gem build saddle.gemspec
       - name: publish gem
         shell: bash
-        run: gem push saddle-*.gem --key github --host "https://rubygems.pkg.github.com/${GITHUB_REPOSITORY_OWNER}/"
+        run: gem push saddle-*.gem --key github --host "https://rubygems.pkg.github.com/${GITHUB_REPOSITORY_OWNER}"

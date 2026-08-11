@@ -16,6 +16,8 @@ GitHub's NuGet documentation confirms that the source endpoint is `https://nuget
 
 GitHub's RubyGems documentation confirms that GitHub Packages uses `https://rubygems.pkg.github.com/NAMESPACE/` and a `~/.gem/credentials` entry in the form `:github: Bearer TOKEN`. In a workflow the token can be the automatically supplied `GITHUB_TOKEN`; no long-lived RubyGems token belongs in the repository.
 
+The RubyGems workflow must pass the host without a trailing slash, matching the official `gem push --host https://rubygems.pkg.github.com/NAMESPACE` form. RubyGems appends its API path to that host; leaving an extra slash caused the first publish attempt to redirect permanently and fail.
+
 ## workflow decisions
 
 The repository now uses one release-triggered workflow per destination. `publishgithubnpm.yml` publishes a GitHub Packages npm variant under the repository owner scope, currently `@iakadion/saddle`, with `GITHUB_TOKEN`; the public npm workflow keeps the canonical name `@devthink/saddle`. `publishghcr.yml` publishes `ghcr.io/iakadion/saddle`; `publishmaven.yml`, `publishnuget.yml`, and `publishrubygems.yml` publish minimal ecosystem metadata to the corresponding GitHub Packages registries. Every GitHub Packages job grants only `contents: read` and `packages: write`.
