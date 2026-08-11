@@ -28,6 +28,10 @@ The GitHub Packages npm workflow must use a package scope authorized for the wor
 
 The GHCR package is linked automatically by publishing from this repository and includes the OCI source label in `dockerfile.saddle`. GitHub creates a first container package as private by default, so the owner must change its package visibility to public if public pulls are required. The same visibility review applies to the Maven, NuGet, RubyGems, and GitHub npm packages after their first publication.
 
+## live verification
+
+The first `publishgithubnpm.yml` run failed with HTTP 403 because `@devthink/saddle` was not an authorized package namespace for the `iakadion/saddle` workflow. The corrected run `31543249301` completed successfully after rewriting the package name in the CI workspace to `@iakadion/saddle`. However, the repository Packages page still returned an empty listing immediately afterward, and the available GitHub API token could not read the user package namespace. The next verification must query the owner package page directly and inspect the workflow publish logs before treating the successful exit code as visible package availability.
+
 ## sources
 
 1. GitHub Docs — About permissions for GitHub Packages: https://docs.github.com/en/packages/learn-github-packages/about-permissions-for-github-packages

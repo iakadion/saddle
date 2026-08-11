@@ -137,6 +137,7 @@
 - [x] Add safe GitHub release validation and npmjs publish workflow using OIDC Trusted Publishing.
 - [x] Create the v1.0 tag only after the final checks pass.
 - [x] Inspect failed or missing release workflow runs and package listings.
-- [ ] Publish the authorized GitHub Packages artifacts after correcting blockers.
-- [ ] Verify package versions and visibility through the GitHub API.
-- [ ] Commit and push publication fixes and verification metadata.
+- [x] Publish the authorized GitHub Packages npm artifact after correcting the namespace blocker.
+- [x] Verify package version and visibility through the GitHub package page.
+- [ ] Publish GHCR Maven NuGet and RubyGems artifacts after their independent metadata checks.
+- [ ] Commit and push publication verification metadata.
