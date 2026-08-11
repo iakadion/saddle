@@ -15,12 +15,12 @@
   0. Notice.
 
   Project saddle is proprietary and confidential.
-  Source available for viewing only.
+  Source available for viewing only under SADDLE PROPRIETARY LICENSE.
 
   SPDX-License-Identifier: LicenseRef-Saddle-Proprietary
 
   1. Trademarks.
 
-  "saddle" is trademark of Licensor.
+  "saddle" is trademark of Licensor. All rights reserved.
 
                      END OF TERMS AND CONDITIONS

@@ -11,12 +11,14 @@
 
                        TERMS AND CONDITIONS
 
-  0. Marks.
+  0. Trademarks.
 
-  "saddle" is trademark of Licensor.
+  "saddle" and associated logos are trademarks of Licensor.
 
-  1. No License.
+  1. No License to Use Marks.
 
-  No permission to use marks granted.
+  No permission to use trade names, trademarks, service marks granted.
+
+  You may not use marks to suggest endorsement or affiliation.
 
                      END OF TERMS AND CONDITIONS

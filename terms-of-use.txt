@@ -7,33 +7,37 @@
 
                             Preamble
 
-  These Terms of Use govern viewing of Project saddle.
-  Viewing does not grant usage rights.
+  These Terms of Use govern your use of Project saddle, including
+  its GitHub repository, source code, documentation, and services.
+
+  This is proprietary, source-available project. Viewing does not grant
+  usage rights.
 
                        TERMS AND CONDITIONS
 
-  0. Definitions.
-
-  "You" means viewer.
-
-  1. Overview.
+  0. Overview.
 
   Rights defined solely in LICENSE file.
 
-  2. Acceptable Use.
+  1. Acceptable Use.
 
-  View only for evaluation.
+  View only for evaluation. No use, copy, distribution, or incorporation.
 
-  3. Prohibited Uses.
+  2. Prohibited Uses.
 
-  Competing products, reverse engineering, malware.
+  Violate law, infringe IP, develop competing products, reverse engineer,
+  distribute malware.
+
+  3. Feedback.
+
+  Any feedback becomes exclusive property of Licensor.
 
   4. Disclaimer.
 
-  AS-IS, AS-AVAILABLE.
+  AS-IS AND AS-AVAILABLE WITHOUT WARRANTY.
 
-  5. Contact.
+  5. Changes to Terms.
 
-  For commercial license, open issue LICENSE REQUEST.
+  Licensor may modify ToU at any time.
 
                      END OF TERMS AND CONDITIONS

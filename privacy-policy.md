@@ -7,17 +7,17 @@
 
                             Preamble
 
-  This Privacy Policy covers Project saddle repository viewing.
+  Privacy policy for Project saddle repository viewing.
 
                        TERMS AND CONDITIONS
 
-  0. Data.
+  0. Data Collection.
 
-  No data collection in source code.
-  GitHub's Privacy Policy applies.
+  No data collection in source code. GitHub's Privacy Policy applies
+  when viewing on GitHub.
 
   1. No Tracking.
 
-  No tracking or telemetry in code.
+  No tracking, telemetry, or analytics in code.
 
                      END OF TERMS AND CONDITIONS

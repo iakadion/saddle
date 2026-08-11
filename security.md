@@ -11,13 +11,14 @@
 
                        TERMS AND CONDITIONS
 
-  0. Reporting.
+  0. Reporting Vulnerability.
 
-  Do NOT open public issues for vulnerabilities.
-  Use GitHub private security advisory.
+  Do NOT open public GitHub issue for security vulnerabilities.
+  Report privately via GitHub private security advisory.
 
   1. No Permission to Test.
 
-  No pentest without written approval.
+  No penetration testing, fuzzing, or active scanning without prior
+  written permission.
 
                      END OF TERMS AND CONDITIONS

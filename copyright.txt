@@ -17,11 +17,11 @@
   All Rights Reserved.
   Project: saddle
 
-  All files protected by copyright law.
+  All files protected by copyright law and international treaties.
 
   1. Protection.
 
-  Unauthorized copying, modification, distribution, or use is prohibited
-  and will be prosecuted.
+  Unauthorized copying, modification, distribution, or use is strictly
+  prohibited and will be prosecuted.
 
                      END OF TERMS AND CONDITIONS

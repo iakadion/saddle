@@ -14,10 +14,11 @@
 
   0. Policy.
 
-  No external contributions accepted without signed CLA.
+  No external contributions accepted via pull requests, patches, or other
+  means, unless you have signed separate Contributor License Agreement.
 
-  1. Request.
+  1. How to Request Permission.
 
-  Open issue LICENSE REQUEST for commercial license.
+  Open issue titled LICENSE REQUEST with intended use.
 
                      END OF TERMS AND CONDITIONS

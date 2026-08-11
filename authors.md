@@ -7,7 +7,7 @@
 
                             Preamble
 
-  Authors of Project saddle.
+  Authors and copyright holders for Project saddle.
 
                        TERMS AND CONDITIONS
 
@@ -20,6 +20,8 @@
   - allan neris
   - andraneris
 
-  All Rights Reserved.
+  All Rights Reserved. Project: saddle
+
+  Contact via GitHub repository iakadion/saddle.
 
                      END OF TERMS AND CONDITIONS

@@ -7,16 +7,21 @@
 
                             Preamble
 
-  Code of Conduct for Project saddle community interaction.
+  Code of Conduct governs behavior in Project saddle repository.
 
                        TERMS AND CONDITIONS
 
   0. Expected Behavior.
 
-  Be respectful. No copying or redistribution.
+  Be respectful and professional. No copying or redistribution.
 
-  1. Enforcement.
+  1. Unacceptable Behavior.
 
-  Ban and legal action for violation.
+  Copying for redistribution, reverse engineering discussions,
+  harassment, discrimination.
+
+  2. Enforcement.
+
+  Immediate ban and legal action for violation.
 
                      END OF TERMS AND CONDITIONS
