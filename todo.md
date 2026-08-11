@@ -41,3 +41,21 @@
 - [x] Implementar API de sessão, replay abstrato e persistência JSONL.
 - [x] Adicionar contrato de socket para realtime sem depender de uma plataforma única.
 - [x] Manter alternativas de deploy abertas sem Netlify Functions ou Vercel Functions.
+
+## Próxima frente do engine
+
+- [ ] Criar contratos de persistência para jobs sessions artifacts chunks e providers.
+- [ ] Adicionar schema operacional compatível com Prisma Drizzle e MySQL2 sem impor um driver.
+- [ ] Implementar queue de jobs idempotência retry e saga de compensação.
+- [ ] Adicionar workflow dispatch parametrizado e registro de run.
+- [ ] Adicionar browser session replay abstrato sem acoplar o core a um browser.
+- [ ] Adicionar scraping seguro com robots cache extraction e content types.
+- [ ] Criar packager para binary container e manifest de distribuição.
+- [ ] Adicionar adapters multiforge para GitLab Forgejo Gitea Codeberg e Hugging Face.
+- [x] Criar contrato de browser e replay de eventos sem acoplar a um navegador.
+- [x] Implementar parser de robots e respeito ao crawl delay.
+- [x] Implementar cache com ttl e stale while revalidate.
+- [x] Implementar extraction estruturada de metadata links e texto.
+- [x] Criar manifest de distribuição para library cli binary e container.
+- [x] Gerar plano de container sem fixar host ou port.
+- [x] Criar adapter genérico de forge e wrappers GitLab Forgejo Gitea Codeberg e Hugging Face.

@@ -20,6 +20,17 @@ import { externalmemory, internalmemory, vectorizedmemory } from "../memory/mode
 import { modeprofile } from "../modes/modes.js";
 import { transport } from "../adapters/transport.js";
 import { githubadapter } from "../adapters/github.js";
+import { memorypersistence } from "../persistence/memory.js";
+import { prismaschema, schemasql } from "../persistence/schema.js";
+import { jobqueue } from "../queue/queue.js";
+import { saga } from "../queue/saga.js";
+import { workflowdispatch } from "../dispatch/workflow.js";
+import { replay } from "../sessions/replay.js";
+import { robotsallowed, robotsrules } from "../scrape/robots.js";
+import { extracthtml } from "../scrape/extract.js";
+import { scraper } from "../scrape/scraper.js";
+import { distributionmanifest, binaryplan, containerplan } from "../packager/manifest.js";
+import { forgejoadapter } from "../adapters/forgejo.js";
 
 test("runs a job through prepare process sync and commit", async () => {
   const root = await mkdtemp(join(tmpdir(), "saddletest"));
@@ -105,4 +116,87 @@ test("github adapter keeps endpoint and token injectable", async () => {
   assert.equal(result.accepted, true);
   assert.equal(request.init.headers.authorization, "Bearer token");
   assert.equal(request.url.includes("actions/workflows/workflow/dispatches"), true);
+});
+
+test("provides neutral persistence schemas and memory persistence", async () => {
+  const persistence = memorypersistence();
+  await persistence.savejob({ id: "job1", status: "queued", name: "test", priority: 0 });
+  await persistence.updatejob("job1", { status: "running" });
+  await persistence.saveevent({ id: "event1", jobid: "job1", type: "jobrunning", at: 1, data: {} });
+  assert.equal((await persistence.getjob("job1")).status, "running");
+  assert.equal((await persistence.listevents("job1")).length, 1);
+  assert.equal(schemasql({ dialect: "mysql" }).length, 5);
+  assert.equal(prismaschema().includes("model job"), true);
+});
+
+test("queues retryable jobs and keeps idempotent results", async () => {
+  let attempts = 0;
+  const queue = jobqueue({ concurrency: 1, maxattempts: 2, backoff: 0 });
+  const handler = async () => { attempts += 1; if (attempts === 1) throw { retryable: true }; return "done"; };
+  const first = await queue.add({ value: 1 }, handler, { key: "same" });
+  const second = await queue.add({ value: 1 }, handler, { key: "same" });
+  assert.equal(first, "done");
+  assert.equal(second, "done");
+  assert.equal(attempts, 2);
+});
+
+test("runs saga compensations in reverse order", async () => {
+  const steps = [];
+  await assert.rejects(() => saga([{ run: async () => { steps.push("one"); return 1; }, compensate: async () => steps.push("undoone") }, { run: async () => { steps.push("two"); throw new Error("stop"); }, compensate: async () => steps.push("undotwo") }]), /stop/);
+  assert.deepEqual(steps, ["one", "two", "undoone"]);
+});
+
+test("dispatches a workflow once for an idempotency key", async () => {
+  let calls = 0;
+  const dispatch = workflowdispatch({ dispatch: async () => { calls += 1; return { accepted: true, status: 204 }; } });
+  const spec = { owner: "owner", repository: "repo", workflow: "ci", ref: "main", inputs: { jobid: "job1" }, requestid: "request1" };
+  const first = await dispatch.submit(spec);
+  const second = await dispatch.submit(spec);
+  assert.equal(first.requestid, second.requestid);
+  assert.equal(calls, 1);
+});
+
+test("replays validated events through an injected browser adapter", async () => {
+  const calls = [];
+  const adapter = { move: async () => calls.push("move"), click: async () => calls.push("click"), drag: async () => calls.push("drag"), scroll: async () => calls.push("scroll"), key: async () => calls.push("key") };
+  const result = await replay({ events: [{ t: 0, type: "move" }, { t: 0, type: "click" }, { t: 0, type: "key" }] }, adapter);
+  assert.deepEqual(calls, ["move", "click", "key"]);
+  assert.equal(result.events, 3);
+});
+
+test("enforces robots rules and extracts structured html", () => {
+  const rules = robotsrules("user-agent: *\ndisallow: /private\nallow: /private/public");
+  assert.equal(robotsallowed(rules, "https://example.com/private/data"), false);
+  assert.equal(robotsallowed(rules, "https://example.com/private/public"), true);
+  const result = extracthtml("<html><head><title>Test</title><meta name=\"description\" content=\"A page\"></head><body><a href=\"/next\">Next</a><p>Hello world</p></body></html>", "https://example.com/");
+  assert.equal(result.title, "Test");
+  assert.equal(result.description, "A page");
+  assert.equal(result.links[0], "https://example.com/next");
+  assert.equal(result.text.includes("Hello world"), true);
+});
+
+test("scrapes with robots and cache through injected transport", async () => {
+  let calls = 0;
+  const result = scraper({ fetcher: async (url) => { calls += 1; return { ok: true, status: 200, text: async () => url.endsWith("robots.txt") ? "user-agent: *\nallow: /" : "<title>Cached</title>" }; }, cacheoptions: { ttl: 1000 } });
+  const first = await result.scrape("https://example.com/page");
+  const second = await result.scrape("https://example.com/page");
+  assert.equal(first.title, "Cached");
+  assert.equal(second.title, "Cached");
+  assert.equal(calls, 2);
+});
+
+test("builds open distribution plans", () => {
+  const manifest = distributionmanifest({ name: "saddle", version: "0.2.0", entry: "cli/main.js" });
+  const binary = binaryplan(manifest, { tool: "node" });
+  const container = containerplan(manifest, { base: "node:22-alpine" });
+  assert.equal(binary.entry, "cli/main.js");
+  assert.equal(container.dockerfile.includes("from node:22-alpine"), true);
+  assert.equal(container.dockerfile.includes("expose"), false);
+});
+
+test("keeps multiforge adapters injectable", async () => {
+  const adapter = forgejoadapter({ baseurl: "https://forge.example.com/", token: async () => "token", fetcher: async (_url, init) => ({ ok: true, status: 200, json: async () => ({ authorization: init.headers.authorization }) }) });
+  const result = await adapter.dispatch({ path: "/api/workflow", ref: "main", inputs: { jobid: "job1" } });
+  assert.equal(result.accepted, true);
+  assert.equal(result.body.authorization, "Bearer token");
 });
