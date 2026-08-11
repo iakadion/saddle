@@ -22,4 +22,4 @@
 - [x] Adicionar package metadata, build, exports e exemplo executável.
 - [x] Adicionar workflows GitHub Actions sem executar ações destrutivas.
 - [x] Validar tudo localmente e revisar o diff antes do push.
-- [ ] Publicar a primeira implementação no repositório GitHub selecionado após confirmação final do diff.
+- [x] Publicar a primeira implementação no repositório GitHub selecionado após confirmação final do diff.
