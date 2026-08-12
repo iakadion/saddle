@@ -76,7 +76,7 @@ node examples/publicapi.js
 | `mcpserver` / `mcptransport` | MCP tools over JSONL/HTTP |
 | `nodeserver` | Web Request/Response handler |
 
-Complete API: `docs/libraryapi.md`
+Complete API: `docs/libraryapi.md`. Surface overview: [`docs/productindex.md`](docs/productindex.md). Usage examples: [`docs/usage.md`](docs/usage.md).
 
 ## The execution model
 
@@ -176,13 +176,14 @@ protocol/      JSON, NDJSON, SSE and block serializers
 workflow/      manifests, templates and registry
 tests/         deterministic engine coverage
 docs/          architecture, API, release and registry notes
+surfaces/      browser, extension, desktop, mobile and n8n contracts
 ```
 
 Root-based JavaScript ESM layout, no src/ directory, no TypeScript build required.
 
 ## Current scope
 
-Version 1.7 establishes the engine contracts, browser snapshot foundation, storage sync primitives, runner recovery contracts, scraping context provenance, API/MCP security contracts, bot integration lifecycle and the first tested extension bridge. Browser implementations, provider credentials, persistent databases and production deployment remain caller-selected adapters. The next improvements should extend those contracts without coupling the core to one forge, registry, browser or storage vendor.
+Version 1.7 establishes the engine contracts, browser snapshot foundation, storage sync primitives, runner recovery contracts, scraping context provenance, API/MCP security contracts, bot integration lifecycle, the first tested extension bridge and the first desktop, mobile and n8n surface contracts. Native runtimes, n8n host registration, provider credentials, persistent databases and production deployment remain caller-selected adapters. The next improvements should extend these contracts without coupling the core to one forge, registry, browser or storage vendor.
 
 ## License
 

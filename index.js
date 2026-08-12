@@ -98,6 +98,7 @@ export * from "./webhook/signature.js";
 export * from "./webhook/receiver.js";
 export * from "./surfaces/manifest.js";
 export * from "./surfaces/n8n.js";
+export * from "./surfaces/adapters.js";
 export * from "./library/public.js";
 export * from "./errors/taxonomy.js";
 export * from "./retry/policy.js";

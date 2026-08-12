@@ -39,6 +39,8 @@ This matrix turns the supplied README and conclusions into implementation decisi
 | CAPTCHA | Contract, guard and evidence exist | No automatic solver integration | deferred | Keep external/manual solver boundary; do not promise bypass in the extension |
 | Stealth | Fingerprint contract exists | No automatic stealth patching | deferred | Keep opt-in fingerprint metadata; no hidden anti-detection behavior |
 | Packaging | npm, GHCR, Maven, NuGet and RubyGems workflows are live | No extension zip build or release artifact | P1 | Add a deterministic zip/check workflow after the reference surface is tested |
+| Mobile and desktop apps | Contract slice | Desktop/mobile manifests and caller-owned adapter contracts exist; no native project is bundled | P1 | Keep native projects caller-owned and add runtime conformance tests incrementally |
+| n8n surface | Contract slice | Node metadata, trigger matching and declared action execution exist; no n8n host package is bundled | P1 | Keep node registration and credentials caller-owned |
 | Cross-browser | Target profile declares browser and extension | No Firefox, Edge or Safari manifests/build validation | P2 | Keep WebExtension-compatible contracts and add adapters incrementally |
 | Storage equals compute | Memory bridge and engine implement storage-to-working-set-to-artifact; sync and capability negotiation now exist | Remote storage is not physical VRAM and has latency | deferred | Document as a working-set model, never as literal remote VRAM |
 | Site/database deployment | Persistence schemas and adapters exist | No hosted site or database is part of the package | deferred | Keep deploy targets caller-owned and outside the library core |

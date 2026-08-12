@@ -54,6 +54,8 @@ The `fetcher`, browser adapter, persistence adapter, proxy pool, captcha solver,
 
 ## package surfaces
 
-The package exposes explicit subpaths for `./browser`, `./bot`, `./captcha`, `./memory-engine`, and `./deploy`. The root entry remains the complete JavaScript API for consumers that prefer one import.
+The package exposes explicit subpaths for `./browser`, `./bot`, `./captcha`, `./memory-engine`, and `./deploy`. Desktop, mobile, and n8n contracts are exported from the root entry; the root entry remains the complete JavaScript API for consumers that prefer one import.
 
 Version 1.1 adds `./extension`, which exposes browser-neutral message, snapshot and service-worker routing contracts. The concrete Manifest V3 files live in `extension/`; they are not imported by the core at runtime and do not require Chrome when the library is used as a Node package. The browser surface also exposes snapshots, tab/frame context, action results, bounded action batches and recording through `./browser`.
+
+Version 1.7 adds `desktopmanifest`, `mobilemanifest`, `desktopadapter`, `mobileadapter`, `n8nnode`, `n8nmatch`, and `n8nexecute`. These factories describe surface boundaries and invoke caller-owned handlers; they do not install a native toolkit, start an n8n server, or store credentials.

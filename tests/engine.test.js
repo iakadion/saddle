@@ -80,8 +80,9 @@ import { llmstxt, llmsfull } from "../ai/llmstxt.js";
 import { webhooksig, webhookverify } from "../webhook/signature.js";
 import { webhookreceiver } from "../webhook/receiver.js";
 import { deliveryqueue } from "../webhook/delivery.js";
-import { surfacemanifest, surfacebundle } from "../surfaces/manifest.js";
-import { n8nnode, n8nexecute } from "../surfaces/n8n.js";
+import { desktopmanifest, mobilemanifest, surfacemanifest, surfacebundle } from "../surfaces/manifest.js";
+import { desktopadapter, mobileadapter } from "../surfaces/adapters.js";
+import { n8nactions, n8nmatch, n8nnode, n8nexecute } from "../surfaces/n8n.js";
 import { scrapeurl, scrapehtml, serializeresult, formatforagent, batchscrape } from "../library/public.js";
 import { browseragent } from "../browser/agent.js";
 import { actionbatch, actionfailure, actionresult } from "../browser/actions.js";
@@ -667,6 +668,21 @@ test("creates packaging surfaces for n8n and browser targets", async () => {
   const node = n8nnode({ name: "saddle" });
   const output = await n8nexecute(node, { command: "status" }, async ({ input }) => input.command);
   assert.equal(output, "status");
+});
+
+test("defines caller-owned desktop mobile and n8n surface contracts", async () => {
+  const desktop = desktopmanifest({ formats: ["custom"] });
+  const mobile = mobilemanifest();
+  assert.deepEqual(desktop.formats, ["custom"]);
+  assert.equal(mobile.formats.includes("apk"), true);
+  assert.equal(surfacebundle(desktop).install, "caller desktop bundle");
+  const adapter = desktopadapter({ handlers: { status: async () => ({ ready: true }) } });
+  assert.deepEqual((await adapter.invoke("status")).result, { ready: true });
+  assert.equal((await mobileadapter().invoke("status")).supported, false);
+  const node = n8nnode({ triggers: ["webhook"], actions: ["scrape"] });
+  assert.equal(n8nmatch(node, { type: "webhook" }).matched, true);
+  assert.equal(n8nactions.includes("crawl"), true);
+  await assert.rejects(() => n8nexecute(node, { command: "status" }, async () => "no"), /unsupported n8n action/);
 });
 
 test("exposes public scrape formats and batch progress", async () => {
