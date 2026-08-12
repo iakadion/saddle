@@ -13,18 +13,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
         with:
           ref: ${{ github.event.repository.default_branch }}
+      - name: setup node
+        uses: actions/setup-node@v7
+        with:
+          node-version: 26.7.0
+          registry-url: https://registry.npmjs.org
       - name: resolve release version
         uses: ./.github/actions/releaseversion
         env:
           RELEASE_TAG: ${{ github.event.release.tag_name }}
-      - name: setup node
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          registry-url: https://registry.npmjs.org
       - name: install
         run: npm ci
       - name: verify

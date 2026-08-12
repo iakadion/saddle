@@ -267,6 +267,10 @@ The following blocks are the execution order for the complete ecosystem. A block
 
 ### Block 12 — release gates
 
+- [x] Audit the latest verified Node, Docker, Java, .NET, Ruby and Bun/Deno action versions before changing CI.
+- [x] Update workflow toolchains and Docker base images without hardcoding a package release version.
+- [x] Validate that all five registry workflows derive the package version from the release tag.
+- [ ] Keep npmjs publication blocked until the owner confirms a valid `NPM_TOKEN`; do not publish during toolchain maintenance.
 - [ ] Require deterministic tests, format audit, syntax checks, package dry-run and security scan for every block.
 - [ ] Require documentation and changelog updates for every public contract.
 - [ ] Require a clean working tree and reviewed diff before each push.

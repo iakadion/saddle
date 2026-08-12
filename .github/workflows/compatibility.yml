@@ -19,12 +19,12 @@ jobs:
         runtime: [node, bun, deno]
     steps:
       - name: checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: setup node
         if: matrix.runtime == 'node'
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
-          node-version: 22
+          node-version: 26.7.0
       - name: setup bun
         if: matrix.runtime == 'bun'
         uses: oven-sh/setup-bun@v2
@@ -34,7 +34,7 @@ jobs:
         if: matrix.runtime == 'deno'
         uses: denoland/setup-deno@v2
         with:
-          deno-version: v2.x
+          deno-version: latest
       - name: run root probe on node
         if: matrix.runtime == 'node'
         run: node tests/runtimeprobe.js
@@ -49,11 +49,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
       - name: setup node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
-          node-version: 22
+          node-version: 26.7.0
       - name: install
         run: npm ci
       - name: run checks
