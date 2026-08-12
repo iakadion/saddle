@@ -6,6 +6,7 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 import { createcommand, createerror, createsnapshot, isfreshsnapshot } from "../extension/protocol.js";
 import { createworkerrouter } from "../extension/serviceworker.js";
+import { extensionpermissions, permissionpolicy, requestpermission } from "../extension/permissions.js";
 import "../extension/content.js";
 
 test("creates versioned extension commands and correlated responses", async () => {
@@ -47,4 +48,14 @@ test("content bridge returns bounded snapshots and executes only referenced clic
   assert.equal(result.clicked, true);
   assert.equal(clicked, true);
   assert.throws(() => bridge.handle(createcommand("clickref", { ref: "e1", snapshotid: "stale" })), (error) => error.code === "stale_snapshot");
+});
+
+test("keeps extension permissions minimal and optional escalation caller-owned", async () => {
+  const policy = permissionpolicy({ optional: ["activeTab"] });
+  assert.deepEqual(policy.hostpermissions, []);
+  assert.equal(policy.allows("storage"), true);
+  assert.deepEqual(policy.missing(["storage", "scripting"]), []);
+  assert.equal(extensionpermissions.includes("scripting"), true);
+  assert.deepEqual(await requestpermission(policy, "activeTab", async () => true), { permission: "activeTab", granted: true });
+  await assert.rejects(() => requestpermission(policy, "storage", async () => true), /not optional/);
 });

@@ -3,3 +3,4 @@
  */
 export * from "./protocol.js";
 export * from "./serviceworker.js";
+export * from "./permissions.js";

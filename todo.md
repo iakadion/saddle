@@ -263,6 +263,7 @@ The following blocks are the execution order for the complete ecosystem. A block
 - [x] Validate root library operation in Node, Bun and Deno through the CI matrix.
 - [x] Validate the browser worker root boundary through the injected `workerbridge` contract.
 - [ ] Validate extension-context package loading and permissions where supported.
+- [x] Add a minimal extension permission policy and optional caller-owned escalation contract.
 - [x] Keep Node-only filesystem and HTTP adapters outside the transport-neutral core.
 - [x] Add capability detection and graceful unsupported-mode errors.
 - [x] Add Node package surface import tests for every declared export target.
