@@ -13,8 +13,10 @@ export function startworker(chromeapi = globalThis.chrome) {
     router.handle(message, sender).then(sendresponse).catch((error) => sendresponse(createerror(message, error)));
     return true;
   };
+  const startup = () => router.rehydrate().catch(() => undefined);
   chromeapi.runtime.onMessage.addListener(listener);
-  return { router, dispose() { chromeapi.runtime.onMessage.removeListener?.(listener); } };
+  chromeapi.runtime.onStartup?.addListener(startup);
+  return { router, dispose() { chromeapi.runtime.onMessage.removeListener?.(listener); chromeapi.runtime.onStartup?.removeListener?.(startup); } };
 }
 
 if (globalThis.chrome?.runtime?.onMessage) startworker();

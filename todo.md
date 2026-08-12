@@ -184,7 +184,7 @@ The following blocks are the execution order for the complete ecosystem. A block
 ### Block 3 — extension runtime
 
 - [x] Add the first Manifest V3 extension surface with popup, content bridge, service worker and protocol.
-- [ ] Add durable pending commands and rehydration after service worker termination.
+- [x] Add durable pending commands and rehydration after service worker termination.
 - [ ] Add optional host permission escalation with explicit user consent.
 - [ ] Add snapshot diffing, tab/frame metadata and resumable command records.
 - [x] Add deterministic extension packaging and unpacked validation.

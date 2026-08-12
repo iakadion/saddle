@@ -6,6 +6,10 @@
 
   All notable changes to Project saddle are documented in this file.
 
+  ## [Unreleased]
+
+    - Added durable pending extension commands with explicit rehydration and resume
+
   ## [1.8.2] - 2026-08-12
 
     - Added a minimal Manifest V3 permission policy with caller-owned optional escalation

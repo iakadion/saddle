@@ -6,6 +6,7 @@ import assert from "node:assert/strict";
 import { test } from "node:test";
 import { createcommand, createerror, createsnapshot, isfreshsnapshot } from "../extension/protocol.js";
 import { createworkerrouter } from "../extension/serviceworker.js";
+import { startworker } from "../extension/worker.js";
 import { extensionpermissions, permissionpolicy, requestpermission } from "../extension/permissions.js";
 import { buildextension } from "../extension/build.js";
 import { mkdtemp, readFile, rm } from "node:fs/promises";
@@ -32,12 +33,14 @@ test("routes commands through scripting and tabs while persisting snapshot state
   const calls = [];
   const router = createworkerrouter({
     scripting: { async executeScript(input) { calls.push(["script", input]); } },
-    tabs: { async sendMessage(tabid, message) { calls.push(["message", tabid, message.command]); return { type: "response", payload: { snapshotid: "snap2" } }; } },
+    tabs: { async sendMessage(tabid, message) { calls.push(["message", tabid, message]); return { type: "response", payload: { snapshotid: "snap2" } }; } },
     storage: { async set(value) { calls.push(["set", value]); }, async get() { return { saddleextensionstate: { snapshotid: "snap1" } }; } }
   });
   const response = await router.handle(createcommand("snapshot", { tabid: 9 }));
   assert.equal(response.payload.snapshotid, "snap2");
-  assert.deepEqual(calls, [["script", { target: { tabId: 9 }, files: ["content.js"] }], ["message", 9, "snapshot"], ["set", { saddleextensionstate: { tabid: 9, snapshotid: "snap2", updatedat: calls[2][1].saddleextensionstate.updatedat } }]]);
+  assert.deepEqual(calls.map(([kind, value]) => kind), ["set", "script", "message", "set"]);
+  assert.deepEqual(calls[3][1].saddleextensionstate.pending, []);
+  assert.equal(calls[0][1].saddleextensionstate.pending[0].requestid, calls[2][2].id);
   assert.deepEqual(await router.readstate(), { snapshotid: "snap1" });
 });
 
@@ -76,4 +79,37 @@ test("builds a versioned unpacked extension artifact without mutating the source
   } finally {
     await rm(output, { force: true, recursive: true });
   }
+});
+
+test("rehydrates and explicitly resumes pending commands after worker termination", async () => {
+  const command = createcommand("snapshot", { tabid: 11 }, { id: "pending1" });
+  const writes = [];
+  const router = createworkerrouter({
+    scripting: { async executeScript() {} },
+    tabs: { async sendMessage(tabid, message) { return { type: "response", payload: { tabid, snapshotid: `snap-${message.id}` } }; } },
+    storage: { async get() { return { saddleextensionstate: { pending: [{ requestid: command.id, command: command.command, message: command, tabid: 11, attempts: 1, createdat: 1, updatedat: 2 }] } }; }, async set(value) { writes.push(value); } }
+  });
+  const state = await router.rehydrate();
+  assert.equal(state.pending[0].requestid, "pending1");
+  const response = await router.resume("pending1");
+  assert.equal(response.payload.snapshotid, "snap-pending1");
+  assert.deepEqual(writes.at(-1).saddleextensionstate.pending, []);
+  await assert.rejects(() => router.resume("missing"), (error) => error.code === "PENDING_NOT_FOUND");
+});
+
+test("registers startup rehydration without automatic command replay", async () => {
+  let startup;
+  let added;
+  let removed;
+  const chromeapi = {
+    runtime: { onMessage: { addListener(listener) { added = listener; }, removeListener() {} }, onStartup: { addListener(listener) { startup = listener; }, removeListener(listener) { removed = listener; } } },
+    tabs: { async sendMessage() { return { type: "response", payload: {} }; } },
+    scripting: { async executeScript() {} },
+    storage: { session: { async get() { return { saddleextensionstate: { pending: [] } }; }, async set() {} } }
+  };
+  const worker = startworker(chromeapi);
+  await startup();
+  assert.equal(typeof added, "function");
+  worker.dispose();
+  assert.equal(removed, startup);
 });
