@@ -37,10 +37,11 @@
   },
   "files": ["core", "domain", "memory", "runners", "runtime", "storage", "sessions", "modes", "adapters", "persistence", "queue", "dispatch", "scrape", "crawl", "api", "mcp", "browser", "proxy", "captcha", "ai", "webhook", "surfaces", "library", "errors", "retry", "server", "binary", "format", "packager", "bot", "protocol", "workflow", "cli", "extension", "index.js", "docs", "examples", "README.md", "LICENSE"],
   "scripts": {
-    "check": "node --check index.js && node --check runtime/engine.js && node --check cli/main.js && node --check extension/protocol.js && node --check extension/serviceworker.js && node --check extension/worker.js && node --check extension/content.js && node --check extension/popup.js",
+    "check": "node --check index.js && node --check runtime/engine.js && node --check cli/main.js && node --check extension/protocol.js && node --check extension/serviceworker.js && node --check extension/worker.js && node --check extension/content.js && node --check extension/popup.js && node --check extension/permissions.js && node --check extension/build.js",
     "formatcheck": "node format/check.js",
     "test": "node --test tests/*.test.js",
     "run": "node cli/main.js",
+    "extension:build": "node extension/build.js",
     "pack:check": "npm run check && npm run formatcheck && npm test && npm pack --dry-run",
     "prepublishOnly": "npm run pack:check"
   }

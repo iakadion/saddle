@@ -187,7 +187,7 @@ The following blocks are the execution order for the complete ecosystem. A block
 - [ ] Add durable pending commands and rehydration after service worker termination.
 - [ ] Add optional host permission escalation with explicit user consent.
 - [ ] Add snapshot diffing, tab/frame metadata and resumable command records.
-- [ ] Add deterministic extension packaging and unpacked validation.
+- [x] Add deterministic extension packaging and unpacked validation.
 - [ ] Add Firefox, Edge and WebExtension-compatible adapter profiles.
 
 ### Block 4 — working set and storage
@@ -232,7 +232,7 @@ The following blocks are the execution order for the complete ecosystem. A block
 
 ### Block 9 — packaging and distribution
 
-- [ ] Add extension zip, desktop bundle, mobile manifest, n8n package and binary artifact plans with real build checks.
+- [x] Add extension zip and unpacked validation with a release-tag-derived build; keep desktop, mobile, n8n and binary artifact plans caller-owned.
 - [ ] Add reproducible SBOM, provenance, checksum and release asset generation.
 - [x] Verify all registry workflows for v1.7.0 without exposing credentials.
 - [ ] Add install and smoke-test instructions for npm, GitHub Packages, GHCR, Maven, NuGet and RubyGems.
@@ -262,7 +262,7 @@ The following blocks are the execution order for the complete ecosystem. A block
 - [x] Confirm the npm token identity can publish `@wenathlan/saddle` without exposing the token.
 - [x] Validate root library operation in Node, Bun and Deno through the CI matrix.
 - [x] Validate the browser worker root boundary through the injected `workerbridge` contract.
-- [ ] Validate extension-context package loading and permissions where supported.
+- [ ] Validate extension-context package loading where supported; the permission policy contract is covered separately.
 - [x] Add a minimal extension permission policy and optional caller-owned escalation contract.
 - [x] Keep Node-only filesystem and HTTP adapters outside the transport-neutral core.
 - [x] Add capability detection and graceful unsupported-mode errors.

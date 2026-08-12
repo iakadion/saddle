@@ -6,6 +6,12 @@
 
   All notable changes to Project saddle are documented in this file.
 
+  ## [Unreleased]
+
+    - Added a minimal Manifest V3 permission policy with caller-owned optional escalation
+    - Added a Node-only extension builder that versions the unpacked manifest from release metadata
+    - Added a release workflow that packages and attaches `saddle-extension-<version>.zip`
+
   ## [1.8.1] - 2026-08-12
 
     - Changed the canonical public npm package identity to `@wenathlan/saddle`

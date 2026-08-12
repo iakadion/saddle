@@ -18,6 +18,10 @@ The content bridge runs in Chrome's isolated world. It exposes bounded page meta
 
 `protocol.js` and `serviceworker.js` are reusable ESM contracts. `content.js` is intentionally a classic injected file because programmatic Chrome content scripts are loaded as files; it exposes a small global bridge and avoids arbitrary page JavaScript evaluation.
 
+## deterministic release artifact
+
+The Node-only build adapter creates an isolated unpacked artifact with the release version in its manifest. A caller can run `npm run extension:build -- --version 1.8.1 --output build/extension` and package that directory with the archive tool available in the host environment. The release workflow derives the version from the published tag and attaches `saddle-extension-<version>.zip` without changing the source manifest.
+
 ## next slices
 
-The next extension slices should add snapshot diffing, tab and frame identity, resumable command records, optional host permission escalation, browser action results and a deterministic zip workflow. Browser providers, login profiles, captcha solvers and remote runners remain caller owned adapters.
+The next extension slices should add snapshot diffing, tab and frame identity, resumable command records, optional host permission escalation and browser action results. Browser providers, login profiles, captcha solvers and remote runners remain caller owned adapters.

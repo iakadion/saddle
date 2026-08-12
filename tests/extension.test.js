@@ -7,6 +7,10 @@ import { test } from "node:test";
 import { createcommand, createerror, createsnapshot, isfreshsnapshot } from "../extension/protocol.js";
 import { createworkerrouter } from "../extension/serviceworker.js";
 import { extensionpermissions, permissionpolicy, requestpermission } from "../extension/permissions.js";
+import { buildextension } from "../extension/build.js";
+import { mkdtemp, readFile, rm } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join } from "node:path";
 import "../extension/content.js";
 
 test("creates versioned extension commands and correlated responses", async () => {
@@ -58,4 +62,18 @@ test("keeps extension permissions minimal and optional escalation caller-owned",
   assert.equal(extensionpermissions.includes("scripting"), true);
   assert.deepEqual(await requestpermission(policy, "activeTab", async () => true), { permission: "activeTab", granted: true });
   await assert.rejects(() => requestpermission(policy, "storage", async () => true), /not optional/);
+});
+
+test("builds a versioned unpacked extension artifact without mutating the source manifest", async () => {
+  const output = await mkdtemp(join(tmpdir(), "saddle-extension-"));
+  try {
+    const result = await buildextension({ output, version: "1.8.1" });
+    const manifest = JSON.parse(await readFile(join(output, "manifest.json"), "utf8"));
+    assert.equal(result.manifest.version, "1.8.1");
+    assert.equal(manifest.version, "1.8.1");
+    assert.equal(manifest.permissions.includes("storage"), true);
+    assert.equal(manifest.host_permissions, undefined);
+  } finally {
+    await rm(output, { force: true, recursive: true });
+  }
 });

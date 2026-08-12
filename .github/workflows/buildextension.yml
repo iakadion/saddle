@@ -1,0 +1,60 @@
+name: build extension
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: Optional release tag to package; empty uses the latest release
+        required: false
+        type: string
+
+permissions:
+  contents: write
+
+env:
+  RELEASE_TAG: ${{ inputs.release_tag || github.event.release.tag_name }}
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v7
+
+      - name: resolve release version
+        id: releaseversion
+        uses: ./.github/actions/releaseversion
+
+      - name: setup node
+        uses: actions/setup-node@v7
+        with:
+          node-version: 26.7.0
+
+      - name: validate package
+        uses: ./.github/actions/validatepackage
+        with:
+          full: "true"
+
+      - name: build extension
+        run: node extension/build.js --version "${{ steps.releaseversion.outputs.version }}" --output build/extension
+
+      - name: create zip
+        run: |
+          cd build/extension
+          zip -qr "../../saddle-extension-${{ steps.releaseversion.outputs.version }}.zip" .
+
+      - name: upload workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: saddle-extension-${{ steps.releaseversion.outputs.version }}
+          path: saddle-extension-${{ steps.releaseversion.outputs.version }}.zip
+          if-no-files-found: error
+
+      - name: attach release asset
+        env:
+          GH_TOKEN: ${{ github.token }}
+          RELEASE_TAG: ${{ steps.releaseversion.outputs.tag }}
+          ASSET: saddle-extension-${{ steps.releaseversion.outputs.version }}.zip
+        run: gh release upload "$RELEASE_TAG" "$ASSET" --clobber

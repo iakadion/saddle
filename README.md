@@ -109,14 +109,17 @@ The caller still chooses how to provide `fetcher`, browser transport, persistenc
 
 ## Browser extension
 
-Version 1.1 includes a pure JavaScript Manifest V3 reference surface in [`extension/`](extension/). It is deliberately narrow: the user invokes the action, the popup sends a versioned command, the service worker routes it, and an isolated content bridge returns bounded page metadata, visible text or a user initiated action result.
+Version 1.8.1 includes a pure JavaScript Manifest V3 reference surface in [`extension/`](extension/). It is deliberately narrow: the user invokes the action, the popup sends a versioned command, the service worker routes it, and an isolated content bridge returns bounded page metadata, visible text or a user initiated action result. The exported `permissionpolicy` keeps base permissions minimal and makes optional escalation caller-owned.
 
 ```bash
 # load the unpacked extension from chrome://extensions
 ls extension/manifest.json extension/worker.js extension/content.js extension/popup.html
+
+# build an isolated unpacked artifact using the package version
+npm run extension:build -- --output build/extension
 ```
 
-The extension requests `activeTab`, `scripting` and `storage`; it does not request broad host permissions, cookies, `webRequest`, debugger access or arbitrary page code execution. Its public contracts are available from `@wenathlan/saddle/extension`. See [`extension/README.md`](extension/README.md) for the unpacked development flow.
+The extension requests `activeTab`, `scripting` and `storage`; it does not request broad host permissions, cookies, `webRequest`, debugger access or arbitrary page code execution. Its public contracts are available from `@wenathlan/saddle/extension`. Published releases attach `saddle-extension-<version>.zip`; the source manifest remains a stable unpacked reference. See [`extension/README.md`](extension/README.md) for the unpacked and release artifact flows.
 
 ## CLI
 
@@ -185,7 +188,7 @@ Root-based JavaScript ESM layout, no src/ directory, no TypeScript build require
 
 ## Current scope
 
-Version 1.8 establishes the engine contracts, browser snapshot foundation, storage sync primitives, runner recovery contracts, scraping context provenance, API/MCP security contracts, bot integration lifecycle, the first tested extension bridge, desktop/mobile/n8n surface contracts, a framework-neutral operator control boundary and the first cross-runtime import boundary. Native runtimes, n8n host registration, provider credentials, persistent databases and production deployment remain caller-selected adapters. The next improvements should extend these contracts without coupling the core to one forge, registry, browser or storage vendor.
+Version 1.8.1 establishes the engine contracts, browser snapshot foundation, storage sync primitives, runner recovery contracts, scraping context provenance, API/MCP security contracts, bot integration lifecycle, the tested extension bridge and permission policy, deterministic extension packaging, desktop/mobile/n8n surface contracts, a framework-neutral operator control boundary and the first cross-runtime import boundary. Native runtimes, n8n host registration, provider credentials, persistent databases and production deployment remain caller-selected adapters. The next improvements should extend these contracts without coupling the core to one forge, registry, browser or storage vendor.
 
 ## License
 
