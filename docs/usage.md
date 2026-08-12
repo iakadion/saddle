@@ -2,10 +2,10 @@
 
 ## install
 
-The canonical package is `@devthink/saddle`. The GitHub Packages npm variant is `@iakadion/saddle`; consumers of that registry must configure npm for the repository owner scope before installing.
+The canonical public package is `@wenathlan/saddle`. The GitHub Packages npm variant is `@iakadion/saddle`; consumers of that registry must configure npm for the repository owner scope before installing.
 
 ```bash
-npm install @devthink/saddle
+npm install @wenathlan/saddle
 ```
 
 ## desktop surface
@@ -13,7 +13,7 @@ npm install @devthink/saddle
 Desktop integrations declare their packaging intent and inject native operations. Saddle does not start a window manager or select a desktop framework.
 
 ```js
-import { desktopadapter, desktopmanifest } from "@devthink/saddle";
+import { desktopadapter, desktopmanifest } from "@wenathlan/saddle";
 
 const manifest = desktopmanifest({ name: "saddle-console", formats: ["appimage"] });
 const adapter = desktopadapter({
@@ -31,7 +31,7 @@ const status = await adapter.invoke("status");
 Mobile integrations use the same adapter shape but declare mobile packaging formats and capabilities. Secure storage, screen navigation, permissions, and lifecycle events remain owned by the mobile host.
 
 ```js
-import { mobileadapter, mobilemanifest } from "@devthink/saddle";
+import { mobileadapter, mobilemanifest } from "@wenathlan/saddle";
 
 const manifest = mobilemanifest({ name: "saddle-mobile", formats: ["apk"] });
 const adapter = mobileadapter({
@@ -49,7 +49,7 @@ const result = await adapter.invoke("invoke", { command: "sync" });
 The n8n contract is metadata plus a caller-owned execution handler. The node supports the engine trigger vocabulary and rejects actions that were not declared by the node.
 
 ```js
-import { n8nexecute, n8nnode } from "@devthink/saddle";
+import { n8nexecute, n8nnode } from "@wenathlan/saddle";
 
 const node = n8nnode({
   triggers: ["webhook", "schedule"],
@@ -68,7 +68,7 @@ Credentials, webhook verification, URL security, browser sessions, workflow stor
 An operator surface can bind resource handlers without forcing a database or dashboard framework into the library. Every response carries a request id, resource, operation and success state; the optional audit callback receives the same serializable response.
 
 ```js
-import { controlsurface } from "@devthink/saddle";
+import { controlsurface } from "@wenathlan/saddle";
 
 const controls = controlsurface({
   adapters: {
@@ -84,7 +84,7 @@ const jobs = await controls.execute({ resource: "jobs", operation: "list" });
 The same contract can be mounted behind any Web Request and Response server. The handler does not bind a framework, host, port, database or authentication scheme.
 
 ```js
-import { controlservice } from "@devthink/saddle";
+import { controlservice } from "@wenathlan/saddle";
 
 const service = controlservice({
   verify: async (token) => token === "caller-token" ? { subject: "operator" } : null,
@@ -97,7 +97,7 @@ const service = controlservice({
 Operational policies remain declarative. An existing metric collector can receive a bounded vocabulary, while retention, recovery and threat ownership are represented without starting background workers or making storage assumptions.
 
 ```js
-import { backupplan, metricstore, operationsmetrics, retentionpolicy, threatmodel } from "@devthink/saddle";
+import { backupplan, metricstore, operationsmetrics, retentionpolicy, threatmodel } from "@wenathlan/saddle";
 
 const metrics = operationsmetrics({ collector: metricstore() });
 metrics.record("runnerselection", 1, { runner: "primary" });

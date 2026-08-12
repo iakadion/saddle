@@ -16,18 +16,18 @@
 
 Saddle is a **JavaScript ESM engine** for jobs that move data between storage, a working set, an injected runner and durable artifacts. It is also a **virtual machine you publish as a package** that runs on other people's computers (GitHub Actions, Forgejo, Gitea, GitLab, Codeberg, free Docker containers) and turns unlimited third-party storage buckets into virtual RAM/GPU/CPU. Nothing runs on the operator's local machine.
 
-Ships as a library, CLI, binary, n8n node, CRX extension, Android/iOS and Tauri desktop app. Package `@devthink/saddle` — published to npm, GitHub Packages, Maven, NuGet, RubyGems and GHCR (auto-mirrored to jsDelivr).
+Ships as a library, CLI, binary, n8n node, CRX extension, Android/iOS and Tauri desktop app. Package `@wenathlan/saddle` — published to npm, GitHub Packages, Maven, NuGet, RubyGems and GHCR (auto-mirrored to jsDelivr).
 
 ## Start here
 
 Saddle requires **Node.js 22 or newer**.
 
 ```bash
-npm install @devthink/saddle
+npm install @wenathlan/saddle
 ```
 
 ```js
-import { scrapeurl, formatforagent } from "@devthink/saddle";
+import { scrapeurl, formatforagent } from "@wenathlan/saddle";
 
 const result = await scrapeurl("https://example.com", { format: "markdown" });
 const context = formatforagent(result, { maxchunksize: 2000, keypoints: 4 });
@@ -89,9 +89,9 @@ Saddle coordinates contracts instead of hiding providers. A repo + CI runner is 
 - repository_dispatch = IPC
 
 ```js
-import { engine, eventbus, inprocess, scheduler } from "@devthink/saddle";
-import { localmemory } from "@devthink/saddle/memory-node";
-import { localstorage } from "@devthink/saddle/storage-node";
+import { engine, eventbus, inprocess, scheduler } from "@wenathlan/saddle";
+import { localmemory } from "@wenathlan/saddle/memory-node";
+import { localstorage } from "@wenathlan/saddle/storage-node";
 const events = eventbus();
 const run = engine({
   storage: localstorage("./.saddle-data"),
@@ -105,7 +105,7 @@ const result = await run.run(
 );
 ```
 
-The caller still chooses how to provide `fetcher`, browser transport, persistence, proxy pool, captcha solver, webhook secret and remote credentials. The root entry is transport-neutral; Node filesystem and HTTP adapters are explicit subpaths such as `@devthink/saddle/storage-node`, `@devthink/saddle/memory-node`, `@devthink/saddle/server-node`, `@devthink/saddle/sessions-file` and `@devthink/saddle/queue-persistent`. Saddle does not embed secrets, fixed hosts or a mandatory cloud vendor.
+The caller still chooses how to provide `fetcher`, browser transport, persistence, proxy pool, captcha solver, webhook secret and remote credentials. The root entry is transport-neutral; Node filesystem and HTTP adapters are explicit subpaths such as `@wenathlan/saddle/storage-node`, `@wenathlan/saddle/memory-node`, `@wenathlan/saddle/server-node`, `@wenathlan/saddle/sessions-file` and `@wenathlan/saddle/queue-persistent`. Saddle does not embed secrets, fixed hosts or a mandatory cloud vendor.
 
 ## Browser extension
 
@@ -116,7 +116,7 @@ Version 1.1 includes a pure JavaScript Manifest V3 reference surface in [`extens
 ls extension/manifest.json extension/worker.js extension/content.js extension/popup.html
 ```
 
-The extension requests `activeTab`, `scripting` and `storage`; it does not request broad host permissions, cookies, `webRequest`, debugger access or arbitrary page code execution. Its public contracts are available from `@devthink/saddle/extension`. See [`extension/README.md`](extension/README.md) for the unpacked development flow.
+The extension requests `activeTab`, `scripting` and `storage`; it does not request broad host permissions, cookies, `webRequest`, debugger access or arbitrary page code execution. Its public contracts are available from `@wenathlan/saddle/extension`. See [`extension/README.md`](extension/README.md) for the unpacked development flow.
 
 ## CLI
 
@@ -147,7 +147,7 @@ saddle mcp
 | Maven | `io.devthink:saddle:1.8.0` | publishmaven.yml | published after JDK 26 retry |
 | NuGet | `Saddle.1.8.0.nupkg` | publishnuget.yml | published |
 | RubyGems | `saddle 1.8.0` | publishrubygems.yml | published |
-| npmjs | `@devthink/saddle@1.8.0` | publishnpmjs.yml | not published; npm returned HTTP 404 `Scope not found` |
+| npmjs | `@wenathlan/saddle@1.8.1` | publishnpmjs.yml | pending follow-up release workflow |
 
 ## Development
 

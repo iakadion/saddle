@@ -259,6 +259,7 @@ The following blocks are the execution order for the complete ecosystem. A block
 - [x] Confirm that the npmjs workflow uses the `NPM_TOKEN` secret without exposing its value in logs or files.
 - [ ] Replace the invalid or unauthorized `NPM_TOKEN` secret with a valid raw token for the intended npm scope.
 - [ ] Reexecute npmjs publication and confirm the public package and version are available.
+- [ ] Confirm the npm token identity can publish `@wenathlan/saddle` without exposing the token.
 - [x] Validate root library operation in Node, Bun and Deno through the CI matrix.
 - [x] Validate the browser worker root boundary through the injected `workerbridge` contract.
 - [ ] Validate extension-context package loading and permissions where supported.
@@ -283,3 +284,10 @@ The following blocks are the execution order for the complete ecosystem. A block
 - [ ] Require documentation and changelog updates for every public contract.
 - [ ] Require a clean working tree and reviewed diff before each push.
 - [ ] Create a versioned release only after all claims in the README match code or are explicitly marked planned or deferred.
+- [ ] Audit `.github` for duplicated release logic and unify only the shared version, checkout and validation path.
+- [x] Centralize package installation, deterministic gates and tarball validation in `.github/actions/validatepackage`.
+- [ ] Continue the next library feature block with tests, documentation and release-aware metadata.
+- [ ] Migrate all canonical package identity references from `@devthink/saddle` to `@wenathlan/saddle`.
+- [ ] Create a follow-up release after the package identity migration; do not reuse the existing v1.8.0 tag.
+- [ ] Align package metadata and release notes to follow-up version `1.8.1`.
+- [ ] Create tag `v1.8.1` only after the unscoped npm identity migration passes all gates.

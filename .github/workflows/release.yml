@@ -25,7 +25,7 @@ jobs:
         uses: ./.github/actions/releaseversion
         env:
           RELEASE_TAG: ${{ github.event.release.tag_name }}
-      - name: install
-        run: npm ci
-      - name: verify
-        run: npm run pack:check
+      - name: validate package
+        uses: ./.github/actions/validatepackage
+        with:
+          full: "true"

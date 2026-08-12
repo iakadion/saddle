@@ -44,6 +44,8 @@ The cross-runtime workflow `31552266171` and its manual rerun `31552272176` comp
 
 Release `v1.8.0` was created from commit `9ddfd6c`. GitHub npm run `31556461901`, GHCR run `31556461887`, NuGet run `31556461883` and RubyGems run `31556461991` completed successfully for `1.8.0`. Maven run `31556461885` initially failed because setup-java rejects `latest`; after changing the workflow to JDK 26, manual run `31556549154` completed successfully. Public npmjs run `31556461909` produced the `@devthink/saddle@1.8.0` tarball but the registry rejected the PUT with HTTP 404 `Scope not found`; no public npmjs publication is claimed.
 
+The active package identity on main is now `@wenathlan/saddle`. The existing `v1.8.0` tag intentionally remains historical and still contains the prior package identity; a follow-up tag is required before publishing the renamed package through the normal release workflow.
+
 ## sources
 
 1. GitHub Docs — About permissions for GitHub Packages: https://docs.github.com/en/packages/learn-github-packages/about-permissions-for-github-packages

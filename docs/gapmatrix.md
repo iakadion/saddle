@@ -64,7 +64,7 @@ The extension remains an adapter. The root library continues to work without a b
 
 ## implementation status
 
-Version 1.1 implements the first slice in `extension/`: `protocol.js` provides versioned serializable messages and snapshot identity; `serviceworker.js` provides browser independent routing; `worker.js` binds that router to Manifest V3 APIs; `content.js` runs the isolated page bridge; and `popup.html` with `popup.js` provides user initiated snapshot and read actions. The package exports `@devthink/saddle/extension`, while the root library remains usable without Chrome.
+Version 1.1 implements the first slice in `extension/`: `protocol.js` provides versioned serializable messages and snapshot identity; `serviceworker.js` provides browser independent routing; `worker.js` binds that router to Manifest V3 APIs; `content.js` runs the isolated page bridge; and `popup.html` with `popup.js` provides user initiated snapshot and read actions. The package exports `@wenathlan/saddle/extension`, while the root library remains usable without Chrome.
 
 The slice is intentionally not a full autonomous browser agent. Snapshot diffing, tab and frame identity, resumable command records, optional host escalation, browser action results and multi-browser packaging remain P1 or P2 work.
 

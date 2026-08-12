@@ -6,6 +6,13 @@
 
   All notable changes to Project saddle are documented in this file.
 
+  ## [1.8.1] - 2026-08-12
+
+    - Changed the canonical public npm package identity to `@wenathlan/saddle`
+    - Preserved the GitHub Packages npm artifact namespace as `@iakadion/saddle`
+    - Added follow-up release metadata after the immutable v1.8.0 package identity
+    - Kept package version resolution derived from the release tag
+
   ## [1.8.0] - 2026-08-12
 
     - Updated GitHub Actions, Docker bases and CI toolchains to Node.js 26.7.0 and current stable action majors

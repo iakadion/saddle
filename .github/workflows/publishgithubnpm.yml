@@ -29,10 +29,8 @@ jobs:
         uses: ./.github/actions/releaseversion
         env:
           RELEASE_TAG: ${{ github.event.release.tag_name }}
-      - name: install
-        run: npm ci
-      - name: verify
-        run: npm run pack:check
+      - name: validate package
+        uses: ./.github/actions/validatepackage
       - name: align github package scope
         run: npm pkg set name="@${GITHUB_REPOSITORY_OWNER}/saddle"
         env:

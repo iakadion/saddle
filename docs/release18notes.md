@@ -12,4 +12,4 @@ The candidate is required to pass `npm run check`, `npm run formatcheck`, `npm t
 
 ## registry behavior
 
-Maven, NuGet, RubyGems, GHCR and GitHub Packages npm derive `1.8.0` from the `v1.8.0` tag. The Maven workflow required one retry because `java-version: latest` is not a valid setup-java input; it now uses JDK 26 and succeeded. Public npmjs also derives the version automatically, but the release run returned HTTP 404 `Scope not found` for `@devthink/saddle`, so npmjs is not claimed as published.
+Maven, NuGet, RubyGems, GHCR and GitHub Packages npm derive `1.8.0` from the `v1.8.0` tag. The Maven workflow required one retry because `java-version: latest` is not a valid setup-java input; it now uses JDK 26 and succeeded. The current main branch changes the canonical npm identity to `@wenathlan/saddle`; publication must use a follow-up tag because the existing `v1.8.0` tag predates this identity migration.
