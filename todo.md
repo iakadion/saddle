@@ -255,6 +255,9 @@ The following blocks are the execution order for the complete ecosystem. A block
 
 ### Block 11 — cross-runtime compatibility
 
+- [ ] Reexecute a validação cross-runtime a partir da versão derivada da tag/release, sem versão fixa em workflow.
+- [ ] Confirmar que o workflow npmjs usa o secret `NPM_TOKEN` sem expor seu valor em logs ou arquivos.
+- [ ] Reexecutar a publicação npmjs e confirmar o pacote público e a versão publicada.
 - [ ] Validate root library operation in Node, browser worker, Deno, Bun and extension contexts where supported.
 - [ ] Keep Node-only filesystem and HTTP adapters outside the transport-neutral core.
 - [ ] Add capability detection and graceful unsupported-mode errors.

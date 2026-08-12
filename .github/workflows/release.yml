@@ -14,6 +14,10 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v4
+      - name: resolve release version
+        uses: ./.github/actions/releaseversion
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
       - name: setup node
         uses: actions/setup-node@v4
         with:

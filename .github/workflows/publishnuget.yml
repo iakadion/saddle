@@ -4,11 +4,6 @@ on:
   release:
     types: [created]
   workflow_dispatch:
-    inputs:
-      version:
-        description: "Release version, for example v1.7.0"
-        required: false
-        type: string
 
 permissions:
   contents: read
@@ -18,11 +13,14 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     timeout-minutes: 15
-    env:
-      RELEASE_VERSION: ${{ inputs.version || github.event.release.tag_name }}
     steps:
       - name: checkout
         uses: actions/checkout@v4
+      - name: resolve release version
+        id: release
+        uses: ./.github/actions/releaseversion
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
       - name: setup dotnet
         uses: actions/setup-dotnet@v4
         with:
@@ -30,6 +28,6 @@ jobs:
       - name: add github source
         run: dotnet nuget add source --username "${{ github.actor }}" --password "${{ secrets.GITHUB_TOKEN }}" --store-password-in-clear-text --name github "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json"
       - name: pack package
-        run: dotnet pack saddle.csproj --configuration Release --output ./nuget -p:PackageVersion="${RELEASE_VERSION#v}"
+        run: dotnet pack saddle.csproj --configuration Release --output ./nuget -p:PackageVersion="${{ steps.release.outputs.version }}"
       - name: publish package
         run: dotnet nuget push "./nuget/*.nupkg" --api-key "${{ secrets.GITHUB_TOKEN }}" --source github --skip-duplicate

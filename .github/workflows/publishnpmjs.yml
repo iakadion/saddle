@@ -7,7 +7,6 @@ on:
 
 permissions:
   contents: read
-  id-token: write
 
 jobs:
   publish:
@@ -16,6 +15,11 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v4
+      - name: resolve release version
+        id: release
+        uses: ./.github/actions/releaseversion
+        env:
+          RELEASE_TAG: ${{ github.event.release.tag_name }}
       - name: setup node
         uses: actions/setup-node@v4
         with:
@@ -27,4 +31,6 @@ jobs:
       - name: verify
         run: npm run pack:check
       - name: publish public package
-        run: npm publish --provenance --access public
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
