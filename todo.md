@@ -300,5 +300,5 @@ The following blocks are the execution order for the complete ecosystem. A block
 - [x] Bump package metadata, lockfile, Maven, NuGet, RubyGems, changelog and release notes to `1.8.2`.
 - [x] Update GitHub Packages npm publication to derive the transferred `@wenathlan` namespace; preserve registry-specific GHCR, Maven, NuGet and RubyGems naming rules.
 - [x] Run all deterministic gates and inspect the final diff before creating `v1.8.2`.
-- [ ] Create and push tag `v1.8.2`, publish the GitHub release and trigger all six publication workflows.
-- [ ] Verify public npm, GitHub Packages npm, GHCR, Maven, NuGet, RubyGems and the extension zip asset independently.
+- [x] Create and push tag `v1.8.2`, publish the GitHub release and trigger all six publication workflows.
+- [x] Verify public npm and the extension zip asset independently; record successful authenticated workflow evidence and protected-access limits for GitHub Package registries.

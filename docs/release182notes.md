@@ -23,3 +23,5 @@ This release includes the minimal extension permission policy, deterministic ext
 ## validation boundary
 
 The release must pass `npm run check`, `npm run formatcheck`, `npm test`, `npm run pack:check` and `git diff --check` before the tag is created. Each registry workflow remains isolated because its package protocol and credential boundary differ. Publication evidence is reported only after the workflow succeeds and the target registry can be queried independently.
+
+The `v1.8.2` release and all publication workflows completed successfully. Public npm and the extension asset were independently visible. GitHub Package registries returned their expected protected-access responses to unauthenticated probes, so their workflow logs remain the authoritative evidence available to the authenticated publisher context.

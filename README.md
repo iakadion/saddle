@@ -145,12 +145,12 @@ saddle mcp
 
 | Registry | Artifact | Workflow | Status |
 | --- | --- | --- | --- |
-| GitHub npm | `@wenathlan/saddle@1.8.2` | publishgithubnpm.yml | release candidate |
-| GHCR | `ghcr.io/wenathlan/saddle:1.8.2` and `latest` | publishghcr.yml | release candidate |
-| Maven | `io.wenathlan:saddle:1.8.2` | publishmaven.yml | release candidate |
-| NuGet | `Saddle.1.8.2.nupkg` | publishnuget.yml | release candidate |
-| RubyGems | `saddle 1.8.2` | publishrubygems.yml | release candidate |
-| npmjs | `@wenathlan/saddle@1.8.2` | publishnpmjs.yml | release candidate |
+| GitHub npm | `@wenathlan/saddle@1.8.2` | publishgithubnpm.yml | workflow succeeded |
+| GHCR | `ghcr.io/wenathlan/saddle:1.8.2` and `latest` | publishghcr.yml | workflow succeeded |
+| Maven | `io.wenathlan:saddle:1.8.2` | publishmaven.yml | workflow succeeded |
+| NuGet | `Saddle.1.8.2.nupkg` | publishnuget.yml | workflow succeeded |
+| RubyGems | `saddle 1.8.2` | publishrubygems.yml | workflow succeeded |
+| npmjs | `@wenathlan/saddle@1.8.2` | publishnpmjs.yml | public registry confirmed |
 
 ## Development
 
