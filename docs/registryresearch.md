@@ -20,13 +20,13 @@ The RubyGems workflow must pass the host without a trailing slash, matching the 
 
 ## workflow decisions
 
-The repository now uses one release-triggered workflow per destination. `publishgithubnpm.yml` publishes a GitHub Packages npm variant under the repository owner scope, currently `@iakadion/saddle`, with `GITHUB_TOKEN`; the public npm workflow publishes the canonical package `@wenathlan/saddle`. `publishghcr.yml` publishes `ghcr.io/iakadion/saddle`; `publishmaven.yml`, `publishnuget.yml`, and `publishrubygems.yml` publish minimal ecosystem metadata to the corresponding GitHub Packages registries. Every GitHub Packages job grants only `contents: read` and `packages: write`.
+The repository now uses one release-triggered workflow per destination. After the repository transfer, `publishgithubnpm.yml` derives the GitHub Packages npm scope from `github.repository_owner`, so the v1.8.2 run targets `@wenathlan/saddle` with `GITHUB_TOKEN`; the public npm workflow publishes the same canonical package with `NPM_TOKEN`. `publishghcr.yml` derives `ghcr.io/wenathlan/saddle`; `publishmaven.yml` publishes `io.wenathlan:saddle`; NuGet and RubyGems retain their ecosystem-compatible unscoped package identities. Every GitHub Packages job grants only `contents: read` and `packages: write`.
 
 `publishnpmjs.yml` is intentionally separate from GitHub Packages. It uses Node 26.7.0, disables package-manager caching for the release job, and runs `npm publish --access public` against `https://registry.npmjs.org` with `NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}`. The secret name is public by design, but its value must remain owner-managed and absent from logs and source files.
 
 The public npm package must be created under the owner account before the first successful publication. The current path uses the owner-managed `NPM_TOKEN` secret for that bootstrap and subsequent releases. The exposed credential from the prior conversation must never be used.
 
-The GitHub Packages npm workflow must use a package scope authorized for the workflow token. The selected repository belongs to `iakadion`, so the workflow changes only the package metadata in the CI workspace to `@iakadion/saddle` before publishing. The committed `package.json` and public npm package remain `@wenathlan/saddle`; the two registries therefore have independent package names and access rules.
+The GitHub Packages npm workflow uses the repository owner scope at runtime. The repository is now owned by `wenathlan`, while the authenticated `iakadion` account retains administrator permission, so the committed package metadata and the GitHub Packages workspace both resolve to `@wenathlan/saddle`. Public npm and GitHub Packages therefore share the canonical JavaScript identity for v1.8.2.
 
 The GHCR package is linked automatically by publishing from this repository and includes the OCI source label in `dockerfile.saddle`. GitHub creates a first container package as private by default, so the owner must change its package visibility to public if public pulls are required. The same visibility review applies to the Maven, NuGet, RubyGems, and GitHub npm packages after their first publication.
 
@@ -44,7 +44,7 @@ The cross-runtime workflow `31552266171` and its manual rerun `31552272176` comp
 
 Release `v1.8.0` was created from commit `9ddfd6c`. GitHub npm run `31556461901`, GHCR run `31556461887`, NuGet run `31556461883` and RubyGems run `31556461991` completed successfully for `1.8.0`. Maven run `31556461885` initially failed because setup-java rejects `latest`; after changing the workflow to JDK 26, manual run `31556549154` completed successfully. Public npmjs run `31556461909` produced the `@devthink/saddle@1.8.0` tarball but the registry rejected the PUT with HTTP 404 `Scope not found`; no public npmjs publication is claimed.
 
-The active package identity on main is now `@wenathlan/saddle`. The existing `v1.8.0` tag intentionally remains historical and still contains the prior package identity; follow-up release `v1.8.1` carries the renamed package.
+The active package identity on main is now `@wenathlan/saddle`. The repository has since transferred to `wenathlan`; the authenticated `iakadion` account retains administrator permission. Release `v1.8.2` is the first release prepared against the transferred repository owner for GitHub Packages npm, Maven and GHCR.
 
 Release `v1.8.1` was created from the identity migration commit `efcbb02`. The npmjs workflow `31557618590` authenticated as `wenathlan`, generated `@wenathlan/saddle@1.8.1`, and ended with npm's `+ @wenathlan/saddle@1.8.1` success line. A later independent `npm view` returned `1.8.1`, and the direct registry metadata endpoint returned HTTP 200 with the same version record, confirming public visibility. The other v1.8.1 registry workflows also completed successfully: GitHub npm `31557618600`, GHCR `31557618571`, Maven `31557618597`, NuGet `31557618573` and RubyGems `31557618575`.
 

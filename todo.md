@@ -292,3 +292,13 @@ The following blocks are the execution order for the complete ecosystem. A block
 - [x] Create a follow-up release after the package identity migration; do not reuse the existing v1.8.0 tag.
 - [x] Align package metadata and release notes to follow-up version `1.8.1`.
 - [x] Create tag `v1.8.1` only after the scoped npm identity migration passes all gates.
+
+### Release 1.8.2 — canonical wenathlan publication
+
+- [x] Confirm repository administration and package publication authority for `wenathlan` while retaining `iakadion` repository administration.
+- [x] Audit every active manifest, workflow, documentation example and release asset for the canonical `@wenathlan/saddle` identity.
+- [x] Bump package metadata, lockfile, Maven, NuGet, RubyGems, changelog and release notes to `1.8.2`.
+- [x] Update GitHub Packages npm publication to derive the transferred `@wenathlan` namespace; preserve registry-specific GHCR, Maven, NuGet and RubyGems naming rules.
+- [x] Run all deterministic gates and inspect the final diff before creating `v1.8.2`.
+- [ ] Create and push tag `v1.8.2`, publish the GitHub release and trigger all six publication workflows.
+- [ ] Verify public npm, GitHub Packages npm, GHCR, Maven, NuGet, RubyGems and the extension zip asset independently.

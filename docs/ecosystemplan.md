@@ -32,7 +32,7 @@ The engine owns **contracts, validation, orchestration, recovery and auditabilit
 | 6 | scraping and context | complete | semantic extraction, content-type normalization, crawl budgets, RAG lineage and low-cardinality metrics |
 | 7 | API, MCP and security | complete | request identity, optional auth, secure headers, browser MCP tools and redirect/DNS checks |
 | 8 | bots and integrations | complete | app lifecycle, command scopes, idempotency, delivery retries and dead letters |
-| 9 | packaging and distribution | extension zip and registry slice verified for 1.8.1 | desktop, mobile, n8n and binary artifacts remain caller-owned |
+| 9 | packaging and distribution | extension zip and registry slice prepared for 1.8.2 | desktop, mobile, n8n and binary artifacts remain caller-owned |
 | 10 | product surfaces and operations | first slice complete | desktop, mobile, n8n and operator control contracts; observability, retention and threat model remain |
 | 11 | cross-runtime compatibility | transport-neutral graph audit complete | Node, Bun and Deno root probe, browser worker bridge, extension permission/build checks and package graph audit |
 | 12 | release gates | active | deterministic checks, docs, clean diffs and claim/code parity |
@@ -52,7 +52,7 @@ Each block follows the same loop:
 
 ## current implementation
 
-Version 1.8.1 contains the first bot and integration lifecycle slice after browser, storage, runners, scraping and API hardening, the public npm identity migration, the minimal extension permission policy and the deterministic extension zip workflow. Registry publication evidence for 1.8.1 covers GitHub npm, GHCR, Maven, NuGet, RubyGems and an accepted public npmjs publish; immediate npmjs index propagation remains a follow-up check. The first product surface slice adds desktop, mobile, n8n, operator control, operational policy and framework-neutral HTTP contracts. The first cross-runtime slice validates the root on Node, Bun and Deno, while extension-context and browser bundler checks remain.
+Version 1.8.2 carries the public npm identity migration through the transferred `wenathlan` repository owner, aligns GitHub Packages npm, Maven and GHCR owner metadata, and includes the minimal extension permission policy, deterministic extension zip workflow, context-aware replay, transport-neutral graph audit and bounded content normalization. Registry publication is triggered only after the release tag and independent target checks. The first product surface slice adds desktop, mobile, n8n, operator control, operational policy and framework-neutral HTTP contracts. The first cross-runtime slice validates the root on Node, Bun and Deno, while extension-context and browser bundler checks remain caller-owned.
 
 ## evidence sources
 

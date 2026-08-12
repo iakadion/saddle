@@ -2,7 +2,7 @@
 
 ## install
 
-The canonical public package is `@wenathlan/saddle`. The GitHub Packages npm variant is `@iakadion/saddle`; consumers of that registry must configure npm for the repository owner scope before installing.
+The canonical package is `@wenathlan/saddle` on both public npm and GitHub Packages npm after the repository transfer. Consumers of GitHub Packages must configure the `wenathlan` registry scope and authenticate with a token authorized for that package.
 
 ```bash
 npm install @wenathlan/saddle

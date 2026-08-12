@@ -198,6 +198,6 @@
 
     You should have received a copy of the Proprietary Source-Available
     License along with this program. If not, see
-    <https://github.com/iakadion/saddle/blob/main/license.txt>
+    <https://github.com/wenathlan/saddle/blob/main/license.txt>
 
   Also add information on how to contact you by electronic and paper mail.

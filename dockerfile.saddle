@@ -1,7 +1,7 @@
 FROM node:26.7.0-alpine
 FROM node:26.7.0-bookworm-slim
 
-LABEL org.opencontainers.image.source="https://github.com/iakadion/saddle"
+LABEL org.opencontainers.image.source="https://github.com/wenathlan/saddle"
 
 WORKDIR /app
 

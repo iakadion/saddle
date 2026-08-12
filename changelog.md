@@ -6,7 +6,7 @@
 
   All notable changes to Project saddle are documented in this file.
 
-  ## [Unreleased]
+  ## [1.8.2] - 2026-08-12
 
     - Added a minimal Manifest V3 permission policy with caller-owned optional escalation
     - Added a Node-only extension builder that versions the unpacked manifest from release metadata
@@ -14,11 +14,13 @@
     - Added context-aware replay for caller-owned window, tab and frame restoration
     - Added a transport-neutral export graph audit for browser-like package loading
     - Added bounded content-type detection and normalization for structured and binary scrape results
+    - Migrated active repository, Maven and GitHub Packages owner metadata to `wenathlan`
+    - Prepared all release workflows to derive owner namespaces from the transferred repository
 
   ## [1.8.1] - 2026-08-12
 
     - Changed the canonical public npm package identity to `@wenathlan/saddle`
-    - Preserved the GitHub Packages npm artifact namespace as `@iakadion/saddle`
+    - Preserved the v1.8.1 GitHub Packages npm artifact namespace as `@iakadion/saddle` for historical accuracy
     - Added follow-up release metadata after the immutable v1.8.0 package identity
     - Kept package version resolution derived from the release tag
 

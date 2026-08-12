@@ -50,16 +50,16 @@
 <p align="center">
   <strong>Storage-backed jobs, scraping contracts and portable runners for Node.js.</strong><br/>
   <strong>Binary computing agent, agent browser, computer-use, scraper and packager.</strong><br/>
-  <a href="https://github.com/iakadion/saddle/actions/workflows/ci.yml"><img src="https://github.com/iakadion/saddle/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
-  <a href="https://github.com/iakadion/saddle/releases/tag/v1.0.0"><img src="https://img.shields.io/badge/release-v1.0.0-d35d3d" alt="Release 1.0.0" /></a>
-  <a href="https://github.com/iakadion/saddle/blob/main/license.md"><img src="https://img.shields.io/badge/license-Proprietary--View--Only-202a2f" alt="Proprietary View Only" /></a>
+  <a href="https://github.com/wenathlan/saddle/actions/workflows/ci.yml"><img src="https://github.com/wenathlan/saddle/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
+  <a href="https://github.com/wenathlan/saddle/releases/tag/v1.8.2"><img src="https://img.shields.io/badge/release-v1.8.2-d35d3d" alt="Release 1.8.2" /></a>
+  <a href="https://github.com/wenathlan/saddle/blob/main/license.md"><img src="https://img.shields.io/badge/license-Proprietary--View--Only-202a2f" alt="Proprietary View Only" /></a>
 </p>
 
 > **Core idea:** storage is the durable side of the working set; the runner is replaceable; the artifact is the boundary. **Storage == Compute** — RAM and disk are the same construct, differing only by usage flag.
 
 Saddle is a **JavaScript ESM engine** for jobs that move data between storage, a working set, an injected runner and durable artifacts. It is also a **virtual machine you publish as a package** that runs on other people's computers (GitHub Actions, Forgejo, Gitea, GitLab, Codeberg, free Docker containers) and turns unlimited third-party storage buckets into virtual RAM/GPU/CPU. Nothing runs on the operator's local machine.
 
-Ships as a library, CLI, binary, n8n node, CRX extension, Android/iOS and Tauri desktop app. Package `@wenathlan/saddle` is published to public npm; the GitHub Packages npm variant is `@iakadion/saddle`, while Maven, NuGet, RubyGems and GHCR retain their ecosystem identities.
+Ships as a library, CLI, binary, n8n node, CRX extension, Android/iOS and Tauri desktop app. The canonical JavaScript package is `@wenathlan/saddle`; GitHub Packages npm, Maven and GHCR use the transferred `wenathlan` owner namespace, while NuGet and RubyGems retain their unscoped ecosystem package names.
 
 ## Start here
 

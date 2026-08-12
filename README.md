@@ -7,16 +7,16 @@
 <p align="center">
   <strong>Storage-backed jobs, scraping contracts and portable runners for Node.js.</strong><br/>
   <strong>Binary computing agent, agent browser, computer-use, scraper and packager.</strong><br/>
-  <a href="https://github.com/iakadion/saddle/actions/workflows/ci.yml"><img src="https://github.com/iakadion/saddle/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
-  <a href="https://github.com/iakadion/saddle/releases/tag/v1.8.0"><img src="https://img.shields.io/badge/release-v1.8.0-d35d3d" alt="Release 1.8.0" /></a>
-  <a href="https://github.com/iakadion/saddle/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-GPL--3.0-202a2f" alt="GPL 3.0 license" /></a>
+  <a href="https://github.com/wenathlan/saddle/actions/workflows/ci.yml"><img src="https://github.com/wenathlan/saddle/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
+  <a href="https://github.com/wenathlan/saddle/releases/tag/v1.8.2"><img src="https://img.shields.io/badge/release-v1.8.2-d35d3d" alt="Release 1.8.2" /></a>
+  <a href="https://github.com/wenathlan/saddle/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-GPL--3.0-202a2f" alt="GPL 3.0 license" /></a>
 </p>
 
 > **Core idea:** storage is the durable side of the working set; the runner is replaceable; the artifact is the boundary. **Storage == Compute** — RAM and disk are the same construct, differing only by usage flag.
 
 Saddle is a **JavaScript ESM engine** for jobs that move data between storage, a working set, an injected runner and durable artifacts. It is also a **virtual machine you publish as a package** that runs on other people's computers (GitHub Actions, Forgejo, Gitea, GitLab, Codeberg, free Docker containers) and turns unlimited third-party storage buckets into virtual RAM/GPU/CPU. Nothing runs on the operator's local machine.
 
-Ships as a library, CLI, binary, n8n node, CRX extension, Android/iOS and Tauri desktop app. Package `@wenathlan/saddle` — published to npm, GitHub Packages, Maven, NuGet, RubyGems and GHCR (auto-mirrored to jsDelivr).
+Ships as a library, CLI, binary, n8n node, CRX extension, Android/iOS and Tauri desktop app. The canonical JavaScript package is `@wenathlan/saddle`; GitHub Packages npm, Maven and GHCR use the transferred `wenathlan` owner namespace, while NuGet and RubyGems retain their unscoped ecosystem package names.
 
 ## Start here
 
@@ -109,7 +109,7 @@ The caller still chooses how to provide `fetcher`, browser transport, persistenc
 
 ## Browser extension
 
-Version 1.8.1 includes a pure JavaScript Manifest V3 reference surface in [`extension/`](extension/). It is deliberately narrow: the user invokes the action, the popup sends a versioned command, the service worker routes it, and an isolated content bridge returns bounded page metadata, visible text or a user initiated action result. The exported `permissionpolicy` keeps base permissions minimal and makes optional escalation caller-owned.
+Version 1.8.2 includes a pure JavaScript Manifest V3 reference surface in [`extension/`](extension/). It is deliberately narrow: the user invokes the action, the popup sends a versioned command, the service worker routes it, and an isolated content bridge returns bounded page metadata, visible text or a user initiated action result. The exported `permissionpolicy` keeps base permissions minimal and makes optional escalation caller-owned.
 
 ```bash
 # load the unpacked extension from chrome://extensions
@@ -145,12 +145,12 @@ saddle mcp
 
 | Registry | Artifact | Workflow | Status |
 | --- | --- | --- | --- |
-| GitHub npm | `@iakadion/saddle@1.8.0` | publishgithubnpm.yml | published |
-| GHCR | `ghcr.io/iakadion/saddle:1.8.0` and `latest` | publishghcr.yml | published |
-| Maven | `io.devthink:saddle:1.8.0` | publishmaven.yml | published after JDK 26 retry |
-| NuGet | `Saddle.1.8.0.nupkg` | publishnuget.yml | published |
-| RubyGems | `saddle 1.8.0` | publishrubygems.yml | published |
-| npmjs | `@wenathlan/saddle@1.8.1` | publishnpmjs.yml | published and visible in the public registry |
+| GitHub npm | `@wenathlan/saddle@1.8.2` | publishgithubnpm.yml | release candidate |
+| GHCR | `ghcr.io/wenathlan/saddle:1.8.2` and `latest` | publishghcr.yml | release candidate |
+| Maven | `io.wenathlan:saddle:1.8.2` | publishmaven.yml | release candidate |
+| NuGet | `Saddle.1.8.2.nupkg` | publishnuget.yml | release candidate |
+| RubyGems | `saddle 1.8.2` | publishrubygems.yml | release candidate |
+| npmjs | `@wenathlan/saddle@1.8.2` | publishnpmjs.yml | release candidate |
 
 ## Development
 
@@ -188,7 +188,7 @@ Root-based JavaScript ESM layout, no src/ directory, no TypeScript build require
 
 ## Current scope
 
-Version 1.8.1 establishes the engine contracts, browser snapshot foundation, storage sync primitives, runner recovery contracts, scraping context provenance, API/MCP security contracts, bot integration lifecycle, the tested extension bridge and permission policy, deterministic extension packaging, desktop/mobile/n8n surface contracts, a framework-neutral operator control boundary and the first cross-runtime import boundary. Native runtimes, n8n host registration, provider credentials, persistent databases and production deployment remain caller-selected adapters. The next improvements should extend these contracts without coupling the core to one forge, registry, browser or storage vendor.
+Version 1.8.2 establishes the engine contracts, browser snapshot foundation, storage sync primitives, runner recovery contracts, scraping context provenance and normalization, API/MCP security contracts, bot integration lifecycle, the tested extension bridge and permission policy, deterministic extension packaging, context-aware replay, desktop/mobile/n8n surface contracts, a framework-neutral operator control boundary and the first cross-runtime import boundary. Native runtimes, n8n host registration, provider credentials, persistent databases and production deployment remain caller-selected adapters. The next improvements should extend these contracts without coupling the core to one forge, registry, browser or storage vendor.
 
 ## License
 
