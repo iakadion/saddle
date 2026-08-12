@@ -190,11 +190,11 @@ The following blocks are the execution order for the complete ecosystem. A block
 
 ### Block 5 — runners and execution
 
-- [ ] Add provider health, capacity, cost, quota and capability reporting.
-- [ ] Add workflow trigger contracts for manual, webhook, schedule, repository dispatch and retry events.
-- [ ] Add resumable remote run records with cancellation, timeout and heartbeat semantics.
-- [ ] Add cron or alarm manifests without binding the core to a single forge or host.
-- [ ] Add execution sandbox capability reports for Node, browser, container and binary modes.
+- [x] Add provider health, capacity, cost, quota and capability reporting.
+- [x] Add workflow trigger contracts for manual, webhook, schedule, repository dispatch and retry events.
+- [x] Add resumable remote run records with cancellation, timeout and heartbeat semantics.
+- [x] Add cron or alarm manifests without binding the core to a single forge or host.
+- [x] Add execution sandbox capability reports for Node, browser, container and binary modes.
 
 ### Block 6 — scraping and agent context
 

@@ -11,6 +11,8 @@ import { validationerror } from "../core/errors.js";
 import { localmemory } from "../memory/bridge.js";
 import { inprocess } from "../runners/inprocess.js";
 import { scheduler } from "../runners/scheduler.js";
+import { runnerhealth, runnerhealthall } from "../runners/health.js";
+import { heartbeat } from "../runners/heartbeat.js";
 import { engine } from "../runtime/engine.js";
 import { localstorage } from "../storage/local.js";
 import { chunkedstorage } from "../storage/chunked.js";
@@ -44,6 +46,7 @@ import { sqlpersistence, mysql2persistence } from "../persistence/sql.js";
 import { drizzlepersistence } from "../persistence/drizzle.js";
 import { prismapersistence } from "../persistence/prisma.js";
 import { workflowmanifest } from "../workflow/manifest.js";
+import { triggerregistry, triggermatch, workflowtriggers } from "../workflow/triggers.js";
 import { githubworkflow, gitlabworkflow, woodpeckerworkflow } from "../workflow/templates.js";
 import { workflowregistry } from "../workflow/registry.js";
 import { memoryengine } from "../memory/engine.js";
@@ -92,6 +95,7 @@ import { persistentqueue } from "../queue/persistent.js";
 import { migrationplan, latestmigration } from "../persistence/migrations.js";
 import { mcptransport } from "../mcp/transport.js";
 import { ispublicurl } from "../api/security.js";
+import { resumablerun, runrecord, transitionrun } from "../dispatch/resumable.js";
 
 test("runs a job through prepare process sync and commit", async () => {
   const root = await mkdtemp(join(tmpdir(), "saddletest"));
@@ -111,6 +115,25 @@ test("selects the first available provider by priority", async () => {
   first.setavailable(false);
   const selected = await scheduler([second, first]).select({ id: "job1" });
   assert.equal(selected.descriptor().id, "second");
+});
+
+test("reports runner health and capacity without selecting infrastructure", async () => {
+  const available = inprocess({ id: "available", capabilities: ["node"] });
+  const offline = inprocess({ id: "offline", status: "offline" });
+  assert.equal((await runnerhealth(available)).healthy, true);
+  const report = await runnerhealthall([available, offline]);
+  assert.equal(report.total, 2);
+  assert.equal(report.available, 1);
+});
+
+test("emits cooperative heartbeat signals and stops cleanly", async () => {
+  const values = [];
+  const signal = heartbeat({ id: "job1", interval: 1000 });
+  signal.on((event) => values.push(event));
+  const tick = await signal.tick({ status: "running", metadata: { stage: "sync" } });
+  assert.equal(tick.sequence, 1);
+  assert.equal(values[0].metadata.stage, "sync");
+  assert.equal(signal.status().running, false);
 });
 
 test("rejects negative session event time", () => {
@@ -361,6 +384,33 @@ test("renders multiforge workflow manifests", () => {
   assert.equal(registry.render("process", "github").includes("workflow_dispatch"), true);
   assert.equal(gitlabworkflow(manifest).includes("image: node:22"), true);
   assert.equal(woodpeckerworkflow(manifest).includes("npm test"), true);
+});
+
+test("normalizes workflow triggers and matches due events", () => {
+  assert.deepEqual(workflowtriggers(["manual", "webhook", "manual"]), ["manual", "webhook"]);
+  const manifest = workflowmanifest({ name: "triggered", command: "npm test", trigger: ["webhook", "schedule"] });
+  assert.equal(triggermatch(manifest, { type: "webhook", requestid: "event1" }).matched, true);
+  assert.equal(triggermatch(manifest, { type: "schedule", at: Date.now() + 10000 }).reason, "not-due");
+  const registry = triggerregistry();
+  registry.register(manifest);
+  assert.equal(registry.match("triggered", { type: "webhook" }).matched, true);
+});
+
+test("resumes a remote run through legal transitions and preserves history", async () => {
+  const calls = [];
+  const run = resumablerun({
+    async submit() { calls.push("submit"); return { runid: "run1" }; },
+    async resume(record) { calls.push(`resume:${record.runid}`); },
+    async status() { calls.push("status"); return { status: "running" }; },
+    async cancel() { calls.push("cancel"); return { accepted: true }; }
+  }, { requestid: "request1", name: "job" });
+  await run.submit();
+  const current = await run.resume();
+  assert.equal(current.status, "running");
+  await run.cancel();
+  assert.equal(run.get().status, "cancelled");
+  assert.deepEqual(calls, ["submit", "resume:run1", "status", "cancel"]);
+  assert.equal(transitionrun(runrecord({ requestid: "r", name: "n" }), "submitted").attempt, 1);
 });
 
 test("loads from the first backend and persists to all backends", async () => {

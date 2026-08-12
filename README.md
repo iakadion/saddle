@@ -51,7 +51,7 @@ node examples/publicapi.js
 | Scraping | robots, cache, extraction, schema, scraper | text, metadata, links and structured output |
 | Crawl | normalization, BFS crawler, persistent frontier | bounded domain-aware crawling |
 | Browser | snapshots, tabs, frames, actions, fingerprint, session, replay and injected agent | browser actions without vendor lock-in |
-| Operations | queues, idempotency, saga, retry, circuit breaker | controlled execution and recovery |
+| Operations | queues, idempotency, saga, retry, circuit breaker, health and heartbeat | controlled execution and recovery |
 | Protocols | JSON, NDJSON, SSE, blocks and MCP | transport-neutral messages |
 | Delivery | manifests, workflow registry, binary/container plans | package and runner surfaces |
 | Agent Browser | capture & replay, stealth, fingerprint | Brave capture, movement replay, session recording |
@@ -181,7 +181,7 @@ Root-based JavaScript ESM layout, no src/ directory, no TypeScript build require
 
 ## Current scope
 
-Version 1.3 establishes the engine contracts, browser snapshot foundation, storage sync primitives and the first tested extension bridge. Browser implementations, provider credentials, persistent databases and production deployment remain caller-selected adapters. The next improvements should extend those contracts without coupling the core to one forge, registry, browser or storage vendor.
+Version 1.4 establishes the engine contracts, browser snapshot foundation, storage sync primitives, runner recovery contracts and the first tested extension bridge. Browser implementations, provider credentials, persistent databases and production deployment remain caller-selected adapters. The next improvements should extend those contracts without coupling the core to one forge, registry, browser or storage vendor.
 
 ## License
 

@@ -22,6 +22,10 @@ The public API is designed around injected transports. Consumers can use the sam
 | `tieredcache` | serve bounded hot values with persistent cold storage and stale revalidation |
 | `syncobject` / `syncbackends` | compare manifests and copy or resolve updates across adapters |
 | `memoryengine.sync` / `memoryengine.capabilities` | synchronize working set objects and inspect backend capabilities |
+| `runnerhealth` / `runnerhealthall` | report provider readiness, capacity and failures |
+| `heartbeat` | emit cooperative liveness signals for long-running work |
+| `workflowtriggers` / `triggermatch` | normalize and match manual, event, schedule and retry starts |
+| `resumablerun` / `transitionrun` | recover remote run state through legal transitions |
 | `nodeserver` | expose a Web Request/Response handler through Node HTTP |
 
 ```js

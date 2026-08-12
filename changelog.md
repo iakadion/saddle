@@ -1,10 +1,17 @@
                          SADDLE - CHANGELOG
-                       Version 1.3, August 2026
+                       Version 1.4, August 2026
 
  Copyright (c) August 2026 devthink, nathlan, akadion, nathu filho, alllan neris, andraneris. All Rights Reserved.
  Project: saddle
 
   All notable changes to Project saddle are documented in this file.
+
+  ## [1.4.0] - 2026-08-11
+
+    - Added provider health and capacity reports
+    - Added cooperative heartbeat signals for long-running work
+    - Added forge-neutral manual, webhook, schedule, retry and heartbeat triggers
+    - Added legal remote run transitions with resumable submit, status and cancel operations
 
   ## [1.3.0] - 2026-08-11
 
