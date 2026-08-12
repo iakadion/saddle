@@ -7,7 +7,7 @@ The repository uses a current-runtime CI lane while preserving a compatible libr
 | GitHub Actions checkout | `actions/checkout@v7` | Latest stable action referenced by current official examples |
 | GitHub Actions Node | `actions/setup-node@v7` with `26.7.0` | Exact current Node release for CI, release validation and all package workflows |
 | Docker runtime | `node:26.7.0-alpine` and `node:26.7.0-bookworm-slim` | Exact Node release for the two-stage container image; both tags are official Node image variants [3] |
-| Maven | `actions/setup-java@v5` with `java-version: latest` | Latest stable GA JDK resolved by the action; Maven remains independently versioned |
+| Maven | `actions/setup-java@v5` with `java-version: 26` | Current OpenJDK release available from the action; Maven remains independently versioned [6] |
 | NuGet | `actions/setup-dotnet@v6` with `dotnet-version: latest` | Latest stable .NET SDK resolved by the action |
 | RubyGems | `ruby/setup-ruby@v1` with `ruby-version: ruby` | Latest stable MRI supported by the action |
 | Bun | `oven-sh/setup-bun@v2` with `bun-version: latest` | Latest Bun release in the cross-runtime matrix |
@@ -25,3 +25,4 @@ The public npm workflow remains blocked until the owner replaces the invalid or 
 [3]: https://hub.docker.com/_/node "Docker Official Image: node"
 [4]: https://github.com/docker/login-action "docker/login-action"
 [5]: https://github.com/docker/build-push-action "docker/build-push-action"
+[6]: https://openjdk.org/projects/jdk/26/ "OpenJDK JDK 26"
