@@ -1,6 +1,6 @@
 Gem::Specification.new do |spec|
   spec.name = "saddle"
-  spec.version = ENV.fetch("SADDLE_VERSION", "1.0.0")
+  spec.version = ENV.fetch("SADDLE_VERSION", "1.8.0")
   spec.authors = ["devthink"]
   spec.summary = "Binary computing engine for distributed storage"
   spec.description = "Binary computing engine that turns distributed storage into a publishable working set."

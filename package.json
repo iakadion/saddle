@@ -1,6 +1,6 @@
 {
   "name": "@devthink/saddle",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "description": "binary computing engine that turns distributed storage into a publishable working set",
   "type": "module",
   "license": "GPL-3.0-only",

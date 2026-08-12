@@ -8,7 +8,7 @@
   <strong>Storage-backed jobs, scraping contracts and portable runners for Node.js.</strong><br/>
   <strong>Binary computing agent, agent browser, computer-use, scraper and packager.</strong><br/>
   <a href="https://github.com/iakadion/saddle/actions/workflows/ci.yml"><img src="https://github.com/iakadion/saddle/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
-  <a href="https://github.com/iakadion/saddle/releases/tag/v1.0.0"><img src="https://img.shields.io/badge/release-v1.0.0-d35d3d" alt="Release 1.0.0" /></a>
+  <a href="https://github.com/iakadion/saddle/releases/tag/v1.8.0"><img src="https://img.shields.io/badge/release-v1.8.0-d35d3d" alt="Release 1.8.0" /></a>
   <a href="https://github.com/iakadion/saddle/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-GPL--3.0-202a2f" alt="GPL 3.0 license" /></a>
 </p>
 
@@ -142,12 +142,12 @@ saddle mcp
 
 | Registry | Artifact | Workflow | Status |
 | --- | --- | --- | --- |
-| GitHub npm | `@iakadion/saddle@1.7.0` | publishgithubnpm.yml | published |
-| GHCR | `ghcr.io/iakadion/saddle:1.7.0` and `latest` | publishghcr.yml | published |
-| Maven | `io.devthink:saddle:1.7.0` | publishmaven.yml | published |
-| NuGet | `Saddle.1.7.0.nupkg` | publishnuget.yml | published |
-| RubyGems | `saddle 1.7.0` | publishrubygems.yml | published |
-| npmjs | `@devthink/saddle@1.7.0` | publishnpmjs.yml | not published; `npm whoami` rejected `NPM_TOKEN` with HTTP 401 |
+| GitHub npm | `@iakadion/saddle@1.8.0` | publishgithubnpm.yml | pending release workflow |
+| GHCR | `ghcr.io/iakadion/saddle:1.8.0` and `latest` | publishghcr.yml | pending release workflow |
+| Maven | `io.devthink:saddle:1.8.0` | publishmaven.yml | pending release workflow |
+| NuGet | `Saddle.1.8.0.nupkg` | publishnuget.yml | pending release workflow |
+| RubyGems | `saddle 1.8.0` | publishrubygems.yml | pending release workflow |
+| npmjs | `@devthink/saddle@1.8.0` | publishnpmjs.yml | pending; previous `NPM_TOKEN` check returned HTTP 401 |
 
 ## Development
 
@@ -185,7 +185,7 @@ Root-based JavaScript ESM layout, no src/ directory, no TypeScript build require
 
 ## Current scope
 
-Version 1.7 establishes the engine contracts, browser snapshot foundation, storage sync primitives, runner recovery contracts, scraping context provenance, API/MCP security contracts, bot integration lifecycle, the first tested extension bridge, desktop/mobile/n8n surface contracts, a framework-neutral operator control boundary and the first cross-runtime import boundary. Native runtimes, n8n host registration, provider credentials, persistent databases and production deployment remain caller-selected adapters. The next improvements should extend these contracts without coupling the core to one forge, registry, browser or storage vendor.
+Version 1.8 establishes the engine contracts, browser snapshot foundation, storage sync primitives, runner recovery contracts, scraping context provenance, API/MCP security contracts, bot integration lifecycle, the first tested extension bridge, desktop/mobile/n8n surface contracts, a framework-neutral operator control boundary and the first cross-runtime import boundary. Native runtimes, n8n host registration, provider credentials, persistent databases and production deployment remain caller-selected adapters. The next improvements should extend these contracts without coupling the core to one forge, registry, browser or storage vendor.
 
 ## License
 
