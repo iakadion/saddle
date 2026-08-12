@@ -1,4 +1,4 @@
-# saddle release 1.8.2
+# saddle release 1.8.4
 
 ## release path
 
@@ -6,10 +6,10 @@ The release path is intentionally split into source validation, package validati
 
 | step | owner | condition |
 |---|---|---|
-| package version | repository | `package.json` is `1.8.2` |
+| package version | repository | `package.json` is `1.8.4` |
 | quality gate | GitHub Actions | `npm run pack:check` passes |
-| tag | repository owner | tag `v1.8.2` points to the validated release commit |
-| GitHub release | repository owner | release `v1.8.2` is created from the validated tag |
+| tag | repository owner | tag `v1.8.4` points to the validated release commit |
+| GitHub release | repository owner | release `v1.8.4` is created from the validated tag |
 | GitHub Packages | GitHub Actions | `publishgithubnpm.yml`, `publishghcr.yml`, `publishmaven.yml`, `publishnuget.yml`, and `publishrubygems.yml` use `GITHUB_TOKEN` |
 | public npmjs | owner-managed GitHub Actions secret | `publishnpmjs.yml` uses `NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}` and derives the version from the release tag or latest release in manual maintenance runs |
 | extension zip | GitHub Actions | `buildextension.yml` derives the version from the release tag, validates the unpacked artifact and attaches `saddle-extension-<version>.zip` |

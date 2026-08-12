@@ -19,7 +19,7 @@ export function binaryplan(manifest, options = {}) {
 }
 
 export function containerplan(manifest, options = {}) {
-  const base = options.base ?? "node:22-alpine";
+  const base = options.base ?? "node:26.7.0-alpine";
   const workdir = options.workdir ?? "/app";
   const command = options.command ?? ["node", manifest.entry];
   const lines = [`from ${base}`, `workdir ${workdir}`, "copy package.json package-lock.json ./", "run npm ci --omit=dev", "copy . .", `cmd ${JSON.stringify(command)}`];

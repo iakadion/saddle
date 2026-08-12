@@ -302,3 +302,14 @@ The following blocks are the execution order for the complete ecosystem. A block
 - [x] Run all deterministic gates and inspect the final diff before creating `v1.8.2`.
 - [x] Create and push tag `v1.8.2`, publish the GitHub release and trigger all six publication workflows.
 - [x] Verify public npm and the extension zip asset independently; record successful authenticated workflow evidence and protected-access limits for GitHub Package registries.
+
+### Release 1.8.4 — platform pipelines and pages
+
+- [x] Audit every Node.js 22 reference across source, Docker, GitHub Actions, GitLab, Forgejo, Gitea, Codeberg and Woodpecker configurations.
+- [x] Replace all active Node.js 22 references with Node.js 26.7.0 and add deterministic version checks.
+- [x] Add the Saddle Pages GitHub Pages build and deployment workflow without committing generated site output.
+- [x] Add equivalent caller-configured workflows for GitLab, Forgejo, Gitea, Codeberg and Woodpecker.
+- [x] Document required repository variables, tokens and deployment limitations for each external forge.
+- [x] Verify the owner and package coordinate before deleting the legacy Maven package `io.devthink:saddle`.
+- [x] Bump JavaScript, Maven, NuGet, RubyGems, Docker and release metadata to `1.8.4`.
+- [ ] Run all library and website gates, commit the migration, create `v1.8.4` and verify the resulting pipelines.

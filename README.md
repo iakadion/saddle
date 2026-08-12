@@ -8,7 +8,7 @@
   <strong>Storage-backed jobs, scraping contracts and portable runners for Node.js.</strong><br/>
   <strong>Binary computing agent, agent browser, computer-use, scraper and packager.</strong><br/>
   <a href="https://github.com/wenathlan/saddle/actions/workflows/ci.yml"><img src="https://github.com/wenathlan/saddle/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
-  <a href="https://github.com/wenathlan/saddle/releases/tag/v1.8.2"><img src="https://img.shields.io/badge/release-v1.8.2-d35d3d" alt="Release 1.8.2" /></a>
+  <a href="https://github.com/wenathlan/saddle/releases/tag/v1.8.4"><img src="https://img.shields.io/badge/release-v1.8.4-d35d3d" alt="Release 1.8.4" /></a>
   <a href="https://github.com/wenathlan/saddle/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-GPL--3.0-202a2f" alt="GPL 3.0 license" /></a>
 </p>
 
@@ -109,7 +109,7 @@ The caller still chooses how to provide `fetcher`, browser transport, persistenc
 
 ## Browser extension
 
-Version 1.8.2 includes a pure JavaScript Manifest V3 reference surface in [`extension/`](extension/). It is deliberately narrow: the user invokes the action, the popup sends a versioned command, the service worker routes it, and an isolated content bridge returns bounded page metadata, visible text or a user initiated action result. The exported `permissionpolicy` keeps base permissions minimal and makes optional escalation caller-owned.
+Version 1.8.4 includes a pure JavaScript Manifest V3 reference surface in [`extension/`](extension/). It is deliberately narrow: the user invokes the action, the popup sends a versioned command, the service worker routes it, and an isolated content bridge returns bounded page metadata, visible text or a user initiated action result. The exported `permissionpolicy` keeps base permissions minimal and makes optional escalation caller-owned.
 
 ```bash
 # load the unpacked extension from chrome://extensions
@@ -145,12 +145,12 @@ saddle mcp
 
 | Registry | Artifact | Workflow | Status |
 | --- | --- | --- | --- |
-| GitHub npm | `@wenathlan/saddle@1.8.2` | publishgithubnpm.yml | workflow succeeded |
-| GHCR | `ghcr.io/wenathlan/saddle:1.8.2` and `latest` | publishghcr.yml | workflow succeeded |
-| Maven | `io.wenathlan:saddle:1.8.2` | publishmaven.yml | workflow succeeded |
-| NuGet | `Saddle.1.8.2.nupkg` | publishnuget.yml | workflow succeeded |
-| RubyGems | `saddle 1.8.2` | publishrubygems.yml | workflow succeeded |
-| npmjs | `@wenathlan/saddle@1.8.2` | publishnpmjs.yml | public registry confirmed |
+| GitHub npm | `@wenathlan/saddle@1.8.4` | publishgithubnpm.yml | pending release |
+| GHCR | `ghcr.io/wenathlan/saddle:1.8.4` and `latest` | publishghcr.yml | pending release |
+| Maven | `io.wenathlan:saddle:1.8.4` | publishmaven.yml | pending release |
+| NuGet | `Saddle.1.8.4.nupkg` | publishnuget.yml | pending release |
+| RubyGems | `saddle 1.8.4` | publishrubygems.yml | pending release |
+| npmjs | `@wenathlan/saddle@1.8.4` | publishnpmjs.yml | pending release |
 
 ## Development
 
@@ -188,7 +188,7 @@ Root-based JavaScript ESM layout, no src/ directory, no TypeScript build require
 
 ## Current scope
 
-Version 1.8.2 establishes the engine contracts, browser snapshot foundation, storage sync primitives, runner recovery contracts, scraping context provenance and normalization, API/MCP security contracts, bot integration lifecycle, the tested extension bridge and permission policy, deterministic extension packaging, context-aware replay, desktop/mobile/n8n surface contracts, a framework-neutral operator control boundary and the first cross-runtime import boundary. Native runtimes, n8n host registration, provider credentials, persistent databases and production deployment remain caller-selected adapters. The next improvements should extend these contracts without coupling the core to one forge, registry, browser or storage vendor.
+Version 1.8.4 establishes the engine contracts, browser snapshot foundation, storage sync primitives, runner recovery contracts, scraping context provenance and normalization, API/MCP security contracts, bot integration lifecycle, the tested extension bridge and permission policy, deterministic extension packaging, context-aware replay, Node.js 26.7.0 cross-forge gates, desktop/mobile/n8n surface contracts, a framework-neutral operator control boundary and the first cross-runtime import boundary. Native runtimes, n8n host registration, provider credentials, persistent databases and production deployment remain caller-selected adapters. The next improvements should extend these contracts without coupling the core to one forge, registry, browser or storage vendor.
 
 ## License
 

@@ -10,6 +10,12 @@
 
     - Added durable pending extension commands with explicit rehydration and resume
 
+  ## [1.8.4] - 2026-08-12
+
+    - Updated all active library and forge pipelines from Node 22 to Node.js 26.7.0
+    - Added complete deterministic gates to GitLab, Forgejo, Gitea and Woodpecker validation workflows
+    - Documented caller-owned Pages and cross-forge deployment boundaries
+
   ## [1.8.2] - 2026-08-12
 
     - Added a minimal Manifest V3 permission policy with caller-owned optional escalation
