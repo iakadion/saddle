@@ -89,7 +89,9 @@ Saddle coordinates contracts instead of hiding providers. A repo + CI runner is 
 - repository_dispatch = IPC
 
 ```js
-import { engine, eventbus, inprocess, localmemory, localstorage, scheduler } from "@devthink/saddle";
+import { engine, eventbus, inprocess, scheduler } from "@devthink/saddle";
+import { localmemory } from "@devthink/saddle/memory-node";
+import { localstorage } from "@devthink/saddle/storage-node";
 const events = eventbus();
 const run = engine({
   storage: localstorage("./.saddle-data"),
@@ -103,7 +105,7 @@ const result = await run.run(
 );
 ```
 
-The caller still chooses how to provide `fetcher`, browser transport, persistence, proxy pool, captcha solver, webhook secret and remote credentials. Saddle does not embed secrets, fixed hosts or a mandatory cloud vendor.
+The caller still chooses how to provide `fetcher`, browser transport, persistence, proxy pool, captcha solver, webhook secret and remote credentials. The root entry is transport-neutral; Node filesystem and HTTP adapters are explicit subpaths such as `@devthink/saddle/storage-node`, `@devthink/saddle/memory-node`, `@devthink/saddle/server-node`, `@devthink/saddle/sessions-file` and `@devthink/saddle/queue-persistent`. Saddle does not embed secrets, fixed hosts or a mandatory cloud vendor.
 
 ## Browser extension
 
@@ -183,7 +185,7 @@ Root-based JavaScript ESM layout, no src/ directory, no TypeScript build require
 
 ## Current scope
 
-Version 1.7 establishes the engine contracts, browser snapshot foundation, storage sync primitives, runner recovery contracts, scraping context provenance, API/MCP security contracts, bot integration lifecycle, the first tested extension bridge, desktop/mobile/n8n surface contracts and a framework-neutral operator control boundary. Native runtimes, n8n host registration, provider credentials, persistent databases and production deployment remain caller-selected adapters. The next improvements should extend these contracts without coupling the core to one forge, registry, browser or storage vendor.
+Version 1.7 establishes the engine contracts, browser snapshot foundation, storage sync primitives, runner recovery contracts, scraping context provenance, API/MCP security contracts, bot integration lifecycle, the first tested extension bridge, desktop/mobile/n8n surface contracts, a framework-neutral operator control boundary and the first cross-runtime import boundary. Native runtimes, n8n host registration, provider credentials, persistent databases and production deployment remain caller-selected adapters. The next improvements should extend these contracts without coupling the core to one forge, registry, browser or storage vendor.
 
 ## License
 

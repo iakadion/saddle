@@ -1,7 +1,9 @@
 /**
  * byte collection and hashing are grouped because every storage adapter uses them.
  */
-import { createHash } from "node:crypto";
+import { sha256 } from "../core/hash.js";
+
+export { sha256 } from "../core/hash.js";
 
 export async function collectbytes(input) {
   if (input instanceof Uint8Array) return input;
@@ -12,8 +14,4 @@ export async function collectbytes(input) {
   let offset = 0;
   for (const chunk of chunks) { output.set(chunk, offset); offset += chunk.byteLength; }
   return output;
-}
-
-export function sha256(data) {
-  return createHash("sha256").update(data).digest("hex");
 }

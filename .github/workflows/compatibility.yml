@@ -1,0 +1,60 @@
+name: cross runtime compatibility
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  root-probe:
+    name: root probe (${{ matrix.runtime }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        runtime: [node, bun, deno]
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: setup node
+        if: matrix.runtime == 'node'
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: setup bun
+        if: matrix.runtime == 'bun'
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+      - name: setup deno
+        if: matrix.runtime == 'deno'
+        uses: denoland/setup-deno@v2
+        with:
+          deno-version: v2.x
+      - name: run root probe on node
+        if: matrix.runtime == 'node'
+        run: node tests/runtimeprobe.js
+      - name: run root probe on bun
+        if: matrix.runtime == 'bun'
+        run: bun tests/runtimeprobe.js
+      - name: run root probe on deno
+        if: matrix.runtime == 'deno'
+        run: deno run --allow-env tests/runtimeprobe.js
+  node-suite:
+    name: node deterministic suite
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: install
+        run: npm ci
+      - name: run checks
+        run: npm run check && npm run formatcheck && npm test

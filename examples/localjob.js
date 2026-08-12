@@ -4,7 +4,9 @@
 import { mkdtemp } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
-import { eventbus, engine, inprocess, localmemory, localstorage, scheduler } from "../index.js";
+import { eventbus, engine, inprocess, scheduler } from "../index.js";
+import { localmemory } from "../memory/bridge.js";
+import { localstorage } from "../storage/local.js";
 
 const root = await mkdtemp(join(tmpdir(), "saddleexample"));
 const events = eventbus();

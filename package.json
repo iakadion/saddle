@@ -14,8 +14,10 @@
   "exports": {
     ".": "./index.js",
     "./memory": "./memory/bridge.js",
+    "./memory-node": "./memory/bridge.js",
     "./memory-engine": "./memory/engine.js",
     "./storage": "./storage/index.js",
+    "./storage-node": "./storage/local.js",
     "./runners": "./runners/scheduler.js",
     "./sessions": "./domain/sessions.js",
     "./modes": "./modes/resolve.js",
@@ -24,7 +26,13 @@
     "./bot": "./bot/bot.js",
     "./captcha": "./captcha/contract.js",
     "./deploy": "./deploy/index.js",
-    "./extension": "./extension/index.js"
+    "./extension": "./extension/index.js",
+    "./server-node": "./server/node.js",
+    "./sessions-file": "./sessions/file.js",
+    "./sessions-store": "./sessions/store.js",
+    "./queue-persistent": "./queue/persistent.js",
+    "./captcha-evidence": "./captcha/evidence.js",
+    "./hash": "./core/hash.js"
   },
   "files": ["core", "domain", "memory", "runners", "runtime", "storage", "sessions", "modes", "adapters", "persistence", "queue", "dispatch", "scrape", "crawl", "api", "mcp", "browser", "proxy", "captcha", "ai", "webhook", "surfaces", "library", "errors", "retry", "server", "binary", "format", "packager", "bot", "protocol", "workflow", "cli", "extension", "index.js", "docs", "examples", "README.md", "LICENSE"],
   "scripts": {

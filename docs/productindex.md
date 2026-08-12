@@ -11,6 +11,7 @@ Saddle is the contract layer for a family of caller-owned surfaces. The library 
 | mobile | `mobilemanifest` and `mobileadapter` | screen lifecycle, secure storage, permissions and app-store packaging |
 | n8n | `n8nnode`, `n8nmatch` and `n8nexecute` | node registration, credential UI, workflow persistence and execution host |
 | operations | `operationsmetrics`, `retentionpolicy`, `backupplan` and `threatmodel` | telemetry exporter, backup store, retention worker and incident response |
+| cross runtime | `runtimecontract`, `memorystorage` and root ESM import | runtime-specific APIs and package loader behavior |
 | browser | browser agent and snapshot contracts | browser vendor adapter, profile and session ownership |
 | extension | Manifest V3 reference files and serializable protocol | browser permission grant, signing and store submission |
 | web control | API, service, `controlsurface` and `controlservice` contracts | operator UI, authentication, database and hosting |
@@ -18,6 +19,8 @@ Saddle is the contract layer for a family of caller-owned surfaces. The library 
 ## operating boundary
 
 The engine never invents a host, port, credential, account, app identifier, browser profile, or cloud provider. A surface adapter should expose only the operations that its host can execute. Unsupported operations return a structured capability result, while handler failures preserve a stable code and message for operator logs.
+
+The cross-runtime boundary keeps the root entry free of filesystem, Node HTTP and other Node-only imports. Those adapters remain explicit imports so callers can select them in Node without making browser worker, Deno or Bun consumers pay for unavailable APIs.
 
 ## block 10 scope
 
