@@ -247,7 +247,7 @@ The following blocks are the execution order for the complete ecosystem. A block
 - [x] Add a framework-neutral Web Request and Response control handler with optional caller authorization.
 - [x] Add bounded operational metrics for latency, retries, queue depth, runner selection, storage bytes and failures.
 - [x] Add retention, backup, restore and threat ownership policy contracts without forcing workers or persistence.
-- [ ] Add caller-owned desktop, mobile, n8n and web control surfaces around the same contracts.
+- [x] Add the first caller-owned desktop, mobile, n8n and framework-neutral web control contracts around the same engine contracts.
 - [ ] Add operator controls for jobs, sessions, storage, runners, permissions, logs and artifacts.
 - [ ] Add observability for latency, retries, queue depth, runner selection, storage bytes and failures.
 - [ ] Add migration, backup, restore and data retention policies for persistent adapters.

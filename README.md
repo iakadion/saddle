@@ -183,7 +183,7 @@ Root-based JavaScript ESM layout, no src/ directory, no TypeScript build require
 
 ## Current scope
 
-Version 1.7 establishes the engine contracts, browser snapshot foundation, storage sync primitives, runner recovery contracts, scraping context provenance, API/MCP security contracts, bot integration lifecycle, the first tested extension bridge and the first desktop, mobile and n8n surface contracts. Native runtimes, n8n host registration, provider credentials, persistent databases and production deployment remain caller-selected adapters. The next improvements should extend these contracts without coupling the core to one forge, registry, browser or storage vendor.
+Version 1.7 establishes the engine contracts, browser snapshot foundation, storage sync primitives, runner recovery contracts, scraping context provenance, API/MCP security contracts, bot integration lifecycle, the first tested extension bridge, desktop/mobile/n8n surface contracts and a framework-neutral operator control boundary. Native runtimes, n8n host registration, provider credentials, persistent databases and production deployment remain caller-selected adapters. The next improvements should extend these contracts without coupling the core to one forge, registry, browser or storage vendor.
 
 ## License
 

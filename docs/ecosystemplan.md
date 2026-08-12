@@ -52,7 +52,7 @@ Each block follows the same loop:
 
 ## current implementation
 
-Version 1.7 contains the first bot and integration lifecycle slice after browser, storage, runners, scraping and API hardening. It adds app installation and scope state, command authorization, idempotent bot execution, retryable webhook delivery and dead-letter records. The registry publication slice for 1.7.0 is verified for GitHub npm, GHCR, Maven, NuGet and RubyGems; public npmjs remains blocked until the owner bootstraps `@devthink/saddle` and configures its Trusted Publisher. The next implementation block is product surfaces and operations around the existing contracts.
+Version 1.7 contains the first bot and integration lifecycle slice after browser, storage, runners, scraping and API hardening. It adds app installation and scope state, command authorization, idempotent bot execution, retryable webhook delivery and dead-letter records. The registry publication slice for 1.7.0 is verified for GitHub npm, GHCR, Maven, NuGet and RubyGems; public npmjs remains blocked until the owner bootstraps `@devthink/saddle` and configures its Trusted Publisher. The first product surface slice now adds desktop, mobile, n8n, operator control, operational policy and framework-neutral HTTP contracts. The next implementation block is cross-runtime compatibility.
 
 ## evidence sources
 
