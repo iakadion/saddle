@@ -1,0 +1,36 @@
+name: deploy codeberg pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: https://data.forgejo.org/actions/checkout@v6
+      - name: setup node
+        uses: https://data.forgejo.org/actions/setup-node@v6
+        with:
+          node-version: 26.7.0
+          cache: pnpm
+      - name: enable pnpm
+        run: corepack enable
+      - name: install dependencies
+        run: pnpm install --frozen-lockfile
+      - name: typecheck
+        run: pnpm run check
+      - name: build static site
+        env:
+          VITE_BASE_PATH: /saddle-pages/
+        run: pnpm run build:pages
+      - name: prepare pages output
+        run: cp dist/public/index.html dist/public/404.html && touch dist/public/.nojekyll
+      - name: publish codeberg pages
+        uses: https://codeberg.org/git-pages/action@v2
+        with:
+          site: https://${{ forge.repository_owner }}.codeberg.page/saddle-pages/
+          token: ${{ forge.token }}
+          source: dist/public/
