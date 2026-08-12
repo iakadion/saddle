@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>UKA — Teste hCaptcha</title>
+    <script src="https://hcaptcha.com/1/api.js" async defer></script>
+    <style>
+      body { font-family: system-ui, sans-serif; max-width: 640px; margin: 4rem auto; }
+      button { padding: 0.6rem 1rem; }
+      pre { background: #111; color: #0f0; padding: 1rem; overflow: auto; }
+    </style>
+  </head>
+  <body>
+    <h1>UKA — Página de teste hCaptcha</h1>
+    <p>Usada pela plataforma de captura do UKA para validar o computer-use contra um captcha forte.</p>
+
+    <div id="hcaptcha-demo"></div>
+
+    <button id="submit">Enviar</button>
+    <p id="status">status: aguardando</p>
+    <pre id="token">token: (vazio)</pre>
+
+    <script>
+      // Sitekey de teste público do hCaptcha.
+      const SITEKEY = "a9b5fb07-92ff-493f-86fe-352a2803b3df";
+
+      window.onload = function () {
+        if (window.hcaptcha) {
+          window.hcaptcha.render("hcaptcha-demo", {
+            sitekey: SITEKEY,
+            callback: function (token) {
+              document.getElementById("status").textContent = "status: resolvido";
+              document.getElementById("token").textContent = "token: " + token.slice(0, 24) + "...";
+              window.__UKA_CAPTCHA_TOKEN__ = token;
+              window.__UKA_CAPTCHA_PASSED__ = true;
+            },
+            "expired-callback": function () {
+              document.getElementById("status").textContent = "status: expirado";
+              window.__UKA_CAPTCHA_PASSED__ = false;
+            },
+            "error-callback": function () {
+              document.getElementById("status").textContent = "status: erro";
+              window.__UKA_CAPTCHA_PASSED__ = false;
+            },
+          });
+        }
+      };
+
+      document.getElementById("submit").addEventListener("click", function () {
+        const passed = window.__UKA_CAPTCHA_PASSED__ === true;
+        document.getElementById("status").textContent =
+          "status: " + (passed ? "enviado com captcha OK" : "captcha pendente");
+      });
+    </script>
+  </body>
+</html>

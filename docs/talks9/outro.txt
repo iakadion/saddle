@@ -1,0 +1,24 @@
+
+- [ ] Oferecer acesso ao destinatário sem configurações adicionais por meio de PWA com Service Worker, Mini App do Telegram, extensão nativa para navegadores e subdomínios de ponte do gateway.
+
+
+- [ ] Registrar domínios de ápice reais utilizando extensões gratuitas como pp.ua, eu.org e no.kg ou TLDs comerciais acessíveis como .eu, .fr e .tech.
+- [ ] Configurar servidores autoritativos de ponte DNS com suporte a Anycast, DNSSEC e gerenciamento por API através das plataformas deSEC (desec.io) e public-adns.
+
+- [ ] Agregar provedores de armazenamento em nuvem para a camada de memória usando Cloudflare R2, Amazon S3 ou Backblaze B2 com suporte a leituras por intervalo (ranged GET) e cota gratuita de 10 GB, HuggingFace Hub para datasets e modelos via API, repositórios Git LFS via GitHub e Forgejo com limites de arquivo de 100 MB, e Terabox.
+- [ ] Implementar mecanismo de exposição para o motor de inferência C kimi-k3 utilizando o plug-in nativo K3ExpertSrc com leitor de tronco para requisições get e getmany, sistema de arquivos virtual FUSE ou dispositivo de bloco virtual com pread e O_DIRECT, ou arquitetura híbrida de leitura contígua.
+
+- [ ] Estruturar a entrega da plataforma iniciando pelo núcleo da biblioteca de memória virtual, avançando para documentos de arquitetura com protótipos spike, interfaces web acopladas a APIs de inferência e solução completa ponta a ponta.
+- [ ] Configurar ambientes sandbox para execução de código por agentes de inteligência artificial, ambientes integrados de desenvolvimento para programadores, plataformas SaaS multiusuário e execuções temporárias efêmeras.
+- [ ] Executar o motor de processamento em instâncias dedicadas NVMe com 8 GB ou mais de RAM em provedores como Hetzner, Render, Fly.io e Railway, utilizando ambientes serverless no Vercel ou Netlify, máquinas locais, contêineres Docker e instâncias gratuitas de CI no GitHub Actions, Kaggle e Codeberg com Woodpecker.
+- [ ] Aplicar isolamento de execução com contêineres Docker, microVMs Firecracker sob KVM com baixo overhead, modelo híbrido alternando entre desenvolvimento e produção, e isolamento direto no kernel via HiveBox e LXC.
+- [ ] Desenvolver APIs e orquestradores em TypeScript e Node.js com Drizzle ORM, Python com FastAPI, Rust para binários consolidados de alta performance ou Go para infraestrutura.
+- [ ] Selecionar imagens de execução CPU no Alibaba Cloud PAI-DSW equipadas com 8 cores e 32 GB de RAM, abrangendo ambientes Ubuntu 22.04 com Python 3.11 e PyTorch 2.3.1, Ubuntu 20.04 com Python 3.8, PyTorch 2.0.1 e TensorFlow 1.15.5, Ubuntu 20.04 com Python 3.7 e PyTorch 1.11.0, e Ubuntu 20.04 com Python 3.10 e PaddlePaddle 3.0.0.
+- [ ] Utilizar imagens de execução GPU no Alibaba Cloud PAI-DSW equipadas com 8 cores, 32 GB de RAM e 24 GB de VRAM sob cota de 36 horas, contemplando Ubuntu 22.04 com CUDA 12.8.1, Python 3.11 e PyTorch 2.9.1; Ubuntu 22.04 com CUDA 12.1.0, Python 3.11, PyTorch 2.3.1 e TensorFlow 2.16.1; Ubuntu 22.04 com CUDA 12.1.0, Python 3.10 e PyTorch 2.3.0; Ubuntu 20.04 com CUDA 11.7.1, Python 3.8, PyTorch 2.0.1 e TensorFlow 1.15.5; Ubuntu 20.04 com CUDA 11.3.0, Python 3.7 e PyTorch 1.11.0; e Ubuntu 20.04 com CUDA 12.3, TensorRT 8.6, Python 3.10 e PaddlePaddle 3.0.0.
+
+- [ ] Hospedar o código-fonte em repositórios públicos no GitHub, GitLab.com, instâncias auto-hospedadas do Forgejo ou Gitea, Codeberg e infraestruturas com espelhamento automatizado entre plataformas.
+- [ ] Operar módulos de interface e gerenciamento Git abrangendo painéis de compilação com pipelines, tarefas, agendamentos e artefatos, configurações gerais de sistema com serviços, integradores, webhooks, tokens de acesso, controle de repositórios, solicitações de mesclagem, registros de pacotes e monitoramento de cotas de uso.
+- [ ] Gerenciar ambientes de operação e implantação com suporte a clusters Kubernetes, arquivos de estado e módulos do Terraform, conexões Google Cloud, implantações paralelas, serviços de páginas e armazenamento estático.
+
+- [ ] Gerenciar parque de 60 máquinas através de CronJobs agendados em Kubernetes, scripts automatizados de bootstrap via cron ou systemd em nós bare metal e rotinas disparadas por runners de CI/CD no Forgejo Actions ou GitLab CI.
+- [ ] Executar cargas de mineração adequadas ao limite de 2 GB de VRAM priorizando mineradores GPU como gminer e lolMiner, mantendo chaveamento e suporte automático para processamento secundário em CPU.

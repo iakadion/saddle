@@ -1,0 +1,458 @@
+# GitLab CI - 400 min free, 10GB storage por projeto
+# GitLab Pages ilimitado comparado com GitHub
+image: node:20
+
+stages:
+  - process
+  - deploy
+
+variables:
+  GIT_DEPTH: "1"
+
+heavy_processor:
+  stage: process
+  script:
+    - echo "=== GitLab Runner - Transformando Storage em RAM ==="
+    - free -h && df -h
+    - |
+      # Cria swap file de 8GB no storage do runner
+      fallocate -l 8G /tmp/swapfile || dd if=/dev/zero of=/tmp/swapfile bs=1M count=8192
+      chmod 600 /tmp/swapfile
+      mkswap /tmp/swapfile
+      swapon /tmp/swapfile || echo "swap precisa sudo, pulando"
+    - mkdir -p public/results/$CI_JOB_ID dumps/incoming
+    - ls -la dumps/incoming/ || true
+    - cp -r dumps/incoming/* public/results/$CI_JOB_ID/ 2>/dev/null || echo "nada"
+    - echo "Processado no GitLab em $(date)" > public/results/$CI_JOB_ID/gitlab.txt
+  artifacts:
+    paths:
+      - public/
+    expire_in: 7 days
+  only:
+    - main
+    - web
+
+pages:
+  stage: deploy
+  dependencies:
+    - heavy_processor
+  script:
+    - mkdir -p public
+    - echo "GitLab Pages deploy"
+  artifacts:
+    paths:
+      - public
+  only:
+    - main
+
+name: Cleanup Artifacts (Evita estourar 500MB Free)
+
+on:
+  schedule:
+    - cron: '0 0 * * 0' # domingo meia-noite
+  workflow_dispatch:
+
+permissions:
+  actions: write
+  contents: read
+
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deletar artifacts antigos (>7 dias)
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+            const artifacts = await github.paginate(github.rest.actions.listArtifactsForRepo, { owner, repo });
+            const cutoff = Date.now() - 7*24*60*60*1000;
+            for (const art of artifacts) {
+              if (new Date(art.created_at).getTime() < cutoff) {
+                console.log(`Deletando ${art.name} ${art.id}`);
+                await github.rest.actions.deleteArtifact({ owner, repo, artifact_id: art.id });
+              }
+            }
+
+# Woodpecker CI para Codeberg - alternativa ilimitada open source
+# Coloque este arquivo em .woodpecker/deploy.yml ou .woodpecker.yml
+# Docs: https://woodpecker-ci.org/
+
+when:
+  - event: push
+    branch: pages
+  - event: manual
+
+steps:
+  heavy-processor:
+    image: node:20-bullseye
+    commands:
+      - echo "Codeberg Woodpecker - Storage como CPU"
+      - free -h
+      - mkdir -p /tmp/ramdisk
+      - mount -t tmpfs -o size=4G tmpfs /tmp/ramdisk || echo "sem permissão tmpfs, usando /tmp"
+      - ls -la dumps/incoming/ || true
+      - cp -r dumps/incoming/* /tmp/ramdisk/ 2>/dev/null || true
+      - echo "Processado em Woodpecker $(date)" > /tmp/ramdisk/woodpecker-result.txt
+      - cp /tmp/ramdisk/* docs/results/ -r || true
+    volumes:
+      - /tmp:/tmp
+
+  deploy-pages:
+    image: bitnami/git
+    commands:
+      - git config user.name "woodpecker-bot"
+      - git config user.email "bot@codeberg"
+      - git add docs/results/ || true
+      - git commit -m "woodpecker: result" || true
+      - git push origin pages || true
+    when:
+      - event: manual
+
+name: Dump Processor (Recebe do Browser)
+
+on:
+  push:
+    paths:
+      - 'dumps/incoming/**'
+  workflow_dispatch:
+    inputs:
+      dump_path:
+        description: 'Caminho do dump'
+        required: false
+
+permissions:
+  contents: write
+
+jobs:
+  process-dump:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Processar dumps novos
+        run: |
+          echo "Processando dumps..."
+          ls -R dumps/incoming/ || true
+          mkdir -p docs/processed
+          for f in dumps/incoming/*; do
+            [ -e "$f" ] || continue
+            base=$(basename "$f")
+            echo "Processando $base"
+            # Exemplo: extrai info, gera preview, etc - sem pesar browser
+            cp "$f" "docs/processed/$base.processed"
+            sha256sum "$f" > "docs/processed/$base.sha256"
+          done
+      - name: Commit processed
+        run: |
+          git config user.name "dump-bot"
+          git config user.email "dump@bot"
+          git add docs/processed/ || true
+          git commit -m "chore: process dumps [skip ci]" || true
+          git push || true
+
+name: Forgejo Heavy Processor (Unlimited Self-Hosted)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      job_id:
+        description: 'Job ID do browser'
+        required: true
+      filename:
+        description: 'Arquivo'
+
+# Forgejo usa runners self-hosted = ilimitado
+jobs:
+  heavy-unlimited:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Transformar Storage em RAM (Swap + tmpfs)
+        run: |
+          echo "=== Antes ===" && free -h && df -h
+          # 1. Cria swap de 16GB em /mnt (storage -> RAM)
+          sudo fallocate -l 16G /mnt/swapfile || sudo dd if=/dev/zero of=/mnt/swapfile bs=1G count=16
+          sudo chmod 600 /mnt/swapfile
+          sudo mkswap /mnt/swapfile
+          sudo swapon /mnt/swapfile
+          # 2. Cria RAM disk de 8GB para processamento
+          sudo mkdir -p /mnt/ramdisk
+          sudo mount -t tmpfs -o size=8G tmpfs /mnt/ramdisk
+          # 3. ZRAM para comprimir RAM
+          sudo modprobe zram || true
+          echo "=== Depois (Storage virou RAM) ===" && free -h && swapon --show
+
+      - name: Processar binário com RAM expandida
+        run: |
+          echo "Processando ${{ inputs.filename }} com storage como RAM"
+          cp -r dumps/incoming/* /mnt/ramdisk/ 2>/dev/null || true
+          ls -lh /mnt/ramdisk/
+          # Simula heavy: usa /mnt/ramdisk como workspace
+          echo "processed at $(date)" > /mnt/ramdisk/result.txt
+          cp /mnt/ramdisk/* docs/results/ 2>/dev/null || true
+
+      - name: Salvar como artifact ilimitado (Forgejo self-hosted não tem limite 500MB)
+        uses: actions/upload-artifact@v4
+        with:
+          name: result-${{ inputs.job_id }}
+          path: docs/results/
+
+name: OpenCode Runner (Browser triggers, Action runs)
+
+on:
+  workflow_dispatch:
+    inputs:
+      session_id:
+        description: 'ID da sessão browser'
+        required: true
+      prompt:
+        description: 'Prompt para o agente'
+        required: true
+      model:
+        description: 'provider/model'
+        required: false
+        default: 'opencode/gpt-5'
+  repository_dispatch:
+    types: [opencode-run]
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  run-opencode:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: oven-sh/setup-bun@v2
+      - run: curl -fsSL https://opencode.ai/install | bash
+      - run: echo "$HOME/.opencode/bin" >> $GITHUB_PATH
+
+      - name: Rodar OpenCode headless
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: |
+          mkdir -p .opencode/results
+          opencode run --format json "${{ inputs.prompt }}" > .opencode/results/${{ inputs.session_id }}.json || true
+          cat .opencode/results/${{ inputs.session_id }}.json
+
+      - name: Salvar resultado no repo
+        run: |
+          git config user.name "opencode-bot"
+          git config user.email "bot@opencode.bot"
+          git add .opencode/results/
+          git commit -m "opencode: ${{ inputs.session_id }}" || true
+          git push || true
+
+      - name: Upload result artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: opencode-${{ inputs.session_id }}
+          path: .opencode/results/
+
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Criar .nojekyll
+        run: touch .nojekyll
+      - name: Build (se precisar)
+        run: |
+          echo "Site estático - sem build"
+          ls -la
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
+
+name: Process Binary (Heavy - Offloaded from Browser)
+
+on:
+  workflow_dispatch:
+    inputs:
+      job_id:
+        description: 'ID da execução vinda do browser'
+        required: true
+        type: string
+      filename:
+        description: 'Nome do binário / arquivo'
+        required: true
+        type: string
+      action:
+        description: 'Ação: run, analyze, export'
+        required: false
+        default: 'run'
+        type: choice
+        options: [run, analyze, export, opencode]
+      prompt:
+        description: 'Prompt ou comando opcional'
+        required: false
+        type: string
+
+# Permissão para commitar resultado de volta
+permissions:
+  contents: write
+  actions: read
+  pages: write
+  id-token: write
+
+jobs:
+  heavy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Bun (OpenCode precisa)
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Baixar dump do browser se existir
+        run: |
+          mkdir -p dumps/incoming output
+          echo "job_id=${{ inputs.job_id }}" >> $GITHUB_STEP_SUMMARY
+          echo "filename=${{ inputs.filename }}" >> $GITHUB_STEP_SUMMARY
+          # Se o arquivo foi enviado como artifact anterior, tenta baixar
+          ls -la dumps/ || true
+
+      - name: Instalar OpenCode (dentro do Action, não no browser)
+        run: |
+          curl -fsSL https://opencode.ai/install | bash
+          echo "$HOME/.opencode/bin" >> $GITHUB_PATH
+          opencode --version || npm i -g opencode-ai@latest
+
+      - name: Processamento pesado (aqui não pesa o navegador)
+        env:
+          JOB_ID: ${{ inputs.job_id }}
+          FILENAME: ${{ inputs.filename }}
+          PROMPT: ${{ inputs.prompt }}
+        run: |
+          echo "Processando $FILENAME com ação ${{ inputs.action }}"
+          # Simula processamento pesado
+          # Exemplo real OpenCode:
+          # opencode run --format json "$PROMPT" > output/result.json || true
+
+          # Se for binário, roda análise
+          if [ "${{ inputs.action }}" = "analyze" ]; then
+            file dumps/incoming/${{ inputs.filename }} > output/analysis.txt || echo "arquivo não encontrado" > output/analysis.txt
+            sha256sum dumps/incoming/${{ inputs.filename }} > output/hash.txt || true
+          fi
+
+          # Se for export, copia
+          cp -r dumps/incoming/* output/ 2>/dev/null || echo "{}" > output/result.json
+
+          echo "{"job_id":"$JOB_ID","filename":"$FILENAME","status":"done","processed_at":"$(date -u +%Y-%m-%dT%H:%M:%SZ)"}" > output/manifest.json
+          ls -lh output/
+
+      - name: Commit resultado no repo (storage via Git)
+        run: |
+          mkdir -p docs/results/${{ inputs.job_id }}
+          cp -r output/* docs/results/${{ inputs.job_id }}/
+          git config user.name "opencode-bot"
+          git config user.email "bot@opencode.bot"
+          git add docs/results/${{ inputs.job_id }}/
+          git commit -m "feat: result ${{ inputs.job_id }} - ${{ inputs.filename }}" || echo "nada para commitar"
+          git push || true
+
+      - name: Upload artifact para Pages
+        uses: actions/upload-artifact@v4
+        with:
+          name: result-${{ inputs.job_id }}
+          path: output/
+          retention-days: 7
+          if-no-files-found: warn
+
+      - name: Deploy para Pages (se quiser expor resultado)
+        if: ${{ inputs.action == 'export' }}
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs/results/${{ inputs.job_id }}
+
+  # Opcional segundo job para Pages
+  deploy-pages:
+    if: ${{ inputs.action == 'export' }}
+    needs: heavy
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4
+
+name: Forgejo Third-Party Only
+on:
+  workflow_dispatch:
+    inputs:
+      job_id: { required: true, type: string }
+jobs:
+  third-party-process:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          free -h
+          sudo fallocate -l 12G /mnt/swapfile || true
+          sudo chmod 600 /mnt/swapfile; sudo mkswap /mnt/swapfile || true; sudo swapon /mnt/swapfile || true
+          sudo mkdir -p /mnt/ramdisk; sudo mount -t tmpfs -o size=6G tmpfs /mnt/ramdisk || true
+          echo "Storage -> RAM done, all third-party"
+
+name: GitHub Third-Party Only
+on:
+  workflow_dispatch:
+    inputs:
+      job_id: { required: true, type: string }
+permissions:
+  contents: write
+jobs:
+  thirdparty:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          echo "Runner third-party GitHub-hosted, not self-hosted"
+          free -h
+          sudo fallocate -l 16G /mnt/swapfile || true
+          sudo chmod 600 /mnt/swapfile; sudo mkswap /mnt/swapfile || true; sudo swapon /mnt/swapfile || true
+          sudo mkdir -p /mnt/ramdisk; sudo mount -t tmpfs -o size=8G tmpfs /mnt/ramdisk || true
