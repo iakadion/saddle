@@ -5,6 +5,7 @@ import { crawl } from "../crawl/crawler.js";
 import { chunkmarkdown } from "../ai/chunk.js";
 import { estimatetokens } from "../ai/tokens.js";
 import { extracthtml } from "../scrape/extract.js";
+import { normalizeresponse } from "../scrape/normalize.js";
 import { browseragent } from "../browser/agent.js";
 
 /** Selects the fetch or browser execution path. */
@@ -19,8 +20,9 @@ export async function scrapeurl(url, options = {}) {
   const target = safeurl(url);
   const response = await (options.fetcher ?? fetch)(target, { signal: options.signal, headers: options.headers });
   if (!response.ok) throw new Error(`scrape request failed with ${response.status}`);
-  const html = await response.text();
-  return formatresult(scrapehtml(html, target, options), options);
+  const normalized = await normalizeresponse(response, { url: target, defaultcontenttype: "text/html", maxbytes: options.maxbytes });
+  const result = normalized.kind === "html" ? scrapehtml(normalized.content, target, options) : { content: normalized.content, data: normalized.data, metadata: { url: target, contenttype: normalized.contenttype, size: normalized.size }, bytes: normalized.bytes };
+  return formatresult(result, options);
 }
 
 /** Extracts a serializable result from HTML without network access. */

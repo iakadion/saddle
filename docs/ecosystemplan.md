@@ -29,7 +29,7 @@ The engine owns **contracts, validation, orchestration, recovery and auditabilit
 | 3 | extension runtime | first slice complete | MV3 unpacked surface, protocol, worker, content bridge and tests |
 | 4 | working set and storage | complete | range chunks, content dedupe, tiered cache, conflict sync and memory capabilities |
 | 5 | runners and execution | complete | provider health, triggers, cancellation, heartbeat and resumable runs |
-| 6 | scraping and context | complete | semantic extraction, crawl budgets, RAG lineage and low-cardinality metrics |
+| 6 | scraping and context | complete | semantic extraction, content-type normalization, crawl budgets, RAG lineage and low-cardinality metrics |
 | 7 | API, MCP and security | complete | request identity, optional auth, secure headers, browser MCP tools and redirect/DNS checks |
 | 8 | bots and integrations | complete | app lifecycle, command scopes, idempotency, delivery retries and dead letters |
 | 9 | packaging and distribution | extension zip and registry slice verified for 1.8.1 | desktop, mobile, n8n and binary artifacts remain caller-owned |

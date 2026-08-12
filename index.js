@@ -77,6 +77,7 @@ export * from "./crawl/normalize.js";
 export * from "./crawl/crawler.js";
 export * from "./crawl/persistent.js";
 export * from "./scrape/schema.js";
+export * from "./scrape/normalize.js";
 export * from "./mcp/server.js";
 export * from "./runtime/detect.js";
 export * from "./runtime/abort.js";

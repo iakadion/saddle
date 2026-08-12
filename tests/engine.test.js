@@ -20,6 +20,7 @@ import { contentstorage } from "../storage/content.js";
 import { tieredcache } from "../storage/cache.js";
 import { comparemanifests, objectmanifest, storagecapabilities, syncobject } from "../storage/sync.js";
 import { validatesession } from "../domain/sessions.js";
+import { detectcontenttype, normalizeresponse, normalizeresult } from "../scrape/normalize.js";
 import { sessionstore } from "../sessions/store.js";
 import { externalmemory, internalmemory, vectorizedmemory } from "../memory/modes.js";
 import { modeprofile } from "../modes/modes.js";
@@ -342,6 +343,25 @@ test("enforces robots rules and extracts structured html", () => {
   assert.equal(result.description, "A page");
   assert.equal(result.links[0], "https://example.com/next");
   assert.equal(result.text.includes("Hello world"), true);
+});
+
+test("normalizes JSON, markup and bounded binary responses without assuming a transport", async () => {
+  const json = normalizeresult('{"ok":true}', { contenttype: "application/json; charset=utf-8", url: "https://example.com/data" });
+  assert.equal(json.kind, "json");
+  assert.equal(json.data.ok, true);
+  assert.equal(detectcontenttype(undefined, "https://example.com/feed.xml"), "application/xml");
+  assert.equal(normalizeresult("# Title", { contenttype: "text/markdown" }).kind, "markdown");
+  assert.equal(normalizeresult(new Uint8Array([0, 1, 2]), { contenttype: "image/png" }).kind, "binary");
+  assert.throws(() => normalizeresult("too long", { contenttype: "text/plain", maxbytes: 3 }), (error) => error.code === "CONTENT_TOO_LARGE");
+  const encoded = new TextEncoder().encode('{"id":1}');
+  const response = await normalizeresponse({ headers: { get(name) { return name === "content-type" ? "application/json" : null; } }, arrayBuffer: async () => encoded.buffer }, { url: "https://example.com/data" });
+  assert.equal(response.data.id, 1);
+});
+
+test("routes public scrapeurl JSON through the content normalizer", async () => {
+  const result = await scrapeurl("https://example.com/data.json", { fetcher: async () => ({ ok: true, status: 200, headers: { get: () => "application/json" }, arrayBuffer: async () => new TextEncoder().encode('{"ready":true}').buffer }) });
+  assert.equal(result.data.ready, true);
+  assert.equal(result.metadata.contenttype, "application/json");
 });
 
 test("extracts semantic headings landmarks controls and links safely", () => {

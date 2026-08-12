@@ -6,6 +6,7 @@ The public API is designed around injected transports. Consumers can use the sam
 |---|---|
 | `saddleurl` | choose fetch or an injected browser agent |
 | `scrapeurl` | fetch a URL and return extracted content |
+| `detectcontenttype` / `normalizeresult` / `normalizeresponse` | classify and bound JSON, XML, Markdown, text, HTML and binary response content |
 | `scrapehtml` | extract content from an HTML string |
 | `extractcontent` | expose structured extraction directly |
 | `serializeresult` | serialize as JSON, Markdown, text, XML, or Redis payload |

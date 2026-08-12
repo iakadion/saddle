@@ -37,7 +37,7 @@
   },
   "files": ["core", "domain", "memory", "runners", "runtime", "storage", "sessions", "modes", "adapters", "persistence", "queue", "dispatch", "scrape", "crawl", "api", "mcp", "browser", "proxy", "captcha", "ai", "webhook", "surfaces", "library", "errors", "retry", "server", "binary", "format", "packager", "bot", "protocol", "workflow", "cli", "extension", "index.js", "docs", "examples", "README.md", "LICENSE"],
   "scripts": {
-    "check": "node --check index.js && node --check runtime/engine.js && node --check cli/main.js && node --check extension/protocol.js && node --check extension/serviceworker.js && node --check extension/worker.js && node --check extension/content.js && node --check extension/popup.js && node --check extension/permissions.js && node --check extension/build.js",
+    "check": "node --check index.js && node --check runtime/engine.js && node --check cli/main.js && node --check extension/protocol.js && node --check extension/serviceworker.js && node --check extension/worker.js && node --check extension/content.js && node --check extension/popup.js && node --check extension/permissions.js && node --check extension/build.js && node --check sessions/replay.js && node --check browser/recorder.js && node --check scrape/normalize.js",
     "formatcheck": "node format/check.js",
     "test": "node --test tests/*.test.js",
     "run": "node cli/main.js",

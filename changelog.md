@@ -13,6 +13,7 @@
     - Added a release workflow that packages and attaches `saddle-extension-<version>.zip`
     - Added context-aware replay for caller-owned window, tab and frame restoration
     - Added a transport-neutral export graph audit for browser-like package loading
+    - Added bounded content-type detection and normalization for structured and binary scrape results
 
   ## [1.8.1] - 2026-08-12
 
