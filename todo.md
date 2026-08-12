@@ -257,6 +257,7 @@ The following blocks are the execution order for the complete ecosystem. A block
 
 - [x] Reexecute cross-runtime validation from the derived release tag without a fixed workflow version.
 - [x] Confirm that the npmjs workflow uses the `NPM_TOKEN` secret without exposing its value in logs or files.
+- [ ] Replace the invalid or unauthorized `NPM_TOKEN` secret with a valid raw token for the intended npm scope.
 - [ ] Reexecute npmjs publication and confirm the public package and version are available.
 - [x] Validate root library operation in Node, Bun and Deno through the CI matrix.
 - [ ] Validate root library operation in browser worker and extension contexts where supported.
