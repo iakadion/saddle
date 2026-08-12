@@ -25,7 +25,7 @@ The engine owns **contracts, validation, orchestration, recovery and auditabilit
 | Block | Scope | Current state | Exit evidence |
 | --- | --- | --- | --- |
 | 1 | audit and governance | active | gap matrix, sources, claims reconciled |
-| 2 | browser agent foundation | complete | snapshots, refs, stale errors, tabs, frames, action results and replay provenance tests |
+| 2 | browser agent foundation | complete | snapshots, refs, stale errors, tabs, frames, action results and context-aware replay provenance tests |
 | 3 | extension runtime | first slice complete | MV3 unpacked surface, protocol, worker, content bridge and tests |
 | 4 | working set and storage | complete | range chunks, content dedupe, tiered cache, conflict sync and memory capabilities |
 | 5 | runners and execution | complete | provider health, triggers, cancellation, heartbeat and resumable runs |

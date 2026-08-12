@@ -179,7 +179,7 @@ The following blocks are the execution order for the complete ecosystem. A block
 - [x] Add stale reference, overlay obstruction, navigation and frame errors.
 - [x] Add tab, frame, window and browser session identity contracts.
 - [x] Add action results for navigation, click, type, fill, key, scroll, upload and screenshot.
-- [x] Add deterministic event recording and replay with snapshot boundaries.
+- [x] Add deterministic event recording and replay with snapshot boundaries and tab/window/frame context restoration.
 
 ### Block 3 — extension runtime
 

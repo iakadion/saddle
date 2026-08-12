@@ -309,6 +309,30 @@ test("replays validated events through an injected browser adapter", async () =>
   assert.equal(result.events, 3);
 });
 
+test("restores window, tab and frame context before replay actions", async () => {
+  const calls = [];
+  const adapter = {
+    move: async () => undefined,
+    click: async () => calls.push("click"),
+    async selectwindow(id) { calls.push(["window", id]); },
+    async selecttab(id) { calls.push(["tab", id]); },
+    async selectframe(id) { calls.push(["frame", id]); }
+  };
+  const result = await replay({ events: [
+    { t: 0, type: "click", context: { windowid: "window1", tabid: "tab1", frameid: "main" } },
+    { t: 0, type: "click", context: { windowid: "window1", tabid: "tab1", frameid: "frame2" } },
+    { t: 0, type: "click", context: { windowid: "window1", tabid: "tab2", frameid: "main" } }
+  ] }, adapter);
+  assert.deepEqual(calls, [["window", "window1"], ["tab", "tab1"], ["frame", "main"], "click", ["frame", "frame2"], "click", ["tab", "tab2"], ["frame", "main"], "click"]);
+  assert.equal(result.contextswitches, 3);
+});
+
+test("validates replay context identifiers and records context provenance", () => {
+  const session = validatesession({ version: 1, id: "session1", agentname: "test", originurl: "https://example.com", seed: "seed", status: "closed", startedat: 1, events: [{ t: 0, type: "click", context: { windowid: "window1", tabid: "tab1", frameid: "main" } }] });
+  assert.deepEqual(session.events[0].context, { windowid: "window1", tabid: "tab1", frameid: "main" });
+  assert.throws(() => validatesession({ version: 1, id: "session1", agentname: "test", originurl: "https://example.com", seed: "seed", status: "closed", startedat: 1, events: [{ t: 0, type: "click", context: { tabid: 7 } }] }), (error) => error.code === "INVALID_INPUT");
+});
+
 test("enforces robots rules and extracts structured html", () => {
   const rules = robotsrules("user-agent: *\ndisallow: /private\nallow: /private/public");
   assert.equal(robotsallowed(rules, "https://example.com/private/data"), false);

@@ -30,5 +30,17 @@ function validateevent(value, index) {
   if (value.key !== undefined && typeof value.key !== "string") throw validationerror(`session event ${index} key is invalid`);
   if (value.target !== undefined && typeof value.target !== "string") throw validationerror(`session event ${index} target is invalid`);
   if (value.button !== undefined && !["left", "right"].includes(value.button)) throw validationerror(`session event ${index} button is invalid`);
-  return { ...value };
+  const context = validatecontext(value.context ?? value, index);
+  return context ? { ...value, context } : { ...value };
+}
+
+function validatecontext(value, index) {
+  if (value.context !== undefined && (value.context === null || typeof value.context !== "object" || Array.isArray(value.context))) throw validationerror(`session event ${index} context is invalid`);
+  const source = value.context ?? value;
+  const context = {};
+  for (const name of ["windowid", "tabid", "frameid"]) if (source[name] !== undefined) {
+    if (typeof source[name] !== "string" || !source[name]) throw validationerror(`session event ${index} ${name} is invalid`);
+    context[name] = source[name];
+  }
+  return Object.keys(context).length ? context : undefined;
 }
