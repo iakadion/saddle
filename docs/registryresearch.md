@@ -38,7 +38,9 @@ The first `publishgithubnpm.yml` run failed with HTTP 403 because `@devthink/sad
 
 The v1.7.0 release verification used workflow logs as the available artifact evidence. GitHub npm run `31549603859` published `@iakadion/saddle@1.7.0`; GHCR run `31549603838` pushed `ghcr.io/iakadion/saddle:1.7.0` and `latest`; Maven retry run `31549802841` uploaded `io.devthink:saddle:1.7.0`; RubyGems retry run `31549804286` registered `saddle (1.7.0)`; and NuGet retry run `31549972311` created and pushed `Saddle.1.7.0.nupkg`. The GitHub package-list API was not readable with the available integration token, so these statements are limited to successful workflow upload evidence rather than an independent package-page listing.
 
-The public npmjs run `31549603849` produced an OIDC provenance statement but npm returned HTTP 404 for `@devthink/saddle`. A package owner action is still required: create or bootstrap the package directly on npmjs.com and configure the Trusted Publisher for owner `iakadion`, repository `saddle`, workflow `publishnpmjs.yml`. The exposed token from the prior conversation remains deliberately unused and must not be introduced into repository secrets.
+The first public npmjs run `31549603849` used OIDC and returned HTTP 404. Retry `31551708958` used the configured `NPM_TOKEN` secret, and retry `31551771374` confirmed that the masked secret reached the runner after newline normalization; both still returned HTTP 404 for `@devthink/saddle`. The remaining blocker is npm package ownership or scope permission: the owner must create or bootstrap `@devthink/saddle` under the intended npm account or organization and ensure the token can publish that scope. The exposed token from the prior conversation remains deliberately unused.
+
+The cross-runtime workflow `31552266171` and its manual rerun `31552272176` completed successfully. The matrix ran the root probe on Node, Bun and Deno and the deterministic Node suite. The root entry no longer imports filesystem, Node HTTP, persistent queue, file-session or local-memory adapters; those remain explicit Node-only subpaths.
 
 ## sources
 

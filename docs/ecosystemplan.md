@@ -34,7 +34,7 @@ The engine owns **contracts, validation, orchestration, recovery and auditabilit
 | 8 | bots and integrations | complete | app lifecycle, command scopes, idempotency, delivery retries and dead letters |
 | 9 | packaging and distribution | partial; registry slice verified for 1.7.0 | reproducible extension, desktop, mobile, n8n and binary artifacts |
 | 10 | product surfaces and operations | first slice complete | desktop, mobile, n8n and operator control contracts; observability, retention and threat model remain |
-| 11 | cross-runtime compatibility | planned | Node, worker, Deno, Bun and extension capability checks |
+| 11 | cross-runtime compatibility | first slice complete | Node, Bun and Deno root probe; browser worker, extension and package tree-shaking checks remain |
 | 12 | release gates | active | deterministic checks, docs, clean diffs and claim/code parity |
 
 ## execution method
@@ -52,7 +52,7 @@ Each block follows the same loop:
 
 ## current implementation
 
-Version 1.7 contains the first bot and integration lifecycle slice after browser, storage, runners, scraping and API hardening. It adds app installation and scope state, command authorization, idempotent bot execution, retryable webhook delivery and dead-letter records. The registry publication slice for 1.7.0 is verified for GitHub npm, GHCR, Maven, NuGet and RubyGems; public npmjs remains blocked until the owner bootstraps `@devthink/saddle` and configures its Trusted Publisher. The first product surface slice now adds desktop, mobile, n8n, operator control, operational policy and framework-neutral HTTP contracts. The next implementation block is cross-runtime compatibility.
+Version 1.7 contains the first bot and integration lifecycle slice after browser, storage, runners, scraping and API hardening. It adds app installation and scope state, command authorization, idempotent bot execution, retryable webhook delivery and dead-letter records. The registry publication slice for 1.7.0 is verified for GitHub npm, GHCR, Maven, NuGet and RubyGems; public npmjs remains blocked because the owner account or scope still rejects the configured publication with HTTP 404. The first product surface slice adds desktop, mobile, n8n, operator control, operational policy and framework-neutral HTTP contracts. The first cross-runtime slice now validates the root on Node, Bun and Deno, while browser worker and extension import checks remain.
 
 ## evidence sources
 

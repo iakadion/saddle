@@ -147,7 +147,7 @@ saddle mcp
 | Maven | `io.devthink:saddle:1.7.0` | publishmaven.yml | published |
 | NuGet | `Saddle.1.7.0.nupkg` | publishnuget.yml | published |
 | RubyGems | `saddle 1.7.0` | publishrubygems.yml | published |
-| npmjs | `@devthink/saddle@1.7.0` | publishnpmjs.yml | not published; Trusted Publisher bootstrap required |
+| npmjs | `@devthink/saddle@1.7.0` | publishnpmjs.yml | not published; npm returned 404 despite masked `NPM_TOKEN` injection |
 
 ## Development
 

@@ -255,10 +255,11 @@ The following blocks are the execution order for the complete ecosystem. A block
 
 ### Block 11 — cross-runtime compatibility
 
-- [x] Reexecute a validação cross-runtime a partir da versão derivada da tag/release, sem versão fixa em workflow.
-- [x] Confirmar que o workflow npmjs usa o secret `NPM_TOKEN` sem expor seu valor em logs ou arquivos.
-- [ ] Reexecutar a publicação npmjs e confirmar o pacote público e a versão publicada.
-- [ ] Validate root library operation in Node, browser worker, Deno, Bun and extension contexts where supported.
+- [x] Reexecute cross-runtime validation from the derived release tag without a fixed workflow version.
+- [x] Confirm that the npmjs workflow uses the `NPM_TOKEN` secret without exposing its value in logs or files.
+- [ ] Reexecute npmjs publication and confirm the public package and version are available.
+- [x] Validate root library operation in Node, Bun and Deno through the CI matrix.
+- [ ] Validate root library operation in browser worker and extension contexts where supported.
 - [x] Keep Node-only filesystem and HTTP adapters outside the transport-neutral core.
 - [x] Add capability detection and graceful unsupported-mode errors.
 - [ ] Add import, export, tree-shaking and package surface tests for every declared subpath.

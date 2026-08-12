@@ -45,5 +45,7 @@ jobs:
             exit 1
           fi
           printf 'NODE_AUTH_TOKEN=%s\n' "$token" >> "$GITHUB_ENV"
+      - name: verify npm identity
+        run: npm whoami
       - name: publish public package
         run: npm publish --access public
