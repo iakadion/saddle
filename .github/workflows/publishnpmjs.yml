@@ -47,5 +47,3 @@ jobs:
           printf 'NODE_AUTH_TOKEN=%s\n' "$token" >> "$GITHUB_ENV"
       - name: publish public package
         run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ env.NODE_AUTH_TOKEN }}
