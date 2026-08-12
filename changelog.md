@@ -1,10 +1,17 @@
                          SADDLE - CHANGELOG
-                       Version 1.4, August 2026
+                       Version 1.5, August 2026
 
  Copyright (c) August 2026 devthink, nathlan, akadion, nathu filho, alllan neris, andraneris. All Rights Reserved.
  Project: saddle
 
   All notable changes to Project saddle are documented in this file.
+
+  ## [1.5.0] - 2026-08-12
+
+    - Added semantic page extraction for headings, landmarks, controls and links
+    - Added priority crawl frontiers and per-domain page budgets
+    - Added retrieval provenance and provenance merging for RAG context
+    - Added bounded in-memory counters and duration metrics
 
   ## [1.4.0] - 2026-08-11
 

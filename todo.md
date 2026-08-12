@@ -198,11 +198,11 @@ The following blocks are the execution order for the complete ecosystem. A block
 
 ### Block 6 — scraping and agent context
 
-- [ ] Add structured accessibility and semantic extraction alongside HTML extraction.
+- [x] Add structured accessibility and semantic extraction alongside HTML extraction.
 - [ ] Add schema validation, content-type detection and safe normalization for JSON, XML, Markdown and binary results.
-- [ ] Add crawl frontier priorities, per-domain budgets, sitemap refresh and persistence metrics.
-- [ ] Add RAG chunk lineage, embeddings adapter contracts and retrieval result provenance.
-- [ ] Add token accounting and model context policies without hardcoded provider prices.
+- [x] Add crawl frontier priorities, per-domain budgets, sitemap refresh and persistence metrics.
+- [x] Add RAG chunk lineage, embeddings adapter contracts and retrieval result provenance.
+- [x] Add token accounting and model context policies without hardcoded provider prices.
 
 ### Block 7 — API, MCP and security
 

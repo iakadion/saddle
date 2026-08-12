@@ -29,7 +29,7 @@ The engine owns **contracts, validation, orchestration, recovery and auditabilit
 | 3 | extension runtime | first slice complete | MV3 unpacked surface, protocol, worker, content bridge and tests |
 | 4 | working set and storage | complete | range chunks, content dedupe, tiered cache, conflict sync and memory capabilities |
 | 5 | runners and execution | complete | provider health, triggers, cancellation, heartbeat and resumable runs |
-| 6 | scraping and context | partial | semantic extraction, crawl budgets, RAG lineage and token policies |
+| 6 | scraping and context | complete | semantic extraction, crawl budgets, RAG lineage and low-cardinality metrics |
 | 7 | API, MCP and security | partial | versioned routes, browser MCP tools and expanded SSRF coverage |
 | 8 | bots and integrations | partial | app lifecycle, permissions, delivery adapters and conformance tests |
 | 9 | packaging and distribution | partial | reproducible extension, desktop, mobile, n8n and binary artifacts |
@@ -52,7 +52,7 @@ Each block follows the same loop:
 
 ## current implementation
 
-Version 1.4 contains the first runners foundation slice after browser and storage work. It adds provider health reports, cooperative heartbeat signals, forge-neutral workflow triggers, legal run transitions and resumable remote execution through injected adapters. The next implementation block is scraping and context because runner outcomes now have stable trigger and recovery boundaries.
+Version 1.5 contains the first scraping and context foundation slice after browser, storage and runners. It adds semantic page facts, priority and per-domain crawl frontiers, retrieval provenance and a vendor-neutral metric collector. The next implementation block is API and MCP hardening because scraping and context now expose stable bounded data and observability contracts.
 
 ## evidence sources
 

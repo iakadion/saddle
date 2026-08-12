@@ -48,8 +48,8 @@ node examples/publicapi.js
 | Jobs | `engine`, `scheduler`, `inprocess` | `prepare → process → sync → cleanup` |
 | Storage | local, chunked, content-addressed, S3-compatible, GitHub Contents, file hosting | durable objects, ranges, dedupe and sync |
 | Working set | memory bridge, modes, objects, transforms | storage-to-compute and compute-to-storage |
-| Scraping | robots, cache, extraction, schema, scraper | text, metadata, links and structured output |
-| Crawl | normalization, BFS crawler, persistent frontier | bounded domain-aware crawling |
+| Scraping | robots, cache, extraction, semantic facts, schema, scraper | text, metadata, links, controls and structured output |
+| Crawl | normalization, priority frontier, BFS crawler, per-domain budgets and persistent frontier | bounded domain-aware crawling |
 | Browser | snapshots, tabs, frames, actions, fingerprint, session, replay and injected agent | browser actions without vendor lock-in |
 | Operations | queues, idempotency, saga, retry, circuit breaker, health and heartbeat | controlled execution and recovery |
 | Protocols | JSON, NDJSON, SSE, blocks and MCP | transport-neutral messages |
@@ -181,7 +181,7 @@ Root-based JavaScript ESM layout, no src/ directory, no TypeScript build require
 
 ## Current scope
 
-Version 1.4 establishes the engine contracts, browser snapshot foundation, storage sync primitives, runner recovery contracts and the first tested extension bridge. Browser implementations, provider credentials, persistent databases and production deployment remain caller-selected adapters. The next improvements should extend those contracts without coupling the core to one forge, registry, browser or storage vendor.
+Version 1.5 establishes the engine contracts, browser snapshot foundation, storage sync primitives, runner recovery contracts, scraping context provenance and the first tested extension bridge. Browser implementations, provider credentials, persistent databases and production deployment remain caller-selected adapters. The next improvements should extend those contracts without coupling the core to one forge, registry, browser or storage vendor.
 
 ## License
 

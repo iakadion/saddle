@@ -33,6 +33,7 @@ import { workflowdispatch } from "../dispatch/workflow.js";
 import { replay } from "../sessions/replay.js";
 import { robotsallowed, robotsrules } from "../scrape/robots.js";
 import { extracthtml } from "../scrape/extract.js";
+import { extractsemantic } from "../scrape/semantic.js";
 import { scraper } from "../scrape/scraper.js";
 import { distributionmanifest, binaryplan, containerplan } from "../packager/manifest.js";
 import { forgejoadapter } from "../adapters/forgejo.js";
@@ -55,6 +56,7 @@ import { normalizeurl } from "../crawl/normalize.js";
 import { crawl } from "../crawl/crawler.js";
 import { saddleservice } from "../api/service.js";
 import { persistentqueue as crawlqueue } from "../crawl/persistent.js";
+import { crawlfrontier } from "../crawl/frontier.js";
 import { filesessions } from "../sessions/file.js";
 import { extractwithschema } from "../scrape/schema.js";
 import { mcpserver } from "../mcp/server.js";
@@ -70,6 +72,8 @@ import { captchaguard } from "../captcha/guard.js";
 import { estimatetokens, fitscontext, tokenbudget } from "../ai/tokens.js";
 import { chunkmarkdown } from "../ai/chunk.js";
 import { ragmanifest, vectorrecord } from "../ai/rag.js";
+import { mergeprovenance, provenance } from "../ai/provenance.js";
+import { metricstore } from "../observability/metrics.js";
 import { llmstxt, llmsfull } from "../ai/llmstxt.js";
 import { webhooksig, webhookverify } from "../webhook/signature.js";
 import { webhookreceiver } from "../webhook/receiver.js";
@@ -303,6 +307,14 @@ test("enforces robots rules and extracts structured html", () => {
   assert.equal(result.text.includes("Hello world"), true);
 });
 
+test("extracts semantic headings landmarks controls and links safely", () => {
+  const result = extractsemantic("<title>Page</title><main aria-label='Content'><h1>Title</h1><button aria-label='Run'>Go</button><a href='/docs'>Docs</a></main>", "https://example.com/");
+  assert.equal(result.headings[0].level, 1);
+  assert.equal(result.landmarks[0].role, "main");
+  assert.equal(result.controls[0].name, "Run");
+  assert.equal(result.links[0].url, "https://example.com/docs");
+});
+
 test("scrapes with robots and cache through injected transport", async () => {
   let calls = 0;
   const result = scraper({ fetcher: async (url) => { calls += 1; return { ok: true, status: 200, text: async () => url.endsWith("robots.txt") ? "user-agent: *\nallow: /" : "<title>Cached</title>" }; }, cacheoptions: { ttl: 1000 } });
@@ -454,6 +466,17 @@ test("crawls breadth first with normalized same domain links", async () => {
   assert.equal(result.results[1].title, "next");
 });
 
+test("prioritizes crawl frontier items and applies per-domain budgets", () => {
+  const frontier = crawlfrontier({ maxpages: 4, maxperdomain: 1 });
+  frontier.add({ url: "https://example.com/low", priority: 0 });
+  frontier.add({ url: "https://example.org/high", priority: 3 });
+  assert.equal(frontier.next().url, "https://example.org/high");
+  frontier.complete("https://example.org/high");
+  assert.equal(frontier.next().url, "https://example.com/low");
+  assert.equal(frontier.add({ url: "https://example.com/second" }), true);
+  assert.equal(frontier.next(), null);
+});
+
 test("serves universal api routes with web request response objects", async () => {
   const service = saddleservice({ scrape: async (url) => ({ url, links: [] }) });
   const health = await service.handle(new Request("https://api.example.com/health"));
@@ -546,6 +569,18 @@ test("chunks markdown and builds a deduplicated rag manifest", async () => {
   const manifest = await ragmanifest({ source: "https://example.com/doc", chunks: [...chunks, ...chunks], embeddingmodel: "test" });
   assert.equal(manifest.chunks.length, chunks.length);
   assert.equal(vectorrecord(manifest.chunks[0], [0.1, 0.2]).vector.length, 2);
+});
+
+test("keeps retrieval provenance and low-cardinality metrics", () => {
+  const first = provenance({ sourceurl: "https://example.com/a", documentid: "a", chunks: [{ id: "1", score: 0.9 }] });
+  const second = provenance({ sourceurl: "https://example.com/b", documentid: "b", chunks: [{ id: "1", score: 0.8 }] });
+  const merged = mergeprovenance([first, second, first]);
+  assert.equal(merged.sources.length, 2);
+  assert.equal(merged.chunks.length, 2);
+  const metrics = metricstore();
+  metrics.count("scrape.completed", 1, { source: "test" });
+  metrics.observe("scrape.latency", 4, { source: "test" });
+  assert.equal(metrics.snapshot().counters['scrape.completed|[["source","test"]]'], 1);
 });
 
 test("estimates token budgets and generates llms text", () => {

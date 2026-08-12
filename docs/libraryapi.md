@@ -26,6 +26,10 @@ The public API is designed around injected transports. Consumers can use the sam
 | `heartbeat` | emit cooperative liveness signals for long-running work |
 | `workflowtriggers` / `triggermatch` | normalize and match manual, event, schedule and retry starts |
 | `resumablerun` / `transitionrun` | recover remote run state through legal transitions |
+| `extractsemantic` | expose bounded headings, landmarks, controls and links |
+| `crawlfrontier` | prioritize URLs and enforce page and domain budgets |
+| `provenance` / `mergeprovenance` | link context chunks to source and retrieval evidence |
+| `metricstore` | collect bounded counters and duration summaries |
 | `nodeserver` | expose a Web Request/Response handler through Node HTTP |
 
 ```js
