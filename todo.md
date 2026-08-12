@@ -271,10 +271,10 @@ The following blocks are the execution order for the complete ecosystem. A block
 
 - [x] Align package metadata, lockfile, changelog and release notes to `1.8.0`.
 - [x] Run all local release gates on the 1.8.0 candidate.
-- [ ] Create and push tag `v1.8.0` only from the validated commit.
-- [ ] Create GitHub Release `v1.8.0` with notes derived from the changelog.
-- [ ] Verify GitHub npm, GHCR, Maven, NuGet and RubyGems workflows for `1.8.0`.
-- [ ] Confirm npmjs status without claiming publication if `NPM_TOKEN` remains unauthorized.
+- [x] Create and push tag `v1.8.0` only from the validated commit.
+- [x] Create GitHub Release `v1.8.0` with notes derived from the changelog.
+- [x] Verify GitHub npm, GHCR, Maven, NuGet and RubyGems workflows for `1.8.0`.
+- [x] Confirm npmjs status without claiming publication when the registry returns HTTP 404.
 - [x] Audit the latest verified Node, Docker, Java, .NET, Ruby and Bun/Deno action versions before changing CI.
 - [x] Update workflow toolchains and Docker base images without hardcoding a package release version.
 - [x] Validate that all five registry workflows derive the package version from the release tag.

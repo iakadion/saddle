@@ -12,4 +12,4 @@ The candidate is required to pass `npm run check`, `npm run formatcheck`, `npm t
 
 ## registry behavior
 
-Maven, NuGet, RubyGems, GHCR and GitHub Packages npm derive `1.8.0` from the `v1.8.0` tag. Public npmjs also derives the version automatically but requires the owner-managed `NPM_TOKEN`; the prior token check returned HTTP 401, so npmjs must be reported according to its actual workflow result rather than assumed successful.
+Maven, NuGet, RubyGems, GHCR and GitHub Packages npm derive `1.8.0` from the `v1.8.0` tag. The Maven workflow required one retry because `java-version: latest` is not a valid setup-java input; it now uses JDK 26 and succeeded. Public npmjs also derives the version automatically, but the release run returned HTTP 404 `Scope not found` for `@devthink/saddle`, so npmjs is not claimed as published.

@@ -142,12 +142,12 @@ saddle mcp
 
 | Registry | Artifact | Workflow | Status |
 | --- | --- | --- | --- |
-| GitHub npm | `@iakadion/saddle@1.8.0` | publishgithubnpm.yml | pending release workflow |
-| GHCR | `ghcr.io/iakadion/saddle:1.8.0` and `latest` | publishghcr.yml | pending release workflow |
-| Maven | `io.devthink:saddle:1.8.0` | publishmaven.yml | pending release workflow |
-| NuGet | `Saddle.1.8.0.nupkg` | publishnuget.yml | pending release workflow |
-| RubyGems | `saddle 1.8.0` | publishrubygems.yml | pending release workflow |
-| npmjs | `@devthink/saddle@1.8.0` | publishnpmjs.yml | pending; previous `NPM_TOKEN` check returned HTTP 401 |
+| GitHub npm | `@iakadion/saddle@1.8.0` | publishgithubnpm.yml | published |
+| GHCR | `ghcr.io/iakadion/saddle:1.8.0` and `latest` | publishghcr.yml | published |
+| Maven | `io.devthink:saddle:1.8.0` | publishmaven.yml | published after JDK 26 retry |
+| NuGet | `Saddle.1.8.0.nupkg` | publishnuget.yml | published |
+| RubyGems | `saddle 1.8.0` | publishrubygems.yml | published |
+| npmjs | `@devthink/saddle@1.8.0` | publishnpmjs.yml | not published; npm returned HTTP 404 `Scope not found` |
 
 ## Development
 
