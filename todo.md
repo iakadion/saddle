@@ -154,6 +154,16 @@
 
 ## Master ecosystem plan
 
+### Release 1.7.0 execution
+
+- [ ] Confirm the 1.7.0 working tree, workflows, release metadata and package contents.
+- [ ] Create and push tag `v1.7.0` from the validated commit.
+- [ ] Create GitHub Release Notes for 1.7.0 without publishing credentials in the repository.
+- [ ] Verify the npm GitHub Packages, GHCR, Maven, NuGet and RubyGems workflow runs.
+- [ ] Confirm the published artifact name and version in each registry before reporting success.
+- [ ] Record any npmjs Trusted Publishing or visibility blocker without claiming a publish.
+- [ ] Continue with the surfaces block after the release verification.
+
 The following blocks are the execution order for the complete ecosystem. A block becomes complete only when its contracts, implementation, deterministic tests, documentation and release impact are all checked.
 
 ### Block 1 — audit and governance
