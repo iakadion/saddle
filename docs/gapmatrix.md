@@ -36,6 +36,7 @@ This matrix turns the supplied README and conclusions into implementation decisi
 | RAG context | Implemented chunk hashes and vector record metadata | Retrieval provenance and merge records now exist; embeddings and indexes remain injected | P1 | Preserve source, document, chunk and score lineage |
 | Observability | Contract slice | Low-cardinality counters and durations are bound to the standard operational metric vocabulary; export and tracing remain caller-owned | P1 | Keep metrics vendor-neutral and bounded |
 | Operations policy | Contract slice | Retention, backup/restore capability and threat ownership are declarative and caller-owned | P1 | Add workers, persistence and incident response only in host surfaces |
+| Web control surface | Contract slice | `controlservice` maps Web Request and Response traffic to the auditable control contract; framework, auth verifier and persistence remain injected | P1 | Keep the HTTP boundary transport-neutral |
 | Auth profiles | Session file and replay contracts exist | No extension profile or consent model | P1 | Defer cookie/profile export; support explicit user-owned session references only |
 | CAPTCHA | Contract, guard and evidence exist | No automatic solver integration | deferred | Keep external/manual solver boundary; do not promise bypass in the extension |
 | Stealth | Fingerprint contract exists | No automatic stealth patching | deferred | Keep opt-in fingerprint metadata; no hidden anti-detection behavior |

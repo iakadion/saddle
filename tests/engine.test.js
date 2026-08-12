@@ -110,6 +110,7 @@ import { authorize } from "../api/auth.js";
 import { errorpayload, requestcontext, successpayload } from "../api/contracts.js";
 import { browsertools } from "../mcp/browser.js";
 import { resumablerun, runrecord, transitionrun } from "../dispatch/resumable.js";
+import { controlservice } from "../api/control.js";
 
 test("runs a job through prepare process sync and commit", async () => {
   const root = await mkdtemp(join(tmpdir(), "saddletest"));
@@ -709,6 +710,18 @@ test("defines bounded operational metrics recovery and policy boundaries", async
   assert.deepEqual(await plan.backup({ id: "snapshot1" }), { saved: "snapshot1" });
   assert.equal(threatmodel({ controls: ["url validation"] }).owner, "caller");
   await assert.rejects(() => backupplan().restore({}), /restore handler is not configured/);
+});
+
+test("serves operator controls through web request and response contracts", async () => {
+  const service = controlservice({ verify: async (token) => token === "ok" ? { subject: "operator" } : null, adapters: { jobs: { list: async () => [{ id: "job1" }] } } });
+  const overview = await service.handle(new Request("https://example.com/v1/control", { headers: { authorization: "Bearer ok", "x-request-id": "req-overview" } }));
+  assert.equal(overview.status, 200);
+  assert.equal((await overview.json()).resources.includes("jobs"), true);
+  const result = await service.handle(new Request("https://example.com/v1/control", { method: "POST", headers: { authorization: "Bearer ok", "content-type": "application/json", "x-request-id": "req-job" }, body: JSON.stringify({ resource: "jobs", operation: "list" }) }));
+  assert.equal(result.status, 200);
+  assert.equal((await result.json()).data.result[0].id, "job1");
+  const denied = await service.handle(new Request("https://example.com/v1/control", { headers: { authorization: "Bearer bad" } }));
+  assert.equal(denied.status, 401);
 });
 
 test("exposes public scrape formats and batch progress", async () => {

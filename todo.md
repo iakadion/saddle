@@ -244,6 +244,7 @@ The following blocks are the execution order for the complete ecosystem. A block
 - [x] Extend n8n trigger and action declarations with deterministic execution guards.
 - [x] Add a product surface index and usage guide for the new contracts.
 - [x] Add an auditable operator control contract for jobs, sessions, storage, runners, permissions, logs and artifacts.
+- [x] Add a framework-neutral Web Request and Response control handler with optional caller authorization.
 - [x] Add bounded operational metrics for latency, retries, queue depth, runner selection, storage bytes and failures.
 - [x] Add retention, backup, restore and threat ownership policy contracts without forcing workers or persistence.
 - [ ] Add caller-owned desktop, mobile, n8n and web control surfaces around the same contracts.

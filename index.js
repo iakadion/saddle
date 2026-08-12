@@ -119,4 +119,5 @@ export * from "./surfaces/targets.js";
 export * from "./api/rate.js";
 export * from "./api/http.js";
 export * from "./api/service.js";
+export * from "./api/control.js";
 export * from "./extension/index.js";

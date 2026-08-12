@@ -81,6 +81,17 @@ const controls = controlsurface({
 const jobs = await controls.execute({ resource: "jobs", operation: "list" });
 ```
 
+The same contract can be mounted behind any Web Request and Response server. The handler does not bind a framework, host, port, database or authentication scheme.
+
+```js
+import { controlservice } from "@devthink/saddle";
+
+const service = controlservice({
+  verify: async (token) => token === "caller-token" ? { subject: "operator" } : null,
+  adapters: { jobs: { list: async () => [{ id: "job1" }] } }
+});
+```
+
 ## operations policies
 
 Operational policies remain declarative. An existing metric collector can receive a bounded vocabulary, while retention, recovery and threat ownership are represented without starting background workers or making storage assumptions.

@@ -13,7 +13,7 @@ Saddle is the contract layer for a family of caller-owned surfaces. The library 
 | operations | `operationsmetrics`, `retentionpolicy`, `backupplan` and `threatmodel` | telemetry exporter, backup store, retention worker and incident response |
 | browser | browser agent and snapshot contracts | browser vendor adapter, profile and session ownership |
 | extension | Manifest V3 reference files and serializable protocol | browser permission grant, signing and store submission |
-| web control | API, service and `controlsurface` contracts | operator UI, authentication, database and hosting |
+| web control | API, service, `controlsurface` and `controlservice` contracts | operator UI, authentication, database and hosting |
 
 ## operating boundary
 
