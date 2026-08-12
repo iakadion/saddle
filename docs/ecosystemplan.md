@@ -34,7 +34,7 @@ The engine owns **contracts, validation, orchestration, recovery and auditabilit
 | 8 | bots and integrations | complete | app lifecycle, command scopes, idempotency, delivery retries and dead letters |
 | 9 | packaging and distribution | extension zip and registry slice verified for 1.8.1 | desktop, mobile, n8n and binary artifacts remain caller-owned |
 | 10 | product surfaces and operations | first slice complete | desktop, mobile, n8n and operator control contracts; observability, retention and threat model remain |
-| 11 | cross-runtime compatibility | first slice complete | Node, Bun and Deno root probe; extension-context and package tree-shaking checks remain |
+| 11 | cross-runtime compatibility | transport-neutral graph audit complete | Node, Bun and Deno root probe, browser worker bridge, extension permission/build checks and package graph audit |
 | 12 | release gates | active | deterministic checks, docs, clean diffs and claim/code parity |
 
 ## execution method

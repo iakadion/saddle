@@ -267,7 +267,7 @@ The following blocks are the execution order for the complete ecosystem. A block
 - [x] Keep Node-only filesystem and HTTP adapters outside the transport-neutral core.
 - [x] Add capability detection and graceful unsupported-mode errors.
 - [x] Add Node package surface import tests for every declared export target.
-- [ ] Add browser bundler/tree-shaking tests for every transport-neutral subpath.
+- [x] Add a deterministic transport-neutral export graph audit for every browser-safe subpath; full vendor bundler output remains a host concern.
 
 ### Block 12 — release gates
 

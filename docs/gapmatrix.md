@@ -43,7 +43,7 @@ This matrix turns the supplied README and conclusions into implementation decisi
 | Packaging | npm, GHCR, Maven, NuGet, RubyGems and extension zip workflows are live | Desktop, mobile, n8n and binary release artifacts remain caller-owned | P1 | Keep non-JavaScript artifacts in explicit adapters and release jobs |
 | Mobile and desktop apps | Contract slice | Desktop/mobile manifests and caller-owned adapter contracts exist; no native project is bundled | P1 | Keep native projects caller-owned and add runtime conformance tests incrementally |
 | n8n surface | Contract slice | Node metadata, trigger matching and declared action execution exist; no n8n host package is bundled | P1 | Keep node registration and credentials caller-owned |
-| Cross-browser | Target profile declares browser and extension | No Firefox, Edge or Safari manifests/build validation | P2 | Keep WebExtension-compatible contracts and add adapters incrementally |
+| Cross-browser | Target profile declares browser and extension | Firefox, Edge or Safari manifests remain unbundled; transport-neutral export graph is statically audited for Node-only imports | P2 | Keep WebExtension-compatible contracts and add browser adapters incrementally |
 | Storage equals compute | Memory bridge and engine implement storage-to-working-set-to-artifact; sync and capability negotiation now exist | Remote storage is not physical VRAM and has latency | deferred | Document as a working-set model, never as literal remote VRAM |
 | Site/database deployment | Persistence schemas and adapters exist | No hosted site or database is part of the package | deferred | Keep deploy targets caller-owned and outside the library core |
 

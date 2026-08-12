@@ -12,6 +12,7 @@
     - Added a Node-only extension builder that versions the unpacked manifest from release metadata
     - Added a release workflow that packages and attaches `saddle-extension-<version>.zip`
     - Added context-aware replay for caller-owned window, tab and frame restoration
+    - Added a transport-neutral export graph audit for browser-like package loading
 
   ## [1.8.1] - 2026-08-12
 
