@@ -312,4 +312,4 @@ The following blocks are the execution order for the complete ecosystem. A block
 - [x] Document required repository variables, tokens and deployment limitations for each external forge.
 - [x] Verify the owner and package coordinate before deleting the legacy Maven package `io.devthink:saddle`.
 - [x] Bump JavaScript, Maven, NuGet, RubyGems, Docker and release metadata to `1.8.4`.
-- [ ] Run all library and website gates, commit the migration, create `v1.8.4` and verify the resulting pipelines.
+- [x] Run all library and website gates, commit the migration, create `v1.8.4` and verify the resulting library pipelines.
