@@ -5,7 +5,10 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>io.devthink</groupId>
   <artifactId>saddle</artifactId>
-  <version>1.0.0</version>
+  <version>${revision}</version>
+  <properties>
+    <revision>1.0.0</revision>
+  </properties>
   <packaging>pom</packaging>
   <name>Saddle</name>
   <description>Binary computing engine that turns distributed storage into a publishable working set.</description>
