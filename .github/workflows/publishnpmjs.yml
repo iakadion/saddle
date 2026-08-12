@@ -32,7 +32,20 @@ jobs:
         run: npm ci
       - name: verify
         run: npm run pack:check
+      - name: normalize npm token
+        shell: bash
+        env:
+          RAW_NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: |
+          set -euo pipefail
+          token="${RAW_NPM_TOKEN//$'\r'/}"
+          token="${token//$'\n'/}"
+          if [[ -z "$token" ]]; then
+            echo "NPM_TOKEN is empty" >&2
+            exit 1
+          fi
+          printf 'NODE_AUTH_TOKEN=%s\n' "$token" >> "$GITHUB_ENV"
       - name: publish public package
         run: npm publish --access public
         env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ env.NODE_AUTH_TOKEN }}
