@@ -40,7 +40,7 @@ The public API is designed around injected transports. Consumers can use the sam
 | `nodeserver` | expose a Web Request/Response handler through Node HTTP |
 
 ```js
-import { scrapeurl, formatforagent } from "@devthink/saddle";
+import { scrapeurl, formatforagent } from "@wenathlan/saddle";
 
 const result = await scrapeurl("https://example.com", {
   format: "markdown",

@@ -31,7 +31,7 @@
 - [x] Renomear arquivos internos para lowercase sem underscore ou hyphen.
 - [x] Substituir classes e identificadores públicos por nomes lowercase compatíveis com a skill.
 - [x] Remover endereços e portas hardcoded do runtime e tornar opções parametrizáveis.
-- [x] Manter o pacote `@devthink/saddle` como superfície de distribuição sem travar os adaptadores.
+- [x] Manter o pacote `@wenathlan/saddle` como superfície de distribuição sem travar os adaptadores.
 
 ## Expansão do engine
 
@@ -258,7 +258,7 @@ The following blocks are the execution order for the complete ecosystem. A block
 - [x] Reexecute cross-runtime validation from the derived release tag without a fixed workflow version.
 - [x] Confirm that the npmjs workflow uses the `NPM_TOKEN` secret without exposing its value in logs or files.
 - [x] Replace the invalid or unauthorized `NPM_TOKEN` secret with a valid raw token for the intended npm scope.
-- [x] Reexecute npmjs publication; public index propagation check remains pending.
+- [x] Reexecute npmjs publication and confirm `@wenathlan/saddle@1.8.1` is visible in the public registry.
 - [x] Confirm the npm token identity can publish `@wenathlan/saddle` without exposing the token.
 - [x] Validate root library operation in Node, Bun and Deno through the CI matrix.
 - [x] Validate the browser worker root boundary through the injected `workerbridge` contract.

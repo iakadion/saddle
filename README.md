@@ -150,7 +150,7 @@ saddle mcp
 | Maven | `io.devthink:saddle:1.8.0` | publishmaven.yml | published after JDK 26 retry |
 | NuGet | `Saddle.1.8.0.nupkg` | publishnuget.yml | published |
 | RubyGems | `saddle 1.8.0` | publishrubygems.yml | published |
-| npmjs | `@wenathlan/saddle@1.8.1` | publishnpmjs.yml | publish accepted; public index propagation check pending |
+| npmjs | `@wenathlan/saddle@1.8.1` | publishnpmjs.yml | published and visible in the public registry |
 
 ## Development
 

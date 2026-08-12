@@ -12,4 +12,4 @@ The candidate must pass `npm run check`, `npm run formatcheck`, `npm test`, `npm
 
 ## publication boundary
 
-The release workflows remain separate at the registry job level because each destination requires a different protocol and credential. Shared checkout, Node setup, version resolution and package validation use local actions; incompatible publish commands remain isolated by registry. The npmjs job authenticated as `wenathlan` and reported `+ @wenathlan/saddle@1.8.1`; an independent public index lookup performed immediately afterward still returned E404 and remains a propagation check rather than a contradictory publish failure.
+The release workflows remain separate at the registry job level because each destination requires a different protocol and credential. Shared checkout, Node setup, version resolution and package validation use local actions; incompatible publish commands remain isolated by registry. The npmjs job authenticated as `wenathlan` and reported `+ @wenathlan/saddle@1.8.1`; a later independent `npm view` and direct registry metadata lookup both returned `1.8.1`, confirming public visibility.

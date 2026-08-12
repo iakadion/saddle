@@ -590,7 +590,7 @@ test("detects universal runtime capabilities and creates a deadline", () => {
 });
 
 test("creates registry and CDN publication plans without publishing", () => {
-  const manifest = { name: "@devthink/saddle", version: "0.2.0" };
+  const manifest = { name: "@wenathlan/saddle", version: "0.2.0" };
   const plan = publishplan(manifest, { repository: "iakadion/saddle" });
   assert.equal(plan.package.command, "npm publish --access public");
   assert.equal(plan.cdn[0].url.includes("jsdelivr"), true);

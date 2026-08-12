@@ -59,18 +59,18 @@
 
 Saddle is a **JavaScript ESM engine** for jobs that move data between storage, a working set, an injected runner and durable artifacts. It is also a **virtual machine you publish as a package** that runs on other people's computers (GitHub Actions, Forgejo, Gitea, GitLab, Codeberg, free Docker containers) and turns unlimited third-party storage buckets into virtual RAM/GPU/CPU. Nothing runs on the operator's local machine.
 
-Ships as a library, CLI, binary, n8n node, CRX extension, Android/iOS and Tauri desktop app. Package `@devthink/saddle` — published to npm, GitHub Packages, Maven, NuGet, RubyGems and GHCR (auto-mirrored to jsDelivr).
+Ships as a library, CLI, binary, n8n node, CRX extension, Android/iOS and Tauri desktop app. Package `@wenathlan/saddle` is published to public npm; the GitHub Packages npm variant is `@iakadion/saddle`, while Maven, NuGet, RubyGems and GHCR retain their ecosystem identities.
 
 ## Start here
 
 Saddle requires **Node.js 22 or newer**.
 
 ```bash
-npm install @devthink/saddle
+npm install @wenathlan/saddle
 ```
 
 ```js
-import { scrapeurl, formatforagent } from "@devthink/saddle";
+import { scrapeurl, formatforagent } from "@wenathlan/saddle";
 
 const result = await scrapeurl("https://example.com", { format: "markdown" });
 const context = formatforagent(result, { maxchunksize: 2000, keypoints: 4 });
@@ -130,7 +130,7 @@ Saddle coordinates contracts instead of hiding providers. A repo + CI runner is 
 - repository_dispatch = IPC
 
 ```js
-import { engine, eventbus, inprocess, localmemory, localstorage, scheduler } from "@devthink/saddle";
+import { engine, eventbus, inprocess, localmemory, localstorage, scheduler } from "@wenathlan/saddle";
 const events = eventbus();
 const run = engine({
   storage: localstorage("./.saddle-data"),
@@ -160,4 +160,4 @@ saddle deploy --target netlify
 ## Security boundaries
 
 | Boundary | Policy |
-| --- | --- 
+| --- | --- |

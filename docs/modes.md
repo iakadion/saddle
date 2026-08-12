@@ -13,7 +13,7 @@ The mode resolver keeps execution open. It returns a profile and capability map 
 | pair | without, with |
 
 ```js
-import { resolvemode } from "@devthink/saddle/modes";
+import { resolvemode } from "@wenathlan/saddle/modes";
 
 const profile = resolvemode({
   execution: "binary",
