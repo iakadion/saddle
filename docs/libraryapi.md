@@ -58,4 +58,4 @@ The package exposes explicit subpaths for `./browser`, `./bot`, `./captcha`, `./
 
 Version 1.1 adds `./extension`, which exposes browser-neutral message, snapshot and service-worker routing contracts. The concrete Manifest V3 files live in `extension/`; they are not imported by the core at runtime and do not require Chrome when the library is used as a Node package. The browser surface also exposes snapshots, tab/frame context, action results, bounded action batches and recording through `./browser`.
 
-Version 1.7 adds `desktopmanifest`, `mobilemanifest`, `desktopadapter`, `mobileadapter`, `n8nnode`, `n8nmatch`, and `n8nexecute`. These factories describe surface boundaries and invoke caller-owned handlers; they do not install a native toolkit, start an n8n server, or store credentials.
+Version 1.7 adds `desktopmanifest`, `mobilemanifest`, `desktopadapter`, `mobileadapter`, `n8nnode`, `n8nmatch`, `n8nexecute`, and `controlsurface`. These factories describe surface boundaries and invoke caller-owned handlers; they do not install a native toolkit, start an n8n server, create a dashboard, or store credentials.

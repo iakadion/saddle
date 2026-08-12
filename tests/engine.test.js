@@ -82,6 +82,8 @@ import { webhookreceiver } from "../webhook/receiver.js";
 import { deliveryqueue } from "../webhook/delivery.js";
 import { desktopmanifest, mobilemanifest, surfacemanifest, surfacebundle } from "../surfaces/manifest.js";
 import { desktopadapter, mobileadapter } from "../surfaces/adapters.js";
+import { controlsurface } from "../surfaces/controls.js";
+import { backupplan, operationsmetrics, retentionpolicy, threatmodel } from "../surfaces/operations.js";
 import { n8nactions, n8nmatch, n8nnode, n8nexecute } from "../surfaces/n8n.js";
 import { scrapeurl, scrapehtml, serializeresult, formatforagent, batchscrape } from "../library/public.js";
 import { browseragent } from "../browser/agent.js";
@@ -683,6 +685,30 @@ test("defines caller-owned desktop mobile and n8n surface contracts", async () =
   assert.equal(n8nmatch(node, { type: "webhook" }).matched, true);
   assert.equal(n8nactions.includes("crawl"), true);
   await assert.rejects(() => n8nexecute(node, { command: "status" }, async () => "no"), /unsupported n8n action/);
+});
+
+test("exposes auditable operator controls for core resources", async () => {
+  const events = [];
+  const controls = controlsurface({ adapters: { jobs: { list: async () => [{ id: "job1" }] }, permissions: { check: async (input) => ({ allowed: input.scope === "read" }) } }, audit: async (event) => events.push(event) });
+  assert.equal((await controls.execute({ resource: "jobs", operation: "list", requestid: "req1" })).result[0].id, "job1");
+  assert.equal((await controls.execute({ resource: "permissions", operation: "check", input: { scope: "read" } })).result.allowed, true);
+  assert.equal((await controls.execute({ resource: "logs", operation: "list" })).code, "UNSUPPORTED_CONTROL");
+  assert.equal(events.length, 3);
+  assert.equal(controls.describe().resources.includes("artifacts"), true);
+});
+
+test("defines bounded operational metrics recovery and policy boundaries", async () => {
+  const metrics = operationsmetrics({ collector: metricstore() });
+  metrics.record("queuedepth", 2, { queue: "crawl" });
+  metrics.record("latency", 12, { operation: "scrape" });
+  assert.equal(metrics.snapshot().counters['queuedepth|[["queue","crawl"]]'], 2);
+  const policy = retentionpolicy({ days: 1, maxbytes: 100 });
+  assert.equal(policy.keeps({ updatedat: Date.now(), bytes: 50 }), true);
+  assert.equal(policy.keeps({ updatedat: Date.now(), bytes: 101 }), false);
+  const plan = backupplan({ backup: async (input) => ({ saved: input.id }), restore: async (input) => ({ restored: input.id }) });
+  assert.deepEqual(await plan.backup({ id: "snapshot1" }), { saved: "snapshot1" });
+  assert.equal(threatmodel({ controls: ["url validation"] }).owner, "caller");
+  await assert.rejects(() => backupplan().restore({}), /restore handler is not configured/);
 });
 
 test("exposes public scrape formats and batch progress", async () => {

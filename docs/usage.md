@@ -62,3 +62,35 @@ const output = await n8nexecute(node, { command: "scrape", url: "https://example
 ```
 
 Credentials, webhook verification, URL security, browser sessions, workflow storage, and n8n node registration must be supplied by the host application. This keeps the package usable in local, CI, container, desktop, mobile, and browser-worker contexts.
+
+## operator controls
+
+An operator surface can bind resource handlers without forcing a database or dashboard framework into the library. Every response carries a request id, resource, operation and success state; the optional audit callback receives the same serializable response.
+
+```js
+import { controlsurface } from "@devthink/saddle";
+
+const controls = controlsurface({
+  adapters: {
+    jobs: { list: async () => [{ id: "job1", status: "running" }] },
+    permissions: { check: async ({ scope }) => ({ allowed: scope === "read" }) }
+  },
+  audit: async (event) => console.log(event)
+});
+
+const jobs = await controls.execute({ resource: "jobs", operation: "list" });
+```
+
+## operations policies
+
+Operational policies remain declarative. An existing metric collector can receive a bounded vocabulary, while retention, recovery and threat ownership are represented without starting background workers or making storage assumptions.
+
+```js
+import { backupplan, metricstore, operationsmetrics, retentionpolicy, threatmodel } from "@devthink/saddle";
+
+const metrics = operationsmetrics({ collector: metricstore() });
+metrics.record("runnerselection", 1, { runner: "primary" });
+const retention = retentionpolicy({ days: 30, maxbytes: 500000000 });
+const recovery = backupplan({ backup: async (input) => ({ saved: input }), restore: async (input) => ({ restored: input }) });
+const security = threatmodel({ owner: "platform-team", controls: ["url validation", "audit log"] });
+```

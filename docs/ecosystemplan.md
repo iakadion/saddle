@@ -33,7 +33,7 @@ The engine owns **contracts, validation, orchestration, recovery and auditabilit
 | 7 | API, MCP and security | complete | request identity, optional auth, secure headers, browser MCP tools and redirect/DNS checks |
 | 8 | bots and integrations | complete | app lifecycle, command scopes, idempotency, delivery retries and dead letters |
 | 9 | packaging and distribution | partial; registry slice verified for 1.7.0 | reproducible extension, desktop, mobile, n8n and binary artifacts |
-| 10 | product surfaces and operations | planned | controls, observability, retention, threat model and release process |
+| 10 | product surfaces and operations | first slice complete | desktop, mobile, n8n and operator control contracts; observability, retention and threat model remain |
 | 11 | cross-runtime compatibility | planned | Node, worker, Deno, Bun and extension capability checks |
 | 12 | release gates | active | deterministic checks, docs, clean diffs and claim/code parity |
 

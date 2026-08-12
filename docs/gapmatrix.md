@@ -34,7 +34,8 @@ This matrix turns the supplied README and conclusions into implementation decisi
 | Scraping | Implemented robots, cache, HTML extraction, schema extraction and scraper | Semantic headings, landmarks, controls and links are now available; content-type normalization remains partial | P1 | Keep extraction safe and bounded; add adapters for richer document types |
 | Crawl | Implemented normalized BFS and persistent frontier | Priority and per-domain budget frontier now exist; sitemap refresh remains absent | P1 | Keep frontier state serializable and caller-persistable |
 | RAG context | Implemented chunk hashes and vector record metadata | Retrieval provenance and merge records now exist; embeddings and indexes remain injected | P1 | Preserve source, document, chunk and score lineage |
-| Observability | Partial | Low-cardinality counters and durations now exist; export and tracing adapters remain absent | P1 | Keep metrics vendor-neutral and bounded |
+| Observability | Contract slice | Low-cardinality counters and durations are bound to the standard operational metric vocabulary; export and tracing remain caller-owned | P1 | Keep metrics vendor-neutral and bounded |
+| Operations policy | Contract slice | Retention, backup/restore capability and threat ownership are declarative and caller-owned | P1 | Add workers, persistence and incident response only in host surfaces |
 | Auth profiles | Session file and replay contracts exist | No extension profile or consent model | P1 | Defer cookie/profile export; support explicit user-owned session references only |
 | CAPTCHA | Contract, guard and evidence exist | No automatic solver integration | deferred | Keep external/manual solver boundary; do not promise bypass in the extension |
 | Stealth | Fingerprint contract exists | No automatic stealth patching | deferred | Keep opt-in fingerprint metadata; no hidden anti-detection behavior |
