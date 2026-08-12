@@ -46,6 +46,8 @@ Release `v1.8.0` was created from commit `9ddfd6c`. GitHub npm run `31556461901`
 
 The active package identity on main is now `@wenathlan/saddle`. The existing `v1.8.0` tag intentionally remains historical and still contains the prior package identity; a follow-up tag is required before publishing the renamed package through the normal release workflow.
 
+Release `v1.8.1` was created from the identity migration commit `efcbb02`. The npmjs workflow `31557618590` authenticated as `wenathlan`, generated `@wenathlan/saddle@1.8.1`, and ended with npm's `+ @wenathlan/saddle@1.8.1` success line. An independent `npm view` and direct registry lookup immediately afterward returned HTTP 404, so the workflow publish is recorded as accepted while public index propagation remains to be checked again. The other v1.8.1 registry workflows also completed successfully: GitHub npm `31557618600`, GHCR `31557618571`, Maven `31557618597`, NuGet `31557618573` and RubyGems `31557618575`.
+
 ## sources
 
 1. GitHub Docs — About permissions for GitHub Packages: https://docs.github.com/en/packages/learn-github-packages/about-permissions-for-github-packages
