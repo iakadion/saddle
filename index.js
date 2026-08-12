@@ -81,6 +81,7 @@ export * from "./mcp/server.js";
 export * from "./runtime/detect.js";
 export * from "./runtime/abort.js";
 export * from "./runtime/compatibility.js";
+export * from "./runtime/worker.js";
 export * from "./packager/publish.js";
 export * from "./browser/fingerprint.js";
 export * from "./browser/session.js";

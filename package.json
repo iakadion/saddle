@@ -32,7 +32,8 @@
     "./sessions-store": "./sessions/store.js",
     "./queue-persistent": "./queue/persistent.js",
     "./captcha-evidence": "./captcha/evidence.js",
-    "./hash": "./core/hash.js"
+    "./hash": "./core/hash.js",
+    "./worker": "./runtime/worker.js"
   },
   "files": ["core", "domain", "memory", "runners", "runtime", "storage", "sessions", "modes", "adapters", "persistence", "queue", "dispatch", "scrape", "crawl", "api", "mcp", "browser", "proxy", "captcha", "ai", "webhook", "surfaces", "library", "errors", "retry", "server", "binary", "format", "packager", "bot", "protocol", "workflow", "cli", "extension", "index.js", "docs", "examples", "README.md", "LICENSE"],
   "scripts": {

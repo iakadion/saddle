@@ -6,6 +6,13 @@
 
   All notable changes to Project saddle are documented in this file.
 
+  ## [Unreleased]
+
+    - Updated GitHub Actions, Docker bases and CI toolchains to Node.js 26.7.0 and current stable action majors
+    - Added a transport-neutral browser worker bridge and package export import tests
+    - Added a Node 26.7.0 cross-runtime probe lane for Node, Bun and Deno
+    - Kept package publication versions derived from release tags without creating a new release
+
   ## [1.7.0] - 2026-08-12
 
     - Added app installation, suspension, revocation and scope authorization

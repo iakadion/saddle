@@ -12,6 +12,7 @@ Saddle is the contract layer for a family of caller-owned surfaces. The library 
 | n8n | `n8nnode`, `n8nmatch` and `n8nexecute` | node registration, credential UI, workflow persistence and execution host |
 | operations | `operationsmetrics`, `retentionpolicy`, `backupplan` and `threatmodel` | telemetry exporter, backup store, retention worker and incident response |
 | cross runtime | `runtimecontract`, `memorystorage` and root ESM import | runtime-specific APIs and package loader behavior |
+| browser worker | `workerbridge` and root-safe contracts | worker lifecycle, message transport and extension permissions |
 | browser | browser agent and snapshot contracts | browser vendor adapter, profile and session ownership |
 | extension | Manifest V3 reference files and serializable protocol | browser permission grant, signing and store submission |
 | web control | API, service, `controlsurface` and `controlservice` contracts | operator UI, authentication, database and hosting |

@@ -112,6 +112,7 @@ import { browsertools } from "../mcp/browser.js";
 import { resumablerun, runrecord, transitionrun } from "../dispatch/resumable.js";
 import { controlservice } from "../api/control.js";
 import { hmacsha256, sha256 } from "../core/hash.js";
+import { workerbridge } from "../runtime/worker.js";
 
 test("runs a job through prepare process sync and commit", async () => {
   const root = await mkdtemp(join(tmpdir(), "saddletest"));
@@ -728,6 +729,16 @@ test("serves operator controls through web request and response contracts", asyn
 test("keeps sha256 and hmac deterministic without node crypto imports", () => {
   assert.equal(sha256("abc"), "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad");
   assert.equal(hmacsha256("The quick brown fox jumps over the lazy dog", "key"), "f7bc83f430538424b13298e6aa6fb143ef4d59a14946175997479dbc2d1a3cd8");
+});
+
+test("bridges browser worker messages through an injected dispatcher", async () => {
+  let handler;
+  const responses = [];
+  const scope = { addEventListener(_event, listener) { handler = listener; }, removeEventListener() {}, postMessage(value) { responses.push(value); } };
+  const bridge = workerbridge({ scope, dispatch: async (input) => ({ echoed: input.value }) });
+  await handler({ data: { requestid: "worker1", value: "ok" } });
+  assert.deepEqual(responses[0], { ok: true, requestid: "worker1", data: { echoed: "ok" } });
+  bridge.close();
 });
 
 test("exposes public scrape formats and batch progress", async () => {
