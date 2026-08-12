@@ -1,10 +1,16 @@
                          SADDLE - CHANGELOG
-                       Version 1.6, August 2026
+                       Version 1.7, August 2026
 
  Copyright (c) August 2026 devthink, nathlan, akadion, nathu filho, alllan neris, andraneris. All Rights Reserved.
  Project: saddle
 
   All notable changes to Project saddle are documented in this file.
+
+  ## [1.7.0] - 2026-08-12
+
+    - Added app installation, suspension, revocation and scope authorization
+    - Added command scope guards and idempotent bot command results
+    - Added webhook delivery attempts, retryable failures and dead letters
 
   ## [1.6.0] - 2026-08-12
 

@@ -54,6 +54,7 @@ node examples/publicapi.js
 | Operations | queues, idempotency, saga, retry, circuit breaker, health and heartbeat | controlled execution and recovery |
 | Protocols | JSON, NDJSON, SSE, blocks, API envelopes and MCP | transport-neutral messages |
 | Delivery | manifests, workflow registry, binary/container plans | package and runner surfaces |
+| Integrations | GitHub, GitLab, Forgejo, app lifecycle, command scopes and delivery adapters | caller-owned provider connectivity |
 | Agent Browser | capture & replay, stealth, fingerprint | Brave capture, movement replay, session recording |
 | Compute Backends | github-actions, huggingface, gitlab-ci, kaggle, oracle-cloud | free runners chain |
 | Storage Backends | HF, Kaggle, Terabox, R2, Telegram, Discord via rclone | unlimited disk as RAM |
@@ -181,7 +182,7 @@ Root-based JavaScript ESM layout, no src/ directory, no TypeScript build require
 
 ## Current scope
 
-Version 1.6 establishes the engine contracts, browser snapshot foundation, storage sync primitives, runner recovery contracts, scraping context provenance, API/MCP security contracts and the first tested extension bridge. Browser implementations, provider credentials, persistent databases and production deployment remain caller-selected adapters. The next improvements should extend those contracts without coupling the core to one forge, registry, browser or storage vendor.
+Version 1.7 establishes the engine contracts, browser snapshot foundation, storage sync primitives, runner recovery contracts, scraping context provenance, API/MCP security contracts, bot integration lifecycle and the first tested extension bridge. Browser implementations, provider credentials, persistent databases and production deployment remain caller-selected adapters. The next improvements should extend those contracts without coupling the core to one forge, registry, browser or storage vendor.
 
 ## License
 

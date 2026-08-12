@@ -13,7 +13,7 @@ export function webhookreceiver(options = {}) {
       if (id && deliveries.has(id)) return { accepted: false, status: 200, duplicate: true };
       if (id) deliveries.add(id);
       const result = await options.handle(input.event, input.body);
-      return { accepted: true, status: 202, result };
+      return { accepted: true, status: 202, deliveryid: id, result };
     },
     deliveries() { return [...deliveries]; }
   };

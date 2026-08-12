@@ -214,11 +214,11 @@ The following blocks are the execution order for the complete ecosystem. A block
 
 ### Block 8 — bots, apps and integrations
 
-- [ ] Complete GitHub, GitLab, Forgejo, Gitea, Codeberg, Hugging Face, Discord, Telegram and generic webhook adapters.
-- [ ] Add app installation, OAuth, bot token and webhook lifecycle contracts without storing secrets in the library.
-- [ ] Add command permissions, idempotent command execution and platform-neutral status reporting.
-- [ ] Add notification and artifact delivery adapters with retry and dead-letter behavior.
-- [ ] Add integration conformance tests using fake transports only.
+- [x] Complete GitHub, GitLab, Forgejo, Gitea, Codeberg, Hugging Face, Discord, Telegram and generic webhook adapters.
+- [x] Add app installation, OAuth, bot token and webhook lifecycle contracts without storing secrets in the library.
+- [x] Add command permissions, idempotent command execution and platform-neutral status reporting.
+- [x] Add notification and artifact delivery adapters with retry and dead-letter behavior.
+- [x] Add integration conformance tests using fake transports only.
 
 ### Block 9 — packaging and distribution
 

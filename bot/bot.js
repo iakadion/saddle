@@ -6,6 +6,8 @@ import { parsecommand } from "./commands.js";
 export function saddlebot(options = {}) {
   const adapters = new Map(Object.entries(options.adapters ?? {}));
   const tasks = new Map();
+  const guard = options.guard;
+  const keys = new Map();
   const state = { status: "stopped", startedat: undefined, commands: 0 };
   const timers = new Set();
   async function executecommand(input, context = {}) {
@@ -16,7 +18,13 @@ export function saddlebot(options = {}) {
     const platform = parsed.flags.platform ?? context.platform;
     const adapter = adapters.get(platform);
     if (!adapter) throw new Error(`no adapter registered for ${platform ?? "command"}`);
-    return adapter.executebot({ command: parsed.command, flags: parsed.flags, context });
+    const permission = guard?.check({ command: parsed.command, platform, scopes: context.scopes ?? [] });
+    if (permission && !permission.allowed) { const error = new Error(`bot command is not authorized: ${parsed.command}`); error.code = "BOT_COMMAND_UNAUTHORIZED"; error.missing = permission.missing; throw error; }
+    const key = context.idempotencykey;
+    if (key && keys.has(key)) return keys.get(key);
+    const result = await adapter.executebot({ command: parsed.command, flags: parsed.flags, context });
+    if (key) keys.set(key, result);
+    return result;
   }
   function getstatus() { return { ...state, adapters: [...adapters.keys()], tasks: [...tasks.keys()] }; }
   return {

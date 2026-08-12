@@ -34,6 +34,9 @@ The public API is designed around injected transports. Consumers can use the sam
 | `requestcontext` / `successpayload` / `errorpayload` | create versioned API identity and response contracts |
 | `assertresolvedpublicurl` / `assertredirectchain` | validate resolved destinations and bounded redirects |
 | `browsertools` | expose injected snapshot and action methods as optional MCP tools |
+| `appregistry` | track app installation, scopes and revocation state |
+| `commandguard` | enforce caller-defined bot command scopes |
+| `deliveryqueue` | retry webhook deliveries and retain dead letters |
 | `nodeserver` | expose a Web Request/Response handler through Node HTTP |
 
 ```js

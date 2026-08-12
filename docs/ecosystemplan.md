@@ -31,7 +31,7 @@ The engine owns **contracts, validation, orchestration, recovery and auditabilit
 | 5 | runners and execution | complete | provider health, triggers, cancellation, heartbeat and resumable runs |
 | 6 | scraping and context | complete | semantic extraction, crawl budgets, RAG lineage and low-cardinality metrics |
 | 7 | API, MCP and security | complete | request identity, optional auth, secure headers, browser MCP tools and redirect/DNS checks |
-| 8 | bots and integrations | partial | app lifecycle, permissions, delivery adapters and conformance tests |
+| 8 | bots and integrations | complete | app lifecycle, command scopes, idempotency, delivery retries and dead letters |
 | 9 | packaging and distribution | partial | reproducible extension, desktop, mobile, n8n and binary artifacts |
 | 10 | product surfaces and operations | planned | controls, observability, retention, threat model and release process |
 | 11 | cross-runtime compatibility | planned | Node, worker, Deno, Bun and extension capability checks |
@@ -52,7 +52,7 @@ Each block follows the same loop:
 
 ## current implementation
 
-Version 1.6 contains the first API and MCP security slice after browser, storage, runners and scraping. It adds request identity envelopes, caller-owned optional authorization, secure response headers, redirect and resolved-address checks, and browser snapshot/action MCP tools. The next implementation block is bot and integration lifecycle because external events now have safer request and tool boundaries.
+Version 1.7 contains the first bot and integration lifecycle slice after browser, storage, runners, scraping and API hardening. It adds app installation and scope state, command authorization, idempotent bot execution, retryable webhook delivery and dead-letter records. The next implementation block is packaging and release automation because external integrations now have explicit lifecycle contracts.
 
 ## evidence sources
 

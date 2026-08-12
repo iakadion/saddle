@@ -39,6 +39,8 @@ import { distributionmanifest, binaryplan, containerplan } from "../packager/man
 import { forgejoadapter } from "../adapters/forgejo.js";
 import { parsecommand } from "../bot/commands.js";
 import { saddlebot } from "../bot/bot.js";
+import { commandguard } from "../bot/permissions.js";
+import { appregistry } from "../apps/registry.js";
 import { jsonencode, jsondecode } from "../protocol/json.js";
 import { ndjsonencode, ndjsondecode } from "../protocol/ndjson.js";
 import { sseencode, ssedecode } from "../protocol/sse.js";
@@ -77,6 +79,7 @@ import { metricstore } from "../observability/metrics.js";
 import { llmstxt, llmsfull } from "../ai/llmstxt.js";
 import { webhooksig, webhookverify } from "../webhook/signature.js";
 import { webhookreceiver } from "../webhook/receiver.js";
+import { deliveryqueue } from "../webhook/delivery.js";
 import { surfacemanifest, surfacebundle } from "../surfaces/manifest.js";
 import { n8nnode, n8nexecute } from "../surfaces/n8n.js";
 import { scrapeurl, scrapehtml, serializeresult, formatforagent, batchscrape } from "../library/public.js";
@@ -354,6 +357,36 @@ test("parses bot commands and executes through a platform adapter", async () => 
   assert.equal(result.command, "deploy");
   assert.equal(bot.getstatus().status, "running");
   await bot.stop();
+});
+
+test("enforces bot command scopes and keeps idempotent results", async () => {
+  let calls = 0;
+  const bot = saddlebot({ guard: commandguard({ policies: { deploy: { scopes: ["deploy"] } } }), adapters: { forge: { executebot: async () => { calls += 1; return { ok: true }; } } } });
+  await assert.rejects(() => bot.executecommand("deploy --platform forge", { scopes: [] }), (error) => error.code === "BOT_COMMAND_UNAUTHORIZED");
+  const first = await bot.executecommand("deploy --platform forge", { scopes: ["deploy"], idempotencykey: "cmd1" });
+  const second = await bot.executecommand("deploy --platform forge", { scopes: ["deploy"], idempotencykey: "cmd1" });
+  assert.deepEqual(second, first);
+  assert.equal(calls, 1);
+});
+
+test("tracks app installation scopes and revocation", () => {
+  const registry = appregistry();
+  registry.install({ id: "app1", name: "Forge", scopes: ["read", "write"] });
+  assert.equal(registry.authorize("app1", ["read"]).allowed, true);
+  assert.equal(registry.authorize("app1", ["admin"]).allowed, false);
+  registry.revoke("app1");
+  assert.equal(registry.authorize("app1", ["read"]).reason, "app-revoked");
+});
+
+test("retries retryable deliveries and records dead letters", async () => {
+  let attempts = 0;
+  const queue = deliveryqueue({ maxattempts: 2 });
+  const delivered = await queue.deliver({ id: "delivery1", event: { type: "push" } }, async () => { attempts += 1; if (attempts === 1) { const error = new Error("temporary"); error.retryable = true; throw error; } return { ok: true }; });
+  assert.equal(delivered.status, "delivered");
+  assert.equal(delivered.attempts, 2);
+  const dead = await queue.deliver({ id: "delivery2", event: {} }, async () => { throw new Error("permanent"); });
+  assert.equal(dead.status, "dead");
+  assert.equal(queue.deadletters().length, 1);
 });
 
 test("serializes json ndjson sse and bounded blocks", async () => {
