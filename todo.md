@@ -206,11 +206,11 @@ The following blocks are the execution order for the complete ecosystem. A block
 
 ### Block 7 — API, MCP and security
 
-- [ ] Complete HTTP and Web Request/Response server routes for scrape, crawl, batch, jobs, health and artifacts.
-- [ ] Add versioned API envelopes, request ids, structured error responses and content negotiation.
-- [ ] Add MCP browser snapshot and browser action tools over JSONL and HTTP transports.
-- [ ] Expand SSRF defenses to redirects, DNS rebinding, IPv6, metadata endpoints and proxy dispatch.
-- [ ] Add authentication, authorization, rate limits and audit events as caller-owned adapters.
+- [x] Complete HTTP and Web Request/Response server routes for scrape, crawl, batch, jobs, health and artifacts.
+- [x] Add versioned API envelopes, request ids, structured error responses and content negotiation.
+- [x] Add MCP browser snapshot and browser action tools over JSONL and HTTP transports.
+- [x] Expand SSRF defenses to redirects, DNS rebinding, IPv6, metadata endpoints and proxy dispatch.
+- [x] Add authentication, authorization, rate limits and audit events as caller-owned adapters.
 
 ### Block 8 — bots, apps and integrations
 

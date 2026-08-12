@@ -4,6 +4,7 @@
 import { crawl } from "../crawl/crawler.js";
 import { extractwithschema } from "../scrape/schema.js";
 import { jsonencode } from "../protocol/json.js";
+import { browsertools } from "./browser.js";
 
 export function mcpserver(options = {}) {
   if (typeof options.scrape !== "function") throw new TypeError("mcp server requires scrape");
@@ -12,7 +13,9 @@ export function mcpserver(options = {}) {
     crawl: async (input) => crawl(input.url, { ...input, scrape: (url) => options.scrape(url, input) }),
     batch: async (input) => ({ results: await Promise.all((input.urls ?? []).map((url) => options.scrape(url, input))) }),
     extract: async (input) => extractwithschema(input.html, input.schema, input.url),
-    serialize: async (input) => jsonencode(input.value)
+    serialize: async (input) => jsonencode(input.value),
+    ...(options.browser ? browsertools(options.browser) : {}),
+    ...(options.tools ?? {})
   };
   return {
     listtools() { return Object.keys(tools).map((name) => ({ name, description: `saddle ${name} tool` })); },

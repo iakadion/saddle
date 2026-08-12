@@ -1,10 +1,18 @@
                          SADDLE - CHANGELOG
-                       Version 1.5, August 2026
+                       Version 1.6, August 2026
 
  Copyright (c) August 2026 devthink, nathlan, akadion, nathu filho, alllan neris, andraneris. All Rights Reserved.
  Project: saddle
 
   All notable changes to Project saddle are documented in this file.
+
+  ## [1.6.0] - 2026-08-12
+
+    - Added request identity, success and error API envelopes
+    - Added caller-owned optional authorization verification
+    - Added secure response headers and bounded redirect checks
+    - Added injected DNS resolution checks for private targets
+    - Added optional browser snapshot and action MCP tools
 
   ## [1.5.0] - 2026-08-12
 

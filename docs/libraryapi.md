@@ -30,6 +30,10 @@ The public API is designed around injected transports. Consumers can use the sam
 | `crawlfrontier` | prioritize URLs and enforce page and domain budgets |
 | `provenance` / `mergeprovenance` | link context chunks to source and retrieval evidence |
 | `metricstore` | collect bounded counters and duration summaries |
+| `authorize` | verify caller credentials through an injected verifier |
+| `requestcontext` / `successpayload` / `errorpayload` | create versioned API identity and response contracts |
+| `assertresolvedpublicurl` / `assertredirectchain` | validate resolved destinations and bounded redirects |
+| `browsertools` | expose injected snapshot and action methods as optional MCP tools |
 | `nodeserver` | expose a Web Request/Response handler through Node HTTP |
 
 ```js

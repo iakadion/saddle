@@ -30,7 +30,7 @@ The engine owns **contracts, validation, orchestration, recovery and auditabilit
 | 4 | working set and storage | complete | range chunks, content dedupe, tiered cache, conflict sync and memory capabilities |
 | 5 | runners and execution | complete | provider health, triggers, cancellation, heartbeat and resumable runs |
 | 6 | scraping and context | complete | semantic extraction, crawl budgets, RAG lineage and low-cardinality metrics |
-| 7 | API, MCP and security | partial | versioned routes, browser MCP tools and expanded SSRF coverage |
+| 7 | API, MCP and security | complete | request identity, optional auth, secure headers, browser MCP tools and redirect/DNS checks |
 | 8 | bots and integrations | partial | app lifecycle, permissions, delivery adapters and conformance tests |
 | 9 | packaging and distribution | partial | reproducible extension, desktop, mobile, n8n and binary artifacts |
 | 10 | product surfaces and operations | planned | controls, observability, retention, threat model and release process |
@@ -52,7 +52,7 @@ Each block follows the same loop:
 
 ## current implementation
 
-Version 1.5 contains the first scraping and context foundation slice after browser, storage and runners. It adds semantic page facts, priority and per-domain crawl frontiers, retrieval provenance and a vendor-neutral metric collector. The next implementation block is API and MCP hardening because scraping and context now expose stable bounded data and observability contracts.
+Version 1.6 contains the first API and MCP security slice after browser, storage, runners and scraping. It adds request identity envelopes, caller-owned optional authorization, secure response headers, redirect and resolved-address checks, and browser snapshot/action MCP tools. The next implementation block is bot and integration lifecycle because external events now have safer request and tool boundaries.
 
 ## evidence sources
 

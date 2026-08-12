@@ -99,6 +99,10 @@ import { persistentqueue } from "../queue/persistent.js";
 import { migrationplan, latestmigration } from "../persistence/migrations.js";
 import { mcptransport } from "../mcp/transport.js";
 import { ispublicurl } from "../api/security.js";
+import { assertredirectchain, assertresolvedpublicurl } from "../api/security.js";
+import { authorize } from "../api/auth.js";
+import { errorpayload, requestcontext, successpayload } from "../api/contracts.js";
+import { browsertools } from "../mcp/browser.js";
 import { resumablerun, runrecord, transitionrun } from "../dispatch/resumable.js";
 
 test("runs a job through prepare process sync and commit", async () => {
@@ -485,6 +489,27 @@ test("serves universal api routes with web request response objects", async () =
   assert.equal((await scrape.json()).url, "https://example.com");
   const stream = await service.handle(new Request("https://api.example.com/v1/event"));
   assert.equal(stream.headers.get("content-type").startsWith("text/event-stream"), true);
+});
+
+test("keeps API identity and authorization caller-owned", async () => {
+  const request = new Request("https://api.example.com/health", { headers: { authorization: "Bearer token", "x-request-id": "req1" } });
+  const context = requestcontext(request, { path: "/health" });
+  assert.equal(context.requestid, "req1");
+  assert.equal((await authorize(request, { verify: async (token) => token === "token" ? { subject: "user1", claims: { role: "agent" } } : null })).subject, "user1");
+  assert.equal(successpayload({ ok: true }, context).requestid, "req1");
+  assert.equal(errorpayload("BAD", "bad", context).error.code, "BAD");
+});
+
+test("blocks unsafe redirect chains and resolved private addresses", async () => {
+  assert.deepEqual(assertredirectchain(["https://example.com", "https://example.org/path"]), ["https://example.com/", "https://example.org/path"]);
+  assert.throws(() => assertredirectchain(["https://example.com", "https://example.org", "https://example.net", "https://example.dev", "https://example.test", "https://example.invalid"], { maxredirects: 4 }), /redirect chain/);
+  await assert.rejects(() => assertresolvedpublicurl("https://example.com", { resolve: async () => ["127.0.0.1"] }), /private/);
+});
+
+test("exposes optional browser snapshot and action tools through MCP", async () => {
+  const tools = browsertools({ snapshot: async (input) => ({ snapshotid: input.id ?? "snap" }), action: async (input) => ({ action: input.action }) });
+  assert.equal((await tools.browser_snapshot({ id: "snap1" })).snapshotid, "snap1");
+  assert.equal((await tools.browser_action({ action: "click" })).action, "click");
 });
 
 test("restores persistent crawl queue and completes entries", async () => {
