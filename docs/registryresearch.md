@@ -36,6 +36,10 @@ The live GHCR workflow `31544093172` completed successfully, and the public pack
 
 The first `publishgithubnpm.yml` run failed with HTTP 403 because `@devthink/saddle` was not an authorized package namespace for the `iakadion/saddle` workflow. The corrected run `31543249301` completed successfully after rewriting the package name in the CI workspace to `@iakadion/saddle`. However, the repository Packages page still returned an empty listing immediately afterward, and the available GitHub API token could not read the user package namespace. The next verification must query the owner package page directly and inspect the workflow publish logs before treating the successful exit code as visible package availability.
 
+The v1.7.0 release verification used workflow logs as the available artifact evidence. GitHub npm run `31549603859` published `@iakadion/saddle@1.7.0`; GHCR run `31549603838` pushed `ghcr.io/iakadion/saddle:1.7.0` and `latest`; Maven retry run `31549802841` uploaded `io.devthink:saddle:1.7.0`; RubyGems retry run `31549804286` registered `saddle (1.7.0)`; and NuGet retry run `31549972311` created and pushed `Saddle.1.7.0.nupkg`. The GitHub package-list API was not readable with the available integration token, so these statements are limited to successful workflow upload evidence rather than an independent package-page listing.
+
+The public npmjs run `31549603849` produced an OIDC provenance statement but npm returned HTTP 404 for `@devthink/saddle`. A package owner action is still required: create or bootstrap the package directly on npmjs.com and configure the Trusted Publisher for owner `iakadion`, repository `saddle`, workflow `publishnpmjs.yml`. The exposed token from the prior conversation remains deliberately unused and must not be introduced into repository secrets.
+
 ## sources
 
 1. GitHub Docs — About permissions for GitHub Packages: https://docs.github.com/en/packages/learn-github-packages/about-permissions-for-github-packages

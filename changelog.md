@@ -11,6 +11,8 @@
     - Added app installation, suspension, revocation and scope authorization
     - Added command scope guards and idempotent bot command results
     - Added webhook delivery attempts, retryable failures and dead letters
+    - Verified GitHub npm, GHCR, Maven, NuGet and RubyGems publication workflows for 1.7.0
+    - Documented the public npmjs Trusted Publisher bootstrap requirement
 
   ## [1.6.0] - 2026-08-12
 

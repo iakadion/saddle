@@ -32,7 +32,7 @@ The engine owns **contracts, validation, orchestration, recovery and auditabilit
 | 6 | scraping and context | complete | semantic extraction, crawl budgets, RAG lineage and low-cardinality metrics |
 | 7 | API, MCP and security | complete | request identity, optional auth, secure headers, browser MCP tools and redirect/DNS checks |
 | 8 | bots and integrations | complete | app lifecycle, command scopes, idempotency, delivery retries and dead letters |
-| 9 | packaging and distribution | partial | reproducible extension, desktop, mobile, n8n and binary artifacts |
+| 9 | packaging and distribution | partial; registry slice verified for 1.7.0 | reproducible extension, desktop, mobile, n8n and binary artifacts |
 | 10 | product surfaces and operations | planned | controls, observability, retention, threat model and release process |
 | 11 | cross-runtime compatibility | planned | Node, worker, Deno, Bun and extension capability checks |
 | 12 | release gates | active | deterministic checks, docs, clean diffs and claim/code parity |
@@ -52,7 +52,7 @@ Each block follows the same loop:
 
 ## current implementation
 
-Version 1.7 contains the first bot and integration lifecycle slice after browser, storage, runners, scraping and API hardening. It adds app installation and scope state, command authorization, idempotent bot execution, retryable webhook delivery and dead-letter records. The next implementation block is packaging and release automation because external integrations now have explicit lifecycle contracts.
+Version 1.7 contains the first bot and integration lifecycle slice after browser, storage, runners, scraping and API hardening. It adds app installation and scope state, command authorization, idempotent bot execution, retryable webhook delivery and dead-letter records. The registry publication slice for 1.7.0 is verified for GitHub npm, GHCR, Maven, NuGet and RubyGems; public npmjs remains blocked until the owner bootstraps `@devthink/saddle` and configures its Trusted Publisher. The next implementation block is product surfaces and operations around the existing contracts.
 
 ## evidence sources
 

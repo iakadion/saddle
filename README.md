@@ -138,14 +138,14 @@ saddle mcp
 
 ## Package surfaces
 
-| Registry | Artifact | Workflow |
-| --- | --- | --- |
-| GitHub npm | `@iakadion/saddle@1.1.0` | publishgithubnpm.yml |
-| GHCR | `ghcr.io/iakadion/saddle:latest` | publishghcr.yml |
-| Maven | `io.devthink:saddle:1.0.0` | publishmaven.yml |
-| NuGet | `Saddle 1.0.0` | publishnuget.yml |
-| RubyGems | `saddle 1.0.0` | publishrubygems.yml |
-| npmjs | `@devthink/saddle` | canonical |
+| Registry | Artifact | Workflow | Status |
+| --- | --- | --- | --- |
+| GitHub npm | `@iakadion/saddle@1.7.0` | publishgithubnpm.yml | published |
+| GHCR | `ghcr.io/iakadion/saddle:1.7.0` and `latest` | publishghcr.yml | published |
+| Maven | `io.devthink:saddle:1.7.0` | publishmaven.yml | published |
+| NuGet | `Saddle.1.7.0.nupkg` | publishnuget.yml | published |
+| RubyGems | `saddle 1.7.0` | publishrubygems.yml | published |
+| npmjs | `@devthink/saddle@1.7.0` | publishnpmjs.yml | not published; Trusted Publisher bootstrap required |
 
 ## Development
 

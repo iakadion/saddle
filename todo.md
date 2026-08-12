@@ -156,13 +156,13 @@
 
 ### Release 1.7.0 execution
 
-- [ ] Confirm the 1.7.0 working tree, workflows, release metadata and package contents.
-- [ ] Create and push tag `v1.7.0` from the validated commit.
-- [ ] Create GitHub Release Notes for 1.7.0 without publishing credentials in the repository.
-- [ ] Verify the npm GitHub Packages, GHCR, Maven, NuGet and RubyGems workflow runs.
-- [ ] Confirm the published artifact name and version in each registry before reporting success.
-- [ ] Record any npmjs Trusted Publishing or visibility blocker without claiming a publish.
-- [ ] Continue with the surfaces block after the release verification.
+- [x] Confirm the 1.7.0 working tree, workflows, release metadata and package contents.
+- [x] Create and push tag `v1.7.0` from the validated commit.
+- [x] Create GitHub Release Notes for 1.7.0 without publishing credentials in the repository.
+- [x] Verify the npm GitHub Packages, GHCR, Maven, NuGet and RubyGems workflow runs.
+- [x] Confirm the published artifact name and version in each registry before reporting success.
+- [x] Record the npmjs Trusted Publishing bootstrap blocker without claiming a publish.
+- [x] Continue with the surfaces block after the release verification.
 
 The following blocks are the execution order for the complete ecosystem. A block becomes complete only when its contracts, implementation, deterministic tests, documentation and release impact are all checked.
 
@@ -234,7 +234,7 @@ The following blocks are the execution order for the complete ecosystem. A block
 
 - [ ] Add extension zip, desktop bundle, mobile manifest, n8n package and binary artifact plans with real build checks.
 - [ ] Add reproducible SBOM, provenance, checksum and release asset generation.
-- [ ] Verify all registry workflows from a new version tag without exposing credentials.
+- [x] Verify all registry workflows for v1.7.0 without exposing credentials.
 - [ ] Add install and smoke-test instructions for npm, GitHub Packages, GHCR, Maven, NuGet and RubyGems.
 - [ ] Publish only after namespace, visibility, license and artifact contents are confirmed.
 
