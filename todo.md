@@ -550,3 +550,22 @@ The following blocks are the execution order for the complete ecosystem. A block
 - [ ] Add nested PE signature verification and fail closed when a signing status claims provider trust.
 - [ ] Add Sigstore/SLSA provenance and release manifest evidence without presenting it as Authenticode.
 - [ ] Bump manifests, run gates, create the immutable `v1.8.12` tag and publish only after the release inputs are confirmed.
+
+### Expanded open-source IDE and artifact investigation
+
+- [ ] Map public release workflows for VS Code, VSCodium, Code - OSS, Zed, OpenCode, Lapce, Helix, Neovim GUIs, Eclipse, IntelliJ Community, RustRover alternatives, Lite XL and Pulsar.
+- [ ] Map public release workflows for RustDesk, KeePassXC, Audacity, OBS Studio, Blender, Krita, Godot and GitHub Desktop.
+- [ ] Inspect each project's Windows artifact formats, publisher metadata, signatures, timestamp authorities and release manifests.
+- [ ] Inspect each project's macOS signing, notarization, DMG/PKG/app packaging and Apple identity boundaries.
+- [ ] Inspect each project's Linux packaging, repository signing and whether package-manager trust is separate from binary trust.
+- [x] Inspect workflows for SignPath, Azure Artifact Signing, DigiCert ONE, Keyfactor, SSL.com, GaraSign, SignServer and cloud KMS.
+- [x] Inspect public certificates and signatures only as metadata, never copy or reuse a third-party private key or identity.
+- [ ] Compare PE Authenticode tables, signer chains, timestamps, catalog signatures and embedded binary signatures on representative public releases.
+- [ ] Compare MSIX/AppX identity, publisher subject, package identity name and Store re-signing behavior on representative public releases.
+- [ ] Compare NSIS, MSI, DMG, PKG, AppImage, DEB and RPM metadata with platform trust behavior.
+- [ ] Investigate whether public package managers provide publisher verification, checksum verification or only transport/discovery.
+- [x] Investigate “free certificate” claims with provider terms, certificate chain verification and revocation status.
+- [x] Investigate test certificates, enterprise roots, CI ephemeral keys and safe development-only workflows.
+- [x] Investigate whether any legitimate provider offers free signing to established open-source projects beyond SignPath Foundation.
+- [x] Reject certificate scraping, identity reuse, stolen keys, reputation farming, download inflation and SmartScreen bypass claims.
+- [x] Add verified findings and an updated 1.8.12 route classification to the research report.
