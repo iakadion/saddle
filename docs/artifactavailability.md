@@ -62,4 +62,23 @@ Version 1.8.11 keeps the Tauri browser build flat at `desktop/`, with `Cargo.tom
 
 The Android project maps Saddle-owned `AndroidManifest.xml`, `main/`, `res/`, `test/` and `androidtest/` directly from the `android/` root through Gradle `sourceSets`. Capacitor staging under `android/app`, `android/assets` and plugin internals is generated during synchronization, removed or ignored before build, and is not project-owned source. The iOS surface keeps its generated Xcode and Swift Package internals because Capacitor owns those paths; Saddle-owned configuration remains at the `ios/` root and no project-owned `ios/src` directory is added.
 
-The v1.8.11 workflows derive the version from the release tag, run flat-surface validation, reject helper binaries and attach only outputs matching the dotted lowercase contract. The live release asset list must be verified before this section is changed from a source contract to a generated asset inventory.
+The v1.8.11 workflows derive the version from the release tag, run flat-surface validation, reject helper binaries and attach only outputs matching the dotted lowercase contract. The live release asset list below was verified against the published GitHub release.
+
+## Verified 1.8.11 primary assets
+
+Sizes are bytes and exclude the separate manifest and checksum files.
+
+| Surface         | Asset                                                                                                       |       Size |
+| --------------- | ----------------------------------------------------------------------------------------------------------- | ---------: |
+| Desktop browser | [AppImage](https://github.com/wenathlan/saddle/releases/download/v1.8.11/saddle.browser.1.8.11.appimage)    | 79,870,456 |
+| Desktop browser | [Debian](https://github.com/wenathlan/saddle/releases/download/v1.8.11/saddle.browser.1.8.11.deb)           |  5,294,158 |
+| Desktop browser | [RPM](https://github.com/wenathlan/saddle/releases/download/v1.8.11/saddle.browser.1.8.11.rpm)              |  5,297,619 |
+| Desktop browser | [Windows EXE](https://github.com/wenathlan/saddle/releases/download/v1.8.11/saddle.browser.1.8.11.exe)      |  4,343,237 |
+| Desktop browser | [Windows MSI](https://github.com/wenathlan/saddle/releases/download/v1.8.11/saddle.browser.1.8.11.msi)      |  5,246,976 |
+| Desktop browser | [macOS DMG](https://github.com/wenathlan/saddle/releases/download/v1.8.11/saddle.browser.1.8.11.dmg)        |  5,216,935 |
+| Android         | [APK](https://github.com/wenathlan/saddle/releases/download/v1.8.11/saddle.apk.1.8.11.apk)                  |  3,498,594 |
+| Android         | [AAB](https://github.com/wenathlan/saddle/releases/download/v1.8.11/saddle.aab.1.8.11.aab)                  |  3,893,324 |
+| Container       | [OCI tarball](https://github.com/wenathlan/saddle/releases/download/v1.8.11/saddle.container.1.8.11.tar.gz) | 81,722,975 |
+| Extension       | [ZIP](https://github.com/wenathlan/saddle/releases/download/v1.8.11/saddle.extension.1.8.11.zip)            |     10,760 |
+
+The release also contains `manifest.*.1.8.11.json` and `sha256.*.1.8.11` files for Android, container, and each desktop runner. No IPA was attached because caller-owned Apple signing and provisioning were not enabled for this release.

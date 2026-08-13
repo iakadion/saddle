@@ -481,4 +481,4 @@ The following blocks are the execution order for the complete ecosystem. A block
 - [x] Remove or relocate every project-owned `src` path that is not required by the native toolchain and add validation that prevents new forbidden source directories.
 - [x] Preserve the TypeScript library-first boundary so native surfaces convert shared web output instead of duplicating engine logic.
 - [x] Bump all active manifests and release metadata to 1.8.11 while preserving historical 1.8.10 references.
-- [ ] Run local checks and native CI builds, verify the release asset names and sizes, publish v1.8.11 and document any toolchain-owned paths that cannot be flattened safely.
+- [x] Run local checks and native CI builds, verify the release asset names and sizes, publish v1.8.11 and document any toolchain-owned paths that cannot be flattened safely.
