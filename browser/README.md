@@ -4,4 +4,4 @@ The root `browser/` directory contains the transport-neutral browser-agent contr
 
 The user-facing browser application is the existing Tauri shell in `desktop/`, which wraps the compiled `web/dist/public` surface on Windows, Linux and macOS. Android and iOS convert the same web output through Capacitor. This boundary keeps browser behavior in the library and keeps presentation and native packaging in their target surfaces.
 
-Release filenames identify the user-facing desktop browser with the dotted lowercase pattern `saddle.browser.1.8.10.<format>`. Internal module filenames remain API-compatible unless a deliberate public compatibility migration is documented.
+Release filenames identify the user-facing desktop browser with the dotted lowercase pattern `saddle.browser.1.8.11.<format>`. Internal module filenames remain API-compatible unless a deliberate public compatibility migration is documented.

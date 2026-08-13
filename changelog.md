@@ -8,7 +8,15 @@
 
   ## [Unreleased]
 
-    - Future changes will be recorded here after the 1.8.10 release.
+    - Future changes will be recorded here after the 1.8.11 release.
+
+  ## [1.8.11] - 2026-08-13
+
+    - Flattened the project-owned Tauri desktop surface into `desktop/` with root Cargo, Rust entrypoints, icons and configuration
+    - Flattened the project-owned Capacitor Android surface into root `android/` source sets with explicit Gradle mappings and generated staging cleanup
+    - Preserved Capacitor and Xcode generator-owned internals while rejecting project-owned `src` paths in native surfaces
+    - Added flat native validation, Android staging flattening and workflow path corrections for desktop, Android and iOS
+    - Bumped active package, registry, extension, crawler and native metadata to `1.8.11`
 
   ## [1.8.10] - 2026-08-13
 

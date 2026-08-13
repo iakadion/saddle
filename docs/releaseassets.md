@@ -1,10 +1,10 @@
 # Release assets
 
-The Node-only release adapter creates deterministic metadata for caller-selected artifacts. For version `1.8.10`, it writes dotted surface-specific names such as `sha256.desktop.1.8.10`, `manifest.desktop.1.8.10.json`, `sbom.desktop.1.8.10.cdx.json` and `provenance.desktop.1.8.10.intoto.jsonl`. The adapter rejects underscore-based public names and Rust build-helper executables. It never publishes, authenticates or selects a registry.
+The Node-only release adapter creates deterministic metadata for caller-selected artifacts. For version `1.8.11`, it writes dotted surface-specific names such as `sha256.desktop.1.8.11`, `manifest.desktop.1.8.11.json`, `sbom.desktop.1.8.11.cdx.json` and `provenance.desktop.1.8.11.intoto.jsonl`. The adapter rejects underscore-based public names and Rust build-helper executables. It never publishes, authenticates or selects a registry.
 
 ```bash
 npm run release:assets -- \
-  --version 1.8.10 \
+  --version 1.8.11 \
   --surface desktop \
   --output build/release \
   --artifact build/saddle.tgz \

@@ -1,5 +1,7 @@
 package com.getcapacitor.myapp;
 
+package com.wenathlan.saddle;
+
 import static org.junit.Assert.*;
 
 import android.content.Context;
@@ -21,6 +23,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        assertEquals("com.getcapacitor.app", appContext.getPackageName());
+        assertEquals("com.wenathlan.saddle", appContext.getPackageName());
     }
 }

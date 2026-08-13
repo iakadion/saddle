@@ -470,3 +470,15 @@ The following blocks are the execution order for the complete ecosystem. A block
 - [x] Normalize release artifact names to lowercase Saddle names with dots and release versions, including `saddle.browser.1.8.10`, `saddle.apk.1.8.10.apk`, `saddle.aab.1.8.10.aab`, `saddle.container.1.8.10.tar.gz` and `saddle.extension.1.8.10.zip`.
 - [x] Remove all `build_script_build*.exe`, `build-script-build.exe`, stale `saddle_desktop.exe`, duplicate `saddle-desktop.exe` and other non-user-facing build outputs from release assets and workflow collection paths.
 - [x] Add release manifest validation that rejects helper binaries, underscore-based public artifact names and unexpected duplicate assets before upload.
+
+### Flat native build migration for 1.8.11
+
+- [x] Audit every `src` directory and source path in `desktop/`, `android/`, `ios/`, `browser/` and root workflows; distinguish required vendor-generated internals from project-owned source.
+- [x] Define the flat root mapping for the desktop Tauri build, keeping only generated `dist/` output out of version control and moving project-owned configuration and entrypoints to the `desktop/` root where feasible.
+- [x] Define the flat root mapping for the Capacitor Android build, configuring Gradle source sets and project-owned entrypoints without maintaining a project-owned `app/src` source tree.
+- [x] Define the flat root mapping for the Capacitor iOS build, documenting which Xcode and Capacitor generated paths remain toolchain-owned and which Saddle files belong at the `ios/` root.
+- [x] Update `capacitor.config.ts`, desktop configuration, Gradle/Xcode settings and all native workflows to consume the flat mappings without hardcoded host, port, credentials or release versions.
+- [x] Remove or relocate every project-owned `src` path that is not required by the native toolchain and add validation that prevents new forbidden source directories.
+- [x] Preserve the TypeScript library-first boundary so native surfaces convert shared web output instead of duplicating engine logic.
+- [x] Bump all active manifests and release metadata to 1.8.11 while preserving historical 1.8.10 references.
+- [ ] Run local checks and native CI builds, verify the release asset names and sizes, publish v1.8.11 and document any toolchain-owned paths that cannot be flattened safely.

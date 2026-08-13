@@ -1,8 +1,9 @@
 import type { CapacitorConfig } from "@capacitor/cli";
 
 /**
- * Capacitor uses the shared web build as the native application source.
- * Native platform projects remain conversion targets and never own engine logic.
+ * Capacitor 1.8.11 uses the shared web build as the native application source.
+ * Project-owned native configuration stays at the android/ and ios/ roots.
+ * Capacitor-generated staging remains transient and never owns engine logic.
  */
 const config: CapacitorConfig = {
   appId: "com.wenathlan.saddle",

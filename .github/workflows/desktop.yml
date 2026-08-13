@@ -61,9 +61,12 @@ jobs:
       - name: install node dependencies
         run: npm ci
 
+      - name: validate flat native surfaces
+        run: npm run native:check:flat
+
       - name: generate platform icons
         shell: bash
-        run: npx --yes @tauri-apps/cli@2.11.4 icon desktop/icon.svg --output desktop/src-tauri/icons
+        run: npx --yes @tauri-apps/cli@2.11.4 icon desktop/icon.svg --output desktop/icons
 
       - name: build desktop bundles
         shell: bash
@@ -78,23 +81,23 @@ jobs:
           mkdir -p build/release-assets/desktop
           case "${{ matrix.platform }}" in
             linux)
-              deb="$(find desktop/src-tauri/target -type f -path '*/bundle/deb/*.deb' -print -quit)"
-              rpm="$(find desktop/src-tauri/target -type f -path '*/bundle/rpm/*.rpm' -print -quit)"
-              appimage="$(find desktop/src-tauri/target -type f -path '*/bundle/appimage/*.AppImage' -print -quit)"
+              deb="$(find desktop/target -type f -path '*/bundle/deb/*.deb' -print -quit)"
+              rpm="$(find desktop/target -type f -path '*/bundle/rpm/*.rpm' -print -quit)"
+              appimage="$(find desktop/target -type f -path '*/bundle/appimage/*.AppImage' -print -quit)"
               test -n "$deb" && test -n "$rpm" && test -n "$appimage"
               cp "$deb" "build/release-assets/desktop/saddle.browser.${version}.deb"
               cp "$rpm" "build/release-assets/desktop/saddle.browser.${version}.rpm"
               cp "$appimage" "build/release-assets/desktop/saddle.browser.${version}.appimage"
               ;;
             windows)
-              exe="$(find desktop/src-tauri/target -type f -path '*/bundle/nsis/*.exe' -print -quit)"
-              msi="$(find desktop/src-tauri/target -type f -path '*/bundle/msi/*.msi' -print -quit)"
+              exe="$(find desktop/target -type f -path '*/bundle/nsis/*.exe' -print -quit)"
+              msi="$(find desktop/target -type f -path '*/bundle/msi/*.msi' -print -quit)"
               test -n "$exe" && test -n "$msi"
               cp "$exe" "build/release-assets/desktop/saddle.browser.${version}.exe"
               cp "$msi" "build/release-assets/desktop/saddle.browser.${version}.msi"
               ;;
             macos)
-              dmg="$(find desktop/src-tauri/target -type f -path '*/bundle/dmg/*.dmg' -print -quit)"
+              dmg="$(find desktop/target -type f -path '*/bundle/dmg/*.dmg' -print -quit)"
               test -n "$dmg"
               cp "$dmg" "build/release-assets/desktop/saddle.browser.${version}.dmg"
               ;;

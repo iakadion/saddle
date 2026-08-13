@@ -55,3 +55,11 @@ The v1.8.10 release contains the following primary assets. Sizes are bytes and e
 | Android         | [AAB](https://github.com/wenathlan/saddle/releases/download/v1.8.10/saddle.aab.1.8.10.aab)                  |  3,893,352 |
 | Container       | [OCI tarball](https://github.com/wenathlan/saddle/releases/download/v1.8.10/saddle.container.1.8.10.tar.gz) | 81,718,314 |
 | Extension       | [ZIP](https://github.com/wenathlan/saddle/releases/download/v1.8.10/saddle.extension.1.8.10.zip)            |     10,759 |
+
+## 1.8.11 flat source contract
+
+Version 1.8.11 keeps the Tauri browser build flat at `desktop/`, with `Cargo.toml`, `tauri.conf.json`, `build.rs`, `lib.rs` and `main.rs` directly in that surface root. The frontend remains the generated `web/dist/public` output and `dist/` is not committed.
+
+The Android project maps Saddle-owned `AndroidManifest.xml`, `main/`, `res/`, `test/` and `androidtest/` directly from the `android/` root through Gradle `sourceSets`. Capacitor staging under `android/app`, `android/assets` and plugin internals is generated during synchronization, removed or ignored before build, and is not project-owned source. The iOS surface keeps its generated Xcode and Swift Package internals because Capacitor owns those paths; Saddle-owned configuration remains at the `ios/` root and no project-owned `ios/src` directory is added.
+
+The v1.8.11 workflows derive the version from the release tag, run flat-surface validation, reject helper binaries and attach only outputs matching the dotted lowercase contract. The live release asset list must be verified before this section is changed from a source contract to a generated asset inventory.

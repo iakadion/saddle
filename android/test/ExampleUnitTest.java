@@ -1,5 +1,7 @@
 package com.getcapacitor.myapp;
 
+package com.wenathlan.saddle;
+
 import static org.junit.Assert.*;
 
 import org.junit.Test;

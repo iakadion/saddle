@@ -1,6 +1,6 @@
 {
   "name": "@wenathlan/saddle",
-  "version": "1.8.10",
+  "version": "1.8.11",
   "description": "binary computing engine that turns distributed storage into a publishable working set",
   "type": "module",
   "private": false,
@@ -97,7 +97,9 @@
     "prepublishOnly": "npm run pack:check",
     "tauri": "npx --yes @tauri-apps/cli@2.11.4",
     "capacitor:sync:android": "npm run web:build:pages && cap sync android",
+    "capacitor:flatten:android": "node tests/scripts/flattenandroid.mjs",
     "capacitor:sync:ios": "npm run web:build:pages && cap sync ios",
+    "native:check:flat": "node tests/scripts/validateflatnative.mjs",
     "web:dev": "vite --config web/vite.config.ts --host",
     "web:check": "tsc --project web/tsconfig.json --noEmit",
     "web:build": "vite build --config web/vite.config.ts",

@@ -203,7 +203,7 @@ Earlier README snapshots remain in `docs/plans/README.md`, `docs/talks9/README.m
 
 ## Current scope
 
-Version 1.8.10 extends the TypeScript-first engine with explicit Android, iOS and browser surface boundaries, optimized Android release configuration, dotted release asset naming and helper-binary rejection. Browser binaries, provider credentials, n8n host registration, persistent databases, captcha solvers and production deployment remain caller-selected adapters. Future work should extend contracts without coupling the core to one forge, registry, browser or storage vendor.
+Version 1.8.11 extends the TypeScript-first engine with flat project-owned desktop, Android and iOS build surfaces, explicit Capacitor staging boundaries, dotted release asset naming and helper-binary rejection. Browser binaries, provider credentials, n8n host registration, persistent databases, captcha solvers and production deployment remain caller-selected adapters. Future work should extend contracts without coupling the core to one forge, registry, browser or storage vendor.
 
 ## License
 

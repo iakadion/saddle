@@ -1,4 +1,4 @@
-src-tauri/target/
-src-tauri/gen/
-src-tauri/icons/
+gen/
+icons/
+target/
 build/

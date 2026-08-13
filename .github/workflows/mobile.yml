@@ -53,6 +53,10 @@ jobs:
         run: npm run web:build:pages
       - name: synchronize capacitor android surface
         run: npx cap sync android
+      - name: flatten generated android staging
+        run: npm run native:flatten:android
+      - name: validate flat native surfaces
+        run: npm run native:check:flat
       - name: derive android version values
         shell: bash
         run: |
@@ -102,8 +106,8 @@ jobs:
           aab="saddle.aab.${version}.aab"
           checksums="sha256.android.${version}"
           manifest="manifest.android.${version}.json"
-          apk_source="$(find android/app/build/outputs/apk/release -type f -name 'app-release*.apk' -print -quit)"
-          aab_source="$(find android/app/build/outputs/bundle/release -type f -name 'app-release*.aab' -print -quit)"
+          apk_source="$(find android/build/outputs/apk/release -type f \( -name 'android-release*.apk' -o -name 'app-release*.apk' \) -print -quit)"
+          aab_source="$(find android/build/outputs/bundle/release -type f \( -name 'android-release*.aab' -o -name 'app-release*.aab' \) -print -quit)"
           test -n "$apk_source" && test -n "$aab_source"
           cp "$apk_source" "build/release-assets/android/${apk}"
           cp "$aab_source" "build/release-assets/android/${aab}"
@@ -148,6 +152,8 @@ jobs:
         run: npm run web:build:pages
       - name: synchronize capacitor ios surface
         run: npx cap sync ios
+      - name: validate flat native surfaces
+        run: npm run native:check:flat
       - name: configure ios export options
         env:
           IOS_EXPORT_OPTIONS_BASE64: ${{ secrets.IOS_EXPORT_OPTIONS_BASE64 }}
