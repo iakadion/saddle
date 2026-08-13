@@ -32,3 +32,9 @@ Tauri configuration is resolved from `tauri.conf.json` and can be extended with 
 [1]: https://v2.tauri.app/reference/cli/ "Tauri Command Line Interface"
 [2]: https://v2.tauri.app/develop/configuration-files/ "Tauri Configuration Files"
 [3]: https://github.com/wenathlan/saddle/releases/tag/v1.8.9 "Saddle v1.8.9 GitHub Release"
+
+## 1.8.10 conversion contract
+
+Version 1.8.10 keeps the Tauri desktop browser and adds explicit Capacitor Android and iOS conversion targets. The shared source is the TypeScript library plus the compiled `web/dist/public` output; the native folders do not fork engine logic. The Android release build enables R8 and resource shrinking, and the workflow creates an ephemeral CI test key when caller production signing secrets are absent.
+
+The 1.8.10 workflow names the public outputs `saddle.browser.1.8.10.<format>`, `saddle.apk.1.8.10.apk`, `saddle.aab.1.8.10.aab`, `saddle.ipa.1.8.10.ipa`, `saddle.container.1.8.10.tar.gz` and `saddle.extension.1.8.10.zip`. Surface manifests and checksums use the corresponding `manifest.<surface>.1.8.10.json` and `sha256.<surface>.1.8.10` forms. The release is not considered complete until the live GitHub asset list matches these generated names.

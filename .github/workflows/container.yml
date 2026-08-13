@@ -32,24 +32,30 @@ jobs:
         env:
           IMAGE: ghcr.io/${{ github.repository }}:${{ steps.releaseversion.outputs.version }}
         run: |
+          archive="saddle.container.${{ steps.releaseversion.outputs.version }}.tar.gz"
           docker build --build-arg SADDLE_VERSION="${{ steps.releaseversion.outputs.version }}" --tag "$IMAGE" .
-          docker save "$IMAGE" | gzip -9 > "saddle-container-${{ steps.releaseversion.outputs.version }}.tar.gz"
+          docker save "$IMAGE" | gzip -9 > "$archive"
       - name: checksum and manifest
         shell: bash
         run: |
-          sha256sum "saddle-container-${{ steps.releaseversion.outputs.version }}.tar.gz" > SHA256SUMS-container
-          printf '{\n  "version": "%s",\n  "image": "ghcr.io/%s:%s",\n  "archive": "saddle-container-%s.tar.gz",\n  "signing": "caller-owned"\n}\n' "${{ steps.releaseversion.outputs.version }}" "${{ github.repository }}" "${{ steps.releaseversion.outputs.version }}" "${{ steps.releaseversion.outputs.version }}" > container-artifact-manifest.json
+          version="${{ steps.releaseversion.outputs.version }}"
+          archive="saddle.container.${version}.tar.gz"
+          checksums="sha256.container.${version}"
+          manifest="manifest.container.${version}.json"
+          sha256sum "$archive" > "$checksums"
+          printf '{\n  "version": "%s",\n  "platform": "container",\n  "image": "ghcr.io/%s:%s",\n  "archive": "%s",\n  "signing": "caller-owned"\n}\n' "$version" "${{ github.repository }}" "$version" "$archive" > "$manifest"
+          ! find . -maxdepth 1 -type f \( -name 'build_script_build*.exe' -o -name 'build-script-build.exe' -o -name '*_*' \) -print -quit | grep -q .
       - name: upload workflow artifact
         uses: actions/upload-artifact@v4
         with:
-          name: saddle-container-${{ steps.releaseversion.outputs.version }}
+          name: saddle.container.${{ steps.releaseversion.outputs.version }}
           path: |
-            saddle-container-${{ steps.releaseversion.outputs.version }}.tar.gz
-            SHA256SUMS-container
-            container-artifact-manifest.json
+            saddle.container.${{ steps.releaseversion.outputs.version }}.tar.gz
+            sha256.container.${{ steps.releaseversion.outputs.version }}
+            manifest.container.${{ steps.releaseversion.outputs.version }}.json
           if-no-files-found: error
       - name: attach release assets
         if: github.event_name == 'release' || inputs.release_tag != ''
         env:
           GH_TOKEN: ${{ github.token }}
-        run: gh release upload "$RELEASE_TAG" "saddle-container-${{ steps.releaseversion.outputs.version }}.tar.gz" SHA256SUMS-container container-artifact-manifest.json --clobber
+        run: gh release upload "$RELEASE_TAG" "saddle.container.${{ steps.releaseversion.outputs.version }}.tar.gz" "sha256.container.${{ steps.releaseversion.outputs.version }}" "manifest.container.${{ steps.releaseversion.outputs.version }}.json" --clobber

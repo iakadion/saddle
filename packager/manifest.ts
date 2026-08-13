@@ -11,6 +11,16 @@ export const artifactformats = Object.freeze({
   package: Object.freeze(["npm", "github", "maven", "nuget", "rubygems", "oci", "vsix", "oxt"])
 });
 
+const publicsurfaces = Object.freeze({ desktopapp: "browser", mobileapp: "mobile" });
+
+/** Creates the public dotted artifact stem for a target and version. */
+export function artifactname(target, version, format) {
+  const surface = publicsurfaces[target] ?? target;
+  const normalized = `${surface}.${version}.${format}`.toLowerCase();
+  if (!/^[a-z0-9]+(?:\.[a-z0-9]+)+$/.test(normalized)) throw new TypeError("artifact name contains unsupported characters");
+  return normalized;
+}
+
 /** Creates a distribution manifest for caller-owned build and publication steps. */
 export function distributionmanifest(options = {}) {
   if (!options.name || !options.version || !options.entry) throw new TypeError("distribution manifest requires name version and entry");
@@ -30,7 +40,7 @@ export function targetplan(manifest, target, options = {}) {
   if (!manifest?.name || !manifest?.version) throw new TypeError("target plan requires a distribution manifest");
   if (!target) throw new TypeError("target plan requires a target");
   const format = options.format ?? target;
-  return { name: manifest.name, version: manifest.version, target, format, entry: manifest.entry, output: options.output ?? `build/artifacts/${target}.${format}`, command: options.command ?? `caller-build ${target} ${format}`, generated: true, credentials: "caller-managed", metadata: options.metadata ?? {} };
+  return { name: manifest.name, version: manifest.version, target, format, entry: manifest.entry, output: options.output ?? `build/artifacts/${artifactname(target, manifest.version, format)}`, command: options.command ?? `caller-build ${target} ${format}`, generated: true, credentials: "caller-managed", metadata: options.metadata ?? {} };
 }
 
 /** Creates a declarative Node SEA or caller-selected binary build plan. */

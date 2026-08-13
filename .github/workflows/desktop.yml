@@ -74,30 +74,45 @@ jobs:
       - name: collect desktop artifacts
         shell: bash
         run: |
+          version="${{ steps.releaseversion.outputs.version }}"
           mkdir -p build/release-assets/desktop
           case "${{ matrix.platform }}" in
             linux)
-              find desktop/src-tauri/target -type f \( -path '*/bundle/deb/*.deb' -o -path '*/bundle/rpm/*.rpm' -o -path '*/bundle/appimage/*.AppImage' \) -exec cp {} build/release-assets/desktop/ \;
+              deb="$(find desktop/src-tauri/target -type f -path '*/bundle/deb/*.deb' -print -quit)"
+              rpm="$(find desktop/src-tauri/target -type f -path '*/bundle/rpm/*.rpm' -print -quit)"
+              appimage="$(find desktop/src-tauri/target -type f -path '*/bundle/appimage/*.AppImage' -print -quit)"
+              test -n "$deb" && test -n "$rpm" && test -n "$appimage"
+              cp "$deb" "build/release-assets/desktop/saddle.browser.${version}.deb"
+              cp "$rpm" "build/release-assets/desktop/saddle.browser.${version}.rpm"
+              cp "$appimage" "build/release-assets/desktop/saddle.browser.${version}.appimage"
               ;;
             windows)
-              find desktop/src-tauri/target -type f \( -path '*/bundle/nsis/*.exe' -o -path '*/bundle/msi/*.msi' \) -exec cp {} build/release-assets/desktop/ \;
+              exe="$(find desktop/src-tauri/target -type f -path '*/bundle/nsis/*.exe' -print -quit)"
+              msi="$(find desktop/src-tauri/target -type f -path '*/bundle/msi/*.msi' -print -quit)"
+              test -n "$exe" && test -n "$msi"
+              cp "$exe" "build/release-assets/desktop/saddle.browser.${version}.exe"
+              cp "$msi" "build/release-assets/desktop/saddle.browser.${version}.msi"
               ;;
             macos)
-              find desktop/src-tauri/target -type f -path '*/bundle/dmg/*.dmg' -exec cp {} build/release-assets/desktop/ \;
+              dmg="$(find desktop/src-tauri/target -type f -path '*/bundle/dmg/*.dmg' -print -quit)"
+              test -n "$dmg"
+              cp "$dmg" "build/release-assets/desktop/saddle.browser.${version}.dmg"
               ;;
           esac
           test -n "$(find build/release-assets/desktop -type f -print -quit)"
-          checksums="SHA256SUMS-${{ matrix.platform }}"
-          manifest="artifact-manifest-${{ matrix.platform }}.json"
-          if command -v sha256sum >/dev/null 2>&1; then sha256sum build/release-assets/desktop/* > "build/release-assets/desktop/${checksums}"; else shasum -a 256 build/release-assets/desktop/* > "build/release-assets/desktop/${checksums}"; fi
-          printf '{\n  "version": "%s",\n  "platform": "%s",\n  "files": [' "${{ steps.releaseversion.outputs.version }}" "${{ matrix.platform }}" > "build/release-assets/desktop/${manifest}"
+          checksums="sha256.desktop.${{ matrix.platform }}.${version}"
+          manifest="manifest.desktop.${{ matrix.platform }}.${version}.json"
+          if command -v sha256sum >/dev/null 2>&1; then sha256sum build/release-assets/desktop/saddle.browser.* > "build/release-assets/desktop/${checksums}"; else shasum -a 256 build/release-assets/desktop/saddle.browser.* > "build/release-assets/desktop/${checksums}"; fi
+          sed -i.bak 's#build/release-assets/desktop/##g' "build/release-assets/desktop/${checksums}" && rm -f "build/release-assets/desktop/${checksums}.bak"
+          printf '{\n  "version": "%s",\n  "platform": "%s",\n  "signing": "caller-owned",\n  "files": [' "$version" "${{ matrix.platform }}" > "build/release-assets/desktop/${manifest}"
           find build/release-assets/desktop -type f ! -name "${checksums}" ! -name "${manifest}" -exec basename {} \; | awk 'BEGIN { first=1 } { if (!first) printf ","; printf "\"%s\"", $0; first=0 }' >> "build/release-assets/desktop/${manifest}"
-          printf '],\n  "signing": "caller-owned"\n}\n' >> "build/release-assets/desktop/${manifest}"
+          printf ']\n}\n' >> "build/release-assets/desktop/${manifest}"
+          ! find build/release-assets/desktop -type f \( -name 'build_script_build*.exe' -o -name 'build-script-build.exe' -o -name '*_*' \) -print -quit | grep -q .
 
       - name: upload workflow artifacts
         uses: actions/upload-artifact@v4
         with:
-          name: saddle-desktop-${{ matrix.platform }}-${{ steps.releaseversion.outputs.version }}
+          name: saddle.browser.${{ matrix.platform }}.${{ steps.releaseversion.outputs.version }}
           path: build/release-assets/desktop
           if-no-files-found: error
 

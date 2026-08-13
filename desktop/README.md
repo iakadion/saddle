@@ -1,6 +1,6 @@
 # saddle desktop browser
 
-The desktop surface wraps the existing `web/` build in one Tauri application. Windows, Linux and macOS use the same web assets, compiled library contracts, window policy and release version. Platform differences are limited to native WebView integration, installer format and caller-owned signing.
+The desktop surface is the Saddle browser application. It wraps the existing `web/` build in one Tauri application. Windows, Linux and macOS use the same web assets, compiled library contracts, window policy and release version. Platform differences are limited to native WebView integration, installer format and caller-owned signing.
 
 ## Source boundary
 
@@ -16,4 +16,4 @@ npx --yes @tauri-apps/cli@2.11.4 dev
 npx --yes @tauri-apps/cli@2.11.4 build --ci --no-sign --bundles deb,rpm,appimage
 ```
 
-The release workflow runs the native command on the matching GitHub-hosted runner. It attaches only files that were actually generated. Signing, notarization, Microsoft Store submission, Snap publication, Flatpak publication and Apple App Store submission require caller-owned credentials and are not embedded in this repository.
+The release workflow runs the native command on the matching GitHub-hosted runner. It attaches only files that were actually generated and renames them to `saddle.browser.<version>.<format>`. Android and iOS convert the same web output through the Capacitor surfaces under `android/` and `ios/`. Signing, notarization, Microsoft Store submission, Snap publication, Flatpak publication and Apple App Store submission require caller-owned credentials and are not embedded in this repository.

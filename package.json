@@ -1,6 +1,6 @@
 {
   "name": "@wenathlan/saddle",
-  "version": "1.8.9",
+  "version": "1.8.10",
   "description": "binary computing engine that turns distributed storage into a publishable working set",
   "type": "module",
   "private": false,
@@ -14,6 +14,11 @@
   "packageManager": "npm@12.0.2",
   "publishConfig": {
     "access": "public"
+  },
+  "overrides": {
+    "xcode": {
+      "uuid": "11.1.1"
+    }
   },
   "repository": {
     "type": "git",
@@ -91,12 +96,18 @@
     "pack:check": "npm run check && npm run formatcheck && npm test && npm pack --dry-run",
     "prepublishOnly": "npm run pack:check",
     "tauri": "npx --yes @tauri-apps/cli@2.11.4",
+    "capacitor:sync:android": "npm run web:build:pages && cap sync android",
+    "capacitor:sync:ios": "npm run web:build:pages && cap sync ios",
     "web:dev": "vite --config web/vite.config.ts --host",
     "web:check": "tsc --project web/tsconfig.json --noEmit",
     "web:build": "vite build --config web/vite.config.ts",
     "web:build:pages": "vite build --config web/vite.config.ts"
   },
   "devDependencies": {
+    "@capacitor/android": "^8.5.0",
+    "@capacitor/cli": "^8.5.0",
+    "@capacitor/core": "^8.5.0",
+    "@capacitor/ios": "^8.5.0",
     "@hookform/resolvers": "^5.2.2",
     "@radix-ui/react-accordion": "^1.2.12",
     "@radix-ui/react-alert-dialog": "^1.1.15",

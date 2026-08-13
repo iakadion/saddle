@@ -5,10 +5,12 @@
 
 import { createHash } from "node:crypto";
 import { mkdir, readFile, writeFile } from "node:fs/promises";
-import { dirname, join, relative, resolve } from "node:path";
+import { basename, dirname, join, relative, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 
-const rootpath = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+const modulepath = dirname(fileURLToPath(import.meta.url));
+const moduleparts = modulepath.split(sep);
+const rootpath = moduleparts.at(-1) === "release" && moduleparts.at(-2) === "dist" ? resolve(modulepath, "..", "..") : resolve(modulepath, "..");
 
 /** Builds deterministic release metadata files for caller-selected artifacts. */
 export async function createassets(options = {}) {
@@ -19,13 +21,26 @@ export async function createassets(options = {}) {
   const packagejson = JSON.parse(await readFile(packagefile, "utf8"));
   const lockjson = JSON.parse(await readFile(lockfile, "utf8"));
   const artifacts = [...new Set((options.artifacts ?? []).map((artifact) => resolve(String(artifact))))].sort();
-  const subjects = await Promise.all(artifacts.map(async (artifact) => ({ name: relative(artifactroot, artifact).replaceAll("\\", "/"), digest: await sha256(artifact) })));
+  const version = String(options.version ?? packagejson.version);
+  const surface = normalizeSurface(options.surface ?? "library");
+  const subjects = await Promise.all(artifacts.map(async (artifact) => {
+    const name = relative(artifactroot, artifact).replaceAll("\\", "/");
+    validateArtifactName(basename(name));
+    return { name, digest: await sha256(artifact) };
+  }));
   await mkdir(output, { recursive: true });
   const checksums = `${subjects.map((subject) => `${subject.digest}  ${subject.name}`).join("\n")}${subjects.length ? "\n" : ""}`;
   const sbom = createsbom(packagejson, lockjson);
-  const provenance = createprovenance(packagejson, subjects, options);
-  const files = { checksums: join(output, "SHA256SUMS"), sbom: join(output, "sbom.cdx.json"), provenance: join(output, "provenance.intoto.jsonl") };
+  const provenance = createprovenance(packagejson, subjects, { ...options, version });
+  const manifest = { name: String(packagejson.name), version, surface, files: subjects.map((subject) => basename(subject.name)), signing: String(options.signing ?? "caller-owned") };
+  const files = {
+    checksums: join(output, `sha256.${surface}.${version}`),
+    manifest: join(output, `manifest.${surface}.${version}.json`),
+    sbom: join(output, `sbom.${surface}.${version}.cdx.json`),
+    provenance: join(output, `provenance.${surface}.${version}.intoto.jsonl`)
+  };
   await writeFile(files.checksums, checksums);
+  await writeFile(files.manifest, `${JSON.stringify(manifest, null, 2)}\n`);
   await writeFile(files.sbom, `${JSON.stringify(sbom, null, 2)}\n`);
   await writeFile(files.provenance, `${JSON.stringify(provenance)}\n`);
   return { output, files, subjects, sbom, provenance };
@@ -53,12 +68,20 @@ async function sha256(path) { const hash = createHash("sha256"); hash.update(awa
 
 function stableuuid(value) { const hex = createHash("sha256").update(String(value)).digest("hex").slice(0, 32); return `${hex.slice(0, 8)}-${hex.slice(8, 12)}-4${hex.slice(13, 16)}-${(8 + (Number.parseInt(hex.slice(16, 17), 16) % 4).toString(16))}${hex.slice(17, 20)}-${hex.slice(20)}`; }
 
+/** Normalizes the public release surface used in metadata filenames. */
+function normalizeSurface(value) { const normalized = String(value).trim().toLowerCase(); if (!/^[a-z0-9]+(?:[.-][a-z0-9]+)*$/.test(normalized)) throw new TypeError(`invalid release surface: ${value}`); return normalized; }
+
+/** Rejects helper binaries and ambiguous public filenames before metadata generation. */
+function validateArtifactName(value) { if (value.includes("_") || /build[-_]script[-_]build|saddle[-_]desktop/i.test(value)) throw new TypeError(`forbidden release artifact filename: ${value}`); }
+
 function parsearguments(argumentslist) {
   const options = { artifacts: [] };
   for (let index = 0; index < argumentslist.length; index += 1) {
     const argument = argumentslist[index];
     if (argument === "--output") options.output = argumentslist[++index];
     else if (argument === "--version") options.version = argumentslist[++index];
+    else if (argument === "--surface") options.surface = argumentslist[++index];
+    else if (argument === "--signing") options.signing = argumentslist[++index];
     else if (argument === "--artifact") options.artifacts.push(argumentslist[++index]);
     else if (argument === "--build-type") options.buildtype = argumentslist[++index];
     else if (argument === "--builder") options.builder = argumentslist[++index];

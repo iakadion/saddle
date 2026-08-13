@@ -457,3 +457,16 @@ The following blocks are the execution order for the complete ecosystem. A block
 - [x] Add a release-assets manifest listing generated, unavailable and caller-required artifacts so release notes never imply that a missing binary exists.
 - [x] Run the desktop and mobile workflows from the tag-derived version without hardcoded version numbers or credentials.
 - [x] Update release notes, README, target documentation and todo.md only after the generated asset list is verified against the actual GitHub release.
+
+### Native surface conversion and artifact normalization follow-up
+
+- [ ] Research Ionic, Capacitor, Tauri and other TS/TSX-to-mobile conversion paths and document the selected trade-offs.
+- [ ] Create explicit root-based `android/`, `ios/` and `browser/` surface boundaries without duplicating the library engine or web application logic.
+- [ ] Define Android TSX design and configuration inputs that consume the shared library contracts before conversion to APK and AAB.
+- [ ] Define iOS TSX design and configuration inputs that consume the shared library contracts before conversion to app and IPA.
+- [ ] Define the browser surface as the desktop browser contract and document why the implementation remains under `desktop/` or moves to a canonical browser boundary.
+- [ ] Add focused Android, iOS, browser and desktop workflows that convert the shared TypeScript and TSX source without hardcoded infrastructure or credentials.
+- [ ] Measure the Android bundle composition and reduce the APK size through release shrinking, ABI strategy, dependency review and asset optimization without removing required functionality.
+- [ ] Normalize release artifact names to lowercase Saddle names with dots and release versions, such as `saddle.browser.1.8.9`, `saddle.apk.1.8.9`, `saddle.aab.1.8.9`, `saddle.container.1.8.9.tar.gz` and `saddle.extension.1.8.9.zip`.
+- [ ] Remove all `build_script_build*.exe`, `build-script-build.exe`, stale `saddle_desktop.exe`, duplicate `saddle-desktop.exe` and other non-user-facing build outputs from release assets and workflow collection paths.
+- [ ] Add release manifest validation that rejects helper binaries, underscore-based public artifact names and unexpected duplicate assets before upload.

@@ -43,18 +43,18 @@ jobs:
       - name: create zip
         run: |
           cd build/extension
-          zip -qr "../../saddle-extension-${{ steps.releaseversion.outputs.version }}.zip" .
+          zip -qr "../../saddle.extension.${{ steps.releaseversion.outputs.version }}.zip" .
 
       - name: upload workflow artifact
         uses: actions/upload-artifact@v4
         with:
-          name: saddle-extension-${{ steps.releaseversion.outputs.version }}
-          path: saddle-extension-${{ steps.releaseversion.outputs.version }}.zip
+          name: saddle.extension.${{ steps.releaseversion.outputs.version }}
+          path: saddle.extension.${{ steps.releaseversion.outputs.version }}.zip
           if-no-files-found: error
 
       - name: attach release asset
         env:
           GH_TOKEN: ${{ github.token }}
           RELEASE_TAG: ${{ steps.releaseversion.outputs.tag }}
-          ASSET: saddle-extension-${{ steps.releaseversion.outputs.version }}.zip
+          ASSET: saddle.extension.${{ steps.releaseversion.outputs.version }}.zip
         run: gh release upload "$RELEASE_TAG" "$ASSET" --clobber

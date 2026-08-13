@@ -8,7 +8,13 @@
 
   ## [Unreleased]
 
-    - Future changes will be recorded here after the 1.8.9 release.
+    - Future changes will be recorded here after the 1.8.10 release.
+
+  ## [1.8.10] - 2026-08-13
+
+    - Normalized active package, desktop, extension, registry and crawler identity to `1.8.10`
+    - Added mobile conversion research for Capacitor, Ionic and Tauri with an explicit library-first decision
+    - Added the implementation plan for Android, iOS, browser surface boundaries, APK size analysis and dotted artifact names
 
   ## [1.8.9] - 2026-08-13
 

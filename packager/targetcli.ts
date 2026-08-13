@@ -5,7 +5,7 @@
 
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { resolve } from "node:path";
-import { targetplan } from "./manifest.js";
+import { artifactname, targetplan } from "./manifest.js";
 
 /** Reads the distribution manifest and writes one target plan. */
 export async function writeTargetPlan(target: string, format = target, output = "build/targets") {
@@ -13,7 +13,7 @@ export async function writeTargetPlan(target: string, format = target, output = 
   const manifest = { name: packagejson.name, version: packagejson.version, entry: "dist/index.js" };
   const plan = targetplan(manifest, target, { format });
   await mkdir(resolve(output), { recursive: true });
-  const filename = resolve(output, `${target}-${format}.json`);
+  const filename = resolve(output, `manifest.${artifactname(target, manifest.version, format)}.json`);
   await writeFile(filename, `${JSON.stringify(plan, null, 2)}\n`);
   return filename;
 }

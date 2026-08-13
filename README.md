@@ -181,6 +181,10 @@ scrape/        robots, cache, extraction, schema, normalization and grouped craw
 queue/         queue, idempotency, saga and recovery
 browser/       fingerprint, session, agent and Playwright adapter contracts
 extension/     Manifest V3 reference surface and packager
+desktop/       Tauri browser application for Windows, Linux and macOS
+android/       Capacitor Android conversion target and optimized Gradle release
+ios/           Capacitor iOS conversion target and caller-owned Xcode signing
+capacitor.config.ts shared web-to-native configuration for Android and iOS
 protocol/      JSON, NDJSON, SSE and block serializers
 workflow/      manifests, templates and registry contracts
 release/       checksums, SBOM and provenance metadata
@@ -191,7 +195,7 @@ tests/         deterministic engine and extension coverage
 docs/          architecture, API, security, release and registry notes
 ```
 
-The engine is TypeScript-first ESM with English JSDoc comments and a generated JavaScript `dist/` publication surface. The web surface is TypeScript/React, and no source or generated artifact hardcodes a host, port or credential.
+The engine is TypeScript-first ESM with English JSDoc comments and a generated JavaScript `dist/` publication surface. The web surface is TypeScript/React. Desktop is the browser application and uses Tauri; Android and iOS convert the same web output through Capacitor. No source or generated artifact hardcodes a host, port or credential.
 
 ## Historical documentation
 
@@ -199,7 +203,7 @@ Earlier README snapshots remain in `docs/plans/README.md`, `docs/talks9/README.m
 
 ## Current scope
 
-Version 1.8.9 extends the 1.8.8 engine with TypeScript-first source conversion, dist-only compilation, target-plan manifests and web source consolidation. Browser binaries, provider credentials, n8n host registration, persistent databases, captcha solvers and production deployment remain caller-selected adapters. Future work should extend contracts without coupling the core to one forge, registry, browser or storage vendor.
+Version 1.8.10 extends the TypeScript-first engine with explicit Android, iOS and browser surface boundaries, optimized Android release configuration, dotted release asset naming and helper-binary rejection. Browser binaries, provider credentials, n8n host registration, persistent databases, captcha solvers and production deployment remain caller-selected adapters. Future work should extend contracts without coupling the core to one forge, registry, browser or storage vendor.
 
 ## License
 
