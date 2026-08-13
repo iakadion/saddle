@@ -24,7 +24,7 @@ jobs:
         with:
           ref: ${{ github.event.release.tag_name || github.ref_name }}
       - name: setup node
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v7
         with:
           node-version: 26.7.0
       - name: resolve release version

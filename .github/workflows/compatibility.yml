@@ -21,7 +21,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v5
       - name: setup node
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v7
         with:
           node-version: 26.7.0
       - name: install and build
@@ -52,7 +52,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v5
       - name: setup node
-        uses: actions/setup-node@v5
+        uses: actions/setup-node@v7
         with:
           node-version: 26.7.0
       - name: install
