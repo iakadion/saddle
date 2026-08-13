@@ -499,6 +499,6 @@ The following blocks are the execution order for the complete ecosystem. A block
 
 - [x] Inventory all local and remote branches, preserve their commits through tags or reachable history, and retain only `main` as the active remote branch without rewriting commit history.
 - [x] Research how open source projects distribute Windows, macOS, Android and iOS artifacts when they do not own platform signing certificates, distinguishing self-signed test keys, public release signing, notarization, package-manager trust and user-side installation.
-- [ ] Document legitimate certificate acquisition paths, costs, identity requirements, renewal responsibilities and the exact GitHub Actions secret contracts for each platform.
-- [ ] Add an explicit unsigned/test-build mode and release manifest status so workflows never imply that an unsigned artifact is trusted or malware-free.
+- [x] Document legitimate certificate acquisition paths, costs, identity requirements, renewal responsibilities and the exact GitHub Actions secret contracts for each platform.
+- [x] Add an explicit unsigned/test-build mode and release manifest status so workflows never imply that an unsigned artifact is trusted or malware-free.
 - [ ] Decide whether the next immutable release must be `1.8.12`, because the published `v1.8.11` tag cannot safely be overwritten with the new hardening commits.
