@@ -14,7 +14,7 @@ The manifest requests only `activeTab`, `scripting` and `storage`. It does not r
 
 ## boundaries
 
-The content bridge runs in Chrome's isolated world. It exposes bounded page metadata, visible text, stable references and user initiated click or fill commands. The service worker forwards versioned messages, persists bounded pending command records and stores the latest snapshot metadata in session storage. Rehydration is explicit; startup never replays a command without a caller action. No endpoint, credential, remote script or browser profile is embedded.
+The content bridge runs in Chrome's isolated world. It exposes bounded page metadata, visible text, stable references and user initiated click or fill commands. `pagebridge.js` runs in the page world as a narrow read-only boundary; the isolated content script requests the `pagefacts` command through a token-correlated `postMessage` channel and rejects foreign sources or timed-out responses. The page world cannot invoke extension commands, receive credentials or evaluate arbitrary extension code. The service worker forwards versioned messages, persists bounded pending command records and stores the latest snapshot metadata in session storage. Rehydration is explicit; startup never replays a command without a caller action. No endpoint, credential, remote script or browser profile is embedded.
 
 `protocol.js` and `serviceworker.js` are reusable ESM contracts. `content.js` is intentionally a classic injected file because programmatic Chrome content scripts are loaded as files; it exposes a small global bridge and avoids arbitrary page JavaScript evaluation.
 
@@ -24,4 +24,4 @@ The Node-only build adapter creates an isolated unpacked artifact with the relea
 
 ## next slices
 
-The next extension slices should add snapshot diffing, richer tab and frame metadata, optional host permission escalation and browser action results. Browser providers, login profiles, captcha solvers and remote runners remain caller owned adapters.
+The next extension slices should add snapshot diffing, richer tab and frame metadata, optional host permission escalation, browser action results and Firefox, Edge or Safari adapter profiles. Browser providers, login profiles, captcha solvers and remote runners remain caller owned adapters.

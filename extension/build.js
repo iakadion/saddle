@@ -7,7 +7,7 @@ import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const rootpath = resolve(dirname(fileURLToPath(import.meta.url)), "..");
-const entries = ["manifest.json", "worker.js", "serviceworker.js", "content.js", "popup.js", "popup.html", "popup.css", "protocol.js", "permissions.js"];
+const entries = ["manifest.json", "worker.js", "serviceworker.js", "content.js", "pagebridge.js", "popup.js", "popup.html", "popup.css", "protocol.js", "permissions.js"];
 
 function parsearguments(argumentslist) {
   const options = {};
