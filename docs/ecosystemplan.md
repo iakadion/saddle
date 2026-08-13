@@ -52,7 +52,7 @@ Each block follows the same loop:
 
 ## current implementation
 
-Version 1.8.2 carries the public npm identity migration through the transferred `wenathlan` repository owner, aligns GitHub Packages npm, Maven and GHCR owner metadata, and includes the minimal extension permission policy, deterministic extension zip workflow, context-aware replay, transport-neutral graph audit and bounded content normalization. The unreleased extension slice adds a read-only page-world boundary with token-correlated `pagefacts` responses and deterministic timeout handling. Registry publication is triggered only after the release tag and independent target checks. The first product surface slice adds desktop, mobile, n8n, operator control, operational policy and framework-neutral HTTP contracts. The first cross-runtime slice validates the root on Node, Bun and Deno, while extension-context and browser bundler checks remain caller-owned.
+Version 1.8.6 carries the public npm identity migration through the transferred `wenathlan` repository owner, aligns GitHub Packages npm, Maven and GHCR owner metadata, and includes the minimal extension permission policy, deterministic extension zip workflow, context-aware replay, transport-neutral graph audit, bounded content normalization, isolated page facts, snapshot context diffs, reproducible release assets and root-based Pages deployment. Registry publication is triggered only after the release tag and independent target checks. The first product surface slice adds desktop, mobile, n8n, operator control, operational policy and framework-neutral HTTP contracts. The first cross-runtime slice validates the root on Node, Bun and Deno, while extension-context and browser bundler checks remain caller-owned.
 
 ## evidence sources
 

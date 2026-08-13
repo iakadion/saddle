@@ -345,3 +345,15 @@ The following blocks are the execution order for the complete ecosystem. A block
 - [x] Merge web development dependencies and package configuration into the repository root; remove the nested package and lockfile.
 - [x] Run web typecheck, static build, dependency synchronization and deploy configuration checks.
 - [ ] Commit and push the root migration after reviewing the complete diff and resolving workflow-scope permissions.
+
+### Pages incident and release 1.8.6
+
+- [ ] Inspect the latest GitHub Actions runs, logs and annotations for Pages, release validation and Dependabot.
+- [ ] Reconcile `main` with any Dependabot branch or pull request without deleting an active branch blindly.
+- [ ] Verify the GitHub Pages source, artifact path, base path, environment and repository visibility settings.
+- [ ] Fix the Pages workflow and validate a deployable artifact from the root-based web project.
+- [ ] Set the repository project name and description to the Saddle canonical identity after browser confirmation.
+- [ ] Bump all package and release manifests to `1.8.6` without hardcoding workflow versions.
+- [ ] Run engine, web, packaging and release gates for `1.8.6`.
+- [ ] Create and push the `v1.8.6` tag and release only after the previous checks pass.
+- [ ] Verify the six registry workflows and Pages execution after the release trigger.

@@ -8,11 +8,16 @@
 
   ## [Unreleased]
 
+    - Future changes will be recorded here after the 1.8.6 release.
+
+  ## [1.8.6] - 2026-08-13
+
     - Added durable pending extension commands with explicit rehydration and resume
     - Added optional Playwright peer metadata and a Node-only `browser-playwright` adapter
     - Added a read-only page-world bridge with token-correlated `pagefacts` responses and deterministic timeout handling
     - Added extension snapshot diffs plus persisted window, tab and frame context for explicit resume
     - Added deterministic SHA256SUMS, CycloneDX SBOM and in-toto-shaped provenance asset generation
+    - Flattened the web application into a root-based layout and corrected GitHub Pages, CI and Dependabot paths
 
   ## [1.8.5] - 2026-08-13
 
