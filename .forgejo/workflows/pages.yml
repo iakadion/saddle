@@ -1,10 +1,9 @@
-name: build pages
-
+name: saddle web pages
 on:
   push:
     branches: [main]
+    paths: ["web/**", "package.json", "package-lock.json", ".forgejo/workflows/pages.yml"]
   workflow_dispatch:
-
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,21 +14,17 @@ jobs:
         uses: https://data.forgejo.org/actions/setup-node@v6
         with:
           node-version: 26.7.0
-          cache: pnpm
-      - name: enable pnpm
-        run: corepack enable
+          cache: npm
       - name: install dependencies
-        run: pnpm install --frozen-lockfile
-      - name: typecheck
-        run: pnpm run check
-      - name: build static site
+        run: npm ci
+      - name: check web
+        run: npm run web:check
+      - name: build web
         env:
-          VITE_BASE_PATH: /saddle-pages/
-        run: pnpm run build:pages
-      - name: prepare artifact
-        run: cp dist/public/index.html dist/public/404.html && touch dist/public/.nojekyll
+          VITE_BASE_PATH: ${{ vars.SADDLE_PAGES_BASE_PATH || '/' }}
+        run: npm run web:build:pages
       - name: upload artifact
         uses: https://data.forgejo.org/actions/upload-artifact@v4
         with:
           name: saddle-pages
-          path: dist/public
+          path: web/dist/public
