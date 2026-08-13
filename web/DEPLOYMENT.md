@@ -1,23 +1,23 @@
 # Saddle Pages deployment
 
-The site is a static React/Vite application. The normal development build also bundles the placeholder server entrypoint, but Pages deployments use `pnpm run build:pages` so only `dist/public` is published.
+The site is a static React/Vite application rooted directly in this directory. The repository root owns the package manifest and deployment workflows; this directory owns `index.html`, `main.tsx`, components, pages, public assets and `dist/`. Pages deployments use the root script `npm run web:build:pages` so only `web/dist/public` is published.
 
 ## GitHub Pages
 
-The GitHub workflow uses Node.js 26.7.0, runs the typecheck, builds with `VITE_BASE_PATH=/saddle-pages/`, uploads `dist/public` with `actions/upload-pages-artifact@v4` and deploys it with `actions/deploy-pages@v4`. The repository must be public or the account plan must support Pages, and the repository Pages setting must use GitHub Actions as its source.
+The root GitHub workflow uses Node.js 26.7.0, runs `npm run web:check`, builds with the caller-configured `SADDLE_PAGES_BASE_PATH` variable, uploads `web/dist/public` with `actions/upload-pages-artifact@v4` and deploys it with `actions/deploy-pages@v4`. The repository Pages setting must use GitHub Actions as its source.
 
 ## GitLab Pages
 
-The GitLab pipeline builds with the `node:26.7.0` image, copies the output into `public/` and marks the job with `pages: true`. GitLab Pages then serves the generated `public` artifact. The project owner controls the namespace and Pages visibility.
+The root GitLab pipeline builds with the `node:26.7.0` image, copies `web/dist/public` into `public/` and marks the job with `pages: true`. GitLab Pages then serves the generated `public` artifact. The project owner controls the namespace and Pages visibility.
 
 ## Forgejo and Codeberg Pages
 
-The generic Forgejo workflow builds and uploads an artifact using fully qualified actions from `data.forgejo.org`. The Codeberg-specific workflow additionally calls `https://codeberg.org/git-pages/action@v2` with the injected `forge.token`. It is intended for a repository hosted on Codeberg and publishes `https://${forge.repository_owner}.codeberg.page/saddle-pages/`.
+The root Forgejo workflow builds and uploads `web/dist/public` using fully qualified actions from `data.forgejo.org`. The root Codeberg-specific workflow additionally calls `https://codeberg.org/git-pages/action@v2` with the injected `forge.token`. It publishes the repository name under the caller's Codeberg Pages namespace.
 
 ## Gitea
 
-The Gitea workflow uses the mostly GitHub-compatible Actions runner to build and upload `dist/public`. Gitea does not provide a universal Pages endpoint in the workflow contract, so serving the artifact requires a Pages service or object-storage target selected by the instance owner.
+The root Gitea workflow uses the mostly GitHub-compatible Actions runner to build and upload `web/dist/public`. Gitea does not provide a universal Pages endpoint in the workflow contract, so serving the artifact requires a Pages service or object-storage target selected by the instance owner.
 
 ## Woodpecker
 
-The Woodpecker workflow builds the same output in a `node:26.7.0` container. Woodpecker keeps the workspace available to later steps, but artifact storage or a Pages upload plugin is instance-specific. No endpoint or deployment secret is hardcoded.
+The root Woodpecker workflow builds the same output in a `node:26.7.0` container. Woodpecker keeps the workspace available to later steps, but artifact storage or a Pages upload plugin is instance-specific. No endpoint or deployment secret is hardcoded.

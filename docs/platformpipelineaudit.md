@@ -1,6 +1,10 @@
 # Platform pipeline audit
 
-This document records the platform facts used by the 1.8.4 pipeline work. The workflows remain caller-configured: repository owners provide runner availability, deployment secrets and target repository names.
+This document records the platform facts used by the 1.8.4 pipeline work and the subsequent web root migration. The workflows remain caller-configured: repository owners provide runner availability, deployment secrets and target repository names.
+
+## repository layout contract
+
+The repository has one package manifest and one npm lockfile at the root. The static application is rooted at `web/` without a nested `client/` or `src/` directory: `web/index.html`, `web/main.tsx`, `web/App.tsx`, `web/components/`, `web/pages/`, `web/public/` and `web/dist/` are the canonical paths. Every Pages pipeline installs from the root with `npm ci`, runs `npm run web:check`, and writes the deployable artifact to `web/dist/public`. No nested web package, pnpm lockfile or platform workflow is retained.
 
 ## verified platform facts
 

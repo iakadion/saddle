@@ -1,6 +1,7 @@
 stages:
   - verify
   - package
+  - pages
 verify:
   stage: verify
   image: node:26.7.0
@@ -26,3 +27,19 @@ package:
     when: always
     paths:
       - '*.tgz'
+
+webpages:
+  stage: pages
+  image: node:26.7.0
+  script:
+    - npm ci
+    - npm run web:check
+    - VITE_BASE_PATH="${VITE_BASE_PATH:-/}" npm run web:build:pages
+    - rm -rf public
+    - cp -R web/dist/public public
+    - cp public/index.html public/404.html
+    - touch public/.nojekyll
+  pages: true
+  artifacts:
+    paths:
+      - public

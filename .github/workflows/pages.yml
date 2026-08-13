@@ -1,0 +1,49 @@
+name: saddle web pages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "web/**"
+      - "package.json"
+      - "package-lock.json"
+      - ".github/workflows/pages.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v5
+      - name: setup node
+        uses: actions/setup-node@v5
+        with:
+          node-version: 26.7.0
+          cache: npm
+      - name: install dependencies
+        run: npm ci
+      - name: check web
+        run: npm run web:check
+      - name: build web
+        env:
+          VITE_BASE_PATH: ${{ vars.SADDLE_PAGES_BASE_PATH || '/' }}
+        run: npm run web:build:pages
+      - name: configure pages
+        uses: actions/configure-pages@v5
+      - name: upload pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: web/dist/public
+      - name: deploy pages
+        id: deployment
+        uses: actions/deploy-pages@v4

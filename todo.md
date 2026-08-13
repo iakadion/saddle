@@ -328,8 +328,19 @@ The following blocks are the execution order for the complete ecosystem. A block
 ### Web duplicate cleanup
 
 - [x] Inventory `/web` files and group duplicate suffix variants by canonical basename.
-- [x] Preserve `other1` and `other2` groups exactly as requested, without consolidating or deleting them.
 - [x] Compare duplicate contents and merge unique sections into the canonical file for each authorized group.
 - [x] Delete 310 duplicate suffix files outside the ignored directories and keep canonical paths without numeric suffixes.
+- [x] Remove the explicitly authorized `web/other1` and `web/other2` directories after the migration audit.
 - [x] Run web typecheck, static Pages build, touched-file format check, engine gates and diff review.
 - [x] Publish the deduplicated web tree in commit `d4b6ec5`.
+
+### Web root architecture migration
+
+- [x] Inventory `web/client`, nested workflow folders and all path-sensitive imports before moving files.
+- [x] Move the client contents to the web root without creating a second source tree or duplicate canonical files.
+- [x] Consolidate web workflows into the root workflow locations defined by the architecture and remove nested copies.
+- [x] Remove `web/other1` and `web/other2` after checking that no active build or deploy path references them.
+- [x] Reconcile Vite, TypeScript, Pages, GitLab, Forgejo, Gitea, Codeberg and Woodpecker paths after the move.
+- [x] Merge web development dependencies and package configuration into the repository root; remove the nested package and lockfile.
+- [x] Run web typecheck, static build, dependency synchronization and deploy configuration checks.
+- [ ] Commit and push the root migration after reviewing the complete diff and resolving workflow-scope permissions.
