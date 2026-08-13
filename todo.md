@@ -355,8 +355,8 @@ The following blocks are the execution order for the complete ecosystem. A block
 - [x] Set the repository project name and description to the Saddle canonical identity after browser confirmation.
 - [x] Bump all package and release manifests to `1.8.6` without hardcoding workflow versions.
 - [x] Run engine, web, packaging and release gates for `1.8.6`.
-- [ ] Create and push the `v1.8.6` tag and release only after the previous checks pass.
-- [ ] Verify the six registry workflows and Pages execution after the release trigger.
+- [x] Create and push the `v1.8.6` tag and release only after the previous checks pass.
+- [x] Verify the six registry workflows and Pages execution after the release trigger, including the successful GHCR rerun.
 
 ### Branch and checks consolidation
 
