@@ -125,10 +125,10 @@ jobs:
         uses: actions/checkout@v5
         with:
           fetch-depth: 0
-      - name: gitleaks
-        uses: gitleaks/gitleaks-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: trufflehog
+        uses: trufflesecurity/trufflehog@v3.96.0
+        with:
+          extra_args: --results=verified,unknown
 
   filesystem-scan:
     name: filesystem vulnerability scan
@@ -137,7 +137,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v5
       - name: trivy filesystem scan
-        uses: aquasecurity/trivy-action@0.28.0
+        uses: aquasecurity/trivy-action@v0.36.0
         with:
           scan-type: fs
           scan-ref: .
@@ -159,6 +159,8 @@ jobs:
     steps:
       - name: checkout
         uses: actions/checkout@v5
+      - name: prepare SBOM directory
+        run: mkdir -p build/security
       - name: generate CycloneDX SBOM
         uses: anchore/sbom-action@v0.20.5
         with:
@@ -166,6 +168,7 @@ jobs:
           format: cyclonedx-json
           output-file: build/security/saddle.sbom.cdx.json
           upload-artifact: false
+          upload-release-assets: false
       - name: upload SBOM
         uses: actions/upload-artifact@v4
         with:
