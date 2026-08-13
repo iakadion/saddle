@@ -52,7 +52,7 @@ jobs:
       - name: prepare pages fallback
         run: cp web/dist/public/index.html web/dist/public/404.html && touch web/dist/public/.nojekyll
       - name: upload pages artifact
-        uses: actions/upload-pages-artifact@v4
+        uses: actions/upload-pages-artifact@v5
         with:
           path: web/dist/public
   deploy:
