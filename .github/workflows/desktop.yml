@@ -75,7 +75,17 @@ jobs:
         shell: bash
         run: |
           mkdir -p build/release-assets/desktop
-          find desktop/src-tauri/target -type f \( -name '*.deb' -o -name '*.rpm' -o -name '*.AppImage' -o -name '*.exe' -o -name '*.msi' -o -name '*.msix' -o -name '*.dmg' -o -name '*.pkg' -o -name '*.app.tar.gz' \) -exec cp {} build/release-assets/desktop/ \;
+          case "${{ matrix.platform }}" in
+            linux)
+              find desktop/src-tauri/target -type f \( -path '*/bundle/deb/*.deb' -o -path '*/bundle/rpm/*.rpm' -o -path '*/bundle/appimage/*.AppImage' \) -exec cp {} build/release-assets/desktop/ \;
+              ;;
+            windows)
+              find desktop/src-tauri/target -type f \( -path '*/bundle/nsis/*.exe' -o -path '*/bundle/msi/*.msi' \) -exec cp {} build/release-assets/desktop/ \;
+              ;;
+            macos)
+              find desktop/src-tauri/target -type f -path '*/bundle/dmg/*.dmg' -exec cp {} build/release-assets/desktop/ \;
+              ;;
+          esac
           test -n "$(find build/release-assets/desktop -type f -print -quit)"
           if command -v sha256sum >/dev/null 2>&1; then sha256sum build/release-assets/desktop/* > build/release-assets/desktop/SHA256SUMS; else shasum -a 256 build/release-assets/desktop/* > build/release-assets/desktop/SHA256SUMS; fi
           printf '{\n  "version": "%s",\n  "platform": "%s",\n  "files": [' "${{ steps.releaseversion.outputs.version }}" "${{ matrix.platform }}" > build/release-assets/desktop/artifact-manifest.json
