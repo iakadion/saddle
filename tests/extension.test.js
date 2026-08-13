@@ -4,7 +4,7 @@
 
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import { createcommand, createerror, createsnapshot, isfreshsnapshot } from "../extension/protocol.js";
+import { createcommand, createerror, createsnapshot, isfreshsnapshot, snapshotdiff } from "../extension/protocol.js";
 import { createworkerrouter } from "../extension/serviceworker.js";
 import { startworker } from "../extension/worker.js";
 import { extensionpermissions, permissionpolicy, requestpermission } from "../extension/permissions.js";
@@ -30,6 +30,16 @@ test("creates snapshots and rejects stale references by identity", () => {
   assert.equal(isfreshsnapshot("snap0", snapshot.snapshotid), false);
 });
 
+test("computes extension snapshot diffs and detects context changes", () => {
+  const previous = createsnapshot({ snapshotid: "snap1", windowid: "window1", tabid: "tab1", frameid: "main", elements: [{ ref: "e1", role: "button", name: "Run" }, { ref: "e2", role: "link", name: "Docs" }] });
+  const current = createsnapshot({ snapshotid: "snap2", windowid: "window1", tabid: "tab1", frameid: "frame2", elements: [{ ref: "e1", role: "button", name: "Running" }, { ref: "e3", role: "link", name: "Guide" }] });
+  const diff = snapshotdiff(previous, current);
+  assert.equal(diff.contextchanged, true);
+  assert.equal(diff.added[0].ref, "e3");
+  assert.equal(diff.removed[0].ref, "e2");
+  assert.equal(diff.changed[0].name, "Running");
+});
+
 test("routes commands through scripting and tabs while persisting snapshot state", async () => {
   const calls = [];
   const router = createworkerrouter({
@@ -37,8 +47,9 @@ test("routes commands through scripting and tabs while persisting snapshot state
     tabs: { async sendMessage(tabid, message) { calls.push(["message", tabid, message]); return { type: "response", payload: { snapshotid: "snap2" } }; } },
     storage: { async set(value) { calls.push(["set", value]); }, async get() { return { saddleextensionstate: { snapshotid: "snap1" } }; } }
   });
-  const response = await router.handle(createcommand("snapshot", { tabid: 9 }));
+  const response = await router.handle(createcommand("snapshot", { tabid: 9 }), { tab: { id: 9, windowId: 4 }, frameId: 2 });
   assert.equal(response.payload.snapshotid, "snap2");
+  assert.deepEqual({ tabid: response.payload.tabid, frameid: response.payload.frameid, windowid: response.payload.windowid }, { tabid: "9", frameid: "2", windowid: "4" });
   assert.deepEqual(calls.map(([kind, value]) => kind), ["set", "script", "message", "set"]);
   assert.deepEqual(calls[3][1].saddleextensionstate.pending, []);
   assert.equal(calls[0][1].saddleextensionstate.pending[0].requestid, calls[2][2].id);
@@ -117,12 +128,13 @@ test("rehydrates and explicitly resumes pending commands after worker terminatio
   const router = createworkerrouter({
     scripting: { async executeScript() {} },
     tabs: { async sendMessage(tabid, message) { return { type: "response", payload: { tabid, snapshotid: `snap-${message.id}` } }; } },
-    storage: { async get() { return { saddleextensionstate: { pending: [{ requestid: command.id, command: command.command, message: command, tabid: 11, attempts: 1, createdat: 1, updatedat: 2 }] } }; }, async set(value) { writes.push(value); } }
+    storage: { async get() { return { saddleextensionstate: { pending: [{ requestid: command.id, command: command.command, message: command, tabid: 11, frameid: "frame2", windowid: "window1", attempts: 1, createdat: 1, updatedat: 2 }] } }; }, async set(value) { writes.push(value); } }
   });
   const state = await router.rehydrate();
   assert.equal(state.pending[0].requestid, "pending1");
   const response = await router.resume("pending1");
   assert.equal(response.payload.snapshotid, "snap-pending1");
+  assert.deepEqual({ frameid: response.payload.frameid, windowid: response.payload.windowid }, { frameid: "frame2", windowid: "window1" });
   assert.deepEqual(writes.at(-1).saddleextensionstate.pending, []);
   await assert.rejects(() => router.resume("missing"), (error) => error.code === "PENDING_NOT_FOUND");
 });

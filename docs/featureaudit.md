@@ -51,7 +51,7 @@ This audit compares the current repository with the project README and the addit
 | GitHub Packages and GHCR | missing | no package or image publishing jobs |
 | Maven, NuGet, RubyGems, PyPI | missing | no language specific wrappers or trusted publishing jobs |
 | jsDelivr, UNPKG, esm.sh | partial | URLs are documented; no release verification or SRI manifest |
-| browser extension | partial | surface manifest only; no CRX source or permissions manifest |
+| browser extension | partial | MV3 source, minimal permissions, isolated page boundary, snapshot diffs and unpacked zip build exist; CRX signing and cross-browser profiles remain caller-owned |
 | mobile and desktop apps | partial | target manifests only; no Tauri, Capacitor, Android, or iOS project |
 | site and per site database | missing | no `web` application, Hono server, Drizzle schema, Prisma schema, or site deployment adapter |
 | multi platform app identity | partial | generic bot and forge contracts; no OAuth or GitHub App installation flow |

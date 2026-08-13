@@ -59,10 +59,13 @@ export function createsnapshot(input = {}) {
     version: protocolversion,
     snapshotid: String(input.snapshotid ?? createid("snap")),
     createdat: Number(input.createdat ?? Date.now()),
+    windowid: input.windowid === undefined ? undefined : String(input.windowid),
+    tabid: input.tabid === undefined ? undefined : String(input.tabid),
+    frameid: input.frameid === undefined ? undefined : String(input.frameid),
     url: String(input.url ?? ""),
     title: String(input.title ?? ""),
     text: String(input.text ?? ""),
-    elements: Array.isArray(input.elements) ? input.elements.map((element) => ({ ref: String(element.ref), role: String(element.role ?? "generic"), name: String(element.name ?? "") })) : []
+    elements: Array.isArray(input.elements) ? input.elements.map((element) => ({ ref: String(element.ref), role: String(element.role ?? "generic"), name: String(element.name ?? ""), value: element.value === undefined ? undefined : String(element.value), disabled: Boolean(element.disabled) })) : []
   };
   assertserializable(snapshot);
   return snapshot;
@@ -70,6 +73,22 @@ export function createsnapshot(input = {}) {
 
 /** Returns whether a reference still belongs to the current page snapshot. */
 export function isfreshsnapshot(snapshotid, currentid) { return Boolean(snapshotid && currentid && snapshotid === currentid); }
+
+/** Computes bounded additions, removals and changed elements between extension snapshots. */
+export function snapshotdiff(previous, current) {
+  const before = createsnapshot(previous);
+  const after = createsnapshot(current);
+  const oldmap = new Map(before.elements.map((element) => [element.ref, element]));
+  const newmap = new Map(after.elements.map((element) => [element.ref, element]));
+  return {
+    from: before.snapshotid,
+    to: after.snapshotid,
+    contextchanged: before.windowid !== after.windowid || before.tabid !== after.tabid || before.frameid !== after.frameid,
+    added: after.elements.filter((element) => !oldmap.has(element.ref)),
+    removed: before.elements.filter((element) => !newmap.has(element.ref)),
+    changed: after.elements.filter((element) => oldmap.has(element.ref) && JSON.stringify(oldmap.get(element.ref)) !== JSON.stringify(element))
+  };
+}
 
 function assertserializable(value) {
   try { JSON.stringify(value); } catch (error) { throw new TypeError(`extension message is not serializable: ${error.message}`); }
