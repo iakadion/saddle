@@ -77,9 +77,9 @@ jobs:
           mkdir -p build/release-assets/desktop
           find desktop/src-tauri/target -type f \( -name '*.deb' -o -name '*.rpm' -o -name '*.AppImage' -o -name '*.exe' -o -name '*.msi' -o -name '*.msix' -o -name '*.dmg' -o -name '*.pkg' -o -name '*.app.tar.gz' \) -exec cp {} build/release-assets/desktop/ \;
           test -n "$(find build/release-assets/desktop -type f -print -quit)"
-          sha256sum build/release-assets/desktop/* > build/release-assets/desktop/SHA256SUMS
+          if command -v sha256sum >/dev/null 2>&1; then sha256sum build/release-assets/desktop/* > build/release-assets/desktop/SHA256SUMS; else shasum -a 256 build/release-assets/desktop/* > build/release-assets/desktop/SHA256SUMS; fi
           printf '{\n  "version": "%s",\n  "platform": "%s",\n  "files": [' "${{ steps.releaseversion.outputs.version }}" "${{ matrix.platform }}" > build/release-assets/desktop/artifact-manifest.json
-          find build/release-assets/desktop -maxdepth 1 -type f ! -name 'SHA256SUMS' ! -name 'artifact-manifest.json' -printf '"%f",' | sed 's/,$//' >> build/release-assets/desktop/artifact-manifest.json
+          find build/release-assets/desktop -type f ! -name 'SHA256SUMS' ! -name 'artifact-manifest.json' -exec basename {} \; | awk 'BEGIN { first=1 } { if (!first) printf ","; printf "\"%s\"", $0; first=0 }' >> build/release-assets/desktop/artifact-manifest.json
           printf '],\n  "signing": "caller-owned"\n}\n' >> build/release-assets/desktop/artifact-manifest.json
 
       - name: upload workflow artifacts
