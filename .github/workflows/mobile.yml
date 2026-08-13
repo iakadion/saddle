@@ -1,0 +1,124 @@
+name: mobile artifacts
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: Release tag to package
+        required: true
+        type: string
+      build_ios:
+        description: Build iOS only when Apple signing and provisioning secrets are configured
+        required: true
+        default: false
+        type: boolean
+
+permissions:
+  contents: write
+
+env:
+  RELEASE_TAG: ${{ inputs.release_tag || github.event.release.tag_name }}
+
+jobs:
+  android:
+    name: android debug artifacts
+    runs-on: ubuntu-24.04
+    steps:
+      - name: checkout
+        uses: actions/checkout@v5
+      - name: resolve release version
+        id: releaseversion
+        uses: ./.github/actions/releaseversion
+      - name: setup node
+        uses: actions/setup-node@v5
+        with:
+          node-version: 26.7.0
+      - name: setup rust
+        uses: dtolnay/rust-toolchain@stable
+      - name: setup java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+      - name: setup android
+        uses: android-actions/setup-android@v3
+      - name: install android sdk packages
+        shell: bash
+        run: sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0" "ndk;27.0.12077973"
+      - name: install node dependencies
+        run: npm ci
+      - name: generate platform icons
+        shell: bash
+        run: npx --yes @tauri-apps/cli@2.11.4 icon desktop/icon.svg --output desktop/src-tauri/icons
+      - name: initialize android target
+        shell: bash
+        run: cd desktop && npx --yes @tauri-apps/cli@2.11.4 android init --ci --skip-targets-install
+      - name: build debug apk and aab
+        shell: bash
+        run: cd desktop && npx --yes @tauri-apps/cli@2.11.4 android build --ci --debug --apk --aab --target aarch64
+      - name: collect android artifacts
+        shell: bash
+        run: |
+          mkdir -p build/release-assets/android
+          find desktop/src-tauri/gen/android/app/build/outputs -type f \( -name '*.apk' -o -name '*.aab' \) -exec cp {} build/release-assets/android/ \;
+          test -n "$(find build/release-assets/android -type f -print -quit)"
+          sha256sum build/release-assets/android/* > build/release-assets/android/SHA256SUMS
+          printf '{\n  "version": "%s",\n  "platform": "android",\n  "signing": "debug key for test artifacts",\n  "files": [' "${{ steps.releaseversion.outputs.version }}" > build/release-assets/android/artifact-manifest.json
+          find build/release-assets/android -maxdepth 1 -type f ! -name 'SHA256SUMS' ! -name 'artifact-manifest.json' -printf '"%f",' | sed 's/,$//' >> build/release-assets/android/artifact-manifest.json
+          printf ']\n}\n' >> build/release-assets/android/artifact-manifest.json
+      - name: upload android artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: saddle-android-${{ steps.releaseversion.outputs.version }}
+          path: build/release-assets/android
+          if-no-files-found: error
+      - name: attach android assets
+        if: github.event_name == 'release' || inputs.release_tag != ''
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "$RELEASE_TAG" build/release-assets/android/* --clobber
+
+  ios:
+    name: ios ipa
+    if: ${{ (github.event_name == 'workflow_dispatch' && inputs.build_ios == true) || vars.SADDLE_IOS_ENABLED == 'true' }}
+    runs-on: macos-15
+    steps:
+      - name: checkout
+        uses: actions/checkout@v5
+      - name: resolve release version
+        id: releaseversion
+        uses: ./.github/actions/releaseversion
+      - name: setup node
+        uses: actions/setup-node@v5
+        with:
+          node-version: 26.7.0
+      - name: setup rust
+        uses: dtolnay/rust-toolchain@stable
+      - name: install node dependencies
+        run: npm ci
+      - name: generate platform icons
+        run: npx --yes @tauri-apps/cli@2.11.4 icon desktop/icon.svg --output desktop/src-tauri/icons
+      - name: initialize ios target
+        run: cd desktop && npx --yes @tauri-apps/cli@2.11.4 ios init --ci --skip-targets-install
+      - name: build ipa
+        run: cd desktop && npx --yes @tauri-apps/cli@2.11.4 ios build --ci -- --export-method app-store-connect
+      - name: collect ios artifacts
+        run: |
+          mkdir -p build/release-assets/ios
+          find desktop/src-tauri/gen/apple/build -type f -name '*.ipa' -exec cp {} build/release-assets/ios/ \;
+          test -n "$(find build/release-assets/ios -type f -print -quit)"
+          shasum -a 256 build/release-assets/ios/* > build/release-assets/ios/SHA256SUMS
+      - name: upload ios artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: saddle-ios-${{ steps.releaseversion.outputs.version }}
+          path: build/release-assets/ios
+          if-no-files-found: error
+      - name: attach ios assets
+        if: github.event_name == 'release' || inputs.release_tag != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release upload "$RELEASE_TAG" build/release-assets/ios/* --clobber
