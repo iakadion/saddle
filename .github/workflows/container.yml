@@ -26,6 +26,8 @@ jobs:
       - name: resolve release version
         id: releaseversion
         uses: ./.github/actions/releaseversion
+        with:
+          checkout_tag: "false"
       - name: build container
         env:
           IMAGE: ghcr.io/${{ github.repository }}:${{ steps.releaseversion.outputs.version }}

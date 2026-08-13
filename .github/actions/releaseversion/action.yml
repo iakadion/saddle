@@ -5,6 +5,10 @@ inputs:
     description: Package metadata file to validate.
     required: false
     default: package.json
+  checkout_tag:
+    description: Check out the release tag after validating it.
+    required: false
+    default: "true"
 outputs:
   tag:
     description: Release tag without mutation.
@@ -20,6 +24,7 @@ runs:
       env:
         RELEASE_TAG: ${{ env.RELEASE_TAG }}
         PACKAGE_FILE: ${{ inputs.package }}
+        CHECKOUT_TAG: ${{ inputs.checkout_tag }}
         GH_TOKEN: ${{ github.token }}
       run: |
         set -euo pipefail
@@ -33,7 +38,9 @@ runs:
         fi
         version="${tag#v}"
         git fetch --force --tags origin "refs/tags/${tag}:refs/tags/${tag}"
-        git checkout --detach "$tag"
+        if [[ "$CHECKOUT_TAG" == "true" ]]; then
+          git checkout --detach "$tag"
+        fi
         package_version=$(node -p "require('./${PACKAGE_FILE}').version")
         if [[ "$package_version" != "$version" ]]; then
           echo "Release tag ${tag} does not match package version ${package_version}" >&2

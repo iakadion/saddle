@@ -40,6 +40,8 @@ jobs:
       - name: resolve release version
         id: releaseversion
         uses: ./.github/actions/releaseversion
+        with:
+          checkout_tag: "false"
 
       - name: setup node
         uses: actions/setup-node@v5
