@@ -115,6 +115,11 @@ import { controlservice } from "../api/control.js";
 import { hmacsha256, sha256 } from "../core/hash.js";
 import { workerbridge } from "../runtime/worker.js";
 
+test("keeps the Playwright provider optional and explicit", async () => {
+  const { createplaywrightsession } = await import("../browser/playwright.js");
+  await assert.rejects(() => createplaywrightsession(), (error) => error.code === "OPTIONAL_DEPENDENCY_MISSING" || error.code === "ERR_MODULE_NOT_FOUND");
+});
+
 test("runs a job through prepare process sync and commit", async () => {
   const root = await mkdtemp(join(tmpdir(), "saddletest"));
   const events = eventbus();

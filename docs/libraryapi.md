@@ -39,6 +39,7 @@ The public API is designed around injected transports. Consumers can use the sam
 | `commandguard` | enforce caller-defined bot command scopes |
 | `deliveryqueue` | retry webhook deliveries and retain dead letters |
 | `nodeserver` | expose a Web Request/Response handler through Node HTTP |
+| `@wenathlan/saddle/browser-playwright` | optional Node-only Playwright session adapter; the peer is caller-installed and the root remains vendor-neutral |
 
 ```js
 import { scrapeurl, formatforagent } from "@wenathlan/saddle";

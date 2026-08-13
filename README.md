@@ -145,12 +145,12 @@ saddle mcp
 
 | Registry | Artifact | Workflow | Status |
 | --- | --- | --- | --- |
-| GitHub npm | `@wenathlan/saddle@1.8.4` | publishgithubnpm.yml | workflow succeeded |
-| GHCR | `ghcr.io/wenathlan/saddle:1.8.4` and `latest` | publishghcr.yml | workflow succeeded |
-| Maven | `io.wenathlan:saddle:1.8.4` | publishmaven.yml | workflow succeeded |
-| NuGet | `Saddle.1.8.4.nupkg` | publishnuget.yml | workflow succeeded |
-| RubyGems | `saddle 1.8.4` | publishrubygems.yml | workflow succeeded |
-| npmjs | `@wenathlan/saddle@1.8.4` | publishnpmjs.yml | public registry confirmed |
+| GitHub npm | `@wenathlan/saddle@1.8.5` | publishgithubnpm.yml | pending release |
+| GHCR | `ghcr.io/wenathlan/saddle:1.8.5` and `latest` | publishghcr.yml | pending release |
+| Maven | `io.wenathlan:saddle:1.8.5` | publishmaven.yml | pending release |
+| NuGet | `Saddle.1.8.5.nupkg` | publishnuget.yml | pending release |
+| RubyGems | `saddle 1.8.5` | publishrubygems.yml | pending release |
+| npmjs | `@wenathlan/saddle@1.8.5` | publishnpmjs.yml | pending release |
 
 ## Development
 
@@ -188,7 +188,7 @@ Root-based JavaScript ESM layout, no src/ directory, no TypeScript build require
 
 ## Current scope
 
-Version 1.8.4 establishes the engine contracts, browser snapshot foundation, storage sync primitives, runner recovery contracts, scraping context provenance and normalization, API/MCP security contracts, bot integration lifecycle, the tested extension bridge and permission policy, deterministic extension packaging, context-aware replay, Node.js 26.7.0 cross-forge gates, desktop/mobile/n8n surface contracts, a framework-neutral operator control boundary and the first cross-runtime import boundary. Native runtimes, n8n host registration, provider credentials, persistent databases and production deployment remain caller-selected adapters. The next improvements should extend these contracts without coupling the core to one forge, registry, browser or storage vendor.
+Version 1.8.5 extends the 1.8.4 engine contracts with package metadata for Node.js 26.7.0 and npm 12, an optional Playwright peer, and an explicit Node-only `browser-playwright` adapter. Native runtimes, browser binaries, n8n host registration, provider credentials, persistent databases and production deployment remain caller-selected adapters. The next improvements should extend these contracts without coupling the core to one forge, registry, browser or storage vendor.
 
 ## License
 

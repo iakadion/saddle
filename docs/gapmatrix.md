@@ -16,7 +16,7 @@ This matrix turns the supplied README and conclusions into implementation decisi
 | Area | Current state | Gap | Priority | Decision |
 | --- | --- | --- | --- | --- |
 | Root library | Implemented ESM entry point with broad exports | No extension subpath or extension files are shipped | P0 | Add a small `extension/` package surface and export only serializable contracts |
-| Browser agent | Implemented injected action adapter for navigate, click, type, screenshot, DOM, title, scroll and command batches | Vendor-neutral action results and bounded action batches are now public | P1 | Keep the adapter boundary; add vendor adapters without moving browser ownership into the core |
+| Browser agent | Implemented injected action adapter for navigate, click, type, screenshot, DOM, title, scroll and command batches | Vendor-neutral action results and bounded action batches are public; optional Playwright provider is isolated behind `browser-playwright` | P1 | Keep the adapter boundary; browser binaries and credentials remain caller-owned |
 | Browser snapshots | Implemented public contract | Snapshot ids, bounded elements, stable refs, stale checks and diffs are covered by deterministic tests | P0 | Reuse the contract from MCP and extension transport |
 | Session replay | Implemented | Replay restores caller-owned window, tab and frame context before actions; context identifiers are validated and counted | P1 | Keep browser selection and restoration in injected adapters |
 | Extension runtime | Surface is only declared in `surfaces/manifest.js` and `surfaces/targets.js` | No Manifest V3 manifest, service worker, content bridge, popup or build artifact | P0 | Implement a pure JavaScript MV3 reference surface with minimal permissions |

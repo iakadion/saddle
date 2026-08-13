@@ -9,6 +9,13 @@
   ## [Unreleased]
 
     - Added durable pending extension commands with explicit rehydration and resume
+    - Added optional Playwright peer metadata and a Node-only `browser-playwright` adapter
+
+  ## [1.8.5] - 2026-08-13
+
+    - Added Node.js 26.7.0 and npm 12 package metadata
+    - Added an optional Playwright peer and explicit Node-only browser adapter
+    - Preserved the transport-neutral root without adding runtime dependencies
 
   ## [1.8.4] - 2026-08-12
 

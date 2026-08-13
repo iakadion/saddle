@@ -313,3 +313,14 @@ The following blocks are the execution order for the complete ecosystem. A block
 - [x] Verify the owner and package coordinate before deleting the legacy Maven package `io.devthink:saddle`.
 - [x] Bump JavaScript, Maven, NuGet, RubyGems, Docker and release metadata to `1.8.4`.
 - [x] Run all library and website gates, commit the migration, create `v1.8.4` and verify the resulting library pipelines.
+
+### Package metadata and next engine block
+
+- [x] Compare the attached package manifest with the current `package.json` without copying unrelated scripts or claims.
+- [x] Add only the optional Playwright peer because the new explicit adapter and test use it; do not add unused runtime dependencies.
+- [x] Add compatible `engines`, `packageManager` and optional `peerDependencies`; do not add empty `optionalDependencies`, unsupported `trustedDependencies` or unused patch metadata.
+- [x] Preserve the root-based JavaScript ESM boundary and keep Node-only adapters in explicit subpaths.
+- [x] Update package documentation and changelog for any new public metadata or dependency contract.
+- [x] Run install, syntax, format, deterministic tests, package dry-run and security review before the next release.
+- [x] Decide that the resulting changes belong in `1.8.5`; keep the immutable `1.8.4` tag unchanged.
+- [ ] Continue the next engine block only after the package manifest changes are committed and the working tree is clean.
