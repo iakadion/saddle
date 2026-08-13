@@ -324,3 +324,12 @@ The following blocks are the execution order for the complete ecosystem. A block
 - [x] Run install, syntax, format, deterministic tests, package dry-run and security review before the next release.
 - [x] Decide that the resulting changes belong in `1.8.5`; keep the immutable `1.8.4` tag unchanged.
 - [ ] Continue the next engine block only after the package manifest changes are committed and the working tree is clean.
+
+### Web duplicate cleanup
+
+- [x] Inventory `/web` files and group duplicate suffix variants by canonical basename.
+- [x] Preserve `other1` and `other2` groups exactly as requested, without consolidating or deleting them.
+- [x] Compare duplicate contents and merge unique sections into the canonical file for each authorized group.
+- [x] Delete 310 duplicate suffix files outside the ignored directories and keep canonical paths without numeric suffixes.
+- [x] Run web typecheck, static Pages build, touched-file format check, engine gates and diff review.
+- [x] Publish the deduplicated web tree in commit `d4b6ec5`.
