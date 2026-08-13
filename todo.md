@@ -344,16 +344,25 @@ The following blocks are the execution order for the complete ecosystem. A block
 - [x] Reconcile Vite, TypeScript, Pages, GitLab, Forgejo, Gitea, Codeberg and Woodpecker paths after the move.
 - [x] Merge web development dependencies and package configuration into the repository root; remove the nested package and lockfile.
 - [x] Run web typecheck, static build, dependency synchronization and deploy configuration checks.
-- [ ] Commit and push the root migration after reviewing the complete diff and resolving workflow-scope permissions.
+- [x] Commit and push the root migration after reviewing the complete diff and resolving workflow-scope permissions.
 
 ### Pages incident and release 1.8.6
 
-- [ ] Inspect the latest GitHub Actions runs, logs and annotations for Pages, release validation and Dependabot.
-- [ ] Reconcile `main` with any Dependabot branch or pull request without deleting an active branch blindly.
-- [ ] Verify the GitHub Pages source, artifact path, base path, environment and repository visibility settings.
-- [ ] Fix the Pages workflow and validate a deployable artifact from the root-based web project.
-- [ ] Set the repository project name and description to the Saddle canonical identity after browser confirmation.
-- [ ] Bump all package and release manifests to `1.8.6` without hardcoding workflow versions.
-- [ ] Run engine, web, packaging and release gates for `1.8.6`.
+- [x] Inspect the latest GitHub Actions runs, logs and annotations for Pages, release validation and Dependabot.
+- [x] Reconcile `main` with any Dependabot branch or pull request without deleting an active branch blindly.
+- [x] Verify the GitHub Pages source, artifact path, base path, environment and repository visibility settings.
+- [x] Fix the Pages workflow and validate a deployable artifact from the root-based web project.
+- [x] Set the repository project name and description to the Saddle canonical identity after browser confirmation.
+- [x] Bump all package and release manifests to `1.8.6` without hardcoding workflow versions.
+- [x] Run engine, web, packaging and release gates for `1.8.6`.
 - [ ] Create and push the `v1.8.6` tag and release only after the previous checks pass.
 - [ ] Verify the six registry workflows and Pages execution after the release trigger.
+
+### Branch and checks consolidation
+
+- [x] Inventory every remote branch, open pull request, tag and unique commit reachable only from a non-main ref.
+- [x] Record branch tips before deletion so removing refs cannot remove commits from the object database or release history.
+- [x] Close obsolete automated pull requests after confirming their changes are not needed by the root-based package.
+- [x] Delete every non-main remote branch only after preserving its tip in the audit record and checking for unmerged work.
+- [x] Explain the change from the previous check count to the current check count by comparing workflow definitions and check runs.
+- [x] Keep only `main` as an active branch and verify that the latest commit on it has the expected CI, compatibility and Pages checks.
