@@ -67,6 +67,7 @@
     "./queue-persistent": "./queue/persistent.js",
     "./captcha-evidence": "./captcha/evidence.js",
     "./hash": "./core/hash.js",
+    "./release-assets": "./release/assets.js",
     "./worker": "./runtime/worker.js"
   },
   "files": [
@@ -104,6 +105,7 @@
     "workflow",
     "cli",
     "extension",
+    "release",
     "index.js",
     "docs",
     "examples",
@@ -111,11 +113,12 @@
     "LICENSE"
   ],
   "scripts": {
-    "check": "node --check index.js && node --check runtime/engine.js && node --check cli/main.js && node --check extension/protocol.js && node --check extension/serviceworker.js && node --check extension/worker.js && node --check extension/content.js && node --check extension/pagebridge.js && node --check extension/popup.js && node --check extension/permissions.js && node --check extension/build.js && node --check sessions/replay.js && node --check browser/recorder.js && node --check scrape/normalize.js",
+    "check": "node --check index.js && node --check runtime/engine.js && node --check cli/main.js && node --check extension/protocol.js && node --check extension/serviceworker.js && node --check extension/worker.js && node --check extension/content.js && node --check extension/pagebridge.js && node --check extension/popup.js && node --check extension/permissions.js && node --check extension/build.js && node --check release/assets.js && node --check sessions/replay.js && node --check browser/recorder.js && node --check scrape/normalize.js",
     "formatcheck": "node format/check.js",
     "test": "node --test tests/*.test.js",
     "run": "node cli/main.js",
     "extension:build": "node extension/build.js",
+    "release:assets": "node release/assets.js",
     "pack:check": "npm run check && npm run formatcheck && npm test && npm pack --dry-run",
     "prepublishOnly": "npm run pack:check",
     "web:dev": "vite --config web/vite.config.ts --host",

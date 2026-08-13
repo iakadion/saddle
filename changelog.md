@@ -12,6 +12,7 @@
     - Added optional Playwright peer metadata and a Node-only `browser-playwright` adapter
     - Added a read-only page-world bridge with token-correlated `pagefacts` responses and deterministic timeout handling
     - Added extension snapshot diffs plus persisted window, tab and frame context for explicit resume
+    - Added deterministic SHA256SUMS, CycloneDX SBOM and in-toto-shaped provenance asset generation
 
   ## [1.8.5] - 2026-08-13
 

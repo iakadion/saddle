@@ -32,7 +32,7 @@ The engine owns **contracts, validation, orchestration, recovery and auditabilit
 | 6 | scraping and context | complete | semantic extraction, content-type normalization, crawl budgets, RAG lineage and low-cardinality metrics |
 | 7 | API, MCP and security | complete | request identity, optional auth, secure headers, browser MCP tools and redirect/DNS checks |
 | 8 | bots and integrations | complete | app lifecycle, command scopes, idempotency, delivery retries and dead letters |
-| 9 | packaging and distribution | extension zip and registry slice prepared for 1.8.2 | desktop, mobile, n8n and binary artifacts remain caller-owned |
+| 9 | packaging and distribution | extension zip, checksum, SBOM and provenance slice implemented | desktop, mobile, n8n and binary artifacts remain caller-owned |
 | 10 | product surfaces and operations | first slice complete | desktop, mobile, n8n and operator control contracts; observability, retention and threat model remain |
 | 11 | cross-runtime compatibility | transport-neutral graph audit complete | Node, Bun and Deno root probe, browser worker bridge, extension permission/build checks and package graph audit |
 | 12 | release gates | active | deterministic checks, docs, clean diffs and claim/code parity |
