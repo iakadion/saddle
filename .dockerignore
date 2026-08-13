@@ -5,6 +5,8 @@ npm-debug.log
 coverage
 dist
 tests
+!tests/scripts/
+!tests/scripts/buildengine.mjs
 *.gem
 *.nupkg
 *.snupkg
