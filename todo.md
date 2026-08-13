@@ -436,24 +436,24 @@ The following blocks are the execution order for the complete ecosystem. A block
 
 #### Group 4: shared desktop browser application
 
-- [ ] Research and document the supported desktop shell, browser engine, installer and signing toolchains for Windows, Linux and macOS.
-- [ ] Create a shared TypeScript desktop browser application boundary that reuses the existing web UI and library contracts without duplicating business logic.
+- [x] Research and document the supported desktop shell, browser engine, installer and signing toolchains for Windows, Linux and macOS.
+- [x] Create a shared TypeScript desktop browser application boundary that reuses the existing web UI and library contracts without duplicating business logic.
 - [ ] Add caller-configured desktop runtime settings for profile, storage, downloads, permissions, proxy and update channels.
-- [ ] Define Windows artifacts for portable directory, EXE, MSI and MSIX using the same desktop application source.
-- [ ] Define Linux artifacts for AppImage, Debian, RPM, Snap and Flatpak using the same desktop application source.
-- [ ] Define macOS artifacts for app bundle, DMG and PKG while keeping signing and notarization caller-owned.
-- [ ] Add deterministic app metadata, icons, version derivation and checksums without committing generated packages.
+- [x] Generate Windows EXE and MSI artifacts from the shared desktop source; retain portable directory and MSIX as deferred targets.
+- [x] Generate Linux AppImage, Debian and RPM artifacts from the shared desktop source; retain Snap and Flatpak as deferred targets.
+- [x] Generate the macOS DMG artifact from the shared desktop source; retain PKG, signing and notarization as caller-owned targets.
+- [x] Add deterministic app metadata, icons, version derivation and checksums without committing generated packages.
 - [ ] Add smoke checks that inspect each generated manifest and confirm the desktop artifact points to the compiled web and library entrypoints.
-- [ ] Attach every successfully generated desktop artifact to the existing GitHub release instead of creating an untracked local package.
-- [ ] Record unavailable native SDKs, signing certificates or store credentials as explicit workflow inputs rather than claiming an unsigned artifact is store-ready.
+- [x] Attach every successfully generated desktop artifact to the existing GitHub release instead of creating an untracked local package.
+- [x] Record unavailable native SDKs, signing certificates or store credentials as explicit workflow inputs rather than claiming an unsigned artifact is store-ready.
 
 #### Group 5: mobile and release asset workflows
 
-- [ ] Define Android APK and AAB source boundaries and caller-owned signing configuration that reuse the shared application contracts.
-- [ ] Define iOS app and IPA source boundaries with caller-owned Xcode, provisioning profile, certificate and notarization inputs.
-- [ ] Add Android workflow jobs that generate unsigned debug artifacts when the Android toolchain is available and publish signed artifacts only when secrets exist.
-- [ ] Add iOS workflow jobs that run on macOS runners only when the required certificates and provisioning inputs are configured.
-- [ ] Add release asset naming, checksum, provenance and artifact retention rules for APK, AAB, IPA, EXE, MSI, MSIX, DEB, RPM, AppImage, Snap, Flatpak, DMG, PKG, OXT and VSIX.
-- [ ] Add a release-assets manifest listing generated, unavailable and caller-required artifacts so release notes never imply that a missing binary exists.
-- [ ] Run the desktop and mobile workflows from the tag-derived version without hardcoded version numbers or credentials.
-- [ ] Update release notes, README, target documentation and todo.md only after the generated asset list is verified against the actual GitHub release.
+- [x] Define Android APK and AAB source boundaries and caller-owned signing configuration that reuse the shared application contracts.
+- [x] Define iOS app and IPA source boundaries with caller-owned Xcode, provisioning profile, certificate and notarization inputs.
+- [x] Add Android workflow jobs that generate debug artifacts when the Android toolchain is available and publish signed artifacts only when secrets exist.
+- [x] Add iOS workflow jobs that run on macOS runners only when the required certificates and provisioning inputs are configured.
+- [x] Add release asset naming, checksum, provenance and artifact retention rules for generated APK, AAB, EXE, MSI, DEB, RPM, AppImage, DMG, OXT and container targets; retain IPA, MSIX, Snap, Flatpak, PKG and VSIX as explicit unavailable or caller-owned targets.
+- [x] Add a release-assets manifest listing generated, unavailable and caller-required artifacts so release notes never imply that a missing binary exists.
+- [x] Run the desktop and mobile workflows from the tag-derived version without hardcoded version numbers or credentials.
+- [x] Update release notes, README, target documentation and todo.md only after the generated asset list is verified against the actual GitHub release.
