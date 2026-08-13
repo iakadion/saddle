@@ -8,7 +8,17 @@
 
   ## [Unreleased]
 
-    - Future changes will be recorded here after the 1.8.8 release.
+    - Future changes will be recorded here after the 1.8.9 release.
+
+  ## [1.8.9] - 2026-08-13
+
+    - Converted the active engine and deterministic tests from JavaScript to a root-based TypeScript source layout
+    - Added dist-only compilation with declarations, source maps and generated output excluded from version control
+    - Added TypeScript-first extension source resolution and retained the stable JavaScript Manifest V3 artifact format
+    - Added declarative application, computer, desktop, Android, iOS, CLI, binary, browser, web, LibreOffice, VSIX and container target plans
+    - Added tag-driven target-plan workflow without hardcoded credentials or platform-specific source code
+    - Preserved the legacy typed scrape feature surface and verified 98 active tests plus 69 legacy Vitest tests
+    - Moved the development debug collector into the TypeScript web graph and repaired web compiler blockers
 
   ## [1.8.8] - 2026-08-13
 

@@ -1,0 +1,82 @@
+name: target plans
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+    inputs:
+      target:
+        description: target mode
+        required: true
+        default: desktopapp
+        type: choice
+        options: [application, computer, desktopapp, android, ios, cli, binary, browser, extension, web, libreoffice, mcp, vsix, container]
+      format:
+        description: output format
+        required: true
+        default: plan
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  targetplans:
+    name: plan ${{ matrix.target }} ${{ matrix.format }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { target: application, format: tarball }
+          - { target: computer, format: singlefile }
+          - { target: desktopapp, format: appimage }
+          - { target: desktopapp, format: deb }
+          - { target: desktopapp, format: rpm }
+          - { target: desktopapp, format: snap }
+          - { target: desktopapp, format: flatpak }
+          - { target: desktopapp, format: dmg }
+          - { target: desktopapp, format: pkg }
+          - { target: desktopapp, format: exe }
+          - { target: desktopapp, format: msi }
+          - { target: desktopapp, format: msix }
+          - { target: android, format: apk }
+          - { target: android, format: aab }
+          - { target: ios, format: ipa }
+          - { target: cli, format: singlefile }
+          - { target: binary, format: sea }
+          - { target: binary, format: wasm }
+          - { target: browser, format: pwa }
+          - { target: extension, format: crx }
+          - { target: extension, format: xpi }
+          - { target: extension, format: safariextz }
+          - { target: web, format: pwa }
+          - { target: libreoffice, format: oxt }
+          - { target: mcp, format: stdio }
+          - { target: vsix, format: vsix }
+          - { target: container, format: oci }
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 26.7.0
+          cache: npm
+      - name: resolve release version
+        if: github.event_name == 'release'
+        id: releaseversion
+        uses: ./.github/actions/releaseversion
+      - name: install
+        run: npm ci
+      - name: build engine
+        run: npm run build:engine
+      - name: write target plan
+        run: node dist/packager/targetcli.js "${{ matrix.target }}" "${{ matrix.format }}" build/targets
+      - name: upload target plan
+        uses: actions/upload-artifact@v4
+        with:
+          name: saddle-${{ matrix.target }}-${{ matrix.format }}-plan
+          path: build/targets/${{ matrix.target }}-${{ matrix.format }}.json

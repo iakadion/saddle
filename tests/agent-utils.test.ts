@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { formatForAgent, buildContext } from '../agent.js';
-import { slugify, truncate, estimateTokens, chunkText, isValidUrl, isInternalUrl } from '../utils.js';
+import { formatForAgent, buildContext } from '../scrape/agent.js';
+import { slugify, truncate, estimateTokens, chunkText, isValidUrl, isInternalUrl } from '../scrape/utils.js';
 
 const SAMPLE_RESULT = {
   url: 'https://example.com',

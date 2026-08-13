@@ -8,7 +8,7 @@ import { dirname, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { test } from "node:test";
 
-const transportneutral = ["index.js", "storage/index.js", "runners/scheduler.js", "domain/sessions.js", "modes/resolve.js", "modes/matrix.js", "browser/index.js", "bot/bot.js", "captcha/contract.js", "deploy/index.js", "extension/index.js", "core/hash.js", "runtime/worker.js"];
+const transportneutral = ["dist/index.js", "dist/storage/index.js", "dist/runners/scheduler.js", "dist/domain/sessions.js", "dist/modes/resolve.js", "dist/modes/matrix.js", "dist/browser/index.js", "dist/bot/bot.js", "dist/captcha/contract.js", "dist/deploy/index.js", "dist/extension/index.js", "dist/core/hash.js", "dist/runtime/worker.js"];
 
 test("imports every declared package export target in Node", async () => {
   const root = dirname(new URL(import.meta.url).pathname);
@@ -27,7 +27,7 @@ test("declares runtime metadata and an optional browser provider peer", async ()
   assert.equal(packagejson.packageManager, "npm@12.0.2");
   assert.equal(packagejson.peerDependencies.playwright, "^1.62.1");
   assert.equal(packagejson.peerDependenciesMeta.playwright.optional, true);
-  assert.equal(packagejson.exports["./browser-playwright"], "./browser/playwright.js");
+  assert.equal(packagejson.exports["./browser-playwright"], "./dist/browser/playwright.js");
 });
 
 test("keeps transport-neutral export graphs free of Node-only imports", async () => {
@@ -47,6 +47,6 @@ test("keeps transport-neutral export graphs free of Node-only imports", async ()
       pending.push(child.endsWith(".js") ? child : `${child}.js`);
     }
   }
-  assert.equal(seen.has(resolve(root, "..", "index.js")), true);
-  assert.equal(seen.has(resolve(root, "..", "extension/index.js")), true);
+  assert.equal(seen.has(resolve(root, "..", "dist/index.js")), true);
+  assert.equal(seen.has(resolve(root, "..", "dist/extension/index.js")), true);
 });

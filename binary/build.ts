@@ -1,13 +1,13 @@
 /**
  * binary builder plans portable artifacts without choosing a compiler vendor.
  */
-export const binarytargets = Object.freeze(["node", "deno", "bun", "wasm", "singlefile"]);
+export const binarytargets = Object.freeze(["node", "deno", "bun", "wasm", "singlefile", "sea", "appimage", "deb", "rpm", "snap", "flatpak", "dmg", "pkg", "exe", "msi", "msix", "apk", "aab", "ipa"]);
 
 /** Creates a deterministic binary build plan from explicit options. */
 export function binaryplan(options = {}) {
   const target = options.target ?? "node";
   if (!binarytargets.includes(target)) throw new TypeError(`unsupported binary target: ${target}`);
-  return { name: options.name ?? "saddle", target, entry: options.entry ?? "cli/main.js", output: options.output ?? "dist", command: options.command ?? `build ${target}`, minify: options.minify ?? false, embedruntime: options.embedruntime ?? false, externaldependencies: options.externaldependencies ?? [], metadata: options.metadata ?? {} };
+  return { name: options.name ?? "saddle", target, entry: options.entry ?? "dist/cli/main.js", output: options.output ?? "dist/artifacts", command: options.command ?? `build ${target}`, minify: options.minify ?? false, embedruntime: options.embedruntime ?? false, externaldependencies: options.externaldependencies ?? [], metadata: options.metadata ?? {} };
 }
 
 /** Returns an artifact manifest without writing files or running a compiler. */

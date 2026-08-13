@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
-import { generateLlmsTxt, generateLlmsFullTxt } from '../llms-txt.js';
-import type { ScrapeResult } from '../types.js';
+import { generateLlmsTxt, generateLlmsFullTxt } from '../scrape/llms-txt.js';
+import type { ScrapeResult } from '../scrape/types.js';
 
 const mockResults: ScrapeResult[] = [
   {

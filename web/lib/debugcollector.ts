@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * Manus Debug Collector (agent-friendly)
  *

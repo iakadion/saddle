@@ -56,7 +56,7 @@ The `fetcher`, browser adapter, persistence adapter, proxy pool, captcha solver,
 
 ## package surfaces
 
-The package exposes explicit subpaths for `./browser`, `./bot`, `./captcha`, `./memory-engine`, and `./deploy`. Desktop, mobile, and n8n contracts are exported from the root entry; the root entry remains the complete JavaScript API for consumers that prefer one import.
+The package exposes explicit subpaths for `./browser`, `./bot`, `./captcha`, `./memory-engine`, and `./deploy`. Desktop, mobile, target-plan and n8n contracts are exported from the root entry; the root entry remains the complete compiled JavaScript API with generated TypeScript declarations for consumers that prefer one import.
 
 The `./extension` subpath exposes browser-neutral message, snapshot and service-worker routing contracts. The concrete Manifest V3 files live in `extension/`; they are not imported by the core at runtime and do not require Chrome when the library is used as a Node package. The browser surface also exposes snapshots, tab/frame context, action results, bounded action batches and recording through `./browser`.
 

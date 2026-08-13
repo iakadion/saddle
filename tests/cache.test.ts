@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { WebScrapeCache, createCache } from '../cache.js';
+import { WebScrapeCache, createCache } from '../scrape/cache.js';
 
 describe('WebScrapeCache', () => {
   it('stores and retrieves values', () => {

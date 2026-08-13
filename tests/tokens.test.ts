@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { estimateTokens, countTokens, fitsInContext, truncateToTokens } from '../tokens.js';
+import { estimateTokens, countTokens, fitsInContext, truncateToTokens } from '../scrape/tokens.js';
 
 describe('estimateTokens', () => {
   it('estimates tokens for default model', () => {

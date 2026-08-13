@@ -6,13 +6,13 @@
   <strong>Storage-backed jobs, scraping contracts and portable runners for Node.js.</strong><br/>
   <strong>Binary computing engine, agent browser, scraper and packager.</strong><br/>
   <a href="https://github.com/wenathlan/saddle/actions/workflows/ci.yml"><img src="https://github.com/wenathlan/saddle/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
-  <a href="https://github.com/wenathlan/saddle/releases/tag/v1.8.8"><img src="https://img.shields.io/badge/release-v1.8.8-d35d3d" alt="Release 1.8.8" /></a>
+  <a href="https://github.com/wenathlan/saddle/releases/tag/v1.8.9"><img src="https://img.shields.io/badge/release-v1.8.9-d35d3d" alt="Release 1.8.9" /></a>
   <a href="https://github.com/wenathlan/saddle/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-GPL--3.0-202a2f" alt="GPL 3.0 license" /></a>
 </p>
 
 > **Core idea:** storage is the durable side of the working set; the runner is replaceable; the artifact is the boundary. **Storage == Compute** means that the same bytes can be retained or processed according to an explicit usage flag.
 
-Saddle is a **JavaScript ESM engine** for jobs that move data between storage, a bounded working set, a caller-injected runner and durable artifacts. It is also a virtual machine published as a package: the caller can run it on GitHub Actions, Forgejo, Gitea, GitLab, Codeberg, Docker or another third-party compute surface. The engine does not require the operator's local machine, does not embed credentials and does not choose a mandatory cloud provider.
+Saddle is a **TypeScript-first ESM engine** compiled to JavaScript, declarations and source maps for jobs that move data between storage, a bounded working set, a caller-injected runner and durable artifacts. It is also a virtual machine published as a package: the caller can run it on GitHub Actions, Forgejo, Gitea, GitLab, Codeberg, Docker or another third-party compute surface. The engine does not require the operator's local machine, does not embed credentials and does not choose a mandatory cloud provider.
 
 The canonical JavaScript package is `@wenathlan/saddle`. GitHub Packages npm, Maven and GHCR use the `wenathlan` owner namespace; NuGet and RubyGems retain their ecosystem package names. Older `@devthink`, `@iakadion` and `io.devthink` references in archived documents are historical records, not current package identities.
 
@@ -36,7 +36,7 @@ console.log(context.summary);
 The deterministic examples and tests do not require network access or real credentials:
 
 ```bash
-node examples/publicapi.js
+node --import tsx examples/publicapi.ts
 npm test
 ```
 
@@ -78,7 +78,7 @@ The root entry point is transport-neutral. Node filesystem, HTTP server, persist
 
 ### Productization: one engine, many shells
 
-The same contracts can be surfaced as an npm library, CLI, binary, Manifest V3 browser extension, webhook server, MCP transport, workflow action, container image, Maven package, NuGet package or RubyGem. These surfaces are adapters around the engine; they are not separate sources of truth.
+The same contracts can be surfaced as an npm library, application archive, computer runtime, desktop installer, Android APK/AAB, iOS IPA, CLI, binary, browser package, Manifest V3 extension, web/PWA artifact, LibreOffice OXT, VSIX, webhook server, MCP transport, workflow action, container image, Maven package, NuGet package or RubyGem. These surfaces are declarative target plans and caller-owned adapters around the engine; they are not separate sources of truth.
 
 ## Public API
 
@@ -102,14 +102,14 @@ The complete export map is documented in [`docs/libraryapi.md`](docs/libraryapi.
 
 ## Browser extension
 
-The extension is a pure JavaScript Manifest V3 reference surface in [`extension/`](extension/). It contains a popup, service worker, isolated content bridge, read-only page-world `pagefacts` boundary, snapshot diffs and persisted window/tab/frame context for explicit resume.
+The extension is a TypeScript-first Manifest V3 reference surface in [`extension/`](extension/). Its source is compiled into a stable JavaScript unpacked artifact and contains a popup, service worker, isolated content bridge, read-only page-world `pagefacts` boundary, snapshot diffs and persisted window/tab/frame context for explicit resume.
 
 ```bash
-# load the unpacked extension from chrome://extensions
-ls extension/manifest.json extension/worker.js extension/content.js extension/popup.html
-
-# build an isolated artifact using the version supplied by the caller or release tag
+# build an isolated JavaScript artifact using the version supplied by the caller or release tag
 npm run extension:build -- --output build/extension
+
+# load build/extension from chrome://extensions
+ls build/extension/manifest.json build/extension/worker.js build/extension/content.js build/extension/popup.html
 ```
 
 The base permission set is `activeTab`, `scripting` and `storage`. It does not request broad host permissions, cookies, `webRequest`, debugger access or arbitrary page code execution. Optional host escalation remains caller-owned. Releases attach `saddle-extension-<version>.zip`; cross-browser profiles remain adapter work.
@@ -127,7 +127,7 @@ The base permission set is `activeTab`, `scripting` and `storage`. It does not r
 | Failure | retry, circuit breaker, idempotency and resume are configurable |
 | Releases | version comes from the `vX.Y.Z` tag and must match `package.json` |
 
-Version 1.8.8 preserves the dependency-free JavaScript scrape contracts and groups the related crawl context in `scrape/crawl.js`. The retry and circuit context now lives in `runtime/retry.js`, while scraper-specific error classification is part of `core/errors.js`. The root lockfile and security gates remain authoritative; see [`docs/reorganization-1.8.8.md`](docs/reorganization-1.8.8.md) for the ownership decisions and [`docs/securityaudit-1.8.7.md`](docs/securityaudit-1.8.7.md) for the preceding security baseline.
+Version 1.8.9 makes the active source TypeScript-first, compiles it into ignored `dist/`, and keeps public JavaScript package paths stable. It also adds declarative target plans for mobile, desktop, browser, binary and document-extension formats. The dynamic debug collector is intentionally an unchecked browser boundary because it monkey-patches browser APIs; the rest of the web surface remains strictly typechecked. See [`docs/reorganization-1.8.9.md`](docs/reorganization-1.8.9.md), [`docs/toolchainresearch-1.8.9.md`](docs/toolchainresearch-1.8.9.md) and [`docs/securityaudit-1.8.7.md`](docs/securityaudit-1.8.7.md).
 
 ## Package surfaces and release automation
 
@@ -153,7 +153,7 @@ npm run web:check
 VITE_BASE_PATH=/saddle npm run web:build:pages
 ```
 
-Small public configuration and visual assets live under `web/public/`. The development collector is `web/public/debugcollector.js` and uses `/debuglogs`; it is not part of the production build. The obsolete `web/public/__manus__` directory is intentionally absent.
+Small public configuration and visual assets live under `web/public/`. The development collector is TypeScript source at `web/lib/debugcollector.ts`, injected only in development, and uses `/debuglogs`; it is not part of the production build. The obsolete `web/public/__manus__` directory is intentionally absent.
 
 ## Development and release gates
 
@@ -183,15 +183,15 @@ browser/       fingerprint, session, agent and Playwright adapter contracts
 extension/     Manifest V3 reference surface and packager
 protocol/      JSON, NDJSON, SSE and block serializers
 workflow/      manifests, templates and registry contracts
-packager/      package and publication plans
 release/       checksums, SBOM and provenance metadata
 runtime/       engine orchestration, capability detection, worker and grouped retry context
-web/           root-based static marketing site
+packager/      dist, binary, container and multi-target artifact plans
+web/           root-based static marketing site with TypeScript React source
 tests/         deterministic engine and extension coverage
 docs/          architecture, API, security, release and registry notes
 ```
 
-The engine remains pure JavaScript ESM with JSDoc comments in English. The web surface is TypeScript/React, while the published library has no TypeScript build requirement and no hardcoded host, port or credential.
+The engine is TypeScript-first ESM with English JSDoc comments and a generated JavaScript `dist/` publication surface. The web surface is TypeScript/React, and no source or generated artifact hardcodes a host, port or credential.
 
 ## Historical documentation
 
@@ -199,7 +199,7 @@ Earlier README snapshots remain in `docs/plans/README.md`, `docs/talks9/README.m
 
 ## Current scope
 
-Version 1.8.8 extends the 1.8.7 engine with conservative context regrouping. Browser binaries, provider credentials, n8n host registration, persistent databases, captcha solvers and production deployment remain caller-selected adapters. Future work should extend contracts without coupling the core to one forge, registry, browser or storage vendor.
+Version 1.8.9 extends the 1.8.8 engine with TypeScript-first source conversion, dist-only compilation, target-plan manifests and web source consolidation. Browser binaries, provider credentials, n8n host registration, persistent databases, captcha solvers and production deployment remain caller-selected adapters. Future work should extend contracts without coupling the core to one forge, registry, browser or storage vendor.
 
 ## License
 

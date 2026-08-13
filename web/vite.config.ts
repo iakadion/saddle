@@ -87,7 +87,8 @@ function vitePluginManusDebugCollector(): Plugin {
           {
             tag: "script",
             attrs: {
-              src: "/debugcollector.js",
+              src: "/lib/debugcollector.ts",
+              type: "module",
               defer: true,
             },
             injectTo: "head",

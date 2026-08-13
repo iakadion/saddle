@@ -23,7 +23,7 @@ The project has no `src` folder. The root is the map of the engine.
 | `tests` | local deterministic tests without credentials |
 | `examples` | small runnable integration examples |
 
-All internal file names are lowercase and contain no underscore or hyphen. Related logic stays grouped and each module remains small enough to reason about in isolation. Version 1.8.8 groups crawl URL normalization, traversal, frontier budgets and persistence in `scrape/crawl.js`; it does not merge distinct storage cache, job queue or browser session contracts merely because they use similar words.
+All internal file names are lowercase and contain no underscore or hyphen. Related logic stays grouped and each module remains small enough to reason about in isolation. Version 1.8.9 uses TypeScript source at the root and groups crawl URL normalization, traversal, frontier budgets and persistence in `scrape/crawl.ts`; it does not merge distinct storage cache, job queue or browser session contracts merely because they use similar words.
 
 ## public contracts
 
@@ -65,7 +65,7 @@ The same contracts support paired modes. A mode can exist without its pair, and 
 | browser | headless job definition | capture and replay adapter |
 | network | local deterministic job | remote provider and storage adapter |
 
-The first cut implements library, cli, binary entry point, internal memory, and internal file. The other modes are extension points, not hardcoded promises. Version 1.8.8 preserves this boundary while reducing duplicated active context files.
+The first cut implements library, CLI, binary entry point, internal memory, and internal file. The other modes are extension points and declarative target plans, not hardcoded platform promises. Version 1.8.9 preserves this boundary while compiling the active engine to ignored `dist/` output.
 
 ## infrastructure rules
 

@@ -2,11 +2,13 @@
  * extension build adapter creates a versioned, unpacked Manifest V3 artifact for release packaging.
  */
 
-import { cp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import { access, cp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import { existsSync } from "node:fs";
 import { dirname, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
-const rootpath = resolve(dirname(fileURLToPath(import.meta.url)), "..");
+const modulepath = resolve(dirname(fileURLToPath(import.meta.url)));
+const rootpath = existsSync(resolve(modulepath, "..", "..", "package.json")) ? resolve(modulepath, "..", "..") : resolve(modulepath, "..");
 const entries = ["manifest.json", "worker.js", "serviceworker.js", "content.js", "pagebridge.js", "popup.js", "popup.html", "popup.css", "protocol.js", "permissions.js"];
 
 function parsearguments(argumentslist) {
@@ -24,6 +26,12 @@ function validversion(version) {
   return /^\d+\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?$/.test(String(version ?? ""));
 }
 
+/** Resolves a source asset while emitting the stable browser `.js` filename. */
+async function resolveentry(entry) {
+  const javascript = resolve(rootpath, "extension", entry);
+  try { await access(javascript); return javascript; } catch { return resolve(rootpath, "extension", entry.replace(/\.js$/, ".ts")); }
+}
+
 /** Builds the extension into an isolated directory and returns its manifest. */
 export async function buildextension(options = {}) {
   const packagefile = JSON.parse(await readFile(resolve(rootpath, "package.json"), "utf8"));
@@ -35,7 +43,7 @@ export async function buildextension(options = {}) {
   const manifest = JSON.parse(await readFile(resolve(rootpath, "extension/manifest.json"), "utf8"));
   manifest.version = version;
   for (const entry of entries) {
-    const source = resolve(rootpath, "extension", entry);
+    const source = await resolveentry(entry);
     const destination = resolve(output, entry);
     if (entry === "manifest.json") await writeFile(destination, `${JSON.stringify(manifest, null, 2)}\n`);
     else await cp(source, destination);

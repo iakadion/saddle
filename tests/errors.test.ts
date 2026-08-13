@@ -3,7 +3,7 @@ import {
   WebScrapeError, ValidationError, TimeoutError, BlockedError,
   RateLimitError, ProxyError, ParseError, AuthError, NetworkError,
   BrowserNotAvailableError, ErrorCode
-} from '../errors.js';
+} from '../scrape/errors.js';
 
 describe('WebScrapeError', () => {
   it('creates error with all properties', () => {

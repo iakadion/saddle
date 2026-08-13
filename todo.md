@@ -400,34 +400,34 @@ The following blocks are the execution order for the complete ecosystem. A block
 - [x] Consult the current date and record the TypeScript, Node.js, build and packaging versions used for the migration.
 - [x] Inventory every active JavaScript file from `adapters` through `workflow`, excluding `docs` and `web`, with imports, exports, tests and package ownership.
 - [x] Classify the active engine into correlated conversion groups: core, domain, memory, storage, runtime, queue, browser, scrape, API, protocol, workflow and delivery.
-- [ ] Define one root based TypeScript compiler configuration without creating `src` or committing generated `dist` output.
-- [ ] Convert the transport neutral public entry and one correlated group at a time while preserving function names and package exports.
-- [ ] Convert Node only adapters with explicit type boundaries for filesystem, HTTP, process, workers and optional Playwright.
-- [ ] Convert tests and helper scripts to TypeScript where they belong to the active engine contract, retaining deterministic execution.
+- [x] Define one root based TypeScript compiler configuration without creating `src` or committing generated `dist` output.
+- [x] Convert the transport neutral public entry and one correlated group at a time while preserving function names and package exports.
+- [x] Convert Node only adapters with explicit type boundaries for filesystem, HTTP, process, workers and optional Playwright.
+- [x] Convert tests and helper scripts to TypeScript where they belong to the active engine contract, retaining deterministic execution.
 - [ ] Add English JSDoc sections, explicit error catchers and strict type checks without introducing unnecessary external runtime dependencies.
-- [ ] Remove or archive only JavaScript files proven replaced after import graph, package and test verification.
-- [ ] Keep generated JavaScript, declaration files, maps and bundles outside version control and produce them only in CI or local build output.
+- [x] Remove or archive only JavaScript files proven replaced after import graph, package and test verification.
+- [x] Keep generated JavaScript, declaration files, maps and bundles outside version control and produce them only in CI or local build output.
 
 #### Group 2: library, application and binary targets
 
-- [ ] Define target manifests for library, package, application, computer, desktop, browser, CLI, binary, internet and headless modes.
-- [ ] Define Android targets for APK and AAB through a caller owned mobile adapter without hardcoded credentials, hosts or signing keys.
-- [ ] Define iOS targets for IPA and app packaging through a caller owned mobile adapter without committing provisioning material.
-- [ ] Define desktop targets for macOS app, DMG and PKG, Windows EXE, MSI and MSIX, and Linux AppImage, DEB, RPM, Snap and Flatpak.
-- [ ] Define CLI and binary targets for Node, Bun or another caller selected runtime while keeping the library core authoritative.
-- [ ] Define browser extension targets for CRX, XPI and SAFARIEXTZ with shared browser neutral contracts and minimal permissions.
-- [ ] Define package targets for npm, GitHub Packages, Maven, NuGet, RubyGems, OCI, MCP, VSIX and other supported artifact surfaces.
-- [ ] Add reproducible target manifests, version derivation from the release tag, checksums, SBOM and provenance without committing generated artifacts.
-- [ ] Add caller configured workflows for target builds, with secrets only in repository or forge settings and no platform locked functions.
-- [ ] Run smoke tests for every target manifest and explicitly mark unavailable local toolchains as caller or CI responsibilities.
+- [x] Define target manifests for library, package, application, computer, desktop, browser, CLI, binary, internet and headless modes.
+- [x] Define Android targets for APK and AAB through a caller owned mobile adapter without hardcoded credentials, hosts or signing keys.
+- [x] Define iOS targets for IPA and app packaging through a caller owned mobile adapter without committing provisioning material.
+- [x] Define desktop targets for macOS app, DMG and PKG, Windows EXE, MSI and MSIX, and Linux AppImage, DEB, RPM, Snap and Flatpak.
+- [x] Define CLI and binary targets for Node, Bun or another caller selected runtime while keeping the library core authoritative.
+- [x] Define browser extension targets for CRX, XPI and SAFARIEXTZ with shared browser neutral contracts and minimal permissions.
+- [x] Define package targets for npm, GitHub Packages, Maven, NuGet, RubyGems, OCI, MCP, VSIX and other supported artifact surfaces.
+- [x] Add reproducible target manifests, version derivation from the release tag, checksums, SBOM and provenance without committing generated artifacts.
+- [x] Add caller configured workflows for target builds, with secrets only in repository or forge settings and no platform locked functions.
+- [x] Run smoke tests for every target manifest and explicitly mark unavailable local toolchains as caller or CI responsibilities.
 
 #### Group 3: web TypeScript architecture and release
 
-- [ ] Audit `web` folder by folder and file by file, preserving the root based layout and excluding generated `web/dist` output from version control.
-- [ ] Group related web components, routes, hooks, contexts, utilities and styles without creating `src`, `client` or duplicated mode trees.
-- [ ] Apply the same lowercase naming, English JSDoc, error boundary, design token and accessibility rules to the web surface.
-- [ ] Preserve base aware assets, responsive layouts, navigation, pages build and public marketing behavior during the regrouping.
-- [ ] Update TypeScript compiler, Vite, test, format and build configurations for the unified root architecture.
-- [ ] Run engine, web, package, security, target manifest and artifact exclusion gates after each completed group.
-- [ ] Update README, architecture notes, changelog and release metadata to `1.8.9` only after all implemented claims match code.
+- [x] Audit `web` folder by folder and file by file, preserving the root based layout and excluding generated `web/dist` output from version control.
+- [x] Group related web components, routes, hooks, contexts, utilities and styles without creating `src`, `client` or duplicated mode trees.
+- [x] Apply the same lowercase naming, English JSDoc, error boundary, design token and accessibility rules to the web surface.
+- [x] Preserve base aware assets, responsive layouts, navigation, pages build and public marketing behavior during the regrouping.
+- [x] Update TypeScript compiler, Vite, test, format and build configurations for the unified root architecture.
+- [x] Run engine, web, package, security, target manifest and artifact exclusion gates after each completed group.
+- [x] Update README, architecture notes, changelog and release metadata to `1.8.9` only after all implemented claims match code.
 - [ ] Create the validated `v1.8.9` tag and publish only the generated artifacts from CI to the six registries and configured target channels.
