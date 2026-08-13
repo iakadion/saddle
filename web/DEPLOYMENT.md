@@ -4,7 +4,7 @@ The site is a static React/Vite application rooted directly in this directory. T
 
 ## GitHub Pages
 
-The root GitHub workflow uses Node.js 26.7.0, runs `npm run web:check`, builds with the caller-configured `SADDLE_PAGES_BASE_PATH` variable, uploads `web/dist/public` with `actions/upload-pages-artifact@v4` and deploys it with `actions/deploy-pages@v4`. The repository Pages setting must use GitHub Actions as its source.
+The root GitHub workflow uses Node.js 26.7.0, configures Pages, runs `npm run web:check`, builds with the caller-configured `SADDLE_PAGES_BASE_PATH` variable or the repository base path returned by `configure-pages`, uploads `web/dist/public` with `actions/upload-pages-artifact@v4` and deploys it from a dependent `github-pages` environment with `actions/deploy-pages@v4`. The repository Pages setting must use GitHub Actions as its source. For `wenathlan/saddle`, the public project URL is `https://wenathlan.github.io/saddle/` and the default asset base path is `/saddle/`.
 
 ## GitLab Pages
 

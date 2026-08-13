@@ -32,18 +32,31 @@ jobs:
           cache: npm
       - name: install dependencies
         run: npm ci
+      - name: configure pages
+        id: pages
+        uses: actions/configure-pages@v5
       - name: check web
         run: npm run web:check
       - name: build web
         env:
-          VITE_BASE_PATH: ${{ vars.SADDLE_PAGES_BASE_PATH || '/' }}
+          VITE_BASE_PATH: ${{ vars.SADDLE_PAGES_BASE_PATH || steps.pages.outputs.base_path || format('/{0}/', github.event.repository.name) }}
         run: npm run web:build:pages
-      - name: configure pages
-        uses: actions/configure-pages@v5
+      - name: prepare pages fallback
+        run: cp web/dist/public/index.html web/dist/public/404.html && touch web/dist/public/.nojekyll
       - name: upload pages artifact
         uses: actions/upload-pages-artifact@v4
         with:
           path: web/dist/public
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      pages: write
+      id-token: write
+    steps:
       - name: deploy pages
         id: deployment
         uses: actions/deploy-pages@v4

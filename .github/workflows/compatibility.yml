@@ -19,10 +19,10 @@ jobs:
         runtime: [node, bun, deno]
     steps:
       - name: checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@v5
       - name: setup node
         if: matrix.runtime == 'node'
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@v5
         with:
           node-version: 26.7.0
       - name: setup bun
@@ -49,9 +49,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@v5
       - name: setup node
-        uses: actions/setup-node@v7
+        uses: actions/setup-node@v5
         with:
           node-version: 26.7.0
       - name: install
