@@ -501,4 +501,52 @@ The following blocks are the execution order for the complete ecosystem. A block
 - [x] Research how open source projects distribute Windows, macOS, Android and iOS artifacts when they do not own platform signing certificates, distinguishing self-signed test keys, public release signing, notarization, package-manager trust and user-side installation.
 - [x] Document legitimate certificate acquisition paths, costs, identity requirements, renewal responsibilities and the exact GitHub Actions secret contracts for each platform.
 - [x] Add an explicit unsigned/test-build mode and release manifest status so workflows never imply that an unsigned artifact is trusted or malware-free.
-- [ ] Decide whether the next immutable release must be `1.8.12`, because the published `v1.8.11` tag cannot safely be overwritten with the new hardening commits.
+- [x] Decide whether the next immutable release must be `1.8.12`, because the published `v1.8.11` tag cannot safely be overwritten with the new hardening commits.
+
+### Binary signing research for 1.8.12
+
+- [x] Compare Microsoft's official Authenticode, SmartScreen, Trusted Signing, MSIX and Store guidance.
+- [x] Compare Apple Developer ID, Gatekeeper, hardened runtime, notarization and App Store distribution.
+- [x] Compare Android APK signing, Play App Signing, upload keys and direct APK distribution.
+- [x] Compare iOS distribution certificates, provisioning profiles, App Store Connect and ad hoc builds.
+- [x] Inspect SignPath Foundation eligibility, trust model, HSM custody and open-source application process.
+- [x] Inspect Azure Artifact Signing pricing, regional availability, identity validation and OIDC integration.
+- [x] Inspect traditional OV and EV certificate requirements, renewal, timestamping and SmartScreen reputation.
+- [x] Inspect Microsoft Store MSIX re-signing and package certification requirements.
+- [x] Inspect WinGet manifests, package provenance and whether a package manager changes binary trust.
+- [x] Inspect GitHub Actions artifact attestations, provenance and SBOM limits compared with Authenticode.
+- [x] Inspect Sigstore Cosign, Fulcio, Rekor and whether Windows SmartScreen accepts their signatures.
+- [x] Inspect minisign, signify, OpenPGP, GPG and SSH signatures as integrity mechanisms rather than platform trust.
+- [x] Inspect osslsigncode and native SignTool capabilities for Authenticode signing.
+- [x] Inspect jsign, apksigner, jarsigner, codesign and notarytool as platform tooling boundaries.
+- [x] Inspect Tauri, Electron, Wails, Neutralino, Flutter and Qt release signing guidance.
+- [x] Inspect OpenCode, Zed, VS Code, VSCodium, Code - OSS and other open-source IDE release workflows.
+- [x] Inspect RustDesk, KeePassXC, Audacity, OBS Studio and Blender signing/distribution practices.
+- [x] Inspect GitHub Desktop, Chromium, Firefox and other large open-source desktop release models.
+- [x] Inspect open-source projects using SignPath or equivalent community certificate programs.
+- [x] Inspect free CI signing services and distinguish free infrastructure from free identity certificates.
+- [x] Search Stack Overflow for self-signed, SmartScreen, Authenticode, timestamp and reputation questions.
+- [x] Search Reddit for real-world open-source code-signing costs and validate claims against official sources.
+- [x] Search X or public mirrors for signing anecdotes and reject claims without reproducible evidence.
+- [x] Search academic papers on software signing, trusted distribution, reproducible builds and supply-chain provenance.
+- [x] Search the in-toto, SLSA and Sigstore specifications for provenance guarantees that complement signatures.
+- [x] Evaluate whether reproducible builds reduce reputation warnings or only improve independent verification.
+- [x] Evaluate whether timestamping preserves signature validity after certificate expiration.
+- [x] Evaluate whether certificate pinning, installer metadata, icons or version resources affect SmartScreen trust.
+- [x] Evaluate whether Authenticode signing of the installer also requires signing embedded PE files.
+- [x] Evaluate whether MSIX, AppX, MSI, NSIS, EXE, DMG, PKG, AppImage and DEB have different trust semantics.
+- [x] Evaluate whether package-manager verification can replace platform signing for public downloads.
+- [x] Evaluate self-signed development certificates and safe enterprise trust deployment boundaries.
+- [x] Evaluate malware, impersonation and supply-chain risks of “free certificate generator” projects.
+- [x] Evaluate private-key custody models: local token, HSM, cloud KMS, OIDC and provider-hosted signing.
+- [x] Evaluate release-only secret access, Dependabot/fork restrictions and environment approvals.
+- [x] Evaluate exact cost, region, account identity, renewal and revocation requirements for each provider.
+- [x] Produce a 1.8.12 decision matrix with verified, conditional, unsupported and unsafe routes.
+
+### 1.8.12 implementation work
+
+- [ ] Add optional MSIX/AppX packaging and Store submission documentation.
+- [ ] Add a provider adapter for SignPath or Azure Artifact Signing behind protected release secrets.
+- [ ] Add nested PE signature verification and fail closed when a signing status claims provider trust.
+- [ ] Add Sigstore/SLSA provenance and release manifest evidence without presenting it as Authenticode.
+- [ ] Bump manifests, run gates, create the immutable `v1.8.12` tag and publish only after the release inputs are confirmed.
