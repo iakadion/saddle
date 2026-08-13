@@ -27,3 +27,5 @@ The repository metadata audit found `main` as the default branch and one open De
 The repository homepage About editor was opened in the authenticated browser and saved with the canonical Saddle description. The repository API should now report that description instead of the placeholder `saddle`.
 
 The six non-main Dependabot tips were preserved as `archive-dependabot-*` tags, their PRs were closed, and their branch refs were removed. The cleanup leaves `main` as the only active branch without deleting the archived commit objects.
+
+The first `v1.8.6` release fan-out passed release validation, GitHub Packages npm, public npmjs, Maven, NuGet, RubyGems and extension packaging. GHCR alone failed because the Docker image ran `npm ci --omit=dev` against the root manifest, whose dev-only Vite peer graph is rejected by npm's strict peer resolver. The corrective Dockerfile now sets `NPM_CONFIG_LEGACY_PEER_DEPS=true` and passes `--legacy-peer-deps`; the GHCR workflow also checks out the release tag for both release and manual dispatch paths.

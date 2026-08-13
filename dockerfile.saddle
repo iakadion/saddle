@@ -5,10 +5,11 @@ LABEL org.opencontainers.image.source="https://github.com/wenathlan/saddle"
 
 WORKDIR /app
 
-ENV NODE_ENV=production
+ENV NODE_ENV=production \
+    NPM_CONFIG_LEGACY_PEER_DEPS=true
 
 COPY package.json package-lock.json ./
-RUN npm ci --omit=dev --ignore-scripts
+RUN npm ci --omit=dev --ignore-scripts --legacy-peer-deps
 COPY . .
 
 USER node
