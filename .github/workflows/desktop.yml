@@ -61,6 +61,9 @@ jobs:
       - name: install node dependencies
         run: npm ci
 
+      - name: build shared web surface
+        run: npm run web:build:pages
+
       - name: validate flat native surfaces
         run: npm run native:check:flat
 
