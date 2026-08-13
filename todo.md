@@ -430,4 +430,4 @@ The following blocks are the execution order for the complete ecosystem. A block
 - [x] Update TypeScript compiler, Vite, test, format and build configurations for the unified root architecture.
 - [x] Run engine, web, package, security, target manifest and artifact exclusion gates after each completed group.
 - [x] Update README, architecture notes, changelog and release metadata to `1.8.9` only after all implemented claims match code.
-- [ ] Create the validated `v1.8.9` tag and publish only the generated artifacts from CI to the six registries and configured target channels.
+- [x] Create the validated `v1.8.9` tag and publish only the generated artifacts from CI to the six registries and configured target channels.
