@@ -18,6 +18,7 @@
     - Added extension snapshot diffs plus persisted window, tab and frame context for explicit resume
     - Added deterministic SHA256SUMS, CycloneDX SBOM and in-toto-shaped provenance asset generation
     - Flattened the web application into a root-based layout and corrected GitHub Pages, CI and Dependabot paths
+    - Fixed the GHCR production image build for the root manifest's dev-only peer dependency graph
 
   ## [1.8.5] - 2026-08-13
 
