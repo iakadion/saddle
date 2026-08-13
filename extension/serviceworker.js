@@ -60,7 +60,8 @@ export function createworkerrouter(options = {}) {
   async function dispatch(request, sender = {}) {
     const tabid = request.payload?.tabid ?? sender.tab?.id;
     await ensurecontent(tabid);
-    return tabs.sendMessage(tabid, request);
+    const response = await tabs.sendMessage(tabid, request);
+    return decorate(response, sender, tabid);
   }
 
   async function handle(message, sender = {}) {
@@ -70,7 +71,7 @@ export function createworkerrouter(options = {}) {
     await enqueue(request, { ...sender, tab: { ...sender.tab, id: tabid } });
     try {
       const response = await dispatch(request, { ...sender, tab: { ...sender.tab, id: tabid } });
-      await complete(request.id, response?.type === "response" && response.payload?.snapshotid ? { tabid, snapshotid: response.payload.snapshotid, updatedat: Date.now() } : { updatedat: Date.now() });
+    await complete(request.id, response?.type === "response" && response.payload?.snapshotid ? { tabid, snapshotid: response.payload.snapshotid, frameid: response.payload.frameid, windowid: response.payload.windowid, updatedat: Date.now() } : { updatedat: Date.now() });
       return response;
     } catch (error) {
       await markfailure(request.id, error);
@@ -85,8 +86,8 @@ export function createworkerrouter(options = {}) {
     const pending = state.pending.find((item) => item.requestid === requestid);
     if (!pending) throw extensionerror("PENDING_NOT_FOUND", `pending command not found: ${requestid}`);
     const tabid = pending.tabid ?? sender.tab?.id;
-    const response = await dispatch(pending.message, { ...sender, tab: { ...sender.tab, id: tabid } });
-    await complete(requestid, response?.type === "response" && response.payload?.snapshotid ? { tabid, snapshotid: response.payload.snapshotid, updatedat: Date.now() } : { updatedat: Date.now() });
+    const response = await dispatch(pending.message, { ...sender, frameId: pending.frameid ?? sender.frameId, tab: { ...sender.tab, id: tabid, windowId: pending.windowid ?? sender.tab?.windowId } });
+    await complete(requestid, response?.type === "response" && response.payload?.snapshotid ? { tabid, snapshotid: response.payload.snapshotid, frameid: response.payload.frameid, windowid: response.payload.windowid, updatedat: Date.now() } : { updatedat: Date.now() });
     return response;
   }
 
@@ -95,7 +96,13 @@ export function createworkerrouter(options = {}) {
   return { ensurecontent, readstate, savestate, rehydrate, enqueue, resume, cancel, handle };
 }
 
-function pendingrecord(request, sender = {}) { return { requestid: request.id, command: request.command, message: request, tabid: request.payload?.tabid ?? sender.tab?.id, attempts: 0, createdat: Date.now(), updatedat: Date.now() }; }
+function pendingrecord(request, sender = {}) { return { requestid: request.id, command: request.command, message: request, tabid: request.payload?.tabid ?? sender.tab?.id, frameid: request.payload?.frameid ?? sender.frameId, windowid: request.payload?.windowid ?? sender.tab?.windowId, attempts: 0, createdat: Date.now(), updatedat: Date.now() }; }
+
+function decorate(response, sender, tabid) {
+  if (response?.type !== "response" || !response.payload || typeof response.payload !== "object" || !response.payload.snapshotid) return response;
+  const payload = { ...response.payload, tabid: response.payload.tabid ?? (tabid === undefined ? undefined : String(tabid)), frameid: response.payload.frameid ?? (sender.frameId === undefined ? undefined : String(sender.frameId)), windowid: response.payload.windowid ?? (sender.tab?.windowId === undefined ? undefined : String(sender.tab.windowId)) };
+  return { ...response, payload };
+}
 
 function validpending(value) { return Boolean(value && typeof value === "object" && typeof value.requestid === "string" && value.message && value.message.type === "command" && Number.isSafeInteger(value.attempts) && value.attempts >= 0); }
 

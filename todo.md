@@ -187,7 +187,7 @@ The following blocks are the execution order for the complete ecosystem. A block
 - [x] Add durable pending commands and rehydration after service worker termination.
 - [x] Add a read-only isolated-world to page-world bridge with token correlation, bounded facts and timeout errors.
 - [ ] Add optional host permission escalation with explicit user consent.
-- [ ] Add snapshot diffing, tab/frame metadata and resumable command records.
+- [x] Add snapshot diffing, tab/frame metadata and resumable command records.
 - [x] Add deterministic extension packaging and unpacked validation.
 - [ ] Add Firefox, Edge and WebExtension-compatible adapter profiles.
 
