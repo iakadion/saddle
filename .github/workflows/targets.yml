@@ -76,7 +76,7 @@ jobs:
       - name: write target plan
         run: node dist/packager/targetcli.js "${{ matrix.target }}" "${{ matrix.format }}" build/targets
       - name: upload target plan
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: saddle-${{ matrix.target }}-${{ matrix.format }}-plan
           path: build/targets/${{ matrix.target }}-${{ matrix.format }}.json

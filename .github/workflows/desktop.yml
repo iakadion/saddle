@@ -243,7 +243,7 @@ jobs:
           ! find build/release-assets/desktop -type f \( -name 'build_script_build*.exe' -o -name 'build-script-build.exe' -o -name '*_*' \) -print -quit | grep -q .
 
       - name: upload workflow artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: saddle.browser.${{ matrix.platform }}.${{ matrix.architecture }}.${{ steps.releaseversion.outputs.version }}
           path: build/release-assets/desktop
