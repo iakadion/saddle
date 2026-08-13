@@ -9,6 +9,7 @@ build = "build.rs"
 [lib]
 name = "saddle_desktop"
 path = "lib.rs"
+crate-type = ["staticlib", "cdylib", "rlib"]
 
 [[bin]]
 name = "saddle-desktop"
