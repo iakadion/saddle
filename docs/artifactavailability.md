@@ -38,3 +38,20 @@ Tauri configuration is resolved from `tauri.conf.json` and can be extended with 
 Version 1.8.10 keeps the Tauri desktop browser and adds explicit Capacitor Android and iOS conversion targets. The shared source is the TypeScript library plus the compiled `web/dist/public` output; the native folders do not fork engine logic. The Android release build enables R8 and resource shrinking, and the workflow creates an ephemeral CI test key when caller production signing secrets are absent.
 
 The 1.8.10 workflow names the public outputs `saddle.browser.1.8.10.<format>`, `saddle.apk.1.8.10.apk`, `saddle.aab.1.8.10.aab`, `saddle.ipa.1.8.10.ipa`, `saddle.container.1.8.10.tar.gz` and `saddle.extension.1.8.10.zip`. Surface manifests and checksums use the corresponding `manifest.<surface>.1.8.10.json` and `sha256.<surface>.1.8.10` forms. The release is not considered complete until the live GitHub asset list matches these generated names.
+
+## Verified 1.8.10 primary assets
+
+The v1.8.10 release contains the following primary assets. Sizes are bytes and exclude the separate manifest and checksum files.
+
+| Surface         | Asset                                                                                                       |       Size |
+| --------------- | ----------------------------------------------------------------------------------------------------------- | ---------: |
+| Desktop browser | [AppImage](https://github.com/wenathlan/saddle/releases/download/v1.8.10/saddle.browser.1.8.10.appimage)    | 79,870,456 |
+| Desktop browser | [Debian](https://github.com/wenathlan/saddle/releases/download/v1.8.10/saddle.browser.1.8.10.deb)           |  5,294,388 |
+| Desktop browser | [RPM](https://github.com/wenathlan/saddle/releases/download/v1.8.10/saddle.browser.1.8.10.rpm)              |  5,297,815 |
+| Desktop browser | [Windows EXE](https://github.com/wenathlan/saddle/releases/download/v1.8.10/saddle.browser.1.8.10.exe)      |  4,341,818 |
+| Desktop browser | [Windows MSI](https://github.com/wenathlan/saddle/releases/download/v1.8.10/saddle.browser.1.8.10.msi)      |  5,246,976 |
+| Desktop browser | [macOS DMG](https://github.com/wenathlan/saddle/releases/download/v1.8.10/saddle.browser.1.8.10.dmg)        |  5,222,365 |
+| Android         | [APK](https://github.com/wenathlan/saddle/releases/download/v1.8.10/saddle.apk.1.8.10.apk)                  |  3,498,594 |
+| Android         | [AAB](https://github.com/wenathlan/saddle/releases/download/v1.8.10/saddle.aab.1.8.10.aab)                  |  3,893,352 |
+| Container       | [OCI tarball](https://github.com/wenathlan/saddle/releases/download/v1.8.10/saddle.container.1.8.10.tar.gz) | 81,718,314 |
+| Extension       | [ZIP](https://github.com/wenathlan/saddle/releases/download/v1.8.10/saddle.extension.1.8.10.zip)            |     10,759 |

@@ -460,13 +460,13 @@ The following blocks are the execution order for the complete ecosystem. A block
 
 ### Native surface conversion and artifact normalization follow-up
 
-- [ ] Research Ionic, Capacitor, Tauri and other TS/TSX-to-mobile conversion paths and document the selected trade-offs.
-- [ ] Create explicit root-based `android/`, `ios/` and `browser/` surface boundaries without duplicating the library engine or web application logic.
-- [ ] Define Android TSX design and configuration inputs that consume the shared library contracts before conversion to APK and AAB.
-- [ ] Define iOS TSX design and configuration inputs that consume the shared library contracts before conversion to app and IPA.
-- [ ] Define the browser surface as the desktop browser contract and document why the implementation remains under `desktop/` or moves to a canonical browser boundary.
-- [ ] Add focused Android, iOS, browser and desktop workflows that convert the shared TypeScript and TSX source without hardcoded infrastructure or credentials.
-- [ ] Measure the Android bundle composition and reduce the APK size through release shrinking, ABI strategy, dependency review and asset optimization without removing required functionality.
-- [ ] Normalize release artifact names to lowercase Saddle names with dots and release versions, such as `saddle.browser.1.8.9`, `saddle.apk.1.8.9`, `saddle.aab.1.8.9`, `saddle.container.1.8.9.tar.gz` and `saddle.extension.1.8.9.zip`.
-- [ ] Remove all `build_script_build*.exe`, `build-script-build.exe`, stale `saddle_desktop.exe`, duplicate `saddle-desktop.exe` and other non-user-facing build outputs from release assets and workflow collection paths.
-- [ ] Add release manifest validation that rejects helper binaries, underscore-based public artifact names and unexpected duplicate assets before upload.
+- [x] Research Ionic, Capacitor, Tauri and other TS/TSX-to-mobile conversion paths and document the selected trade-offs.
+- [x] Create explicit root-based `android/`, `ios/` and `browser/` surface boundaries without duplicating the library engine or web application logic.
+- [x] Define Android TSX design and configuration inputs that consume the shared library contracts before conversion to APK and AAB.
+- [x] Define iOS TSX design and configuration inputs that consume the shared library contracts before conversion to app and IPA.
+- [x] Define the browser surface as the desktop browser contract and document why the implementation remains under `desktop/` or moves to a canonical browser boundary.
+- [x] Add focused Android, iOS, browser and desktop workflows that convert the shared TypeScript and TSX source without hardcoded infrastructure or credentials.
+- [x] Measure the Android bundle composition and reduce the APK size through release shrinking, ABI strategy, dependency review and asset optimization without removing required functionality.
+- [x] Normalize release artifact names to lowercase Saddle names with dots and release versions, including `saddle.browser.1.8.10`, `saddle.apk.1.8.10.apk`, `saddle.aab.1.8.10.aab`, `saddle.container.1.8.10.tar.gz` and `saddle.extension.1.8.10.zip`.
+- [x] Remove all `build_script_build*.exe`, `build-script-build.exe`, stale `saddle_desktop.exe`, duplicate `saddle-desktop.exe` and other non-user-facing build outputs from release assets and workflow collection paths.
+- [x] Add release manifest validation that rejects helper binaries, underscore-based public artifact names and unexpected duplicate assets before upload.

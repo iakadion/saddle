@@ -14,7 +14,10 @@
 
     - Normalized active package, desktop, extension, registry and crawler identity to `1.8.10`
     - Added mobile conversion research for Capacitor, Ionic and Tauri with an explicit library-first decision
-    - Added the implementation plan for Android, iOS, browser surface boundaries, APK size analysis and dotted artifact names
+    - Added explicit Capacitor Android and iOS surfaces that reuse the shared web output and library contracts
+    - Enabled Android R8, resource shrinking and optimized resource shrinking; the generated APK is 3,498,594 bytes and the AAB is 3,893,352 bytes
+    - Normalized public artifacts to lowercase dotted names and rejected helper binaries, underscore-based names and generic metadata
+    - Published the verified desktop, Android, container and extension assets with surface-specific manifests and SHA-256 files
 
   ## [1.8.9] - 2026-08-13
 
