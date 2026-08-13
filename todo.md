@@ -234,7 +234,7 @@ The following blocks are the execution order for the complete ecosystem. A block
 ### Block 9 — packaging and distribution
 
 - [x] Add extension zip and unpacked validation with a release-tag-derived build; keep desktop, mobile, n8n and binary artifact plans caller-owned.
-- [ ] Add reproducible SBOM, provenance, checksum and release asset generation.
+- [x] Add reproducible SBOM, provenance, checksum and release asset generation.
 - [x] Verify all registry workflows for v1.7.0 without exposing credentials.
 - [ ] Add install and smoke-test instructions for npm, GitHub Packages, GHCR, Maven, NuGet and RubyGems.
 - [ ] Publish only after namespace, visibility, license and artifact contents are confirmed.
