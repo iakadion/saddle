@@ -12,17 +12,18 @@ The project has no `src` folder. The root is the map of the engine.
 
 | folder | responsibility |
 |---|---|
-| `core` | errors, ids, clock, events, and tracing primitives |
+| `core` | engine errors, scrape error taxonomy, ids, events, and hashing primitives |
 | `domain` | jobs, sessions, artifacts, providers, and runtime records |
 | `storage` | storage adapter contract, local backend, and checksums |
 | `memory` | working set preparation, sync, and cleanup |
 | `runners` | provider factories and deterministic scheduling |
-| `runtime` | engine orchestration and output encoding |
+| `runtime` | engine orchestration, capability detection, worker boundary, retry and circuit context |
+| `scrape` | single page extraction, response normalization, robots policy and grouped crawl context |
 | `cli` | explicit command surface with local error handling |
 | `tests` | local deterministic tests without credentials |
 | `examples` | small runnable integration examples |
 
-All internal file names are lowercase and contain no underscore or hyphen. Related logic stays grouped and each module remains small enough to reason about in isolation.
+All internal file names are lowercase and contain no underscore or hyphen. Related logic stays grouped and each module remains small enough to reason about in isolation. Version 1.8.8 groups crawl URL normalization, traversal, frontier budgets and persistence in `scrape/crawl.js`; it does not merge distinct storage cache, job queue or browser session contracts merely because they use similar words.
 
 ## public contracts
 
@@ -64,7 +65,7 @@ The same contracts support paired modes. A mode can exist without its pair, and 
 | browser | headless job definition | capture and replay adapter |
 | network | local deterministic job | remote provider and storage adapter |
 
-The first cut implements library, cli, binary entry point, internal memory, and internal file. The other modes are extension points, not hardcoded promises.
+The first cut implements library, cli, binary entry point, internal memory, and internal file. The other modes are extension points, not hardcoded promises. Version 1.8.8 preserves this boundary while reducing duplicated active context files.
 
 ## infrastructure rules
 

@@ -1,6 +1,6 @@
 {
   "name": "@wenathlan/saddle",
-  "version": "1.8.7",
+  "version": "1.8.8",
   "description": "binary computing engine that turns distributed storage into a publishable working set",
   "type": "module",
   "private": false,
@@ -84,7 +84,6 @@
     "queue",
     "dispatch",
     "scrape",
-    "crawl",
     "api",
     "mcp",
     "browser",
@@ -94,8 +93,6 @@
     "webhook",
     "surfaces",
     "library",
-    "errors",
-    "retry",
     "server",
     "binary",
     "format",
@@ -113,7 +110,7 @@
     "LICENSE"
   ],
   "scripts": {
-    "check": "node --check index.js && node --check runtime/engine.js && node --check cli/main.js && node --check extension/protocol.js && node --check extension/serviceworker.js && node --check extension/worker.js && node --check extension/content.js && node --check extension/pagebridge.js && node --check extension/popup.js && node --check extension/permissions.js && node --check extension/build.js && node --check release/assets.js && node --check sessions/replay.js && node --check browser/recorder.js && node --check scrape/normalize.js",
+    "check": "node --check index.js && node --check runtime/engine.js && node --check runtime/retry.js && node --check cli/main.js && node --check extension/protocol.js && node --check extension/serviceworker.js && node --check extension/worker.js && node --check extension/content.js && node --check extension/pagebridge.js && node --check extension/popup.js && node --check extension/permissions.js && node --check extension/build.js && node --check release/assets.js && node --check sessions/replay.js && node --check browser/recorder.js && node --check scrape/normalize.js && node --check scrape/crawl.js",
     "formatcheck": "node format/check.js",
     "test": "node --test tests/*.test.js",
     "run": "node cli/main.js",

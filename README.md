@@ -6,7 +6,7 @@
   <strong>Storage-backed jobs, scraping contracts and portable runners for Node.js.</strong><br/>
   <strong>Binary computing engine, agent browser, scraper and packager.</strong><br/>
   <a href="https://github.com/wenathlan/saddle/actions/workflows/ci.yml"><img src="https://github.com/wenathlan/saddle/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
-  <a href="https://github.com/wenathlan/saddle/releases/tag/v1.8.7"><img src="https://img.shields.io/badge/release-v1.8.7-d35d3d" alt="Release 1.8.7" /></a>
+  <a href="https://github.com/wenathlan/saddle/releases/tag/v1.8.8"><img src="https://img.shields.io/badge/release-v1.8.8-d35d3d" alt="Release 1.8.8" /></a>
   <a href="https://github.com/wenathlan/saddle/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-GPL--3.0-202a2f" alt="GPL 3.0 license" /></a>
 </p>
 
@@ -127,7 +127,7 @@ The base permission set is `activeTab`, `scripting` and `storage`. It does not r
 | Failure | retry, circuit breaker, idempotency and resume are configurable |
 | Releases | version comes from the `vX.Y.Z` tag and must match `package.json` |
 
-Version 1.8.7 also removes the obsolete nested `scrape` package manifests and lockfile that generated a separate stale dependency graph. The dependency-free JavaScript scrape contracts remain in `scrape/`. The root lockfile is regenerated and CI runs `npm audit --audit-level=high` plus dependency review for pull requests. See [`docs/securityaudit-1.8.7.md`](docs/securityaudit-1.8.7.md) for the baseline and remediation record.
+Version 1.8.8 preserves the dependency-free JavaScript scrape contracts and groups the related crawl context in `scrape/crawl.js`. The retry and circuit context now lives in `runtime/retry.js`, while scraper-specific error classification is part of `core/errors.js`. The root lockfile and security gates remain authoritative; see [`docs/reorganization-1.8.8.md`](docs/reorganization-1.8.8.md) for the ownership decisions and [`docs/securityaudit-1.8.7.md`](docs/securityaudit-1.8.7.md) for the preceding security baseline.
 
 ## Package surfaces and release automation
 
@@ -173,12 +173,11 @@ The engine test suite is deterministic and does not require real credentials or 
 ## Repository map
 
 ```text
-core/          errors, events, identifiers and hashing
+core/          engine errors, scrape error taxonomy, events, identifiers and hashing
 domain/        jobs, artifacts, sessions and providers
 memory/        working-set bridge, modes, objects and transforms
 storage/       local, chunked, remote and file-hosting adapters
-scrape/        dependency-free robots, cache, extraction, schema and normalization contracts
-crawl/         URL normalization, crawler and persistent frontier
+scrape/        robots, cache, extraction, schema, normalization and grouped crawl contracts
 queue/         queue, idempotency, saga and recovery
 browser/       fingerprint, session, agent and Playwright adapter contracts
 extension/     Manifest V3 reference surface and packager
@@ -186,6 +185,7 @@ protocol/      JSON, NDJSON, SSE and block serializers
 workflow/      manifests, templates and registry contracts
 packager/      package and publication plans
 release/       checksums, SBOM and provenance metadata
+runtime/       engine orchestration, capability detection, worker and grouped retry context
 web/           root-based static marketing site
 tests/         deterministic engine and extension coverage
 docs/          architecture, API, security, release and registry notes
@@ -199,7 +199,7 @@ Earlier README snapshots remain in `docs/plans/README.md`, `docs/talks9/README.m
 
 ## Current scope
 
-Version 1.8.7 extends the 1.8.6 engine with dependency remediation, explicit security gates, base-aware Pages assets, removal of the obsolete public debug directory and consolidated documentation. Browser binaries, provider credentials, n8n host registration, persistent databases, captcha solvers and production deployment remain caller-selected adapters. Future work should extend contracts without coupling the core to one forge, registry, browser or storage vendor.
+Version 1.8.8 extends the 1.8.7 engine with conservative context regrouping. Browser binaries, provider credentials, n8n host registration, persistent databases, captcha solvers and production deployment remain caller-selected adapters. Future work should extend contracts without coupling the core to one forge, registry, browser or storage vendor.
 
 ## License
 

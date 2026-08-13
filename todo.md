@@ -379,3 +379,16 @@ The following blocks are the execution order for the complete ecosystem. A block
 - [ ] Update all release manifests and changelog metadata to `1.8.7`; keep workflows deriving the version from the tag and package metadata instead of manual edits.
 - [ ] Run engine, web, dependency, security, packaging and release gates for `1.8.7`.
 - [ ] Create and publish `v1.8.7` only after all actionable security findings and asset checks are resolved or explicitly documented as unfixable external advisories.
+
+### Reorganization and release 1.8.8
+
+- [x] Inventory every active root module and map imports, exports, tests and package payloads by correlated responsibility.
+- [x] Classify overlapping scrape, crawl, cache, normalization, extraction, robots and frontier logic into canonical ownership groups.
+- [x] Define the smallest safe target layout without introducing `src`, deep nesting or provider-specific coupling.
+- [x] Preserve all current public exports through direct moves or compatibility shims before deleting any duplicate implementation.
+- [x] Consolidate equivalent logic inside the owning domain while retaining the richest tested behavior from all historical implementations.
+- [x] Update every import, export map, test fixture, documentation path and package `files` entry affected by the regrouping.
+- [x] Add or improve English JSDoc section comments, bounded error catchers and deterministic tests for each consolidated context.
+- [x] Remove only files proven redundant after import, test, package and historical-feature audits; record deferred legacy surfaces explicitly.
+- [x] Run the complete engine, web, format, package, dependency and security gates after the reorganization.
+- [ ] Update release metadata and create `v1.8.8` only after the final diff, package contents and compatibility surface are verified.

@@ -28,7 +28,7 @@ The public API is designed around injected transports. Consumers can use the sam
 | `workflowtriggers` / `triggermatch` | normalize and match manual, event, schedule and retry starts |
 | `resumablerun` / `transitionrun` | recover remote run state through legal transitions |
 | `extractsemantic` | expose bounded headings, landmarks, controls and links |
-| `crawlfrontier` | prioritize URLs and enforce page and domain budgets |
+| `crawlfrontier` / `normalizeurl` / `persistentqueue` | grouped crawl context for URL normalization, traversal budgets and durable frontier state |
 | `provenance` / `mergeprovenance` | link context chunks to source and retrieval evidence |
 | `metricstore` | collect bounded counters and duration summaries |
 | `authorize` | verify caller credentials through an injected verifier |
@@ -58,8 +58,8 @@ The `fetcher`, browser adapter, persistence adapter, proxy pool, captcha solver,
 
 The package exposes explicit subpaths for `./browser`, `./bot`, `./captcha`, `./memory-engine`, and `./deploy`. Desktop, mobile, and n8n contracts are exported from the root entry; the root entry remains the complete JavaScript API for consumers that prefer one import.
 
-Version 1.1 adds `./extension`, which exposes browser-neutral message, snapshot and service-worker routing contracts. The concrete Manifest V3 files live in `extension/`; they are not imported by the core at runtime and do not require Chrome when the library is used as a Node package. The browser surface also exposes snapshots, tab/frame context, action results, bounded action batches and recording through `./browser`.
+The `./extension` subpath exposes browser-neutral message, snapshot and service-worker routing contracts. The concrete Manifest V3 files live in `extension/`; they are not imported by the core at runtime and do not require Chrome when the library is used as a Node package. The browser surface also exposes snapshots, tab/frame context, action results, bounded action batches and recording through `./browser`.
 
-The current main branch adds `desktopmanifest`, `mobilemanifest`, `desktopadapter`, `mobileadapter`, `n8nnode`, `n8nmatch`, `n8nexecute`, `controlsurface`, `controlservice`, and `workerbridge`. These factories describe surface boundaries and invoke caller-owned handlers; they do not install a native toolkit, start an n8n server, create a dashboard, or store credentials. They will be included in the next versioned release after the compatibility gates are complete.
+The current release exposes `desktopmanifest`, `mobilemanifest`, `desktopadapter`, `mobileadapter`, `n8nnode`, `n8nmatch`, `n8nexecute`, `controlsurface`, `controlservice`, and `workerbridge`. These factories describe surface boundaries and invoke caller-owned handlers; they do not install a native toolkit, start an n8n server, create a dashboard, or store credentials.
 
 The root entry is cross-runtime safe for the tested core contract. Filesystem, Node HTTP, persistent queue, file sessions, local memory and captcha evidence adapters remain available through explicit Node-only files or subpaths. `runtimecontract` reports the capabilities of the current global scope, while `memorystorage` provides a process-local backend for browser workers, Deno, Bun and deterministic tests.

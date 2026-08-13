@@ -1,7 +1,7 @@
 /**
  * public library helpers compose fetch extraction serialization chunking and crawl contracts.
  */
-import { crawl } from "../crawl/crawler.js";
+import { crawl } from "../scrape/crawl.js";
 import { chunkmarkdown } from "../ai/chunk.js";
 import { estimatetokens } from "../ai/tokens.js";
 import { extracthtml } from "../scrape/extract.js";

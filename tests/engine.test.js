@@ -55,11 +55,8 @@ import { githubworkflow, gitlabworkflow, woodpeckerworkflow } from "../workflow/
 import { workflowregistry } from "../workflow/registry.js";
 import { memoryengine } from "../memory/engine.js";
 import { targetfactory, targeturi } from "../memory/targets.js";
-import { normalizeurl } from "../crawl/normalize.js";
-import { crawl } from "../crawl/crawler.js";
+import { normalizeurl, crawl, persistentqueue as crawlqueue, crawlfrontier } from "../scrape/crawl.js";
 import { saddleservice } from "../api/service.js";
-import { persistentqueue as crawlqueue } from "../crawl/persistent.js";
-import { crawlfrontier } from "../crawl/frontier.js";
 import { filesessions } from "../sessions/file.js";
 import { extractwithschema } from "../scrape/schema.js";
 import { mcpserver } from "../mcp/server.js";
@@ -92,9 +89,8 @@ import { actionbatch, actionfailure, actionresult } from "../browser/actions.js"
 import { browsercontext } from "../browser/context.js";
 import { actionrecorder } from "../browser/recorder.js";
 import { assertfreshsnapshot, pagesnapshot, snapshotdiff, snapshotref } from "../browser/snapshot.js";
-import { webscrapeerror, classifyerror } from "../errors/taxonomy.js";
-import { retrypolicy } from "../retry/policy.js";
-import { circuitbreaker } from "../retry/circuit.js";
+import { webscrapeerror, classifyerror } from "../core/errors.js";
+import { retrypolicy, circuitbreaker } from "../runtime/retry.js";
 import { nodeserver } from "../server/node.js";
 import { githubcontents } from "../storage/githubcontents.js";
 import { filehosting } from "../storage/filehosting.js";

@@ -1,7 +1,7 @@
 /**
  * saddle service exposes universal routes without choosing hono fastify express or another server.
  */
-import { crawl } from "../crawl/crawler.js";
+import { crawl } from "../scrape/crawl.js";
 import { ratelimiter } from "./rate.js";
 import { errorresponse, jsonresponse, sseresponse } from "./http.js";
 import { assertpublicurl } from "./security.js";

@@ -1,7 +1,7 @@
 /**
  * mcp server implements a small JSON RPC tool surface and remains transport agnostic.
  */
-import { crawl } from "../crawl/crawler.js";
+import { crawl } from "../scrape/crawl.js";
 import { extractwithschema } from "../scrape/schema.js";
 import { jsonencode } from "../protocol/json.js";
 import { browsertools } from "./browser.js";

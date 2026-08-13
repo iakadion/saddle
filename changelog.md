@@ -8,7 +8,15 @@
 
   ## [Unreleased]
 
-    - Future changes will be recorded here after the 1.8.7 release.
+    - Future changes will be recorded here after the 1.8.8 release.
+
+  ## [1.8.8] - 2026-08-13
+
+    - Consolidated URL normalization, crawl traversal, frontier budgets and persistent crawl state into `scrape/crawl.js`
+    - Consolidated retry policy and circuit protection into `runtime/retry.js`
+    - Merged scraper-specific error taxonomy into the core error context and removed redundant top-level folders
+    - Preserved the public export names and deterministic behavior while reducing active source files and folder boundaries
+    - Updated package, extension, Maven, NuGet, RubyGems, README and release metadata to `1.8.8`
 
   ## [1.8.7] - 2026-08-13
 
