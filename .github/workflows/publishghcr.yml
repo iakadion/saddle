@@ -8,6 +8,8 @@ on:
 permissions:
   contents: read
   packages: write
+  id-token: write
+  attestations: write
 
 env:
   image: ghcr.io/${{ github.repository_owner }}/saddle
@@ -52,10 +54,27 @@ jobs:
             echo "${image}:latest"
             echo 'EOF'
           } >> "${GITHUB_OUTPUT}"
-      - name: build and push image
+      - name: build image for security scan
+        uses: docker/build-push-action@v7
+        with:
+          context: .
+          file: dockerfile.saddle
+          load: true
+          tags: saddle:scan-${{ steps.release.outputs.version }}
+      - name: scan container image
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          image-ref: saddle:scan-${{ steps.release.outputs.version }}
+          scanners: vuln,secret,misconfig
+          severity: HIGH,CRITICAL
+          ignore-unfixed: false
+          exit-code: "1"
+      - name: build and push image with attestations
         uses: docker/build-push-action@v7
         with:
           context: .
           file: dockerfile.saddle
           push: true
           tags: ${{ steps.metadata.outputs.tags }}
+          provenance: mode=max
+          sbom: true

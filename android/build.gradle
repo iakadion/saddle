@@ -1,4 +1,5 @@
 import java.io.FileInputStream
+import groovy.json.JsonSlurper
 import java.util.Properties
 
 // The Android application module is the repository root. Saddle-owned sources,
@@ -22,6 +23,10 @@ def signingProperties = new Properties()
 if (signingPropertiesFile.exists()) {
     signingProperties.load(new FileInputStream(signingPropertiesFile))
 }
+def packageJson = new JsonSlurper().parse(rootProject.file('../package.json'))
+def saddleVersion = (System.getenv('SADDLE_VERSION') ?: packageJson.version).toString()
+def versionParts = saddleVersion.tokenize('.')
+def saddleVersionCode = (System.getenv('SADDLE_VERSION_CODE') ?: (versionParts[0].toInteger() * 1000000 + versionParts[1].toInteger() * 1000 + versionParts[2].toInteger())).toInteger()
 
 android {
     namespace = 'com.wenathlan.saddle'
@@ -31,8 +36,8 @@ android {
         applicationId 'com.wenathlan.saddle'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode = (System.getenv('SADDLE_VERSION_CODE') ?: '1008011').toInteger()
-        versionName = System.getenv('SADDLE_VERSION') ?: '1.8.11'
+        versionCode = saddleVersionCode
+        versionName = saddleVersion
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         aaptOptions {
             ignoreAssetsPattern = '!.svn:!.git:!.ds_store:!*.scc:.*:!CVS:!thumbs.db:!picasa.ini:!*~'

@@ -1,0 +1,174 @@
+name: security
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  release:
+    types: [published]
+  schedule:
+    - cron: "17 3 * * 1"
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+  security-events: write
+
+env:
+  NODE_VERSION: 26.7.0
+
+jobs:
+  dependency-review:
+    if: github.event_name == 'pull_request'
+    name: dependency review
+    runs-on: ubuntu-24.04
+    steps:
+      - name: dependency review
+        uses: actions/dependency-review-action@v4
+        with:
+          fail-on-severity: low
+
+  npm-audit:
+    name: npm audit
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - name: checkout
+        uses: actions/checkout@v5
+      - name: setup node
+        uses: actions/setup-node@v5
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+      - name: install dependencies
+        run: npm ci
+      - name: audit lockfile
+        shell: bash
+        run: |
+          mkdir -p build/security
+          set +e
+          npm audit --audit-level=low --json > build/security/npm-audit.json
+          status=$?
+          set -e
+          printf '%s\n' "$status" > build/security/npm-audit.exit
+      - name: upload npm audit evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: saddle.security.npm-audit
+          path: build/security/npm-audit.*
+          if-no-files-found: error
+      - name: enforce npm audit gate
+        run: test "$(cat build/security/npm-audit.exit)" = "0"
+
+  rust-audit:
+    name: cargo audit
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - name: checkout
+        uses: actions/checkout@v5
+      - name: setup rust
+        uses: dtolnay/rust-toolchain@stable
+      - name: install cargo audit
+        run: cargo install cargo-audit --locked
+      - name: resolve desktop lockfile
+        working-directory: desktop
+        run: cargo generate-lockfile
+      - name: audit resolved desktop graph
+        shell: bash
+        run: |
+          mkdir -p build/security
+          set +e
+          (cd desktop && cargo audit --json) > build/security/cargo-audit.json
+          status=$?
+          set -e
+          printf '%s\n' "$status" > build/security/cargo-audit.exit
+      - name: apply reviewed cargo policy
+        shell: bash
+        env:
+          SECURITY_SUMMARY_PATH: build/security/cargo-audit-summary.md
+        run: |
+          set +e
+          node tests/scripts/securitygate.mjs build/security/cargo-audit.json
+          gate_status=$?
+          set -e
+          if [ "$gate_status" -ne 0 ]; then exit "$gate_status"; fi
+      - name: upload cargo audit evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: saddle.security.cargo-audit
+          path: build/security/cargo-audit.*
+          if-no-files-found: error
+
+  osv:
+    name: osv scanner
+    uses: google/osv-scanner-action/.github/workflows/osv-scanner-reusable.yml@v2.5.0
+    with:
+      fail-on-vuln: true
+      scan-args: |-
+        --recursive
+        ./
+    permissions:
+      actions: read
+      contents: read
+      security-events: write
+
+  secret-scan:
+    name: secret scan
+    runs-on: ubuntu-24.04
+    steps:
+      - name: checkout full history
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+      - name: gitleaks
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  filesystem-scan:
+    name: filesystem vulnerability scan
+    runs-on: ubuntu-24.04
+    steps:
+      - name: checkout
+        uses: actions/checkout@v5
+      - name: trivy filesystem scan
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          scan-type: fs
+          scan-ref: .
+          scanners: vuln,secret,misconfig
+          format: sarif
+          output: trivy-results.sarif
+          severity: HIGH,CRITICAL
+          ignore-unfixed: false
+          exit-code: "1"
+      - name: upload trivy results
+        if: always()
+        uses: github/codeql-action/upload-sarif@v4
+        with:
+          sarif_file: trivy-results.sarif
+
+  sbom:
+    name: software bill of materials
+    runs-on: ubuntu-24.04
+    steps:
+      - name: checkout
+        uses: actions/checkout@v5
+      - name: generate CycloneDX SBOM
+        uses: anchore/sbom-action@v0.20.5
+        with:
+          path: .
+          format: cyclonedx-json
+          output-file: build/security/saddle.sbom.cdx.json
+          upload-artifact: false
+      - name: upload SBOM
+        uses: actions/upload-artifact@v4
+        with:
+          name: saddle.security.sbom
+          path: build/security/saddle.sbom.cdx.json
+          if-no-files-found: error

@@ -1,11 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
   <title id="title">Saddle mark</title>
-  <desc id="desc">Warm ember mark with a storage-to-compute arc.</desc>
-  <rect width="256" height="256" rx="52" fill="#f7f1e8"/>
-  <g transform="translate(45 42) scale(1.25)">
-    <path d="M52 10c-27 0-48 20-48 45 0 32 24 57 57 57 19 0 35-8 46-22-13 5-25 7-36 7-23 0-39-17-39-39 0-19 13-35 31-42 12-5 25-6 39-4C90 18 73 10 52 10Z" fill="#d35d3d"/>
-    <path d="M31 76c15 11 33 17 54 17 25 0 44-9 59-28" fill="none" stroke="#202a2f" stroke-linecap="round" stroke-width="8"/>
-    <circle cx="35" cy="45" r="7" fill="#f7f1e8"/>
-    <circle cx="137" cy="65" r="7" fill="#d35d3d"/>
-  </g>
+  <desc id="desc">A saddle bridge connecting storage and compute nodes.</desc>
+  <path d="M48 147c0-58 36-99 80-99s80 41 80 99" fill="none" stroke="#202a2f" stroke-linecap="round" stroke-width="28"/>
+  <path d="M48 147c0-58 36-99 80-99s80 41 80 99" fill="none" stroke="#d35d3d" stroke-linecap="round" stroke-width="13"/>
+  <path d="M48 147c0 31 24 57 54 57h52c30 0 54-26 54-57" fill="none" stroke="#202a2f" stroke-linecap="round" stroke-width="17"/>
+  <circle cx="48" cy="147" r="17" fill="#f7f1e8" stroke="#202a2f" stroke-width="8"/>
+  <circle cx="208" cy="147" r="17" fill="#f7f1e8" stroke="#202a2f" stroke-width="8"/>
+  <circle cx="128" cy="48" r="13" fill="#d35d3d" stroke="#202a2f" stroke-width="7"/>
 </svg>

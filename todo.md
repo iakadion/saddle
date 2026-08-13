@@ -482,3 +482,15 @@ The following blocks are the execution order for the complete ecosystem. A block
 - [x] Preserve the TypeScript library-first boundary so native surfaces convert shared web output instead of duplicating engine logic.
 - [x] Bump all active manifests and release metadata to 1.8.11 while preserving historical 1.8.10 references.
 - [x] Run local checks and native CI builds, verify the release asset names and sizes, publish v1.8.11 and document any toolchain-owned paths that cannot be flattened safely.
+
+### Native identity and security hardening follow-up
+
+- [x] Research OpenCode, ZCode and comparable cross-platform applications for icon, metadata, signing, notarization and release hardening patterns without copying their proprietary assets or code.
+- [x] Design and generate a distinctive Saddle icon family for Tauri, Android, iOS, browser extension and web metadata, preserving the flat project-owned layout and excluding generated `src` trees.
+- [x] Define caller-owned signing contracts for Windows Authenticode, macOS notarization, Android release signing and Apple provisioning without embedding private keys or pretending unsigned binaries are trusted.
+- [x] Expand desktop artifact coverage for x64, ARM64, MSI, EXE, AppImage, DEB, RPM, DMG and `.app` where the runner and signing configuration support it.
+- [x] Expand mobile and extension artifact coverage for Android APK/AAB, iOS IPA/app and browser extension packages, documenting unavailable targets instead of claiming nonexistent outputs.
+- [x] Investigate `GHSA-wrw7-89jp-8q8g` against the complete dependency graph, lockfiles and transitive Capacitor/Tauri surfaces; upgrade, override or isolate the vulnerable path when a compatible fix exists.
+- [x] Add an aggressive security workflow combining dependency review, npm audit, OSV or equivalent advisory ingestion, CodeQL, secret scanning, SBOM generation, artifact scanning and fail-closed severity policy.
+- [x] Update all application and package workflows to derive versions from release tags, use repository secrets for signing and registry credentials, upload SARIF or equivalent findings, and keep security evidence with the release.
+- [ ] Run the full local and CI security/native gates, document any residual caller-owned signing or unsupported architecture, and prepare the next 1.8.11 release update only after validation.
