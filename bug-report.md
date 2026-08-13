@@ -1,16 +1,16 @@
 ---
-name: Bug Report (View Only)
-about: Report an issue found while viewing saddle source
-title: "[VIEW-ONLY BUG]"
+name: Bug Report
+about: Report a reproducible issue in Saddle
+title: "[BUG]"
 labels: bug
 ---
 
-# Note: Project saddle is proprietary, view-only. No right to use or fix.
+# Saddle is licensed under GPL-3.0-only. Please do not include secrets or private data.
 
-**Describe the issue found while viewing:**
+**Describe the issue:**
 
 **File / Line:**
 
-**Expected behavior if you had permission to use:**
+**Expected behavior:**
 
 **Additional context:**

@@ -1,24 +1,7 @@
-                    SADDLE - TRADEMARK POLICY
-                       Version 1.0, August 2026
+# Saddle trademark policy
 
- Copyright (C) August 2026 devthink, nathlan, iakadion, nathu filho, allan neris, andraneris
- Everyone is permitted to view this document, but changing it
- is not allowed. This document is part of Project saddle.
+Copyright (C) 2026 devthink, nathlan, iakadion, nathu filho, allan neris, and contributors.
 
-                            Preamble
+The names “Saddle” and “Saddle Browser”, together with associated logos and marks, identify the project and its official releases. GPL-3.0-only grants rights to the source code; it does not grant permission to use project marks in a way that suggests endorsement, affiliation or official distribution.
 
-  Trademark policy for Project saddle.
-
-                       TERMS AND CONDITIONS
-
-  0. Trademarks.
-
-  "saddle" and associated logos are trademarks of Licensor.
-
-  1. No License to Use Marks.
-
-  No permission to use trade names, trademarks, service marks granted.
-
-  You may not use marks to suggest endorsement or affiliation.
-
-                     END OF TERMS AND CONDITIONS
+Forks and modified distributions should use distinct names and branding where necessary to avoid confusion. Descriptive references to compatibility, origin or modification are permitted when they are accurate and do not imply sponsorship.

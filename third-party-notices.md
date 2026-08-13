@@ -1,25 +1,7 @@
-                         SADDLE - THIRD PARTY NOTICES
-                       Version 1.0, August 2026
+# Saddle third-party notices
 
- Copyright (c) August 2026 devthink, nathlan, akadion, nathu filho, alllan neris, andraneris. All Rights Reserved.
- Project: saddle
+Copyright (C) 2026 devthink, nathlan, iakadion, nathu filho, allan neris, and contributors.
 
-  Project saddle is proprietary. This file lists third-party components,
-  if any, that may be referenced for viewing purposes.
+Saddle includes or builds with third-party components. Their individual licenses remain in force and are not replaced by GPL-3.0-only. Package manifests, lockfiles and generated license inventories are the source of truth for the exact dependency set of each release.
 
-  Currently, no third-party open source components are distributed with
-  Project saddle under their own licenses. If such components are added,
-  they will be listed below with their respective license texts.
-
-  Example format:
-
-    Component: example-lib
-    Version: 1.0.0
-    License: MIT
-    Copyright: Copyright (c) 2024 Example Author
-    URL: https://example.com
-
-  For any third-party component, the respective license applies only to
-  that component.
-
-                         END OF THIRD PARTY NOTICES
+When a component requires a notice, attribution or source offer, the release process must include it. A future dependency should be recorded with its name, version, license identifier, copyright notice and source URL.

@@ -1,27 +1,9 @@
-                    SADDLE - CODE OF CONDUCT
-                       Version 1.0, August 2026
+# Saddle code of conduct
 
- Copyright (C) August 2026 devthink, nathlan, iakadion, nathu filho, allan neris, andraneris
- Everyone is permitted to view this document, but changing it
- is not allowed. This document is part of Project saddle.
+Copyright (C) 2026 devthink, nathlan, iakadion, nathu filho, allan neris, andraneris, and contributors.
 
-                            Preamble
+The Saddle community follows a respectful, inclusive and technically constructive standard. Participants communicate in good faith, explain technical concerns with evidence, respect different backgrounds and experience levels, and protect private information.
 
-  Code of Conduct governs behavior in Project saddle repository.
+Unacceptable conduct includes harassment, discrimination, threats, deliberate disclosure of private information, malicious interference, impersonation, spam, and behavior that violates applicable law or the project policies.
 
-                       TERMS AND CONDITIONS
-
-  0. Expected Behavior.
-
-  Be respectful and professional. No copying or redistribution.
-
-  1. Unacceptable Behavior.
-
-  Copying for redistribution, reverse engineering discussions,
-  harassment, discrimination.
-
-  2. Enforcement.
-
-  Immediate ban and legal action for violation.
-
-                     END OF TERMS AND CONDITIONS
+Project maintainers may moderate discussions, remove harmful content, or restrict participation when necessary. Reports should be sent through the repository security or support channels, with private disclosure used for security-sensitive matters.

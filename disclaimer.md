@@ -1,23 +1,7 @@
-                    SADDLE - DISCLAIMER
-                       Version 1.0, August 2026
+# Saddle disclaimer
 
- Copyright (C) August 2026 devthink, nathlan, iakadion, nathu filho, allan neris, andraneris
- Everyone is permitted to view this document, but changing it
- is not allowed. This document is part of Project saddle.
+Copyright (C) 2026 devthink, nathlan, iakadion, nathu filho, allan neris, andraneris, and contributors.
 
-                            Preamble
+Saddle is provided under GPL-3.0-only and without warranty to the maximum extent permitted by law. The project does not guarantee availability, correctness, security, compatibility, performance or fitness for a particular purpose.
 
-  Disclaimer for Project saddle.
-
-                       TERMS AND CONDITIONS
-
-  0. Disclaimer of Warranty and Liability.
-
-  THE SOFTWARE IS PROVIDED AS-IS WITHOUT WARRANTY OF ANY KIND, EXPRESS
-  OR IMPLIED, INCLUDING BUT NOT LIMITED TO MERCHANTABILITY, FITNESS FOR
-  A PARTICULAR PURPOSE AND NONINFRINGEMENT.
-
-  IN NO EVENT SHALL AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM,
-  DAMAGES OR OTHER LIABILITY ARISING FROM SOFTWARE.
-
-                     END OF TERMS AND CONDITIONS
+Operators remain responsible for reviewing source code, configuring integrations, protecting credentials, validating outputs and complying with the terms of connected services. Nothing in this disclaimer removes rights or obligations established by GPL-3.0-only.

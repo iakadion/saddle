@@ -1,6 +1,6 @@
 {
   "name": "@wenathlan/saddle",
-  "version": "1.8.11",
+  "version": "1.8.12",
   "description": "binary computing engine that turns distributed storage into a publishable working set",
   "type": "module",
   "private": false,
@@ -74,6 +74,7 @@
     "./captcha-evidence": "./dist/captcha/evidence.js",
     "./hash": "./dist/core/hash.js",
     "./release-assets": "./dist/release/assets.js",
+    "./release-verify": "./dist/release/verify.js",
     "./worker": "./dist/runtime/worker.js"
   },
   "files": [

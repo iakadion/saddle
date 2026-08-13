@@ -1,34 +1,9 @@
-                         SADDLE - CONTRIBUTOR LICENSE AGREEMENT
-                       Version 1.0, August 2026
+# Saddle contributor terms
 
- Copyright (c) August 2026 devthink, nathlan, akadion, nathu filho, alllan neris, andraneris. All Rights Reserved.
- Project: saddle
+Copyright (C) 2026 devthink, nathlan, iakadion, nathu filho, allan neris, andraneris, and contributors.
 
-  This Contributor License Agreement (CLA) must be signed before any
-  contribution to Project saddle can be accepted. Project saddle is
-  proprietary and does NOT accept open source contributions by default.
+Saddle does not require an exclusive proprietary assignment of contributions. A contributor submitting a change represents that the contributor has the right to submit it and grants the project the permissions necessary to review, merge, reproduce, distribute and maintain the contribution under GPL-3.0-only.
 
-  1. Definitions.
+The contributor keeps copyright in the contribution. The project may include the contribution in source and binary releases under GPL-3.0-only and may preserve attribution and required notices.
 
-  "You" means the contributor. "Contribution" means any code, documentation,
-  or other material submitted to the Project.
-
-  2. Grant of Rights.
-
-  You hereby assign all right, title, and interest in your Contribution
-  to the Licensor, or alternatively grant an exclusive, perpetual,
-  irrevocable, worldwide, royalty-free license to use, modify, distribute,
-  and sublicense the Contribution as part of Project saddle.
-
-  3. Representations.
-
-  You represent that you are legally entitled to make the assignment and
-  that your Contribution is your original work.
-
-  4. No Obligation.
-
-  Licensor is not obligated to accept or use any Contribution.
-
-  To sign, contact the Licensor to receive the formal CLA document.
-
-                         END OF CLA
+If a separate contributor agreement is required for a particular institutional or commercial arrangement, it must be reviewed and accepted in writing before the contribution is merged. This file is not a replacement for legal advice or a bespoke agreement.

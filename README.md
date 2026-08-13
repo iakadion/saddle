@@ -6,8 +6,8 @@
   <strong>Storage-backed jobs, scraping contracts and portable runners for Node.js.</strong><br/>
   <strong>Binary computing engine, agent browser, scraper and packager.</strong><br/>
   <a href="https://github.com/wenathlan/saddle/actions/workflows/ci.yml"><img src="https://github.com/wenathlan/saddle/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
-  <a href="https://github.com/wenathlan/saddle/releases/tag/v1.8.9"><img src="https://img.shields.io/badge/release-v1.8.9-d35d3d" alt="Release 1.8.9" /></a>
-  <a href="https://github.com/wenathlan/saddle/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-GPL--3.0-202a2f" alt="GPL 3.0 license" /></a>
+  <a href="https://github.com/wenathlan/saddle/releases/tag/v1.8.11"><img src="https://img.shields.io/badge/release-v1.8.11-d35d3d" alt="Release 1.8.11" /></a>
+  <a href="https://github.com/wenathlan/saddle/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-GPL--3.0--only-202a2f" alt="GPL 3.0 only license" /></a>
 </p>
 
 > **Core idea:** storage is the durable side of the working set; the runner is replaceable; the artifact is the boundary. **Storage == Compute** means that the same bytes can be retained or processed according to an explicit usage flag.
@@ -144,6 +144,14 @@ Workflows use the release tag and the local `releaseversion` action. They do not
 
 Release assets are caller-selected and deterministic: `SHA256SUMS`, `sbom.cdx.json` in CycloneDX 1.5 shape and `provenance.intoto.jsonl` in an in-toto statement shape. The adapter does not publish, authenticate or choose a registry. The npm token previously sent in chat is compromised and must never be used; public npmjs publication uses only the owner-managed `NPM_TOKEN` repository secret.
 
+## Code signing policy
+
+Saddle is applying to the SignPath Foundation for open-source code signing. Until approval is granted, release notes identify each artifact as `unsigned`, `ci-test-key`, `caller-owned` or `notarized` according to the actual build state; no release claims platform trust that has not been verified.
+
+The requested policy is: **Free code signing provided by SignPath.io, certificate by SignPath Foundation**. Committers and reviewers are maintainers with write access to the public repository. Approvers are repository owners or release approvers recorded in `governance.md`. Every signed release must be built from repository source, pass the security and packaging gates, and receive manual signing approval.
+
+The core program will not transfer information to other networked systems unless specifically requested by the user or the person installing or operating it. Browser sessions, storage adapters, runners and external services remain caller-configured and subject to their own policies. See [`privacy-policy.md`](privacy-policy.md) and [`security.md`](security.md).
+
 ## GitHub Pages web surface
 
 The marketing site lives under [`web/`](web/) with a root-based TypeScript/React layout. It has no `client/` or `src/` subdirectory. Vite normalizes the base path and all visual assets resolve through a shared helper, so the same build works at `/` and `/saddle/`.
@@ -207,4 +215,4 @@ Version 1.8.11 extends the TypeScript-first engine with flat project-owned deskt
 
 ## License
 
-Saddle is distributed under the [GNU General Public License v3.0](LICENSE).
+Saddle is distributed under the [GNU General Public License v3.0 only](LICENSE).

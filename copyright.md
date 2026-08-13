@@ -1,27 +1,7 @@
-                    SADDLE - COPYRIGHT NOTICE
-                       Version 1.0, August 2026
+# Saddle copyright notice
 
- Copyright (C) August 2026 devthink, nathlan, iakadion, nathu filho, allan neris, andraneris
- Everyone is permitted to view this document, but changing it
- is not allowed. This document is part of Project saddle.
+Copyright (C) 2026 devthink, nathlan, iakadion, nathu filho, allan neris, andraneris, and contributors.
 
-                            Preamble
+The Saddle source code and original documentation are distributed under the GNU General Public License version 3.0 only. The complete license text is kept in the root `LICENSE` file and must be distributed with covered copies.
 
-  This document records copyright ownership for Project saddle.
-
-                       TERMS AND CONDITIONS
-
-  0. Copyright Notice.
-
-  Copyright (C) August 2026 devthink, nathlan, iakadion, nathu filho, allan neris, andraneris
-  All Rights Reserved.
-  Project: saddle
-
-  All files protected by copyright law and international treaties.
-
-  1. Protection.
-
-  Unauthorized copying, modification, distribution, or use is strictly
-  prohibited and will be prosecuted.
-
-                     END OF TERMS AND CONDITIONS
+Copyright ownership remains with the respective authors and contributors. Copyright ownership does not remove the rights granted by GPL-3.0-only. The Saddle name, logos and other marks are covered separately by `trademark-policy.md`.

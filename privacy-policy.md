@@ -1,23 +1,9 @@
-                    SADDLE - PRIVACY POLICY
-                       Version 1.0, August 2026
+# Saddle privacy policy
 
- Copyright (C) August 2026 devthink, nathlan, iakadion, nathu filho, allan neris, andraneris
- Everyone is permitted to view this document, but changing it
- is not allowed. This document is part of Project saddle.
+Copyright (C) 2026 devthink, nathlan, iakadion, nathu filho, allan neris, and contributors.
 
-                            Preamble
+The core Saddle library does not intentionally collect telemetry or transmit data without an operator-requested integration. Browser, scraper, storage and runner features can access data only when the operator configures and invokes them. Operators must review the configuration and the privacy policy of every connected provider.
 
-  Privacy policy for Project saddle repository viewing.
+The repository itself is hosted by third-party services such as GitHub. Those services process requests, account data, logs and cookies under their own policies. A deployment that adds analytics, account data, logs or external storage must document that behavior and provide the controls required by applicable law.
 
-                       TERMS AND CONDITIONS
-
-  0. Data Collection.
-
-  No data collection in source code. GitHub's Privacy Policy applies
-  when viewing on GitHub.
-
-  1. No Tracking.
-
-  No tracking, telemetry, or analytics in code.
-
-                     END OF TERMS AND CONDITIONS
+Privacy questions and reports should use the repository support channel. Security-sensitive reports must follow `security.md`.

@@ -1,24 +1,9 @@
-                    SADDLE - SECURITY POLICY
-                       Version 1.0, August 2026
+# Saddle security policy
 
- Copyright (C) August 2026 devthink, nathlan, iakadion, nathu filho, allan neris, andraneris
- Everyone is permitted to view this document, but changing it
- is not allowed. This document is part of Project saddle.
+Copyright (C) 2026 devthink, nathlan, iakadion, nathu filho, allan neris, and contributors.
 
-                            Preamble
+Saddle uses private disclosure for vulnerabilities that could expose users, credentials or third-party systems. Do not publish exploit details in a public issue before maintainers have had a reasonable opportunity to investigate and coordinate a fix. Use the repository's private security advisory channel or the contact method configured in the repository.
 
-  Security policy for Project saddle.
+Security testing must be authorized by the owner of the target system. Development and CI scanning of Saddle artifacts is allowed within the project's own build and test environments. Unauthorized penetration testing, fuzzing, active scanning or credential probing of third-party systems is not allowed.
 
-                       TERMS AND CONDITIONS
-
-  0. Reporting Vulnerability.
-
-  Do NOT open public GitHub issue for security vulnerabilities.
-  Report privately via GitHub private security advisory.
-
-  1. No Permission to Test.
-
-  No penetration testing, fuzzing, or active scanning without prior
-  written permission.
-
-                     END OF TERMS AND CONDITIONS
+The project records accepted risks, dependency advisories and remediation status in the security documentation and workflow reports.

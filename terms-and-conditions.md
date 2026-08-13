@@ -1,64 +1,9 @@
-                    SADDLE - TERMS AND CONDITIONS
-                       Version 1.0, August 2026
+# Saddle terms and conditions
 
- Copyright (C) August 2026 devthink, nathlan, iakadion, nathu filho, allan neris, andraneris
- Everyone is permitted to view this document, but changing it
- is not allowed. This document is part of Project saddle.
+Copyright (C) 2026 devthink, nathlan, iakadion, nathu filho, allan neris, and contributors.
 
-                            Preamble
+These terms describe access to the Saddle repository, documentation, releases and project services. The source code license is the GNU General Public License version 3.0 only; the root `LICENSE` file controls permissions to copy, modify, run and redistribute covered works.
 
-  These Terms and Conditions govern your access to and viewing of
-  Project saddle repositories, source code, documentation, and related
-  materials. By accessing the repository, you agree to be bound by these
-  Terms together with the LICENSE file.
+Users must comply with applicable law, third-party provider terms, the acceptable use policy, and the security policy. Users must not use a configured integration to access data or systems without authorization, expose credentials, distribute malware, or evade safety controls.
 
-  Project saddle is proprietary and source-available for viewing only.
-  No open source rights are granted.
-
-                       TERMS AND CONDITIONS
-
-  0. Definitions.
-
-  "Project" means saddle.
-  "Licensor" means devthink, nathlan, iakadion, nathu filho, allan neris, andraneris.
-  "You" means the individual viewing the repository.
-
-  1. Acceptance.
-
-  By accessing, cloning for viewing only, browsing, or interacting with
-  Project saddle repository, you acknowledge that you have read,
-  understood, and agree to be bound by these Terms and LICENSE.
-
-  2. Ownership.
-
-  Project saddle, including all source code, binaries, documentation,
-  and materials, is exclusive property of Licensor. All rights reserved.
-
-  3. Permitted Conduct - View Only.
-
-  You may view source through GitHub web interface for evaluation.
-  You may star or watch repository.
-
-  4. Prohibited Conduct.
-
-  You agree NOT to copy, reproduce, use, modify, adapt, distribute,
-  sublicense, scrape, train AI models, or remove copyright notices.
-
-  5. No Warranty.
-
-  PROJECT PROVIDED AS-IS WITHOUT WARRANTY.
-
-  6. Limitation of Liability.
-
-  NO LIABILITY TO MAXIMUM EXTENT PERMITTED BY LAW.
-
-  7. Termination.
-
-  Licensor may terminate access at any time for breach. Destroy cached
-  copies upon termination.
-
-  8. Governing Law.
-
-  Laws of Brazil.
-
-                     END OF TERMS AND CONDITIONS
+The repository and project services are provided without warranty to the maximum extent permitted by law. Separate provider terms apply to infrastructure, accounts, data and hosted services. These terms do not add restrictions to GPL-licensed source code.

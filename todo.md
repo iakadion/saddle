@@ -569,3 +569,43 @@ The following blocks are the execution order for the complete ecosystem. A block
 - [x] Investigate whether any legitimate provider offers free signing to established open-source projects beyond SignPath Foundation.
 - [x] Reject certificate scraping, identity reuse, stolen keys, reputation farming, download inflation and SmartScreen bypass claims.
 - [x] Add verified findings and an updated 1.8.12 route classification to the research report.
+
+### SignPath Foundation application
+
+- [ ] Open the official SignPath Foundation application and select GitHub Actions as the Saddle CI/CD integration.
+- [ ] Prepare public project fields: project name, repository URL, homepage, open-source license, release workflow and public build provenance.
+- [ ] Confirm the application does not require private keys or credentials to be pasted into the form.
+- [ ] Stop before entering the user's personal email or submitting the application until the user takes over the browser or explicitly confirms the final form.
+- [ ] Record the application status, policy identifiers and provider instructions without committing any secret to the repository.
+
+### Four atomic implementation batches
+
+- [ ] Keep `/home/ubuntu/upload/README.md` as an objective scope reference; do not rewrite it as an execution script.
+- [ ] Audit every license declaration, SPDX identifier, notice and package metadata before choosing a normalized project license.
+- [ ] Record the license decision and its compatibility impact for npm, GitHub Packages, GHCR, Maven, NuGet and RubyGems.
+- [x] Batch 1.8.12: complete signing and distribution readiness, expanded artifact metadata, and release documentation.
+- [x] Batch 1.8.12: run tests, security gates, packaging checks and artifact-manifest validation before tagging.
+- [x] Batch 1.8.13: select the next highest-value missing feature from the objective backlog after the 1.8.12 audit: independent release verification.
+- [x] Batch 1.8.13: implement, test, document and prepare the release surface without publishing a tag before the SignPath form is confirmed.
+- [x] Batch 1.8.14: select and implement the next objective-driven feature group without assuming a fixed implementation path: declarative cross-platform release matrix.
+- [x] Batch 1.8.14: run the complete verification matrix and update release artifacts and notes.
+- [x] Batch 1.8.15: select and implement the next objective-driven feature group based on observed gaps: bounded memory working set.
+- [x] Batch 1.8.15: run the complete verification matrix and update release artifacts and notes.
+- [ ] Create commits and release tags only after each batch has passed its gates and the user has completed the SignPath form when signing claims depend on it.
+
+### License and document consolidation
+
+- [x] Apply the confirmed policy A: GPL-3.0-only and open source.
+- [x] Keep the scope README unchanged and treat it as an objective reference rather than a deterministic file plan.
+- [x] Map every root and `docs` legal document, including extensionless files and `.md`/`.txt` variants.
+- [x] Compare duplicate privacy, terms, conduct, copyright, notice, license and README documents before removing any copy.
+- [x] Select one canonical root document for each legal policy and update internal links without leaving ambiguous duplicates.
+- [x] Replace proprietary view-only license text with the official unmodified GPL-3.0 text in the canonical `LICENSE` file.
+- [x] Align package manifests with `GPL-3.0-only` and remove redundant license copies after preserving required package references.
+- [x] Add a project-specific copyright and license notice without modifying the official GPL text.
+- [x] Verify repository-wide license references, package metadata, release notes and SignPath documentation after consolidation.
+
+### Commit authorization
+
+- [ ] Create the authorized consolidation commit without creating a tag or release.
+- [ ] Keep the SignPath form, signing provider approval and release tags pending for a later version.

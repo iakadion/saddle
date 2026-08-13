@@ -1,27 +1,16 @@
-                    SADDLE - AUTHORS
-                       Version 1.0, August 2026
+# Saddle authors
 
- Copyright (C) August 2026 devthink, nathlan, iakadion, nathu filho, allan neris, andraneris
- Everyone is permitted to view this document, but changing it
- is not allowed. This document is part of Project saddle.
+Copyright (C) 2026 devthink, nathlan, iakadion, nathu filho, allan neris, andraneris, and contributors.
 
-                            Preamble
+The project authors and historical copyright holders are:
 
-  Authors and copyright holders for Project saddle.
+| Contributor | Role |
+|---|---|
+| devthink | Historical author and project contributor |
+| nathlan | Project owner and maintainer |
+| iakadion | Historical author and project contributor |
+| nathu filho | Historical author and project contributor |
+| allan neris | Historical author and project contributor |
+| andraneris | Historical author and project contributor |
 
-                       TERMS AND CONDITIONS
-
-  0. Authors.
-
-  - devthink
-  - nathlan
-  - iakadion
-  - nathu filho
-  - allan neris
-  - andraneris
-
-  All Rights Reserved. Project: saddle
-
-  Contact via GitHub repository iakadion/saddle.
-
-                     END OF TERMS AND CONDITIONS
+Saddle is maintained at https://github.com/wenathlan/saddle and distributed under GPL-3.0-only. Contributors retain copyright in their original contributions unless a separate written agreement states otherwise.

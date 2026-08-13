@@ -21,6 +21,26 @@ export function artifactname(target, version, format) {
   return normalized;
 }
 
+/** Creates the supported cross-platform release matrix for a version. */
+export function releaseartifactmatrix(version, options = {}) {
+  const normalizedversion = normalizeversion(version);
+  const signing = String(options.signing ?? "caller-owned");
+  const entries = [
+    entry("desktop", "linux", "x64", ["deb", "rpm", "appimage"], normalizedversion, signing),
+    entry("desktop", "linux", "arm64", ["deb", "rpm", "appimage"], normalizedversion, signing),
+    entry("desktop", "windows", "x86", ["exe", "msi"], normalizedversion, signing),
+    entry("desktop", "windows", "x64", ["exe", "msi"], normalizedversion, signing),
+    entry("desktop", "windows", "arm64", ["exe", "msi"], normalizedversion, signing),
+    entry("desktop", "macos", "x64", ["dmg", "app.zip"], normalizedversion, signing),
+    entry("desktop", "macos", "arm64", ["dmg", "app.zip"], normalizedversion, signing),
+    entry("android", "android", "caller", ["apk", "aab"], normalizedversion, signing),
+    entry("ios", "ios", "caller", ["ipa", "app.zip"], normalizedversion, signing),
+    entry("container", "oci", "caller", ["tar.gz"], normalizedversion, signing),
+    entry("extension", "browser", "caller", ["zip"], normalizedversion, signing),
+  ];
+  return { version: normalizedversion, signing, entries };
+}
+
 /** Creates a distribution manifest for caller-owned build and publication steps. */
 export function distributionmanifest(options = {}) {
   if (!options.name || !options.version || !options.entry) throw new TypeError("distribution manifest requires name version and entry");
@@ -56,4 +76,18 @@ export function containerplan(manifest, options = {}) {
   const lines = [`from ${base}`, `workdir ${workdir}`, "copy package.json package-lock.json ./", "run npm ci --omit=dev", "copy dist ./dist", `cmd ${JSON.stringify(command)}`];
   if (options.port) lines.splice(3, 0, `expose ${options.port}`);
   return { base, workdir, command, dockerfile: `${lines.join("\n")}\n` };
+}
+
+function normalizeversion(value) { const normalized = String(value).trim(); if (!/^\d+\.\d+\.\d+$/.test(normalized)) throw new TypeError(`invalid release version: ${value}`); return normalized; }
+
+function entry(surface, platform, architecture, formats, version, signing) {
+  const files = formats.map((format) => {
+    if (surface === "android") return `saddle.${format}.${version}.${format}`;
+    if (surface === "ios") return `saddle.${format}.${version}.${format === "app.zip" ? "app.zip" : format}`;
+    if (surface === "container") return `saddle.container.${version}.tar.gz`;
+    if (surface === "extension") return `saddle.extension.${version}.zip`;
+    return `saddle.browser.${version}.${architecture}.${format}`;
+  });
+  const metadata = surface === "desktop" ? `desktop.${platform}.${architecture}` : surface;
+  return { surface, platform, architecture, formats, files, signing, checksums: `sha256.${metadata}.${version}`, manifest: `manifest.${metadata}.${version}.json` };
 }

@@ -1,14 +1,13 @@
-<!-- SADDLE - PULL REQUEST TEMPLATE -->
+<!-- Saddle pull request template -->
 
-# Note: Project saddle is proprietary and view-only.
-# Pull requests will NOT be accepted without a signed CLA and prior written approval.
+# Description
 
-## Description
+## Type of change
 
-## Type of Change
+## Verification
 
-## Checklist
-
-- [ ] I have signed the CLA (see cla.md)
-- [ ] I have permission from Licensor
-- [ ] This PR does not include unauthorized copying
+- [ ] The change preserves GPL-3.0-only metadata and required notices.
+- [ ] Tests or a reason for not adding tests are included.
+- [ ] Security-sensitive behavior and workflow changes were reviewed.
+- [ ] No credentials, private data or generated build output was added.
+- [ ] Public documentation was updated when behavior changed.

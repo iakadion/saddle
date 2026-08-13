@@ -1,7 +1,7 @@
                          SADDLE - CHANGELOG
                        Version 1.7, August 2026
 
- Copyright (c) August 2026 devthink, nathlan, akadion, nathu filho, alllan neris, andraneris. All Rights Reserved.
+ Copyright (C) 2026 devthink, nathlan, iakadion, nathu filho, allan neris, andraneris, and contributors. Licensed under GPL-3.0-only.
  Project: saddle
 
   All notable changes to Project saddle are documented in this file.
@@ -9,6 +9,14 @@
   ## [Unreleased]
 
     - Future changes will be recorded here after the 1.8.11 release.
+
+  ## [1.8.12] - 2026-08-13
+
+    - Standardized the project license and root legal documents on GPL-3.0-only, preserving one canonical `LICENSE` file and removing byte-identical Markdown/Text duplicates.
+    - Added the public SignPath Foundation code-signing policy, GitHub Actions integration path and explicit unsigned, caller-owned, test-key and notarized status vocabulary.
+    - Expanded the desktop matrix to Linux x64/arm64, Windows x86/x64/arm64 and macOS x64/arm64, with dotted lowercase artifact names and per-runner manifests and checksums.
+    - Prepared Android APK/AAB and iOS IPA/app archive metadata, container and browser-extension release assets, with signing claims controlled by the actual CI state.
+    - Preserved the Saddle brand icon across native and extension surfaces and retained security scanning, SBOM and provenance gates.
 
   ## [1.8.11] - 2026-08-13
 

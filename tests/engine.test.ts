@@ -526,6 +526,22 @@ test("loads from the first backend and persists to all backends", async () => {
   assert.equal((await memory.safeload("missing")).success, false);
 });
 
+test("bounds the hot working set with LRU eviction and byte accounting", async () => {
+  const values = new Map();
+  const backend = { get: async (key) => values.get(key) ?? null, put: async (key, value) => values.set(key, value), delete: async (key) => values.delete(key) };
+  const memory = memoryengine({ backends: [backend], maxentries: 2, maxbytes: 12 });
+  await memory.persist("one", "123456");
+  await memory.persist("two", "123456");
+  await memory.load("one");
+  await memory.persist("three", "123456");
+  assert.deepEqual(memory.list(), ["one", "three"]);
+  assert.equal(memory.stats().entries, 2);
+  assert.equal(memory.stats().bytes, 12);
+  assert.equal(memory.stats().evictions, 1);
+  await memory.load("two");
+  assert.equal(memory.stats().misses, 1);
+});
+
 test("syncs a working set object between memory backends with explicit capabilities", async () => {
   const first = new Map([["sync", { data: new TextEncoder().encode("source"), contenttype: "text/plain", sha256: "source" }]]);
   const second = new Map();

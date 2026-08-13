@@ -7,7 +7,7 @@
   <artifactId>saddle</artifactId>
   <version>${revision}</version>
   <properties>
-    <revision>1.8.11</revision>
+    <revision>1.8.12</revision>
   </properties>
   <packaging>pom</packaging>
   <name>Saddle</name>
@@ -15,7 +15,7 @@
   <url>https://github.com/wenathlan/saddle</url>
   <licenses>
     <license>
-      <name>GNU General Public License v3.0</name>
+      <name>GNU General Public License v3.0 only</name>
       <url>https://www.gnu.org/licenses/gpl-3.0.html</url>
       <distribution>repo</distribution>
     </license>

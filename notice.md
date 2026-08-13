@@ -1,26 +1,7 @@
-                    SADDLE - NOTICE FILE
-                       Version 1.0, August 2026
+# Saddle notice
 
- Copyright (C) August 2026 devthink, nathlan, iakadion, nathu filho, allan neris, andraneris
- Everyone is permitted to view this document, but changing it
- is not allowed. This document is part of Project saddle.
+Copyright (C) 2026 devthink, nathlan, iakadion, nathu filho, allan neris, and contributors.
 
-                            Preamble
+Saddle is open-source software licensed under the GNU General Public License version 3.0 only. The source code, generated artifacts and documentation may include work from third-party projects; each third-party component remains subject to its own license.
 
-  This Notice file is part of Project saddle and identifies its
-  proprietary status.
-
-                       TERMS AND CONDITIONS
-
-  0. Notice.
-
-  Project saddle is proprietary and confidential.
-  Source available for viewing only under SADDLE PROPRIETARY LICENSE.
-
-  SPDX-License-Identifier: LicenseRef-Saddle-Proprietary
-
-  1. Trademarks.
-
-  "saddle" is trademark of Licensor. All rights reserved.
-
-                     END OF TERMS AND CONDITIONS
+The project name and logos are trademarks of their respective owner. The trademark policy does not restrict rights granted by GPL-3.0-only to the source code.

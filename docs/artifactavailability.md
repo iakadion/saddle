@@ -82,3 +82,19 @@ Sizes are bytes and exclude the separate manifest and checksum files.
 | Extension       | [ZIP](https://github.com/wenathlan/saddle/releases/download/v1.8.11/saddle.extension.1.8.11.zip)            |     10,760 |
 
 The release also contains `manifest.*.1.8.11.json` and `sha256.*.1.8.11` files for Android, container, and each desktop runner. No IPA was attached because caller-owned Apple signing and provisioning were not enabled for this release.
+
+## 1.8.12 release matrix
+
+Version 1.8.12 is prepared to publish the expanded matrix below. The release workflows derive the version from the `v1.8.12` tag and generate the checksum and manifest files beside each surface artifact. Sizes and final signing states remain pending until the release workflows complete; this section does not claim that an artifact exists before CI attaches it.
+
+| Surface | Architectures | Artifact naming contract |
+| --- | --- | --- |
+| Linux desktop browser | x64, arm64 | `saddle.browser.1.8.12.<architecture>.deb`, `.rpm`, `.appimage` |
+| Windows desktop browser | x86, x64, arm64 | `saddle.browser.1.8.12.<architecture>.exe`, `.msi` |
+| macOS desktop browser | x64, arm64 | `saddle.browser.1.8.12.<architecture>.dmg`, `.app.zip` |
+| Android | caller-configured signing | `saddle.apk.1.8.12.apk`, `saddle.aab.1.8.12.aab` |
+| iOS | caller-configured signing and provisioning | `saddle.ipa.1.8.12.ipa`, `saddle.app.1.8.12.app.zip` |
+| Container | OCI | `saddle.container.1.8.12.tar.gz` |
+| Browser extension | Manifest V3 | `saddle.extension.1.8.12.zip` |
+
+Each surface also emits `sha256.*.1.8.12`, `manifest.*.1.8.12.json` and, where enabled by the release path, SBOM and provenance metadata. The manifest must state `unsigned`, `ci-test-key`, `caller-owned`, `notarized` or the verified provider status actually produced by CI.

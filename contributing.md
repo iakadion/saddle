@@ -1,24 +1,9 @@
-                    SADDLE - CONTRIBUTING
-                       Version 1.0, August 2026
+# Contributing to Saddle
 
- Copyright (C) August 2026 devthink, nathlan, iakadion, nathu filho, allan neris, andraneris
- Everyone is permitted to view this document, but changing it
- is not allowed. This document is part of Project saddle.
+Copyright (C) 2026 devthink, nathlan, iakadion, nathu filho, allan neris, andraneris, and contributors.
 
-                            Preamble
+Saddle welcomes contributions that improve the library, its adapters, target builds, documentation, tests and security posture. Contributions are licensed under GPL-3.0-only unless a different compatible arrangement is agreed in writing before acceptance.
 
-  Project saddle is proprietary. This document explains contribution
-  policy.
+A pull request should explain the change, include focused verification, preserve the root-first architecture and avoid credentials, private data or generated artifacts. Security vulnerabilities must use the private process in `security.md` rather than a public issue.
 
-                       TERMS AND CONDITIONS
-
-  0. Policy.
-
-  No external contributions accepted via pull requests, patches, or other
-  means, unless you have signed separate Contributor License Agreement.
-
-  1. How to Request Permission.
-
-  Open issue titled LICENSE REQUEST with intended use.
-
-                     END OF TERMS AND CONDITIONS
+Maintainers may review, request changes, decline or merge a contribution. No contributor is required to transfer exclusive ownership of their work merely to submit a pull request.

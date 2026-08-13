@@ -1,9 +1,10 @@
 [package]
 name = "saddle-desktop"
-version = "1.8.11"
+version = "1.8.12"
 description = "Saddle desktop browser shell"
 authors = ["wenathlan"]
 edition = "2021"
+license = "GPL-3.0-only"
 build = "build.rs"
 
 [lib]

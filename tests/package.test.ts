@@ -7,6 +7,7 @@ import { readFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { test } from "node:test";
+import { releaseartifactmatrix } from "../packager/manifest.js";
 
 const transportneutral = ["dist/index.js", "dist/storage/index.js", "dist/runners/scheduler.js", "dist/domain/sessions.js", "dist/modes/resolve.js", "dist/modes/matrix.js", "dist/browser/index.js", "dist/bot/bot.js", "dist/captcha/contract.js", "dist/deploy/index.js", "dist/extension/index.js", "dist/core/hash.js", "dist/runtime/worker.js"];
 
@@ -49,4 +50,12 @@ test("keeps transport-neutral export graphs free of Node-only imports", async ()
   }
   assert.equal(seen.has(resolve(root, "..", "dist/index.js")), true);
   assert.equal(seen.has(resolve(root, "..", "dist/extension/index.js")), true);
+});
+
+test("creates the expanded release matrix without vendor coupling", () => {
+  const matrix = releaseartifactmatrix("1.8.14", { signing: "caller-owned" });
+  assert.equal(matrix.entries.length, 11);
+  assert.deepEqual(matrix.entries.find((entry) => entry.platform === "windows" && entry.architecture === "x86")?.files, ["saddle.browser.1.8.14.x86.exe", "saddle.browser.1.8.14.x86.msi"]);
+  assert.deepEqual(matrix.entries.find((entry) => entry.surface === "android")?.files, ["saddle.apk.1.8.14.apk", "saddle.aab.1.8.14.aab"]);
+  assert.equal(matrix.entries.find((entry) => entry.surface === "container")?.manifest, "manifest.container.1.8.14.json");
 });
