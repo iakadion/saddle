@@ -23,4 +23,8 @@ ENV NODE_ENV=production
 COPY --from=build /app/package.json /app/package-lock.json ./
 COPY --from=build /app/dist ./dist
 
+USER node
+
+HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 CMD ["node", "dist/cli/main.js", "help"]
+
 ENTRYPOINT ["node", "dist/cli/main.js"]
