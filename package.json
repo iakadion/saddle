@@ -90,6 +90,7 @@
     "target:manifest": "npm run build:engine && node dist/packager/targetcli.js",
     "pack:check": "npm run check && npm run formatcheck && npm test && npm pack --dry-run",
     "prepublishOnly": "npm run pack:check",
+    "tauri": "npx --yes @tauri-apps/cli@2.11.4",
     "web:dev": "vite --config web/vite.config.ts --host",
     "web:check": "tsc --project web/tsconfig.json --noEmit",
     "web:build": "vite build --config web/vite.config.ts",
