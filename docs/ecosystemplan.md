@@ -26,7 +26,7 @@ The engine owns **contracts, validation, orchestration, recovery and auditabilit
 | --- | --- | --- | --- |
 | 1 | audit and governance | active | gap matrix, sources, claims reconciled |
 | 2 | browser agent foundation | complete | snapshots, refs, stale errors, tabs, frames, action results and context-aware replay provenance tests |
-| 3 | extension runtime | first slice complete | MV3 unpacked surface, protocol, worker, content bridge and tests |
+| 3 | extension runtime | first slice complete | MV3 unpacked surface, protocol, worker, isolated content bridge, read-only page boundary and tests |
 | 4 | working set and storage | complete | range chunks, content dedupe, tiered cache, conflict sync and memory capabilities |
 | 5 | runners and execution | complete | provider health, triggers, cancellation, heartbeat and resumable runs |
 | 6 | scraping and context | complete | semantic extraction, content-type normalization, crawl budgets, RAG lineage and low-cardinality metrics |
@@ -52,7 +52,7 @@ Each block follows the same loop:
 
 ## current implementation
 
-Version 1.8.2 carries the public npm identity migration through the transferred `wenathlan` repository owner, aligns GitHub Packages npm, Maven and GHCR owner metadata, and includes the minimal extension permission policy, deterministic extension zip workflow, context-aware replay, transport-neutral graph audit and bounded content normalization. Registry publication is triggered only after the release tag and independent target checks. The first product surface slice adds desktop, mobile, n8n, operator control, operational policy and framework-neutral HTTP contracts. The first cross-runtime slice validates the root on Node, Bun and Deno, while extension-context and browser bundler checks remain caller-owned.
+Version 1.8.2 carries the public npm identity migration through the transferred `wenathlan` repository owner, aligns GitHub Packages npm, Maven and GHCR owner metadata, and includes the minimal extension permission policy, deterministic extension zip workflow, context-aware replay, transport-neutral graph audit and bounded content normalization. The unreleased extension slice adds a read-only page-world boundary with token-correlated `pagefacts` responses and deterministic timeout handling. Registry publication is triggered only after the release tag and independent target checks. The first product surface slice adds desktop, mobile, n8n, operator control, operational policy and framework-neutral HTTP contracts. The first cross-runtime slice validates the root on Node, Bun and Deno, while extension-context and browser bundler checks remain caller-owned.
 
 ## evidence sources
 

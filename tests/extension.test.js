@@ -13,6 +13,7 @@ import { mkdtemp, readFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { join } from "node:path";
 import "../extension/content.js";
+import "../extension/pagebridge.js";
 
 test("creates versioned extension commands and correlated responses", async () => {
   const command = createcommand("snapshot", { tabid: 7 }, { id: "request1" });
@@ -57,6 +58,34 @@ test("content bridge returns bounded snapshots and executes only referenced clic
   assert.throws(() => bridge.handle(createcommand("clickref", { ref: "e1", snapshotid: "stale" })), (error) => error.code === "stale_snapshot");
 });
 
+test("content isolation reads page-world facts through a correlated message boundary", async () => {
+  const events = new Set();
+  const documentref = { location: { href: "https://example.com/page" }, title: "Page world", body: { innerText: "Facts from the page world" } };
+  const windowref = {
+    document: documentref,
+    addEventListener(type, listener) { if (type === "message") events.add(listener); },
+    removeEventListener(type, listener) { if (type === "message") events.delete(listener); },
+    setTimeout,
+    clearTimeout,
+    postMessage(data) { queueMicrotask(() => { for (const listener of events) listener({ source: windowref, data }); }); }
+  };
+  const pagebridge = globalThis.saddlepagebridge.createpagebridge(windowref);
+  events.add(pagebridge.listener);
+  const bridge = globalThis.saddlecontent.createbridge(documentref, () => 100, { pagechannel: globalThis.saddlecontent.createpagechannel(windowref, () => 100, 50) });
+  const facts = await bridge.handle(createcommand("pagefacts", {}, { id: "facts1" }));
+  assert.deepEqual(facts, { url: "https://example.com/page", title: "Page world", text: "Facts from the page world" });
+  bridge.pagechannel.dispose();
+  events.delete(pagebridge.listener);
+});
+
+test("content isolation rejects a missing page-world response with a stable timeout", async () => {
+  const events = new Set();
+  const windowref = { addEventListener(type, listener) { if (type === "message") events.add(listener); }, removeEventListener(type, listener) { if (type === "message") events.delete(listener); }, setTimeout, clearTimeout, postMessage() {} };
+  const channel = globalThis.saddlecontent.createpagechannel(windowref, () => 100, 5);
+  await assert.rejects(() => channel.readpage(), (error) => error.code === "page_bridge_timeout");
+  channel.dispose();
+});
+
 test("keeps extension permissions minimal and optional escalation caller-owned", async () => {
   const policy = permissionpolicy({ optional: ["activeTab"] });
   assert.deepEqual(policy.hostpermissions, []);
@@ -76,6 +105,7 @@ test("builds a versioned unpacked extension artifact without mutating the source
     assert.equal(manifest.version, "1.8.1");
     assert.equal(manifest.permissions.includes("storage"), true);
     assert.equal(manifest.host_permissions, undefined);
+    assert.match(await readFile(join(output, "pagebridge.js"), "utf8"), /saddle\.pagefacts\.v1/);
   } finally {
     await rm(output, { force: true, recursive: true });
   }

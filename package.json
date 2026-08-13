@@ -111,7 +111,7 @@
     "LICENSE"
   ],
   "scripts": {
-    "check": "node --check index.js && node --check runtime/engine.js && node --check cli/main.js && node --check extension/protocol.js && node --check extension/serviceworker.js && node --check extension/worker.js && node --check extension/content.js && node --check extension/popup.js && node --check extension/permissions.js && node --check extension/build.js && node --check sessions/replay.js && node --check browser/recorder.js && node --check scrape/normalize.js",
+    "check": "node --check index.js && node --check runtime/engine.js && node --check cli/main.js && node --check extension/protocol.js && node --check extension/serviceworker.js && node --check extension/worker.js && node --check extension/content.js && node --check extension/pagebridge.js && node --check extension/popup.js && node --check extension/permissions.js && node --check extension/build.js && node --check sessions/replay.js && node --check browser/recorder.js && node --check scrape/normalize.js",
     "formatcheck": "node format/check.js",
     "test": "node --test tests/*.test.js",
     "run": "node cli/main.js",

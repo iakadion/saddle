@@ -3,7 +3,7 @@
  */
 
 export const protocolversion = 1;
-export const extensioncommands = Object.freeze(["snapshot", "readpage", "clickref", "fillref"]);
+export const extensioncommands = Object.freeze(["snapshot", "readpage", "pagefacts", "clickref", "fillref"]);
 
 /** Creates a compact identifier without embedding a host, port or credential. */
 export function createid(prefix = "msg", source) {

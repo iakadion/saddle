@@ -15,15 +15,15 @@ This matrix turns the supplied README and conclusions into implementation decisi
 
 | Area | Current state | Gap | Priority | Decision |
 | --- | --- | --- | --- | --- |
-| Root library | Implemented ESM entry point with broad exports | No extension subpath or extension files are shipped | P0 | Add a small `extension/` package surface and export only serializable contracts |
+| Root library | Implemented ESM entry point with broad exports and an extension subpath | Browser-specific packaging and cross-browser profiles remain adapter-owned | P2 | Keep serializable extension contracts separate from browser binaries |
 | Browser agent | Implemented injected action adapter for navigate, click, type, screenshot, DOM, title, scroll and command batches | Vendor-neutral action results and bounded action batches are public; optional Playwright provider is isolated behind `browser-playwright` | P1 | Keep the adapter boundary; browser binaries and credentials remain caller-owned |
 | Browser snapshots | Implemented public contract | Snapshot ids, bounded elements, stable refs, stale checks and diffs are covered by deterministic tests | P0 | Reuse the contract from MCP and extension transport |
 | Session replay | Implemented | Replay restores caller-owned window, tab and frame context before actions; context identifiers are validated and counted | P1 | Keep browser selection and restoration in injected adapters |
-| Extension runtime | Surface is only declared in `surfaces/manifest.js` and `surfaces/targets.js` | No Manifest V3 manifest, service worker, content bridge, popup or build artifact | P0 | Implement a pure JavaScript MV3 reference surface with minimal permissions |
-| Extension messaging | Not implemented | No versioned envelope, correlation id, timeout, sender metadata or error response contract | P0 | Add transport-neutral message contracts and Chrome runtime adapter |
+| Extension runtime | Manifest V3 manifest, service worker, content bridge, popup and deterministic build artifact are implemented | Cross-browser manifests remain unbundled | P2 | Keep a pure JavaScript MV3 reference surface with minimal permissions |
+| Extension messaging | Versioned envelope, correlation id, timeout, sender metadata and error response contract are implemented | Long-lived ports remain caller-owned | P1 | Keep transport-neutral messages and explicit runtime adapters |
 | Service worker resilience | Implemented contract slice | Pending command envelopes, attempt metadata and snapshot summaries persist through injected storage; resume remains explicit and user-owned | P0 | Rehydrate metadata on startup and never replay a command without an explicit caller action |
 | Permissions | Contract slice | `permissionpolicy` keeps the base permissions minimal and optional escalation caller-owned | P0 | Start with `storage` and no broad host permissions; make host access caller-configured |
-| Content isolation | Not implemented | No isolated-world DOM bridge or page-to-extension boundary | P0 | Add a narrow content script that reports page facts through the message contract |
+| Content isolation | Implemented read-only page-to-extension boundary | The page world cannot invoke extension commands; richer page facts remain bounded | P1 | Keep `pagebridge.js` read-only, token-correlated and caller-controlled |
 | Task agent | Partial | Jobs, workflows and bot commands exist, but no browser task planner or tool registry | P1 | Reuse workflow, trigger and bot contracts; add browser task commands only after snapshots |
 | MCP | Implemented scrape, crawl, batch, extract and serialize tools with JSON-RPC handling | No browser snapshot or browser action MCP tools | P1 | Add browser tools as an optional adapter over the same snapshot/action contracts |
 | API security | Implemented URL protocol and private hostname/IP checks | Request envelopes, optional authorization, security headers, redirect bounds and injected DNS resolution checks are now available | P0 | Keep credentials caller-owned and reject private or rebinding targets before transport |
@@ -59,6 +59,7 @@ The first code slice targeted the P0 rows only. It now contains:
 6. A Chrome MV3 service worker that rehydrates state and routes messages.
 7. A narrow content script that reports document metadata and visible text through the bridge.
 8. Deterministic tests for browser contracts without Chrome credentials or network access.
+9. A read-only page-world bridge with token-correlated responses and bounded `pagefacts` reads.
 
 The extension remains an adapter. The root library continues to work without a browser, without an extension and without external memory.
 
@@ -66,7 +67,7 @@ The extension remains an adapter. The root library continues to work without a b
 
 Version 1.1 implements the first slice in `extension/`: `protocol.js` provides versioned serializable messages and snapshot identity; `serviceworker.js` provides browser independent routing; `worker.js` binds that router to Manifest V3 APIs; `content.js` runs the isolated page bridge; and `popup.html` with `popup.js` provides user initiated snapshot and read actions. The package exports `@wenathlan/saddle/extension`, while the root library remains usable without Chrome.
 
-The slice is intentionally not a full autonomous browser agent. Snapshot diffing, tab and frame identity, resumable command records, optional host escalation, browser action results and multi-browser packaging remain P1 or P2 work.
+The slice is intentionally not a full autonomous browser agent. Snapshot diffing, tab and frame identity, resumable command records, optional host escalation, browser action results and multi-browser packaging remain P1 or P2 work. The page-world bridge is deliberately read-only and cannot evaluate arbitrary page-provided commands.
 
 ## references
 
