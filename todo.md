@@ -494,3 +494,11 @@ The following blocks are the execution order for the complete ecosystem. A block
 - [x] Add an aggressive security workflow combining dependency review, npm audit, OSV or equivalent advisory ingestion, CodeQL, secret scanning, SBOM generation, artifact scanning and fail-closed severity policy.
 - [x] Update all application and package workflows to derive versions from release tags, use repository secrets for signing and registry credentials, upload SARIF or equivalent findings, and keep security evidence with the release.
 - [ ] Run the full local and CI security/native gates, document any residual caller-owned signing or unsupported architecture, and prepare the next 1.8.11 release update only after validation.
+
+### Branch and signing distribution follow-up
+
+- [x] Inventory all local and remote branches, preserve their commits through tags or reachable history, and retain only `main` as the active remote branch without rewriting commit history.
+- [x] Research how open source projects distribute Windows, macOS, Android and iOS artifacts when they do not own platform signing certificates, distinguishing self-signed test keys, public release signing, notarization, package-manager trust and user-side installation.
+- [ ] Document legitimate certificate acquisition paths, costs, identity requirements, renewal responsibilities and the exact GitHub Actions secret contracts for each platform.
+- [ ] Add an explicit unsigned/test-build mode and release manifest status so workflows never imply that an unsigned artifact is trusted or malware-free.
+- [ ] Decide whether the next immutable release must be `1.8.12`, because the published `v1.8.11` tag cannot safely be overwritten with the new hardening commits.
