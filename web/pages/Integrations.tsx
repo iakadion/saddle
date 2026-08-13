@@ -3,7 +3,7 @@ import { Apple, Bot, Box, Chrome, Container, Github, Smartphone, Terminal } from
 import PageShell from "@/components/PageShell";
 
 const integrationGroups = [
-  { label: "Package surfaces", items: [{ icon: Box, name: "npm package", body: "@devthink/saddle" }, { icon: Terminal, name: "CLI / binary", body: "one command, remote run" }, { icon: Container, name: "GitHub Container", body: "runner-ready image" }] },
+  { label: "Package surfaces", items: [{ icon: Box, name: "npm package", body: "@wenathlan/saddle" }, { icon: Terminal, name: "CLI / binary", body: "one command, remote run" }, { icon: Container, name: "GitHub Container", body: "runner-ready image" }] },
   { label: "Client surfaces", items: [{ icon: Chrome, name: "CRX extension", body: "capture from the browser" }, { icon: Smartphone, name: "Android / iOS", body: "native or Capacitor" }, { icon: Apple, name: "Tauri desktop", body: "local shell, remote engine" }] },
   { label: "Bot surfaces", items: [{ icon: Github, name: "Forge adapters", body: "GitHub / GitLab / Forgejo" }, { icon: Bot, name: "n8n node", body: "workflow as trigger" }, { icon: Terminal, name: "Webhook server", body: "event in, run out" }] },
 ];

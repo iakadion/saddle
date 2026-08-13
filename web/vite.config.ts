@@ -1,4 +1,3 @@
-import { jsxLocPlugin } from "@builder.io/vite-plugin-jsx-loc";
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import fs from "node:fs";
@@ -70,7 +69,7 @@ function writeToLogFile(source: LogSource, entries: unknown[]) {
 
 /**
  * Vite plugin to collect browser debug logs
- * - POST /__manus__/logs: Browser sends logs, written directly to files
+ * - POST /debuglogs: Browser sends logs, written directly to files
  * - Files: browserConsole.log, networkRequests.log, sessionReplay.log
  * - Auto-trimmed when exceeding 1MB (keeps newest entries)
  */
@@ -88,7 +87,7 @@ function vitePluginManusDebugCollector(): Plugin {
           {
             tag: "script",
             attrs: {
-              src: "/__manus__/debug-collector.js",
+              src: "/debugcollector.js",
               defer: true,
             },
             injectTo: "head",
@@ -98,8 +97,8 @@ function vitePluginManusDebugCollector(): Plugin {
     },
 
     configureServer(server: ViteDevServer) {
-      // POST /__manus__/logs: Browser sends logs (written directly to files)
-      server.middlewares.use("/__manus__/logs", (req, res, next) => {
+      // POST /debuglogs: Browser sends logs (written directly to files)
+      server.middlewares.use("/debuglogs", (req, res, next) => {
         if (req.method !== "POST") {
           return next();
         }
@@ -203,11 +202,18 @@ function vitePluginStorageProxy(): Plugin {
   };
 }
 
-const plugins = [react(), tailwindcss(), jsxLocPlugin(), vitePluginManusRuntime(), vitePluginManusDebugCollector(), vitePluginStorageProxy()];
+function normalizeBasePath(value: string | undefined) {
+  const rawvalue = value?.trim() || "/";
+  if (rawvalue === "/") return "/";
+  return `/${rawvalue.replace(/^\/+|\/+$/g, "")}/`;
+}
+
+const plugins = [react(), tailwindcss(), vitePluginManusRuntime(), vitePluginManusDebugCollector(), vitePluginStorageProxy()];
+const basePath = normalizeBasePath(process.env.VITE_BASE_PATH);
 
 export default defineConfig({
   plugins,
-  base: process.env.VITE_BASE_PATH || "/",
+  base: basePath,
   root: path.resolve(import.meta.dirname),
   resolve: {
     alias: {

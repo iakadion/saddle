@@ -4,7 +4,7 @@ The Node-only release adapter creates deterministic metadata for caller-selected
 
 ```bash
 npm run release:assets -- \
-  --version 1.8.6 \
+  --version 1.8.7 \
   --output build/release \
   --artifact build/saddle.tgz \
   --build-type caller-build \

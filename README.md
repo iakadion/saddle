@@ -1,22 +1,20 @@
-# Saddle
-
 <p align="center">
   <img src="docs/assets/saddlemark.svg" alt="Saddle" width="720" />
 </p>
 
 <p align="center">
   <strong>Storage-backed jobs, scraping contracts and portable runners for Node.js.</strong><br/>
-  <strong>Binary computing agent, agent browser, computer-use, scraper and packager.</strong><br/>
+  <strong>Binary computing engine, agent browser, scraper and packager.</strong><br/>
   <a href="https://github.com/wenathlan/saddle/actions/workflows/ci.yml"><img src="https://github.com/wenathlan/saddle/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
-  <a href="https://github.com/wenathlan/saddle/releases/tag/v1.8.6"><img src="https://img.shields.io/badge/release-v1.8.6-d35d3d" alt="Release 1.8.6" /></a>
+  <a href="https://github.com/wenathlan/saddle/releases/tag/v1.8.7"><img src="https://img.shields.io/badge/release-v1.8.7-d35d3d" alt="Release 1.8.7" /></a>
   <a href="https://github.com/wenathlan/saddle/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-GPL--3.0-202a2f" alt="GPL 3.0 license" /></a>
 </p>
 
-> **Core idea:** storage is the durable side of the working set; the runner is replaceable; the artifact is the boundary. **Storage == Compute** — RAM and disk are the same construct, differing only by usage flag.
+> **Core idea:** storage is the durable side of the working set; the runner is replaceable; the artifact is the boundary. **Storage == Compute** means that the same bytes can be retained or processed according to an explicit usage flag.
 
-Saddle is a **JavaScript ESM engine** for jobs that move data between storage, a working set, an injected runner and durable artifacts. It is also a **virtual machine you publish as a package** that runs on other people's computers (GitHub Actions, Forgejo, Gitea, GitLab, Codeberg, free Docker containers) and turns unlimited third-party storage buckets into virtual RAM/GPU/CPU. Nothing runs on the operator's local machine.
+Saddle is a **JavaScript ESM engine** for jobs that move data between storage, a bounded working set, a caller-injected runner and durable artifacts. It is also a virtual machine published as a package: the caller can run it on GitHub Actions, Forgejo, Gitea, GitLab, Codeberg, Docker or another third-party compute surface. The engine does not require the operator's local machine, does not embed credentials and does not choose a mandatory cloud provider.
 
-Ships as a library, CLI, binary, n8n node, CRX extension, Android/iOS and Tauri desktop app. The canonical JavaScript package is `@wenathlan/saddle`; GitHub Packages npm, Maven and GHCR use the transferred `wenathlan` owner namespace, while NuGet and RubyGems retain their unscoped ecosystem package names.
+The canonical JavaScript package is `@wenathlan/saddle`. GitHub Packages npm, Maven and GHCR use the `wenathlan` owner namespace; NuGet and RubyGems retain their ecosystem package names. Older `@devthink`, `@iakadion` and `io.devthink` references in archived documents are historical records, not current package identities.
 
 ## Start here
 
@@ -35,160 +33,173 @@ const context = formatforagent(result, { maxchunksize: 2000, keypoints: 4 });
 console.log(context.summary);
 ```
 
-Deterministic example with no network:
+The deterministic examples and tests do not require network access or real credentials:
 
 ```bash
 node examples/publicapi.js
+npm test
 ```
 
-## What is included
+## Progressive architecture
 
-| Area | Contract | Result |
+The project documentation follows a progressive arc. The foundation describes the storage and runner model; the engine describes the contracts that make the model executable; productization describes the package, extension, workflow and web surfaces.
+
+### Foundation: storage, runners and working sets
+
+Saddle treats a repository, bucket or object store as durable state and a third-party runner as a replaceable processor. GitHub Actions is one adapter, not the core. Forgejo, Gitea, GitLab, Codeberg, Docker and caller-owned runners can implement the same runner contracts.
+
+The physical limit remains explicit: remote storage is not VRAM. A storage-to-RAM bridge can stage a bounded working set through a local filesystem, tmpfs, mmap, cache or caller-owned storage adapter, but it cannot remove network latency or create the bandwidth of a GPU bus. The engine exposes that distinction instead of hiding it behind marketing language.
+
+The execution model is:
+
+```text
+repository or bucket -> runner working set -> process -> durable artifact
+        persistent state       virtual processor       published boundary
+```
+
+The repository may act as a disk, a CI workflow may act as a function call, Pages may act as a static bus and a release artifact may act as the durable boundary. `workflow_dispatch`, `repository_dispatch` and HTTP adapters remain caller-configured interfaces.
+
+### Engine: contracts instead of vendor lock-in
+
+| Area | Contracts shipped | Result |
 | --- | --- | --- |
-| Jobs | `engine`, `scheduler`, `inprocess` | `prepare → process → sync → cleanup` |
-| Storage | local, chunked, content-addressed, S3-compatible, GitHub Contents, file hosting | durable objects, ranges, dedupe and sync |
-| Working set | memory bridge, modes, objects, transforms | storage-to-compute and compute-to-storage |
-| Scraping | robots, cache, extraction, semantic facts, schema, scraper | text, metadata, links, controls and structured output |
-| Crawl | normalization, priority frontier, BFS crawler, per-domain budgets and persistent frontier | bounded domain-aware crawling |
-| Browser | snapshots, tabs, frames, actions, fingerprint, session, replay and injected agent | browser actions without vendor lock-in |
+| Jobs | `engine`, `scheduler`, `inprocess` | `prepare -> process -> sync -> cleanup` |
+| Storage | local, chunked, content-addressed, S3-compatible, GitHub Contents and file-hosting adapters | durable objects, ranges, dedupe and sync |
+| Working set | memory bridge, modes, objects and transforms | storage-to-compute and compute-to-storage flows |
+| Scraping | robots, cache, extraction, semantic facts, schema and normalization | bounded text, metadata, links, controls and structured output |
+| Crawl | normalization, priority frontier, BFS crawler and persistent frontier contracts | domain-aware bounded crawling |
+| Browser | snapshots, tabs, frames, actions, fingerprint, session and replay contracts | caller-owned browser automation without a mandatory provider |
 | Operations | queues, idempotency, saga, retry, circuit breaker, health and heartbeat | controlled execution and recovery |
 | Protocols | JSON, NDJSON, SSE, blocks, API envelopes and MCP | transport-neutral messages |
-| Delivery | manifests, workflow registry, binary/container plans | package and runner surfaces |
+| Delivery | manifests, workflow registry, extension packaging and release assets | repeatable package and runner surfaces |
 | Integrations | GitHub, GitLab, Forgejo, app lifecycle, command scopes and delivery adapters | caller-owned provider connectivity |
-| Agent Browser | capture & replay, stealth, fingerprint | Brave capture, movement replay, session recording |
-| Compute Backends | github-actions, huggingface, gitlab-ci, kaggle, oracle-cloud | free runners chain |
-| Storage Backends | HF, Kaggle, Terabox, R2, Telegram, Discord via rclone | unlimited disk as RAM |
-| Extension | Manifest V3 bridge, snapshot protocol, popup and service worker | user initiated browser control |
+
+The root entry point is transport-neutral. Node filesystem, HTTP server, persistent sessions and Playwright are explicit subpaths or optional adapters. The library accepts caller-provided fetchers, browser transports, storage adapters, persistence, proxy pools, captcha evidence handlers, webhook secrets and remote credentials.
+
+### Productization: one engine, many shells
+
+The same contracts can be surfaced as an npm library, CLI, binary, Manifest V3 browser extension, webhook server, MCP transport, workflow action, container image, Maven package, NuGet package or RubyGem. These surfaces are adapters around the engine; they are not separate sources of truth.
 
 ## Public API
 
 | Export | Purpose |
 | --- | --- |
-| `saddleurl` | choose fetch or injected browser path |
-| `scrapeurl` | fetch one URL and extract |
-| `scrapehtml` | extract from HTML without network |
+| `saddleurl` | choose a fetch or caller-injected browser path |
+| `scrapeurl` | fetch one URL and extract bounded content |
+| `scrapehtml` | extract from HTML without network access |
 | `extractcontent` | structured extraction |
-| `serializeresult` | serialize as JSON, Markdown, XML |
-| `formatforagent` | summary, chunks, token count |
+| `serializeresult` | serialize JSON, Markdown or XML results |
+| `formatforagent` | summary, chunks and token count |
 | `batchscrape` | bounded URL groups |
-| `crawlurl` | crawl contract |
-| `browseragent` | navigation, click, type, screenshot |
-| `mcpserver` / `mcptransport` | MCP tools over JSONL/HTTP |
+| `crawlurl` | crawl contract with domain and budget controls |
+| `browseragent` | caller-owned navigation, click, type and screenshot actions |
+| `mcpserver` / `mcptransport` | MCP tools over JSONL or HTTP |
 | `nodeserver` | Web Request/Response handler |
+| `engine` / `scheduler` | job lifecycle and runner dispatch |
+| `release-assets` | SHA256SUMS, SBOM and provenance metadata for caller-selected artifacts |
 
-Complete API: `docs/libraryapi.md`. Surface overview: [`docs/productindex.md`](docs/productindex.md). Usage examples: [`docs/usage.md`](docs/usage.md).
-
-## The execution model
-
-Saddle coordinates contracts instead of hiding providers. A repo + CI runner is a virtual processor:
-
-- Repo = Disk (persistent state)
-- CI = CPU (workflow_dispatch = function call)
-- Pages = Bus + CDN
-- Static site = BIOS
-- repository_dispatch = IPC
-
-```js
-import { engine, eventbus, inprocess, scheduler } from "@wenathlan/saddle";
-import { localmemory } from "@wenathlan/saddle/memory-node";
-import { localstorage } from "@wenathlan/saddle/storage-node";
-const events = eventbus();
-const run = engine({
-  storage: localstorage("./.saddle-data"),
-  memory: localmemory(),
-  scheduler: scheduler([inprocess()]),
-  events
-});
-const result = await run.run(
-  { name: "example", input: { value: 42 } },
-  ({ job }) => ({ jobid: job.id, ok: true })
-);
-```
-
-The caller still chooses how to provide `fetcher`, browser transport, persistence, proxy pool, captcha solver, webhook secret and remote credentials. The root entry is transport-neutral; Node filesystem and HTTP adapters are explicit subpaths such as `@wenathlan/saddle/storage-node`, `@wenathlan/saddle/memory-node`, `@wenathlan/saddle/server-node`, `@wenathlan/saddle/sessions-file` and `@wenathlan/saddle/queue-persistent`. Saddle does not embed secrets, fixed hosts or a mandatory cloud vendor.
+The complete export map is documented in [`docs/libraryapi.md`](docs/libraryapi.md). The product index is in [`docs/productindex.md`](docs/productindex.md), and runnable examples are in [`docs/usage.md`](docs/usage.md).
 
 ## Browser extension
 
-Version 1.8.6 includes a pure JavaScript Manifest V3 reference surface in [`extension/`](extension/), a read-only page-world `pagefacts` boundary, snapshot diffs and persisted browser context metadata. It is deliberately narrow: the user invokes the action, the popup sends a versioned command, the service worker routes it, and an isolated content bridge returns bounded page metadata, visible text or a user initiated action result. The exported `permissionpolicy` keeps base permissions minimal and makes optional escalation caller-owned.
+The extension is a pure JavaScript Manifest V3 reference surface in [`extension/`](extension/). It contains a popup, service worker, isolated content bridge, read-only page-world `pagefacts` boundary, snapshot diffs and persisted window/tab/frame context for explicit resume.
 
 ```bash
 # load the unpacked extension from chrome://extensions
 ls extension/manifest.json extension/worker.js extension/content.js extension/popup.html
 
-# build an isolated unpacked artifact using the package version
+# build an isolated artifact using the version supplied by the caller or release tag
 npm run extension:build -- --output build/extension
 ```
 
-The extension requests `activeTab`, `scripting` and `storage`; it does not request broad host permissions, cookies, `webRequest`, debugger access or arbitrary page code execution. Its public contracts are available from `@wenathlan/saddle/extension`. Published releases attach `saddle-extension-<version>.zip`; the source manifest remains a stable unpacked reference. See [`extension/README.md`](extension/README.md) for the unpacked and release artifact flows.
-
-## CLI
-
-```bash
-saddle help
-saddle modes
-saddle runexample
-saddle mcp
-```
+The base permission set is `activeTab`, `scripting` and `storage`. It does not request broad host permissions, cookies, `webRequest`, debugger access or arbitrary page code execution. Optional host escalation remains caller-owned. Releases attach `saddle-extension-<version>.zip`; cross-browser profiles remain adapter work.
 
 ## Security boundaries
 
 | Boundary | Policy |
 | --- | --- |
-| Credentials | injected at runtime; never committed |
-| Network | http/https validated; private targets blocked |
-| Crawling | robots rules and crawl delay explicit |
-| Storage | adapters replaceable |
-| Runtime | Node HTTP isolated |
-| Failure | retry, circuit breaker, idempotency configurable |
+| Credentials | injected by the caller or repository secret; never committed or printed |
+| Network | HTTP/HTTPS targets are validated; private-target access remains caller policy |
+| Crawling | robots rules, crawl delay, limits and budgets are explicit |
+| Storage | adapters are replaceable; the core does not own a provider account |
+| Runtime | Node-only filesystem, HTTP, Playwright and release metadata stay outside the transport-neutral root |
+| Extension | page-world reads are bounded, token-correlated and read-only |
+| Failure | retry, circuit breaker, idempotency and resume are configurable |
+| Releases | version comes from the `vX.Y.Z` tag and must match `package.json` |
 
-## Package surfaces
+Version 1.8.7 also removes the obsolete nested `scrape` package manifests and lockfile that generated a separate stale dependency graph. The dependency-free JavaScript scrape contracts remain in `scrape/`. The root lockfile is regenerated and CI runs `npm audit --audit-level=high` plus dependency review for pull requests. See [`docs/securityaudit-1.8.7.md`](docs/securityaudit-1.8.7.md) for the baseline and remediation record.
 
-| Registry | Artifact | Workflow | Status |
-| --- | --- | --- | --- |
-| GitHub npm | `@wenathlan/saddle@1.8.6` | publishgithubnpm.yml | pending release |
-| GHCR | `ghcr.io/wenathlan/saddle:1.8.6` and `latest` | publishghcr.yml | pending release |
-| Maven | `io.wenathlan:saddle:1.8.6` | publishmaven.yml | pending release |
-| NuGet | `Saddle.1.8.6.nupkg` | publishnuget.yml | pending release |
-| RubyGems | `saddle 1.8.6` | publishrubygems.yml | pending release |
-| npmjs | `@wenathlan/saddle@1.8.6` | publishnpmjs.yml | pending release |
+## Package surfaces and release automation
 
-## Development
+Workflows use the release tag and the local `releaseversion` action. They do not contain a manually edited version number. The action fetches the tag, checks out its commit and rejects a release when the tag version does not match the root `package.json`.
+
+| Registry | Artifact | Workflow |
+| --- | --- | --- |
+| GitHub Packages npm | `@wenathlan/saddle@<version>` | `publishgithubnpm.yml` |
+| Public npmjs | `@wenathlan/saddle@<version>` | `publishnpmjs.yml` |
+| GHCR | `ghcr.io/wenathlan/saddle:<version>` | `publishghcr.yml` |
+| Maven | `io.wenathlan:saddle:<version>` | `publishmaven.yml` |
+| NuGet | `Saddle.<version>.nupkg` | `publishnuget.yml` |
+| RubyGems | `saddle <version>` | `publishrubygems.yml` |
+
+Release assets are caller-selected and deterministic: `SHA256SUMS`, `sbom.cdx.json` in CycloneDX 1.5 shape and `provenance.intoto.jsonl` in an in-toto statement shape. The adapter does not publish, authenticate or choose a registry. The npm token previously sent in chat is compromised and must never be used; public npmjs publication uses only the owner-managed `NPM_TOKEN` repository secret.
+
+## GitHub Pages web surface
+
+The marketing site lives under [`web/`](web/) with a root-based TypeScript/React layout. It has no `client/` or `src/` subdirectory. Vite normalizes the base path and all visual assets resolve through a shared helper, so the same build works at `/` and `/saddle/`.
+
+```bash
+npm run web:check
+VITE_BASE_PATH=/saddle npm run web:build:pages
+```
+
+Small public configuration and visual assets live under `web/public/`. The development collector is `web/public/debugcollector.js` and uses `/debuglogs`; it is not part of the production build. The obsolete `web/public/__manus__` directory is intentionally absent.
+
+## Development and release gates
 
 ```bash
 npm ci
-npm test
 npm run check
 npm run formatcheck
+npm test
 npm run pack:check
+npm audit --audit-level=high
+npm run web:check
+VITE_BASE_PATH=/saddle npm run web:build:pages
 ```
 
-Test suite deterministic, no network or real credentials required.
+The engine test suite is deterministic and does not require real credentials or network access. The release path is: update `package.json` and the manifest files, update `changelog.md`, run all gates, create `v<package-version>`, push the tag and create the GitHub release. Registry workflows then derive the same version from that release tag.
 
 ## Repository map
 
-```
-core/          errors, events and identifiers
+```text
+core/          errors, events, identifiers and hashing
 domain/        jobs, artifacts, sessions and providers
 memory/        working-set bridge, modes, objects and transforms
 storage/       local, chunked, remote and file-hosting adapters
-scrape/        robots, cache, extraction, schema and scraper
+scrape/        dependency-free robots, cache, extraction, schema and normalization contracts
 crawl/         URL normalization, crawler and persistent frontier
 queue/         queue, idempotency, saga and recovery
-browser/       fingerprint, session and agent contracts
-browser/       snapshots, tabs, frames, actions and recorder contracts
-mcp/           optional server and JSONL/HTTP transport
+browser/       fingerprint, session, agent and Playwright adapter contracts
+extension/     Manifest V3 reference surface and packager
 protocol/      JSON, NDJSON, SSE and block serializers
-workflow/      manifests, templates and registry
-tests/         deterministic engine coverage
-docs/          architecture, API, release and registry notes
-surfaces/      browser, extension, desktop, mobile and n8n contracts
+workflow/      manifests, templates and registry contracts
+packager/      package and publication plans
+release/       checksums, SBOM and provenance metadata
+web/           root-based static marketing site
+tests/         deterministic engine and extension coverage
+docs/          architecture, API, security, release and registry notes
 ```
 
-Root-based JavaScript ESM layout, no src/ directory, no TypeScript build required.
+The engine remains pure JavaScript ESM with JSDoc comments in English. The web surface is TypeScript/React, while the published library has no TypeScript build requirement and no hardcoded host, port or credential.
+
+## Historical documentation
+
+Earlier README snapshots remain in `docs/plans/README.md`, `docs/talks9/README.md` and `docs/talks9/README (2).md` as archival evidence. Their useful architecture ideas were consolidated here, while stale `@devthink`, `@iakadion`, `io.devthink`, Node 20/22, `client/src` and speculative provider quotas were not copied into the canonical contract.
 
 ## Current scope
 
-Version 1.8.6 extends the 1.8.5 engine contracts with isolated page facts, extension snapshot diffs, persisted browser context metadata, deterministic release assets and root-based Pages deployment. Native runtimes, browser binaries, n8n host registration, provider credentials, persistent databases and production deployment remain caller-selected adapters. The next improvements should extend these contracts without coupling the core to one forge, registry, browser or storage vendor.
+Version 1.8.7 extends the 1.8.6 engine with dependency remediation, explicit security gates, base-aware Pages assets, removal of the obsolete public debug directory and consolidated documentation. Browser binaries, provider credentials, n8n host registration, persistent databases, captcha solvers and production deployment remain caller-selected adapters. Future work should extend contracts without coupling the core to one forge, registry, browser or storage vendor.
 
 ## License
 

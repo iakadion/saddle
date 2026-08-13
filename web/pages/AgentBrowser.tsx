@@ -1,8 +1,9 @@
 // Signal & Ledger: agent browser como trilha de eventos, evidência e replay determinístico.
 import { Activity, Camera, CheckCircle2, MousePointer2, Play, RotateCcw, ScrollText, Terminal } from "lucide-react";
 import PageShell from "@/components/PageShell";
+import { assetpath } from "@/lib/paths";
 
-const browserImage = `${import.meta.env.BASE_URL}assets/saddle-browser-trace.webp`;
+const browserImage = assetpath("assets/saddle-browser-trace.webp");
 
 export default function AgentBrowser() {
   return (

@@ -6,9 +6,10 @@ import RuntimeDiagram from "@/components/RuntimeDiagram";
 import SaddleMark from "@/components/SaddleMark";
 import SectionRail from "@/components/SectionRail";
 import SiteHeader from "@/components/SiteHeader";
+import { assetpath } from "@/lib/paths";
 
-const heroImage = `${import.meta.env.BASE_URL}assets/saddle-hero-bridge.webp`;
-const runtimeImage = `${import.meta.env.BASE_URL}assets/saddle-runtime-map.webp`;
+const heroImage = assetpath("assets/saddle-hero-bridge.webp");
+const runtimeImage = assetpath("assets/saddle-runtime-map.webp");
 
 const surfaces = [
   { index: "01", icon: Cable, title: "Agent Browser", body: "Capture e replay de movimento humano em sessões reproduzíveis.", href: "/agent-browser" },

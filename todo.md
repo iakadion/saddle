@@ -366,3 +366,16 @@ The following blocks are the execution order for the complete ecosystem. A block
 - [x] Delete every non-main remote branch only after preserving its tip in the audit record and checking for unmerged work.
 - [x] Explain the change from the previous check count to the current check count by comparing workflow definitions and check runs.
 - [x] Keep only `main` as an active branch and verify that the latest commit on it has the expected CI, compatibility and Pages checks.
+
+### Security, assets, documentation and release 1.8.7
+
+- [ ] Inventory all GitHub security alerts, Dependabot alerts, dependency paths and workflow security findings without hiding unresolved advisories.
+- [ ] Identify vulnerable direct and transitive packages, prefer Node.js built-ins where they replace external dependencies, and update safe dependencies to current compatible versions.
+- [ ] Regenerate the root lockfile and verify npm audit, dependency review and package gates with the smallest safe remediation.
+- [ ] Review workflow permissions, third-party action pins, secret handling, Docker build inputs and release-version derivation for security regressions.
+- [ ] Inventory `web/public/manos`, determine whether its script is required, and remove or relocate it without leaving duplicate public runtime files.
+- [ ] Audit every web image, SVG, favicon, font and asset URL under the Pages base path; replace root-absolute paths that break at `/saddle/` with base-aware references.
+- [ ] Inspect all current and historical README/Markdown sources through git history, deduplicate claims, remove stale package identities and consolidate the canonical README in English.
+- [ ] Update all release manifests and changelog metadata to `1.8.7`; keep workflows deriving the version from the tag and package metadata instead of manual edits.
+- [ ] Run engine, web, dependency, security, packaging and release gates for `1.8.7`.
+- [ ] Create and publish `v1.8.7` only after all actionable security findings and asset checks are resolved or explicitly documented as unfixable external advisories.

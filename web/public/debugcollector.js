@@ -6,20 +6,20 @@
  * 2) Network requests (fetch + XHR)
  * 3) User interactions (semantic uiEvents: click/type/submit/nav/scroll/etc.)
  *
- * Data is periodically sent to /__manus__/logs
+ * Data is periodically sent to /debuglogs
  * Note: uiEvents are mirrored to sessionEvents for sessionReplay.log
  */
 (function () {
   "use strict";
 
   // Prevent double initialization
-  if (window.__MANUS_DEBUG_COLLECTOR__) return;
+  if (window.__SADDLE_DEBUG_COLLECTOR__) return;
 
   // ==========================================================================
   // Configuration
   // ==========================================================================
   const CONFIG = {
-    reportEndpoint: "/__manus__/logs",
+    reportEndpoint: "/debuglogs",
     bufferSize: {
       console: 500,
       network: 200,
@@ -462,7 +462,7 @@
     var method = init.method || (input && input.method) || "GET";
 
     // Don't intercept internal requests
-    if (url.indexOf("/__manus__/") === 0) {
+    if (url.indexOf("/debuglogs") === 0) {
       return originalFetch(input, init);
     }
 
@@ -612,7 +612,7 @@
     if (
       xhr._manusData &&
       xhr._manusData.url &&
-      xhr._manusData.url.indexOf("/__manus__/") !== 0
+      xhr._saddleData.url.indexOf("/debuglogs") !== 0
     ) {
       xhr._manusData.startTime = Date.now();
       xhr._manusData.requestBody = body ? sanitizeValue(tryParseJson(body)) : null;
@@ -811,7 +811,7 @@
   }
 
   // Mark as initialized
-  window.__MANUS_DEBUG_COLLECTOR__ = {
+  window.__SADDLE_DEBUG_COLLECTOR__ = {
     version: "2.0-no-rrweb",
     store: store,
     forceReport: reportLogs,

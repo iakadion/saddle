@@ -8,7 +8,16 @@
 
   ## [Unreleased]
 
-    - Future changes will be recorded here after the 1.8.6 release.
+    - Future changes will be recorded here after the 1.8.7 release.
+
+  ## [1.8.7] - 2026-08-13
+
+    - Removed the obsolete nested `scrape` package manifests and lockfile while preserving the engine's dependency-free JavaScript scrape contracts
+    - Removed the public `__manus__` directory and moved the development collector to `web/public/debugcollector.js` with a private `/debuglogs` endpoint
+    - Added base-aware asset URL resolution and normalized GitHub Pages subpath builds
+    - Removed the unused JSX locator plugin and upgraded Vitest to the security-fixed 4.1.10 line
+    - Added npm audit and dependency review gates to the primary CI workflow
+    - Consolidated canonical package identity, security boundaries, architecture and release documentation
 
   ## [1.8.6] - 2026-08-13
 

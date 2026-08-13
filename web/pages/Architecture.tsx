@@ -2,8 +2,9 @@
 import { ArrowUpRight, Box, Cloud, Cpu, Database, GitBranch, Globe2, HardDrive, ShieldCheck } from "lucide-react";
 import PageShell from "@/components/PageShell";
 import RuntimeDiagram from "@/components/RuntimeDiagram";
+import { assetpath } from "@/lib/paths";
 
-const runtimeImage = `${import.meta.env.BASE_URL}assets/saddle-runtime-map.webp`;
+const runtimeImage = assetpath("assets/saddle-runtime-map.webp");
 
 export default function Architecture() {
   return (

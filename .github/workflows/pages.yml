@@ -37,9 +37,17 @@ jobs:
         uses: actions/configure-pages@v5
       - name: check web
         run: npm run web:check
-      - name: build web
+      - name: normalize pages base path
+        shell: bash
         env:
-          VITE_BASE_PATH: ${{ vars.SADDLE_PAGES_BASE_PATH || steps.pages.outputs.base_path || format('/{0}/', github.event.repository.name) }}
+          CONFIGURED_BASE_PATH: ${{ vars.SADDLE_PAGES_BASE_PATH || steps.pages.outputs.base_path || format('/{0}/', github.event.repository.name) }}
+        run: |
+          set -euo pipefail
+          base_path="${CONFIGURED_BASE_PATH}"
+          [[ "${base_path}" == /* ]] || base_path="/${base_path}"
+          [[ "${base_path}" == */ ]] || base_path="${base_path}/"
+          echo "VITE_BASE_PATH=${base_path}" >> "${GITHUB_ENV}"
+      - name: build web
         run: npm run web:build:pages
       - name: prepare pages fallback
         run: cp web/dist/public/index.html web/dist/public/404.html && touch web/dist/public/.nojekyll
