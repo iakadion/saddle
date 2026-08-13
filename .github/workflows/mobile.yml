@@ -66,10 +66,12 @@ jobs:
           mkdir -p build/release-assets/android
           find desktop/src-tauri/gen/android/app/build/outputs -type f \( -name '*.apk' -o -name '*.aab' \) -exec cp {} build/release-assets/android/ \;
           test -n "$(find build/release-assets/android -type f -print -quit)"
-          sha256sum build/release-assets/android/* > build/release-assets/android/SHA256SUMS
-          printf '{\n  "version": "%s",\n  "platform": "android",\n  "signing": "debug key for test artifacts",\n  "files": [' "${{ steps.releaseversion.outputs.version }}" > build/release-assets/android/artifact-manifest.json
-          find build/release-assets/android -maxdepth 1 -type f ! -name 'SHA256SUMS' ! -name 'artifact-manifest.json' -printf '"%f",' | sed 's/,$//' >> build/release-assets/android/artifact-manifest.json
-          printf ']\n}\n' >> build/release-assets/android/artifact-manifest.json
+          checksums='SHA256SUMS-android'
+          manifest='artifact-manifest-android.json'
+          if command -v sha256sum >/dev/null 2>&1; then sha256sum build/release-assets/android/* > "build/release-assets/android/${checksums}"; else shasum -a 256 build/release-assets/android/* > "build/release-assets/android/${checksums}"; fi
+          printf '{\n  "version": "%s",\n  "platform": "android",\n  "signing": "debug key for test artifacts",\n  "files": [' "${{ steps.releaseversion.outputs.version }}" > "build/release-assets/android/${manifest}"
+          find build/release-assets/android -type f ! -name "${checksums}" ! -name "${manifest}" -exec basename {} \; | awk 'BEGIN { first=1 } { if (!first) printf ","; printf "\"%s\"", $0; first=0 }' >> "build/release-assets/android/${manifest}"
+          printf ']\n}\n' >> "build/release-assets/android/${manifest}"
       - name: upload android artifacts
         uses: actions/upload-artifact@v4
         with:
@@ -114,7 +116,7 @@ jobs:
           mkdir -p build/release-assets/ios
           find desktop/src-tauri/gen/apple/build -type f -name '*.ipa' -exec cp {} build/release-assets/ios/ \;
           test -n "$(find build/release-assets/ios -type f -print -quit)"
-          shasum -a 256 build/release-assets/ios/* > build/release-assets/ios/SHA256SUMS
+          shasum -a 256 build/release-assets/ios/* > build/release-assets/ios/SHA256SUMS-ios
       - name: upload ios artifacts
         uses: actions/upload-artifact@v4
         with:

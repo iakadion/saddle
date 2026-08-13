@@ -87,10 +87,12 @@ jobs:
               ;;
           esac
           test -n "$(find build/release-assets/desktop -type f -print -quit)"
-          if command -v sha256sum >/dev/null 2>&1; then sha256sum build/release-assets/desktop/* > build/release-assets/desktop/SHA256SUMS; else shasum -a 256 build/release-assets/desktop/* > build/release-assets/desktop/SHA256SUMS; fi
-          printf '{\n  "version": "%s",\n  "platform": "%s",\n  "files": [' "${{ steps.releaseversion.outputs.version }}" "${{ matrix.platform }}" > build/release-assets/desktop/artifact-manifest.json
-          find build/release-assets/desktop -type f ! -name 'SHA256SUMS' ! -name 'artifact-manifest.json' -exec basename {} \; | awk 'BEGIN { first=1 } { if (!first) printf ","; printf "\"%s\"", $0; first=0 }' >> build/release-assets/desktop/artifact-manifest.json
-          printf '],\n  "signing": "caller-owned"\n}\n' >> build/release-assets/desktop/artifact-manifest.json
+          checksums="SHA256SUMS-${{ matrix.platform }}"
+          manifest="artifact-manifest-${{ matrix.platform }}.json"
+          if command -v sha256sum >/dev/null 2>&1; then sha256sum build/release-assets/desktop/* > "build/release-assets/desktop/${checksums}"; else shasum -a 256 build/release-assets/desktop/* > "build/release-assets/desktop/${checksums}"; fi
+          printf '{\n  "version": "%s",\n  "platform": "%s",\n  "files": [' "${{ steps.releaseversion.outputs.version }}" "${{ matrix.platform }}" > "build/release-assets/desktop/${manifest}"
+          find build/release-assets/desktop -type f ! -name "${checksums}" ! -name "${manifest}" -exec basename {} \; | awk 'BEGIN { first=1 } { if (!first) printf ","; printf "\"%s\"", $0; first=0 }' >> "build/release-assets/desktop/${manifest}"
+          printf '],\n  "signing": "caller-owned"\n}\n' >> "build/release-assets/desktop/${manifest}"
 
       - name: upload workflow artifacts
         uses: actions/upload-artifact@v4
