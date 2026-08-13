@@ -38,7 +38,7 @@ jobs:
           full: "true"
 
       - name: build extension
-        run: node extension/build.js --version "${{ steps.releaseversion.outputs.version }}" --output build/extension
+        run: npm run build:engine && node dist/extension/build.js --version "${{ steps.releaseversion.outputs.version }}" --output build/extension
 
       - name: create zip
         run: |

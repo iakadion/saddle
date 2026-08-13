@@ -21,10 +21,11 @@ jobs:
       - name: checkout
         uses: actions/checkout@v5
       - name: setup node
-        if: matrix.runtime == 'node'
         uses: actions/setup-node@v5
         with:
           node-version: 26.7.0
+      - name: install and build
+        run: npm ci && npm run build:engine
       - name: setup bun
         if: matrix.runtime == 'bun'
         uses: oven-sh/setup-bun@v2
