@@ -391,4 +391,4 @@ The following blocks are the execution order for the complete ecosystem. A block
 - [x] Add or improve English JSDoc section comments, bounded error catchers and deterministic tests for each consolidated context.
 - [x] Remove only files proven redundant after import, test, package and historical-feature audits; record deferred legacy surfaces explicitly.
 - [x] Run the complete engine, web, format, package, dependency and security gates after the reorganization.
-- [ ] Update release metadata and create `v1.8.8` only after the final diff, package contents and compatibility surface are verified.
+- [x] Update release metadata and create `v1.8.8` only after the final diff, package contents and compatibility surface are verified.
