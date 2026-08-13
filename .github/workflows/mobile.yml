@@ -54,7 +54,7 @@ jobs:
       - name: synchronize capacitor android surface
         run: npx cap sync android
       - name: flatten generated android staging
-        run: npm run native:flatten:android
+        run: npm run capacitor:flatten:android
       - name: validate flat native surfaces
         run: npm run native:check:flat
       - name: derive android version values
