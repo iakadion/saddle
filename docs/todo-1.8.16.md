@@ -652,14 +652,14 @@
 
 ## 9. Workflow hygiene and cache retention
 
-- [ ] Inventory every YAML file under `.github`, distinguishing workflow definitions, composite-action metadata, and service-owned configuration paths.
-- [ ] Verify GitHub's current required paths for workflow files, composite actions, and Dependabot configuration before moving any YAML file.
-- [ ] Standardize workflow definitions under `.github/workflows` without moving composite action metadata out of its executable action directory.
-- [ ] Keep Dependabot configuration in its GitHub-required location and document why it is not a runnable workflow.
-- [ ] Review the mobile workflow triggers and ensure release Android artifacts can be produced automatically with an explicit non-production signing state when caller secrets are unavailable.
-- [ ] Preserve production Android signing as caller-owned when all configured signing secrets are present.
-- [ ] Inventory existing GitHub Actions caches by key, size, ref, last-access time, and workflow source before changing retention behavior.
-- [ ] Add a least-privilege cache-retention workflow that deletes only caches from this repository after a documented age threshold and never deletes artifacts or release assets.
-- [ ] Add bounded cache cleanup after completed workflows only where it does not remove a cache required by concurrent work.
-- [ ] Add workflow validation and deterministic tests or inspections for YAML syntax, permissions, triggers, and cache deletion scope.
-- [ ] Record the resulting cache policy, manual fallback, and non-goals in release or operational documentation.
+- [x] Inventory every YAML file under `.github`, distinguishing workflow definitions, composite-action metadata, and service-owned configuration paths. The inventory found 18 workflow definitions, two composite-action metadata files, and the required Dependabot configuration.
+- [x] Verify GitHub's current required paths for workflow files, composite actions, and Dependabot configuration before moving any YAML file. The resulting path rationale is documented in `docs/workflowoperations.md`.
+- [x] Standardize workflow definitions under `.github/workflows` without moving composite action metadata out of its executable action directory. Existing workflow definitions already use lower-case `.yml` files in that canonical directory.
+- [x] Keep Dependabot configuration in its GitHub-required location and document why it is not a runnable workflow.
+- [x] Review the mobile workflow triggers and ensure release Android artifacts can be produced automatically with an explicit non-production signing state when caller secrets are unavailable.
+- [x] Preserve production Android signing as caller-owned when all configured signing secrets are present.
+- [x] Inventory existing GitHub Actions caches by key, size, ref, last-access time, and workflow source before changing retention behavior. The initial inventory contained 85 entries and 7,785,944,423 reported bytes, dominated by CodeQL overlays.
+- [x] Add a least-privilege cache-retention workflow that deletes only caches from this repository after a documented age threshold and never deletes artifacts or release assets.
+- [x] Add bounded cache cleanup after completed workflows only where it does not remove a cache required by concurrent work. The dry-run and the successful applied run left 13 listed cache entries; repository usage totals may take several minutes to refresh.
+- [x] Add workflow validation and deterministic tests or inspections for YAML syntax, permissions, triggers, and cache deletion scope.
+- [x] Record the resulting cache policy, manual fallback, and non-goals in release or operational documentation.
