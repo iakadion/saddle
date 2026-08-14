@@ -52,7 +52,7 @@
 - [x] Define a storage-pool capability report that distinguishes range reads, strong checksums, list pagination, conditional writes, delete support, and object size limits.
 - [x] Define a storage-pool error model that reports per-provider evidence without leaking endpoint secrets or internal object paths.
 - [ ] Define a storage-pool health model with bounded probes and injected clocks; do not add background polling to the library core.
-- [ ] Define a storage-pool operation budget for attempts, bytes, elapsed time, and parallelism.
+- [x] Define a storage-pool operation budget for attempts, bytes, elapsed time, and parallelism.
 - [ ] Define a storage-pool immutable manifest that records replica outcomes, content digest, size, creation time, and caller-provided metadata.
 - [ ] Define a storage-pool restore plan that selects verified sources before secondary candidates.
 - [ ] Define how the pool uses existing chunk manifests, checksums, range reads, partial synchronization, and content-addressed indexes.
@@ -71,7 +71,7 @@
 - [ ] Implement range-read validation with offset, length, total-size, and digest-boundary checks.
 - [x] Implement a fail-closed mode when a read response does not meet the expected size or digest.
 - [ ] Implement a best-effort mode that returns all evidence but remains explicit that replica verification failed.
-- [ ] Implement a pool metrics snapshot with low-cardinality counters for attempts, hits, misses, mismatches, bytes, and elapsed time.
+- [x] Implement a pool metrics snapshot with low-cardinality counters for attempts, hits, misses, mismatches, bytes, and elapsed time.
 - [ ] Implement clear unsupported-capability errors for conditional writes, ranges, deletions, or repairs not offered by a selected adapter.
 - [x] Test an empty pool rejection path.
 - [x] Test a duplicate member identifier rejection path.
@@ -84,7 +84,7 @@
 - [x] Test a repair plan that does not mutate any adapter until the caller executes it.
 - [ ] Test pagination with deterministic continuation tokens and a hard page limit.
 - [ ] Test range reads that reject negative offsets, unsafe lengths, and overrun ranges.
-- [ ] Test metrics that remain bounded across repeated pool operations.
+- [x] Test metrics that remain bounded across repeated pool operations.
 - [ ] Test serialization and cloning of every public storage-pool record.
 - [ ] Document how a caller can combine authorized object stores without suggesting account pooling, registry abuse, or quota circumvention.
 - [ ] Document the physical distinction between remote object storage, local cache, process memory, and GPU memory.

@@ -1099,6 +1099,16 @@ test("records quorum writes and keeps repair planning side-effect free", async (
   await assert.rejects(() => pool.put({ key: "next.bin", data: new Uint8Array([4]) }, { quorum: 2 }), (error) => error.code === "STORAGE_POOL_QUORUM_FAILED");
 });
 
+test("enforces storage-pool operation budgets without background retries", async () => {
+  const { memorystorage } = await import("../storage/memory.js");
+  const storage = memorystorage();
+  await storage.put({ key: "large.bin", data: new Uint8Array([1, 2, 3]) });
+  const pool = storagepool({ members: [{ id: "only", storage }] });
+  await assert.rejects(() => pool.read("large.bin", { budget: { maxbytes: 2 } }), (error) => error.code === "STORAGE_POOL_READ_FAILED" && error.detail.attempts[0].code === "STORAGE_POOL_BYTE_BUDGET");
+  await assert.rejects(() => pool.put({ key: "large.bin", data: new Uint8Array([1, 2, 3]) }, { budget: { maxbytes: 2 } }), (error) => error.code === "STORAGE_POOL_BYTE_BUDGET");
+  assert.equal(pool.metrics().attempts, 1);
+});
+
 test("rejects ambiguous storage-pool membership and exposes capability evidence", () => {
   const storage = { async get() {}, async put() {} };
   assert.throws(() => storagepool({ members: [] }), /non-empty/);
