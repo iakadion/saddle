@@ -201,6 +201,19 @@ The evidence supports a future **browser interaction receipt** that records snap
 
 The evidence supports a future **crawl policy receipt** containing a normalized origin, robots decision and source, sitemap discovery evidence, request budget, parser limits and explicit `fetchAdapterRequired` status. It must not fetch, crawl, execute scripts, store cookies, bypass access controls or claim a resource was permitted unless the caller provides the source and parser evidence.
 
+## Additional sandbox and isolation evidence
+
+| Candidate | Primary source | Evidence observed | Relevance to Saddle | Disposition |
+|---|---|---|---|---|
+| `bytecodealliance/wasmtime` | [repository][61] | The Apache-2.0 runtime emphasizes WASI host integration, configurable CPU/memory consumption and an independently maintained security process. | It corroborates explicit module format, host capability and resource-budget declarations. | Consider a runtime-neutral WASM capability receipt; do not embed or invoke a runtime. |
+| `google/nsjail` | [repository][62] | The Apache-2.0 tool requires Linux namespace, cgroup, rlimit, seccomp, mount and network configuration to isolate processes. | It demonstrates that credible process isolation is host-specific and privileged. | Keep `tmpfs`, mount, resource and network controls as adapter requirements; do not execute nsjail or emit commands from core. |
+| `firecracker-microvm/firecracker` | [repository][63] | The Apache-2.0 microVM monitor depends on KVM and a correctly configured Linux host and provides host-controlled vCPU, memory, devices, rates and jailer settings. | It corroborates a detailed external isolation-attestation model. | Consider receipt fields for host-provided isolation; reject microVM control plane, KVM access and privileged setup. |
+| `gvisor/gvisor` | [repository][64] | The candidate was selected for userspace-kernel isolation comparison, but primary page extraction did not return usable content in this run. | It remains a pending source rather than implementation evidence. | Defer until a primary source is captured; do not infer gVisor behavior from summaries. |
+
+## Additional sandbox disposition
+
+The source set supports a future **isolation attestation input** with `runtimeKind`, `hostAuthority`, `filesystemPolicy`, `networkPolicy`, `cpuBudget`, `memoryBudget`, `processBudget`, `timeoutBudget`, `imageOrModuleDigest` and `evidenceStatus`. A caller-provided attestation can be validated for completeness but cannot establish that a host is isolated, privileged operations are allowed or a workload was executed.
+
 ## References
 
 [1]: https://github.com/browser-use/browser-use "browser-use/browser-use"
@@ -263,3 +276,7 @@ The evidence supports a future **crawl policy receipt** containing a normalized 
 [58]: https://github.com/unclecode/crawl4AI "unclecode/crawl4AI"
 [59]: https://github.com/scrapinghub/frontera "scrapinghub/frontera"
 [60]: https://github.com/crawler-commons/crawler-commons "crawler-commons/crawler-commons"
+[61]: https://github.com/bytecodealliance/wasmtime "bytecodealliance/wasmtime"
+[62]: https://github.com/google/nsjail "google/nsjail"
+[63]: https://github.com/firecracker-microvm/firecracker "firecracker-microvm/firecracker"
+[64]: https://github.com/gvisor/gvisor "gvisor/gvisor"
