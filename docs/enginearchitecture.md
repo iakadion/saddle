@@ -34,11 +34,14 @@ The public contract uses plain objects and factory functions. The engine never r
 | `storageadapter` | put, get, head, delete, and list artifacts | local, s3 compatible, webdav, hf, kaggle, or another backend |
 | `storagepool` | read verified replicas, write to an explicit quorum, describe capabilities, and produce a repair plan | caller-authorized adapters with explicit priority and no background replication |
 | `localmemory` | prepare, sync, and cleanup a working set | tmpfs, mmap, sqlite, r2, or a remote bridge |
+| `workingbudget` / `workingadmission` / `bridgeplan` | plan bounded materialization and host-memory operations | caller-owned host adapter; the transport-neutral core never mounts, swaps, or executes a shell command |
 | `scheduler` | select the first available provider by stable priority | github, forgejo, gitea, gitlab, hf, kaggle, or custom |
 | `engine` | coordinate the lifecycle and emit events | library, cli, browser, desktop, mobile, or service |
 | `validatesession` | accept a versioned session record | browser capture, replay, or external event source |
 
 `storagepool` is an additive storage contract. It selects members in stable caller-configured priority order, accepts only caller-owned adapters, verifies a returned digest when one is supplied by the caller or manifest, and returns per-member evidence. A quorum write reports partial outcomes and fails when the requested threshold is not met. `repairplan` is declarative: it identifies a source and candidate targets but never starts a background repair, probes an account, or mutates an adapter.
+
+`workingadmission` selects serializable candidates against byte and entry budgets without reading data. `bridgeplan` can describe `temporaryfile`, `mmap`, `tmpfs`, `zram`, or `swap` only when a caller declares the capability. A returned `caller-executes` result contains preconditions and cleanup ownership; an unsupported capability is reported without a probe or side effect.
 
 ## execution lifecycle
 

@@ -55,6 +55,7 @@
     "./memory": "./dist/memory/bridge.js",
     "./memory-node": "./dist/memory/bridge.js",
     "./memory-engine": "./dist/memory/engine.js",
+    "./memory-plan": "./dist/memory/planner.js",
     "./storage": "./dist/storage/index.js",
     "./storage-pool": "./dist/storage/pool.js",
     "./storage-node": "./dist/storage/local.js",

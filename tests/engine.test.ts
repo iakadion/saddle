@@ -21,6 +21,7 @@ import { s3compatible } from "../storage/s3compatible.js";
 import { tieredcache } from "../storage/cache.js";
 import { comparemanifests, objectmanifest, storagecapabilities, syncobject } from "../storage/sync.js";
 import { storagepool } from "../storage/pool.js";
+import { bridgeplan, materializationrecord, workingadmission } from "../memory/planner.js";
 import { validatesession } from "../domain/sessions.js";
 import { detectcontenttype, normalizeresponse, normalizeresult } from "../scrape/normalize.js";
 import { sessionstore } from "../sessions/store.js";
@@ -1100,4 +1101,25 @@ test("rejects ambiguous storage-pool membership and exposes capability evidence"
   const pool = storagepool({ members: [{ id: "only", storage }] });
   assert.deepEqual(pool.members(), [{ id: "only", priority: 0 }]);
   assert.deepEqual(pool.capabilities(), [{ id: "only", priority: 0, capabilities: { range: false, conditional: false, metadata: false, delete: false } }]);
+});
+
+test("plans bounded working-set admission without materializing data", () => {
+  const plan = workingadmission([
+    { id: "old", sizebytes: 4, lastusedat: 1 },
+    { id: "recent", sizebytes: 5, lastusedat: 9 },
+    { id: "expired", sizebytes: 1, expiresat: 10 }
+  ], { budget: { maxbytes: 6, maxentries: 2 }, now: 10, policy: "lru" });
+  assert.deepEqual(plan.admitted.map((item) => item.id), ["recent"]);
+  assert.deepEqual(plan.deferred.map((item) => item.reason), ["bytebudget", "expired"]);
+  assert.equal(plan.usedbytes, 5);
+});
+
+test("keeps host-memory bridge operations declarative and capability gated", () => {
+  assert.equal(bridgeplan({ operation: "tmpfs", sizebytes: 1024 }).state, "unsupported");
+  const plan = bridgeplan({ operation: "tmpfs", sizebytes: 1024, capabilities: ["tmpfs"] });
+  assert.equal(plan.state, "caller-executes");
+  assert.equal(plan.preconditions.includes("rollback-plan"), true);
+  const record = materializationrecord({ id: "object1", sha256: "a".repeat(64), sizebytes: 1, tier: "l3" });
+  assert.equal(record.state, "planned");
+  assert.throws(() => workingadmission([{ id: "same", sizebytes: 1 }, { id: "same", sizebytes: 1 }]), /unique/);
 });

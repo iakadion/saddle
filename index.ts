@@ -15,6 +15,7 @@ export * from "./memory/objects.js";
 export * from "./memory/targets.js";
 export * from "./memory/transforms.js";
 export * from "./memory/engine.js";
+export * from "./memory/planner.js";
 export * from "./runners/inprocess.js";
 export * from "./runners/scheduler.js";
 export * from "./runtime/engine.js";

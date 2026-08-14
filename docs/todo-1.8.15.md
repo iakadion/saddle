@@ -92,30 +92,30 @@
 
 ## 3. Memory tiers and storage-to-working-set bridge
 
-- [ ] Define a tier descriptor for L1 process memory, L2 caller-provided accelerator memory, L3 local working-set storage, and L4 authorized remote storage.
-- [ ] Define the tier descriptor as a capability model rather than a claim that every environment offers every tier.
-- [ ] Define a working-set budget with bytes, object count, age, transfer budget, and caller-selected eviction strategy.
+- [x] Define a tier descriptor for L1 process memory, L2 caller-provided accelerator memory, L3 local working-set storage, and L4 authorized remote storage.
+- [x] Define the tier descriptor as a capability model rather than a claim that every environment offers every tier.
+- [x] Define a working-set budget with bytes, object count, age, transfer budget, and caller-selected eviction strategy.
 - [ ] Define a bridge plan that differentiates in-process buffering, temporary local files, memory-mapped files, tmpfs, compressed RAM disks, and swap as host-owned capabilities.
 - [ ] Define privileged-host operation descriptors for fallocate, mkswap, swapon, tmpfs, zram, mount, and cleanup without executing shell commands in the transport-neutral core.
 - [ ] Define precondition evidence for every privileged-host operation, including platform, privilege, free space, mount namespace, user consent, and rollback plan.
-- [ ] Define a denial result for a host operation when the adapter cannot prove that it is permitted and reversible.
-- [ ] Define a host-plan result that lets a CLI, runner, or privileged adapter decide whether to execute a plan.
+- [x] Define a denial result for a host operation when the adapter cannot prove that it is permitted and reversible.
+- [x] Define a host-plan result that lets a CLI, runner, or privileged adapter decide whether to execute a plan.
 - [ ] Define a memory-admission policy that considers object size, checksum, priority, cache age, estimated transfer cost, and remaining budget.
 - [ ] Define an eviction policy contract for LRU, size-aware, TTL-first, and caller-supplied ranking without unbounded metadata.
-- [ ] Define a materialization record that links a remote object digest to its local working-set representation and cleanup state.
+- [x] Define a materialization record that links a remote object digest to its local working-set representation and cleanup state.
 - [ ] Define a bridge cleanup plan that safely removes only resources created and identified by the caller-owned adapter.
-- [ ] Implement input validators for tier descriptors, budgets, host operation descriptors, and materialization records.
-- [ ] Implement a capability-based tier resolver that never probes the host from the shared core.
-- [ ] Implement a deterministic working-set admission planner that returns admitted, deferred, rejected, and evicted candidates.
-- [ ] Implement a bridge planner that selects only capabilities declared by the injected adapter.
+- [x] Implement input validators for tier descriptors, budgets, host operation descriptors, and materialization records.
+- [x] Implement a capability-based tier resolver that never probes the host from the shared core.
+- [x] Implement a deterministic working-set admission planner that returns admitted, deferred, rejected, and evicted candidates.
+- [x] Implement a bridge planner that selects only capabilities declared by the injected adapter.
 - [ ] Implement a materialization ledger that maintains digest, size, tier, state, timestamps, and bounded reason codes.
 - [ ] Implement cleanup-plan generation that can be invoked after success, cancellation, failure, or expiry.
 - [ ] Implement an explicit no-op bridge for runtimes without privileged storage or memory controls.
 - [ ] Implement a fake host adapter that simulates tmpfs, zram, swap, mmap, cleanup errors, and permission denials without running shell commands.
-- [ ] Test admission under an exact byte budget.
+- [x] Test admission under an exact byte budget.
 - [ ] Test admission rejection for an oversize object.
 - [ ] Test eviction order under LRU and TTL-first policies.
-- [ ] Test an adapter with no privileged capabilities.
+- [x] Test an adapter with no privileged capabilities.
 - [ ] Test a tmpfs plan that requires an explicit caller-owned execution adapter.
 - [ ] Test a swap plan that records rollback requirements without invoking swapon.
 - [ ] Test a zram plan that rejects unsupported host capabilities.
@@ -127,7 +127,7 @@
 - [ ] Test that L2 accelerator memory remains caller-owned and unavailable by default.
 - [ ] Document safe adapter patterns for a local CLI or authorized runner to execute privileged plans.
 - [ ] Document why the library cannot create host swap, tmpfs, or zram in browser, extension, package, or transport-neutral contexts.
-- [ ] Expose only serializable plans and fake-adapter-tested contracts from the public library surface.
+- [x] Expose only serializable plans and fake-adapter-tested contracts from the public library surface.
 
 ## 4. WASM and binary transformation contracts
 
