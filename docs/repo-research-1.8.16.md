@@ -227,6 +227,19 @@ The source set supports a future **isolation attestation input** with `runtimeKi
 
 The sources support a potential **context provenance envelope** with `sourceDigest`, `sourceLocator`, `retrievalMethod`, `transformIdentity`, `transformDigest`, `chunkIdentity`, `citationRange`, `contextBudget` and `adapterRequired`. The envelope must distinguish caller claims from independently verified data and must not assert document understanding, citation correctness, embedding quality or durable storage without an external adapter.
 
+## Additional supply-chain and policy evidence
+
+| Candidate | Primary source | Evidence observed | Relevance to Saddle | Disposition |
+|---|---|---|---|---|
+| `in-toto/in-toto` | [repository][69] | The framework models owner-signed layouts, authorized functionaries, signed link metadata, material/product rules and independent verification. | It corroborates binding a release claim to explicit expected inputs, steps and evidence rather than a mutable label. | Consider a lightweight expected-evidence schema; do not add signing, command execution or key management. |
+| `ossf/scorecard` | [repository][70] | The Apache-2.0 tool presents structured heuristic checks and explicitly warns that aggregate scores are not definitive and can have false positives/negatives. | It corroborates reporting individual evidence and decisions instead of inventing a single security verdict. | Consider granular policy findings; do not embed a scanner or create a score claim. |
+| `DependencyTrack/dependency-track` | [repository][71] | The Apache-2.0 platform consumes SBOMs to analyze component and supply-chain risk and operates as a separate service. | It reinforces SBOM as external evidence with a digest and lifecycle distinct from runtime code. | Consider optional SBOM-reference fields; do not add component analysis, database or service dependencies. |
+| `open-policy-agent/opa` | [repository][72] | The Apache-2.0 policy engine separates declarative decision evaluation from enforcement by an integrating service. | It corroborates Saddle's plan/decision versus caller-enforced action boundary. | Consider plain-data decision records; do not embed Rego, a policy server or enforcement runtime. |
+
+## Additional security disposition
+
+The combined evidence supports a future **evidence policy result** with `subjectDigest`, `expectedIdentity`, `expectedWorkflow`, `evidenceKind`, `evidenceStatus`, `policyDecision`, `reasons` and `verificationTime`. It must distinguish `absent`, `declared`, `downloaded`, `checked` and `verified` evidence and cannot label an artifact as signed, secure, compliant or trusted without a verifier result supplied by the caller.
+
 ## References
 
 [1]: https://github.com/browser-use/browser-use "browser-use/browser-use"
@@ -297,3 +310,7 @@ The sources support a potential **context provenance envelope** with `sourceDige
 [66]: https://github.com/Unstructured-IO/unstructured "Unstructured-IO/unstructured"
 [67]: https://github.com/deepset-ai/haystack "deepset-ai/haystack"
 [68]: https://github.com/run-llama/llama_index "run-llama/llama_index"
+[69]: https://github.com/in-toto/in-toto "in-toto/in-toto"
+[70]: https://github.com/ossf/scorecard "ossf/scorecard"
+[71]: https://github.com/DependencyTrack/dependency-track "DependencyTrack/dependency-track"
+[72]: https://github.com/open-policy-agent/opa "open-policy-agent/opa"
