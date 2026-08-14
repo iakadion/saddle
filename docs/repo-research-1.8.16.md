@@ -162,6 +162,19 @@ The independent sources strengthen a future adapter-level **runner provenance re
 
 The sources reinforce a possible 1.8.16 **provider feature matrix** that captures `rangeRead`, `conditionalWrite`, `multipart`, `integrityClaim`, `objectImmutability`, `retention`, `mountRequired`, and `credentialOwner` as adapter-reported facts. The core must reject impossible plans before I/O and must never translate remote storage into a claim of RAM, VRAM, local POSIX semantics, unbounded throughput or persistent compute.
 
+## Additional workflow and queue evidence
+
+| Candidate | Primary source | Evidence observed | Relevance to Saddle | Disposition |
+|---|---|---|---|---|
+| `dbos-inc/dbos-transact-ts` | [repository][49] | The MIT durable-workflow SDK uses a Postgres persistence layer for checkpoints, queueing, limits, deduplication, scheduling and workflow management. | It corroborates separating serializable run records and idempotency keys from a provider-specific execution service. | Consider run-state and deduplication receipt fields; reject Postgres runtime, worker loop and autonomous scheduling in core. |
+| `vercel/workflow` | [repository][50] | The Apache-2.0 SDK persists progress, retries steps and can suspend workflows, with managed, self-hosted and custom-world deployment options. | It reinforces the distinction between a portable workflow model and an operator-provided durable backend. | Consider an adapter capability declaration for persistence/resume; do not embed a managed backend or retries. |
+| `taskforcesh/bullmq` | [repository][51] | The MIT queue exposes priorities, concurrency, pause/resume, rate limits, deduplication and sandboxed workers over external Redis/Postgres-backed services. | It corroborates that queue semantics depend on a specific executor/store and must be claimed by an adapter. | Retain Saddle's lease/idempotency contracts; do not add a queue dependency or worker. |
+| `Webslash/duty` | [repository][52] | The unreleased project describes cached activities and resume-after-failure semantics but states it cannot yet be installed. | It is an emergent candidate, not production evidence. | Record as watchlist only; do not derive an implementation from an unreleased API. |
+
+## Additional workflow disposition
+
+The combined sources support a later **durability capability receipt** with declared `checkpointStore`, `leaseAuthority`, `deduplicationScope`, `retryAuthority`, `scheduleAuthority`, `cancellationConfirmation` and `retentionOwner` fields. It must never promise exactly-once external side effects, automatic recovery or background execution without an adapter that has positively provided those capabilities.
+
 ## References
 
 [1]: https://github.com/browser-use/browser-use "browser-use/browser-use"
@@ -212,3 +225,7 @@ The sources reinforce a possible 1.8.16 **provider feature matrix** that capture
 [46]: https://github.com/juicedata/juicefs "juicedata/juicefs"
 [47]: https://github.com/ipfs/kubo "ipfs/kubo"
 [48]: https://github.com/minio/minio "minio/minio"
+[49]: https://github.com/dbos-inc/dbos-transact-ts "dbos-inc/dbos-transact-ts"
+[50]: https://github.com/vercel/workflow "vercel/workflow"
+[51]: https://github.com/taskforcesh/bullmq "taskforcesh/bullmq"
+[52]: https://github.com/Webslash/duty "Webslash/duty"
