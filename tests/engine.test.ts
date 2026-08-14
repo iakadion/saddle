@@ -24,7 +24,7 @@ import { storagepool } from "../storage/pool.js";
 import { bridgeplan, materializationrecord, workingadmission } from "../memory/planner.js";
 import { cachedecision, executeisolated, magicbytes, transformationcache, transformationkey, wasmplan } from "../binary/transform.js";
 import { archiveinspection, extractarchive } from "../binary/archive.js";
-import { artifacthandoff, providerchain } from "../runners/chain.js";
+import { artifacthandoff, cancellationplan, providerchain } from "../runners/chain.js";
 import { deliverymanifest, pwaplan, verifydelivery } from "../delivery/manifest.js";
 import { applicationbridge, dnsplan, miniappplan } from "../surfaces/requirements.js";
 import { validatesession } from "../domain/sessions.js";
@@ -1186,6 +1186,13 @@ test("requires verified evidence before an artifact handoff can be transferred",
   const handoff = artifacthandoff({ key: "artifact.bin", sha256: "c".repeat(64), sizebytes: 3, providerid: "worker", retention: "release" });
   assert.equal(handoff.state, "caller-transfers");
   assert.throws(() => artifacthandoff({ key: "artifact.bin", sha256: "invalid", sizebytes: 3, providerid: "worker", retention: "release" }), /sha256/);
+});
+
+test("preserves unknown remote state in provider cancellation plans", () => {
+  const plan = cancellationplan({ runid: "run1", providerid: "worker", compensation: true });
+  assert.equal(plan.state, "caller-cancels");
+  assert.equal(plan.remotestate, "unknown");
+  assert.equal(plan.compensation, "caller-evaluates");
 });
 
 test("verifies immutable delivery chunks without evaluating their content", () => {

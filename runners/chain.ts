@@ -33,6 +33,14 @@ export function artifacthandoff(input = {}) {
   return Object.freeze({ version: 1, key, sha256, sizebytes: positive(input.sizebytes, "artifact handoff sizebytes"), providerid, retention, state: "caller-transfers" });
 }
 
+/** Creates a cancellation intent without claiming that a remote runner has stopped or cleaned up. */
+export function cancellationplan(input = {}) {
+  const runid = nonempty(input.runid, "provider cancellation runid");
+  const providerid = nonempty(input.providerid, "provider cancellation providerid");
+  const reason = nonempty(input.reason ?? "caller-requested", "provider cancellation reason");
+  return Object.freeze({ version: 1, runid, providerid, reason, state: "caller-cancels", remotestate: "unknown", compensation: input.compensation === true ? "caller-evaluates" : "not-requested" });
+}
+
 function normalizeproviders(input) {
   if (!Array.isArray(input) || input.length === 0) throw new TypeError("provider chain providers must be a non-empty array");
   const ids = new Set();

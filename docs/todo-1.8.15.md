@@ -190,7 +190,7 @@
 - [x] Implement a selection report preserving rejected-provider reasons.
 - [ ] Implement dry-run dispatch payload builders as injected forge adapters.
 - [x] Implement a runner-to-storage handoff planner that requires output digests and explicit retention selection.
-- [ ] Implement a provider-chain cancellation planner that delegates actual remote cancellation to existing caller-owned adapters.
+- [x] Implement a provider-chain cancellation planner that delegates actual remote cancellation to existing caller-owned adapters.
 - [ ] Implement fake provider adapters for unavailable, quota-exhausted, incompatible, slow, canceled, successful, and artifact-mismatch outcomes.
 - [x] Test a chain with no eligible providers.
 - [ ] Test stable selection under equal provider scores.
@@ -198,7 +198,7 @@
 - [ ] Test a provider rejected for a smaller declared time or memory budget.
 - [ ] Test a caller preference that changes selection only among otherwise eligible providers.
 - [ ] Test a dry-run plan that cannot dispatch without an injected adapter.
-- [ ] Test a cancellation plan that retains unknown remote state rather than claiming completed cleanup.
+- [x] Test a cancellation plan that retains unknown remote state rather than claiming completed cleanup.
 - [x] Test an artifact handoff rejected for absent digest or retention policy.
 - [ ] Test a provider report with an unsupported field rejection.
 - [ ] Test low-cardinality selection metrics and bounded selection evidence.
