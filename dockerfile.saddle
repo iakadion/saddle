@@ -1,4 +1,3 @@
-FROM node:26.7.0-alpine
 FROM node:26.7.0-bookworm-slim AS build
 
 ARG SADDLE_VERSION

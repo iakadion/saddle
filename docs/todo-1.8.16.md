@@ -663,3 +663,18 @@
 - [x] Add bounded cache cleanup after completed workflows only where it does not remove a cache required by concurrent work. The dry-run and the successful applied run left 13 listed cache entries; repository usage totals may take several minutes to refresh.
 - [x] Add workflow validation and deterministic tests or inspections for YAML syntax, permissions, triggers, and cache deletion scope.
 - [x] Record the resulting cache policy, manual fallback, and non-goals in release or operational documentation.
+
+## 10. Version 1.8.17 container platform expansion
+
+- [ ] Inventory the platforms and digests present in the published 1.8.16 container manifest before changing the build matrix.
+- [ ] Compare requested operating-system and architecture combinations against Docker Buildx, OCI image-index, Node runtime, and runner support.
+- [ ] Distinguish publishable Linux OCI variants from Windows container variants that require a compatible Windows base image and Windows runner.
+- [ ] Avoid claiming an `unknown` platform as a runnable operating-system or architecture target.
+- [ ] Select a supported 1.8.17 Linux multi-architecture matrix and record rejected or deferred combinations with their technical reason.
+- [ ] Review the current container workflow, image base, tags, OCI labels, post-push pull, label verification, and smoke test before modifying it.
+- [ ] Extend the container workflow only for platform combinations that can build and execute the packaged Saddle runtime.
+- [ ] Keep release-tag version derivation, registry credentials, permissions, and the container-first documentation order intact.
+- [ ] Update every active 1.8.16 version metadata location to 1.8.17 after the implementation scope is validated.
+- [ ] Update release notes, changelog, registry and artifact documentation with an accurate platform matrix and no unverified image claims.
+- [ ] Validate YAML formatting, package and engine gates, workflow logic, and generated OCI manifest inspection before creating the 1.8.17 tag.
+- [ ] Publish and inspect the 1.8.17 release, all registry workflows, container manifest platforms, post-push label checks, and smoke-test results.
