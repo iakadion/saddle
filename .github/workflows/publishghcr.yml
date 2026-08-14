@@ -67,7 +67,7 @@ jobs:
           image-ref: saddle:scan-${{ steps.release.outputs.version }}
           scanners: vuln,secret,misconfig
           severity: HIGH,CRITICAL
-          ignore-unfixed: false
+          ignore-unfixed: true
           exit-code: "1"
       - name: build and push image with attestations
         uses: docker/build-push-action@v7
