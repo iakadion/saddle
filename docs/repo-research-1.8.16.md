@@ -149,6 +149,19 @@ The sources validate the current Saddle approach rather than reveal a safe missi
 
 The independent sources strengthen a future adapter-level **runner provenance receipt**: it may report provider, workflow dialect, labels, runner scope, cache locality, artifact retention and an explicit trust boundary. It must not claim GitHub/Forgejo compatibility without a provider test, and it must reject a request that combines elevated credentials with untrusted checkout unless the caller records an explicit policy override.
 
+## Additional storage and VFS evidence
+
+| Candidate | Primary source | Evidence observed | Relevance to Saddle | Disposition |
+|---|---|---|---|---|
+| `rclone/rclone` | [repository][45] | The MIT sync tool covers many remotes and virtual backends such as union, chunking, hashing, compression and encryption while maintaining explicit copy/sync/check operations. | It corroborates provider-neutral capability reports, integrity-aware plans and explicit operations. | Consider provider-feature normalization; do not embed credentials, mounts or sync execution. |
+| `juicedata/juicefs` | [repository][46] | The Apache-2.0 filesystem combines object data storage and separately managed metadata, supports chunks and mounts, and requires a client plus metadata/object infrastructure. | It demonstrates why filesystem semantics require privileged infrastructure beyond an engine contract. | Keep working-set and mount intent declarative; reject POSIX mount, metadata-engine and FUSE implementation in core. |
+| `ipfs/kubo` | [repository][47] | The dual-licensed node uses CIDs, verifiable transfer and optional gateway/FUSE/daemon surfaces. | It corroborates content-addressable integrity and the cost of service, peer and mount responsibilities. | Consider content-addressed receipt fields; do not add a peer node, HTTP gateway or mount. |
+| `minio/minio` | [repository][48] | The AGPL-3.0 object store is source-only and explicitly warns that deployment, credentials and container operations remain operator responsibilities. | It corroborates provider responsibility boundaries and license-aware dependency rejection. | Use S3 capability concepts only; do not add MinIO code, runtime or AGPL dependency. |
+
+## Additional storage disposition
+
+The sources reinforce a possible 1.8.16 **provider feature matrix** that captures `rangeRead`, `conditionalWrite`, `multipart`, `integrityClaim`, `objectImmutability`, `retention`, `mountRequired`, and `credentialOwner` as adapter-reported facts. The core must reject impossible plans before I/O and must never translate remote storage into a claim of RAM, VRAM, local POSIX semantics, unbounded throughput or persistent compute.
+
 ## References
 
 [1]: https://github.com/browser-use/browser-use "browser-use/browser-use"
@@ -195,3 +208,7 @@ The independent sources strengthen a future adapter-level **runner provenance re
 [42]: https://github.com/actions/actions-runner-controller "actions/actions-runner-controller"
 [43]: https://forgejo.org/docs/v15.0/admin/actions/ "Forgejo Actions administrator guide"
 [44]: https://forgejo.org/docs/v15.0/user/actions/reference/ "Forgejo Actions reference"
+[45]: https://github.com/rclone/rclone "rclone/rclone"
+[46]: https://github.com/juicedata/juicefs "juicedata/juicefs"
+[47]: https://github.com/ipfs/kubo "ipfs/kubo"
+[48]: https://github.com/minio/minio "minio/minio"
