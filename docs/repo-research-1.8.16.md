@@ -97,6 +97,19 @@ The sample supports a future **release verification receipt** that binds a relea
 
 The evidence reinforces 1.8.15's declarative PWA, extension, DNS and Mini App requirements. No additional core implementation is selected: any future work must be an opt-in adapter package with a platform-specific permission review, a deterministic capability report and no implicit registration, credential flow or remote mutation.
 
+## MCP, RAG, and tool-protocol evidence
+
+| Candidate | Primary source | Evidence observed | Relevance to Saddle | Disposition |
+|---|---|---|---|---|
+| `modelcontextprotocol/typescript-sdk` | [repository][29] | The official SDK separates client, server, transport and thin runtime-specific middleware and accepts portable schema implementations. | It corroborates Saddle's explicit protocol contracts and adapter-first transport design. | Consider an optional schema-compatible descriptor only; do not add an MCP server, client, OAuth flow or HTTP listener to the core. |
+| `modelcontextprotocol/servers` | [repository][30] | Reference servers are explicitly educational rather than production-ready and distinguish filesystem, fetch, memory and tool examples. | It reinforces treating example integrations as non-authoritative and requiring threat-model review. | Use as an interoperability reference; do not embed reference-server behavior. |
+| `infiniflow/ragflow` | [repository][31] | The Apache-2.0 system emphasizes source-aware chunking, grounded citations, heterogeneous ingestion and heavy deployment dependencies. | It corroborates Saddle's provenance-bearing structured extraction and bounded context budget. | Consider explicit source/citation receipt fields only; avoid RAG runtime, embeddings, model execution and persistent service dependencies. |
+| `mondaycom/agent-tool-protocol` | [repository][32] | The MIT protocol describes provenance policies, approval pause/resume, schema discovery and isolated execution with resource limits. | It corroborates preserving tool-origin and approval state across serializable workflow records. | Consider provenance/approval receipt semantics; reject generated-code execution, dynamic API loading and secret-bearing OAuth integrations in core. |
+
+## Protocol disposition
+
+The sample corroborates one candidate for later implementation: an **origin-bearing tool result envelope** that separates user, caller, adapter and remote-source claims without trusting a model-generated label. It must be schema-validatable, serializable and side-effect free. Implementation remains deferred until at least two additional protocol or security sources are reviewed and existing `protocol/` exports are mapped.
+
 ## References
 
 [1]: https://github.com/browser-use/browser-use "browser-use/browser-use"
@@ -127,3 +140,7 @@ The evidence reinforces 1.8.15's declarative PWA, extension, DNS and Mini App re
 [26]: https://github.com/GoogleChrome/chrome-extensions-samples "GoogleChrome/chrome-extensions-samples"
 [27]: https://github.com/GoogleChrome/workbox "GoogleChrome/workbox"
 [28]: https://github.com/Telegram-Mini-Apps/tma.js "Telegram-Mini-Apps/tma.js"
+[29]: https://github.com/modelcontextprotocol/typescript-sdk "modelcontextprotocol/typescript-sdk"
+[30]: https://github.com/modelcontextprotocol/servers "modelcontextprotocol/servers"
+[31]: https://github.com/infiniflow/ragflow "infiniflow/ragflow"
+[32]: https://github.com/mondaycom/agent-tool-protocol "mondaycom/agent-tool-protocol"
