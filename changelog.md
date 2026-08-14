@@ -10,7 +10,16 @@
 
 	    - Future changes will be recorded here after the 1.8.11 release.
 
-	  ## [1.8.15] - 2026-08-14
+		  ## [1.8.16] - 2026-08-14
+
+		    - Added `releaseevidence`, `evaluateevidence`, and `releasereadiness` as data-only release evidence and readiness contracts with explicit statuses, policy reason codes, and no external release effects.
+		    - Added `evidencefromverification` to map an already-valid local checksum result into `checked` evidence without upgrading declared signing state into a trust claim.
+		    - Exported the feature from the root entry and `@wenathlan/saddle/release-evidence`, with documented consumer boundaries.
+		    - Expanded deterministic release coverage to 136 active tests while preserving the 69 legacy tests and passing package, web, audit, and flat-native gates.
+		    - Aligned active package, native, extension, crawler and iOS build metadata to `1.8.16`.
+		    - Added the canonical [1.8.16 release notes](docs/releasenotes-1.8.16.md).
+
+		  ## [1.8.15] - 2026-08-14
 
 	    - Added verified storage pools with quorum writes, explicit write modes, bounded operations, range reads, repair plans and restoration plans.
 	    - Added bounded working-set admission, capability-gated bridge plans, materialization ledgers and caller-owned cleanup plans.

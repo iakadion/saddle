@@ -132,3 +132,13 @@ Version 1.8.14 keeps the release-tag-derived matrix and adds post-push container
 Each surface also emits `sha256.*.1.8.14`, `manifest.*.1.8.14.json` and, where enabled by the release path, SBOM and provenance metadata. The Android manifest records `ci-test-key`, desktop manifests record `unsigned` and the container manifest records `caller-owned`. The container image additionally records `org.opencontainers.image.version=1.8.14`; the post-push workflow pulls that exact version and runs the CLI help smoke test.
 
 The verified 1.8.14 release contains six Linux assets, six Windows assets, four macOS assets, two Android assets, one container archive, one browser extension, nine manifests and nine checksum files. The release-event mobile job did not bypass missing production credentials; the successful manual rerun used the explicit `ci-test-key` path.
+
+## 1.8.15 verified release matrix
+
+The published [v1.8.15 release](https://github.com/wenathlan/saddle/releases/tag/v1.8.15) contains 38 attached assets: six Linux desktop artifacts, six Windows desktop artifacts, four macOS desktop artifacts, two Android artifacts, one container archive, one browser extension, nine manifests, and nine checksum files. The primary artifacts use the dotted lowercase names `saddle.browser.1.8.15.<architecture>.<format>`, `saddle.apk.1.8.15.apk`, `saddle.aab.1.8.15.aab`, `saddle.container.1.8.15.tar.gz`, and `saddle.extension.1.8.15.zip`.
+
+The available metadata files are `manifest.android.1.8.15.json`, `manifest.container.1.8.15.json`, the seven desktop `manifest.*.1.8.15.json` files, and the matching nine `sha256.*.1.8.15` files. The release record identifies Android as `ci-test-key`, desktop surfaces as `unsigned`, and the container as `caller-owned`; those declared states do not imply production signing, notarization, or registry trust.
+
+## 1.8.16 candidate release matrix
+
+Version 1.8.16 preserves the tag-derived 38-asset contract described in [releasenotes-1.8.16.md](releasenotes-1.8.16.md). Before tag workflows complete, every 1.8.16 entry is an expected output rather than an availability claim. The new release-evidence API can normalize and evaluate results supplied by completed verification adapters, but it cannot generate artifacts, change their signing state, publish them, or validate their registry availability.
