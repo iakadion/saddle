@@ -645,13 +645,13 @@ The following blocks are the execution order for the complete ecosystem. A block
 
 ### Pending releases after signing configuration
 
-- [ ] Audit existing remote tags and releases before creating any immutable release reference.
-- [ ] Confirm the exact missing release sequence and ensure each tag points to a validated commit without rewriting historical tags.
-- [ ] Prepare release notes and artifact manifests with `unsigned` or `caller-owned` signing status until the user configures a signing provider.
-- [ ] Run the complete local release gate immediately before creating each authorized tag or release.
-- [ ] Create only the confirmed missing tags and GitHub releases; do not publish unsigned binaries as trusted artifacts.
-- [ ] Verify each remote release, asset list, checksum manifest and workflow result after creation.
-- [ ] Make release-time Android fallback behavior explicit: use a CI test key only when production signing secrets are absent, label the resulting manifest `ci-test-key`, and never imply store trust.
-- [ ] Resolve Android SDK tool paths explicitly for `apksigner` and keep AAB/APK verification fail-closed without assuming the tool is on `PATH`.
-- [ ] Diagnose the failed security workflow for v1.8.12 and v1.8.13, preserving the accepted glib advisory only when the failure matches the documented exception.
-- [ ] Diagnose GHCR publication failures for v1.8.12 and v1.8.13, then rerun only after permissions, image metadata and registry inputs are verified.
+- [x] Audit existing remote tags and releases before creating any immutable release reference.
+- [x] Confirm the exact missing release sequence and ensure each tag points to a validated commit without rewriting historical tags.
+- [x] Prepare release notes and artifact manifests with `unsigned`, `ci-test-key` or `caller-owned` signing status until the user configures a signing provider.
+- [x] Run the complete local release gate immediately before creating each authorized tag or release.
+- [x] Create only the confirmed missing tags and GitHub releases; do not publish unsigned binaries as trusted artifacts.
+- [x] Verify each remote release, asset list, checksum manifest and corrected workflow rerun after creation.
+- [x] Make release-time Android fallback behavior explicit: use a CI test key only when production signing secrets are absent, label the resulting manifest `ci-test-key`, and never imply store trust.
+- [x] Resolve Android SDK tool paths explicitly for `apksigner` and keep AAB/APK verification fail-closed without assuming the tool is on `PATH`.
+- [x] Diagnose the failed security workflow for v1.8.12 and v1.8.13; the original failures were unverified TruffleHog results, while corrected security runs passed.
+- [x] Diagnose GHCR publication failures for v1.8.12 and v1.8.13; corrected image hardening and Buildx attestations produced a successful manual GHCR run.

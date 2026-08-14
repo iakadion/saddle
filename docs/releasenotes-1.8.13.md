@@ -17,7 +17,7 @@ Saddle 1.8.13 carries the active code and release-facing manifests forward from 
 
 ## Artifact contract
 
-The active workflows derive names from the release tag. The following names are expected for a 1.8.13 run; actual URLs, checksums and sizes must come from the completed CI run.
+The active workflows derive names from the release tag. The `v1.8.13` release was published and contains the generated assets listed below; iOS remains unavailable because Apple signing and provisioning were not configured.
 
 | Surface | Expected artifact family |
 |---|---|
@@ -31,9 +31,24 @@ The active workflows derive names from the release tag. The following names are 
 
 Signing remains explicit. `unsigned`, `ci-test-key`, `caller-owned`, `notarized` and a provider-reported status are distinct states. This release note does not claim SignPath approval or production signing.
 
+## Verified attached assets
+
+The release contains **38 attached assets**. Desktop binaries are unsigned, Android APK/AAB files use the explicitly labeled `ci-test-key`, and the container is marked `caller-owned`.
+
+| Surface | Attached assets | Signing |
+|---|---|---|
+| Linux desktop | `saddle.browser.1.8.13.x64.deb`, `saddle.browser.1.8.13.x64.rpm`, `saddle.browser.1.8.13.x64.appimage`, `saddle.browser.1.8.13.arm64.deb`, `saddle.browser.1.8.13.arm64.rpm`, `saddle.browser.1.8.13.arm64.appimage` | `unsigned` |
+| Windows desktop | `saddle.browser.1.8.13.x86.exe`, `saddle.browser.1.8.13.x86.msi`, `saddle.browser.1.8.13.x64.exe`, `saddle.browser.1.8.13.x64.msi`, `saddle.browser.1.8.13.arm64.exe`, `saddle.browser.1.8.13.arm64.msi` | `unsigned` |
+| macOS desktop | `saddle.browser.1.8.13.x64.dmg`, `saddle.browser.1.8.13.x64.app.zip`, `saddle.browser.1.8.13.arm64.dmg`, `saddle.browser.1.8.13.arm64.app.zip` | `unsigned` |
+| Android | `saddle.apk.1.8.13.apk`, `saddle.aab.1.8.13.aab` | `ci-test-key` |
+| Container | `saddle.container.1.8.13.tar.gz` | `caller-owned` |
+| Browser extension | `saddle.extension.1.8.13.zip` | `unsigned` |
+| Manifests | `manifest.android.1.8.13.json`, `manifest.container.1.8.13.json`, `manifest.desktop.linux.arm64.1.8.13.json`, `manifest.desktop.linux.x64.1.8.13.json`, `manifest.desktop.macos.arm64.1.8.13.json`, `manifest.desktop.macos.x64.1.8.13.json`, `manifest.desktop.windows.arm64.1.8.13.json`, `manifest.desktop.windows.x64.1.8.13.json`, `manifest.desktop.windows.x86.1.8.13.json` | metadata |
+| Checksums | `sha256.android.1.8.13`, `sha256.container.1.8.13`, `sha256.desktop.linux.arm64.1.8.13`, `sha256.desktop.linux.x64.1.8.13`, `sha256.desktop.macos.arm64.1.8.13`, `sha256.desktop.macos.x64.1.8.13`, `sha256.desktop.windows.arm64.1.8.13`, `sha256.desktop.windows.x64.1.8.13`, `sha256.desktop.windows.x86.1.8.13` | integrity metadata |
+
 ## Verification
 
-The queue, structured extraction, browser context, workflow compensation and retention features passed the active engine and release test suites. The complete release gate must be rerun after the implementation commit before a tag or release is created. The 1.8.21 research set remains the planning label for this feature batch and is not presented as a separate published version.
+The queue, structured extraction, browser context, workflow compensation and retention features passed the active engine and release test suites. The release validation workflow passed, and the live release contains the 38 assets listed above. The original release-event security, GHCR and mobile failures were superseded by successful corrected reruns; production signing remains pending.
 
 ## References
 
