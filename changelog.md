@@ -10,6 +10,15 @@
 
 	    - Future changes will be recorded here after the 1.8.11 release.
 
+		  ## [1.8.17] - 2026-08-14
+
+		    - Expanded the GHCR Linux OCI manifest target to `linux/amd64`, `linux/arm64`, and `linux/ppc64le` with QEMU-enabled Buildx publication.
+		    - Retained a loadable `linux/amd64` image for the container vulnerability scan, OCI version-label verification, and CLI smoke test.
+		    - Added a post-push manifest-index assertion that verifies the published Linux architectures before reporting container availability.
+		    - Documented the deferred Windows container boundary and rejected non-runnable `unknown` descriptors.
+		    - Aligned active package, native, extension, crawler, iOS build, and Capacitor metadata to `1.8.17`.
+		    - Added the canonical [1.8.17 release notes](docs/releasenotes-1.8.17.md).
+
 		  ## [1.8.16] - 2026-08-14
 
 		    - Added `releaseevidence`, `evaluateevidence`, and `releasereadiness` as data-only release evidence and readiness contracts with explicit statuses, policy reason codes, and no external release effects.

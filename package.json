@@ -1,6 +1,6 @@
 {
   "name": "@wenathlan/saddle",
-  "version": "1.8.16",
+  "version": "1.8.17",
   "description": "binary computing engine that turns distributed storage into a publishable working set",
   "type": "module",
   "private": false,

@@ -666,15 +666,15 @@
 
 ## 10. Version 1.8.17 container platform expansion
 
-- [ ] Inventory the platforms and digests present in the published 1.8.16 container manifest before changing the build matrix.
-- [ ] Compare requested operating-system and architecture combinations against Docker Buildx, OCI image-index, Node runtime, and runner support.
-- [ ] Distinguish publishable Linux OCI variants from Windows container variants that require a compatible Windows base image and Windows runner.
-- [ ] Avoid claiming an `unknown` platform as a runnable operating-system or architecture target.
-- [ ] Select a supported 1.8.17 Linux multi-architecture matrix and record rejected or deferred combinations with their technical reason.
-- [ ] Review the current container workflow, image base, tags, OCI labels, post-push pull, label verification, and smoke test before modifying it.
-- [ ] Extend the container workflow only for platform combinations that can build and execute the packaged Saddle runtime.
-- [ ] Keep release-tag version derivation, registry credentials, permissions, and the container-first documentation order intact.
-- [ ] Update every active 1.8.16 version metadata location to 1.8.17 after the implementation scope is validated.
-- [ ] Update release notes, changelog, registry and artifact documentation with an accurate platform matrix and no unverified image claims.
-- [ ] Validate YAML formatting, package and engine gates, workflow logic, and generated OCI manifest inspection before creating the 1.8.17 tag.
+- [x] Inventory the platforms and digests present in the published 1.8.16 container manifest before changing the build matrix. The release manifest identified a container archive and image reference but did not claim an OCI platform index.
+- [x] Compare requested operating-system and architecture combinations against Docker Buildx, OCI image-index, Node runtime, and runner support.
+- [x] Distinguish publishable Linux OCI variants from Windows container variants that require a compatible Windows base image and Windows runner.
+- [x] Avoid claiming an `unknown` platform as a runnable operating-system or architecture target.
+- [x] Select a supported 1.8.17 Linux multi-architecture matrix and record rejected or deferred combinations with their technical reason in `docs/containerplatforms-1.8.17.md`.
+- [x] Review the current container workflow, image base, tags, OCI labels, post-push pull, label verification, and smoke test before modifying it.
+- [x] Extend the container workflow only for platform combinations that can build and execute the packaged Saddle runtime: `linux/amd64`, `linux/arm64`, and `linux/ppc64le`.
+- [x] Keep release-tag version derivation, registry credentials, permissions, and the container-first documentation order intact.
+- [x] Update every active 1.8.16 version metadata location to 1.8.17 after the implementation scope is validated.
+- [x] Update release notes, changelog, registry and artifact documentation with an accurate platform matrix and no unverified image claims.
+- [x] Validate YAML formatting, package and engine gates, workflow logic, package dry-run, high-severity audit, flat-native validation, and whitespace before creating the 1.8.17 tag.
 - [ ] Publish and inspect the 1.8.17 release, all registry workflows, container manifest platforms, post-push label checks, and smoke-test results.
