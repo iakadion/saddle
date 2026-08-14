@@ -318,6 +318,23 @@ The evidence supports a future **tool capability receipt** with `protocolVersion
 
 The evidence supports a future **execution trace receipt** with `runIdentity`, `stateDigest`, `transition`, `approvalState`, `toolCallIdentity`, `traceDigest`, `telemetryOwner`, `retentionOwner` and `redactionStatus`. It must not capture prompt content, store user data, invoke models, schedule work, retry tools or report a run as completed without an adapter-produced confirmation.
 
+## Final supply-chain evidence: 100-source threshold
+
+| Candidate | Primary source | Evidence observed | Relevance to Saddle | Disposition |
+|---|---|---|---|---|
+| `sigstore/cosign` | [repository][97] | The Apache-2.0 tool signs and verifies artifacts by digest, identity and issuer, with transparency-log and offline bundle options. | It corroborates verification inputs that bind a subject digest to an expected signer identity. | Consider a verifier-result adapter schema; do not sign, perform OAuth, access KMS, contact a registry or claim SignPath/Sigstore coverage. |
+| `anchore/syft` | [repository][98] | The Apache-2.0 tool generates SBOMs from images, filesystems and archives in multiple formats. | It corroborates SBOM format/subject-digest facts as metadata distinct from vulnerability outcomes. | Consider an external-SBOM receipt; do not scan local files, images or archives from the core. |
+| `anchore/grype` | [repository][99] | The Apache-2.0 scanner evaluates images, filesystems and SBOMs with vulnerability data and risk prioritization. | It demonstrates that findings depend on a scanner, a data source and a policy. | Consider a scanner-result envelope; do not add CVE fetching, scoring, scanning or remediation to the core. |
+| `ossf/scorecard` | [repository][100] | The Apache-2.0 tool reports structured heuristics and warns that aggregate scores are neither definitive nor one-size-fits-all. | It corroborates reporting granular policy evidence instead of a generic security score. | Consider per-check evidence fields; do not create a trust score or imply absence of vulnerabilities. |
+
+## Research threshold and synthesis gate
+
+This document now records **100 primary repository candidates** in the planned categories. A candidate is treated as a completed source only when a primary repository page was successfully extracted; partial extraction is sufficient only for the specifically recorded facts, while an extraction failure remains explicitly pending. The next stage must create an evidence-to-gap matrix and select a small, testable set of contracts; it must not copy code, dependencies, workflow tokens, credentials, setup commands or operating assumptions from any candidate.
+
+## Final supply-chain disposition
+
+The combined evidence supports a future **evidence evaluation receipt** with `subjectDigest`, `evidenceKind`, `producer`, `verificationMethod`, `verificationStatus`, `policyChecks`, `findingsSummary`, `limitations` and `verifiedAt`. Valid statuses must distinguish `notProvided`, `declared`, `parsed`, `checked`, `verified`, `rejected` and `unknown`. No status may be rendered as “signed,” “secure,” “trusted,” “vulnerability-free” or “compliant” without the specific independently verified evidence required for that claim.
+
 ## References
 
 [1]: https://github.com/browser-use/browser-use "browser-use/browser-use"
@@ -416,3 +433,7 @@ The evidence supports a future **execution trace receipt** with `runIdentity`, `
 [94]: https://github.com/microsoft/autogen "microsoft/autogen"
 [95]: https://github.com/PrefectHQ/prefect "PrefectHQ/prefect"
 [96]: https://github.com/langfuse/langfuse "langfuse/langfuse"
+[97]: https://github.com/sigstore/cosign "sigstore/cosign"
+[98]: https://github.com/anchore/syft "anchore/syft"
+[99]: https://github.com/anchore/grype "anchore/grype"
+[100]: https://github.com/ossf/scorecard "ossf/scorecard"
