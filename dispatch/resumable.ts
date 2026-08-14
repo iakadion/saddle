@@ -23,9 +23,31 @@ export function transitionrun(record, status, options = {}) {
 export function resumablerun(adapter, input = {}) {
   if (typeof adapter?.submit !== "function" || typeof adapter?.status !== "function") throw new TypeError("resumable run adapter requires submit and status");
   let record = runrecord(input);
+  let compensation = { status: typeof input.compensate === "function" ? "pending" : "not-configured" };
   async function submit() { const response = await adapter.submit(input); record = transitionrun(record, "submitted", { runid: response?.runid, reason: "submitted" }); return { ...record, response }; }
   async function resume() { if (record.status === "created") await submit(); if (typeof adapter.resume === "function") await adapter.resume(record); const response = await adapter.status(record.runid); if (response?.status && response.status !== record.status && transitions[record.status]?.includes(response.status)) record = transitionrun(record, response.status, { reason: "remote-status" }); return { ...record, response }; }
-  async function cancel() { if (typeof adapter.cancel !== "function") throw new TypeError("resumable run adapter does not support cancel"); const response = await adapter.cancel(record.runid); if (record.status !== "cancelled" && transitions[record.status]?.includes("cancelled")) record = transitionrun(record, "cancelled", { reason: "cancelled" }); return { ...record, response }; }
+  async function cancel(options = {}) {
+    if (record.status === "cancelled") return { ...record, compensation };
+    if (!transitions[record.status]?.includes("cancelled")) throw new Error(`invalid run transition: ${record.status} to cancelled`);
+    if (typeof adapter.cancel !== "function") throw new TypeError("resumable run adapter does not support cancel");
+    const response = await adapter.cancel(record.runid, options);
+    record = transitionrun(record, "cancelled", { reason: options.reason ?? "cancelled" });
+    const handler = options.compensate ?? input.compensate;
+    if (typeof handler !== "function") compensation = { status: "not-configured" };
+    else if (compensation.status === "pending") {
+      try {
+        compensation = { status: "succeeded", result: await handler({ run: runrecord(record), response, reason: options.reason ?? "cancelled" }) };
+      } catch (error) {
+        compensation = { status: "failed", error: String(error?.message ?? error) };
+        record = { ...record, metadata: { ...record.metadata, compensation: compensation.status } };
+        const failure = new Error("resumable run compensation failed", { cause: error });
+        failure.code = "COMPENSATION_FAILED";
+        throw failure;
+      }
+    }
+    record = { ...record, metadata: { ...record.metadata, compensation: compensation.status } };
+    return { ...record, response, compensation };
+  }
   function get() { return runrecord(record); }
   return { submit, resume, cancel, get };
 }

@@ -8,6 +8,10 @@ Saddle 1.8.13 carries the active code and release-facing manifests forward from 
 |---|---|
 | Persistent queue | Added caller-owned leases, visibility timeout, deterministic clock injection, renewals, attempt accounting and idempotency-key deduplication. Existing crash recovery and retry behavior remain compatible. |
 | Version identity | Aligned npm, lockfile, Maven, NuGet, RubyGems, browser extension, Tauri, iOS, crawler and Capacitor metadata to `1.8.13`. The iOS marketing version is `1.8.13` with build `1008013`. |
+| Structured extraction | Added a schema-neutral result with field-level source URL, selector, extraction timestamp, bounded UTF-8 payload and caller-injected parser support. |
+| Browser context | Added allowlisted snapshot projection with stable snapshot and element references, deterministic UTF-8 byte budgets and truncation metadata. |
+| Workflow lifecycle | Extended resumable runs with explicit cancellation reasons and caller-owned, idempotent compensation callbacks. Compensation failures are surfaced as `COMPENSATION_FAILED`. |
+| Artifact retention | Added deterministic keep/prune decisions by maximum age, count or bytes. Manifest generation records policy and decisions and never deletes caller files. |
 | Documentation | Added the 1.8.13 release notes and retained the 1.8.12 artifact and signing policy documents. |
 | Architecture | Kept the root-first layout, no project-owned `src` directory, transport-neutral exports and caller-owned infrastructure. |
 
@@ -29,7 +33,7 @@ Signing remains explicit. `unsigned`, `ci-test-key`, `caller-owned`, `notarized`
 
 ## Verification
 
-The queue feature passed the active test suite and engine check. The complete release gate must be rerun after the version bump before a tag or release is created. The 1.8.21 research set is independent of this release and remains untagged.
+The queue, structured extraction, browser context, workflow compensation and retention features passed the active engine and release test suites. The complete release gate must be rerun after the implementation commit before a tag or release is created. The 1.8.21 research set remains the planning label for this feature batch and is not presented as a separate published version.
 
 ## References
 

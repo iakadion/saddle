@@ -3,6 +3,7 @@ export { AgentBrowser, createBrowser } from './browser.js';
 export { scrapeUrl, scrapeHtml, scrapeWithBrowser } from './scrape.js';
 export { extractContent, extractReadable } from './extract.js';
 export type { ExtractedContent } from './extract.js';
+export { extractwithschema, extractstructured } from './schema.js';
 export { fetchHtml, fetchAndParse, detectRenderingMode } from './fetch.js';
 export type { FetchResult } from './fetch.js';
 

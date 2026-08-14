@@ -1,26 +1,28 @@
 # Comparative synthesis for Saddle 1.8.21
 
-The evidence set contains 50 public repositories selected across browser, scraping, storage, workflow, extension and packaging categories. Metadata, README excerpts, relevant tree paths and up to two code excerpts per repository were collected through the GitHub API. This document records patterns, not copied code.
+The evidence set contains 60 public repositories selected across browser, scraping, storage, workflow, extension and packaging categories. Metadata, README excerpts, relevant tree paths and up to two code excerpts per repository were collected through the GitHub API. This document records patterns, not copied code.
 
 ## Evidence coverage
 
 | Measure | Result |
 |---|---:|
-| Repositories analyzed | 50 |
-| Repositories with code samples | 28 |
-| Code samples captured | 51 |
-| Repositories with relevant paths | 45 |
+| Repositories analyzed | 60 |
+| Repositories with code samples | 35 |
+| Code samples captured | 64 |
+| Repositories with relevant paths | 54 |
 
 ## Category coverage
 
 | Category | Repositories |
 |---|---:|
-| browser automation | 13 |
+| browser automation | 14 |
 | web scraping crawler | 11 |
 | s3 compatible storage | 11 |
 | browser extension automation | 10 |
-| package release artifacts | 4 |
-| workflow engine ci cd | 1 |
+| package release artifacts | 7 |
+| workflow engine ci cd | 5 |
+| storage backup | 1 |
+| storage | 1 |
 
 ## License and language signals
 
@@ -29,20 +31,21 @@ The license field is evidence for comparison, not permission to copy. Any code r
 | License signal | Repositories |
 |---|---:|
 | unknown | 19 |
-| MIT | 14 |
-| Apache-2.0 | 8 |
-| AGPL-3.0 | 4 |
-| NOASSERTION | 2 |
+| MIT | 16 |
+| Apache-2.0 | 13 |
+| AGPL-3.0 | 5 |
+| NOASSERTION | 3 |
 | GPL-2.0 | 1 |
 | WTFPL | 1 |
 | BSD-3-Clause | 1 |
+| BSD-2-Clause | 1 |
 
 | Language | Repositories |
 |---|---:|
-| Python | 12 |
-| TypeScript | 9 |
+| Python | 15 |
+| TypeScript | 12 |
 | JavaScript | 8 |
-| Go | 4 |
+| Go | 8 |
 | unknown | 4 |
 | C++ | 3 |
 | Jupyter Notebook | 2 |
@@ -56,32 +59,32 @@ The license field is evidence for comparison, not permission to copy. Any code r
 
 | Signal | Repositories with evidence |
 |---|---:|
-| queue | 20 |
-| storage | 36 |
-| browser | 32 |
-| workflow | 29 |
-| release | 39 |
-| security | 25 |
+| queue | 22 |
+| storage | 43 |
+| browser | 33 |
+| workflow | 39 |
+| release | 49 |
+| security | 27 |
 
 ## Most visible repositories in the evidence set
 
 | Repository | Stars | License | Categories |
 |---|---:|---|---|
-| [browser-use/browser-use](https://github.com/browser-use/browser-use) | 109120 | MIT | browser automation |
+| [n8n-io/n8n](https://github.com/n8n-io/n8n) | 200533 | NOASSERTION | workflow engine ci cd |
+| [browser-use/browser-use](https://github.com/browser-use/browser-use) | 109121 | MIT | browser automation |
+| [puppeteer/puppeteer](https://github.com/puppeteer/puppeteer) | 95460 | Apache-2.0 | browser automation |
 | [microsoft/playwright](https://github.com/microsoft/playwright) | 94485 | Apache-2.0 | browser automation |
 | [scrapy/scrapy](https://github.com/scrapy/scrapy) | 63841 | BSD-3-Clause | web scraping crawler |
 | [minio/minio](https://github.com/minio/minio) | 61393 | AGPL-3.0 | s3 compatible storage |
+| [rclone/rclone](https://github.com/rclone/rclone) | 59129 | MIT | storage |
+| [apache/airflow](https://github.com/apache/airflow) | 46473 | Apache-2.0 | workflow engine ci cd |
 | [vercel-labs/agent-browser](https://github.com/vercel-labs/agent-browser) | 40571 | Apache-2.0 | browser automation |
+| [restic/restic](https://github.com/restic/restic) | 35497 | BSD-2-Clause | storage backup |
 | [SeleniumHQ/selenium](https://github.com/SeleniumHQ/selenium) | 34368 | Apache-2.0 | browser automation |
-| [apify/crawlee](https://github.com/apify/crawlee) | 25377 | Apache-2.0 | web scraping crawler |
+| [apify/crawlee](https://github.com/apify/crawlee) | 25378 | Apache-2.0 | web scraping crawler |
 | [browserbase/stagehand](https://github.com/browserbase/stagehand) | 23931 | MIT | browser automation |
-| [segment-boneyard/nightmare](https://github.com/segment-boneyard/nightmare) | 19779 | unknown | browser automation |
-| [pinchtab/pinchtab](https://github.com/pinchtab/pinchtab) | 10034 | MIT | browser automation |
-| [s3tools/s3cmd](https://github.com/s3tools/s3cmd) | 4899 | GPL-2.0 | s3 compatible storage |
-| [saltbo/zpan](https://github.com/saltbo/zpan) | 2049 | AGPL-3.0 | s3 compatible storage |
-| [laravel/dusk](https://github.com/laravel/dusk) | 1944 | MIT | browser automation |
-| [hyperbrowserai/HyperAgent](https://github.com/hyperbrowserai/HyperAgent) | 1530 | NOASSERTION | browser automation |
-| [apache/groovy-geb](https://github.com/apache/groovy-geb) | 1174 | Apache-2.0 | browser automation |
+| [prefecthq/prefect](https://github.com/prefecthq/prefect) | 23618 | Apache-2.0 | workflow engine ci cd |
+| [renovatebot/renovate](https://github.com/renovatebot/renovate) | 22257 | AGPL-3.0 | package release artifacts |
 
 ## Objective-driven candidate gaps for 1.8.21
 

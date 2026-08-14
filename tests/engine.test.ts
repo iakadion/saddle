@@ -59,7 +59,7 @@ import { targetfactory, targeturi } from "../memory/targets.js";
 import { normalizeurl, crawl, persistentqueue as crawlqueue, crawlfrontier } from "../scrape/crawl.js";
 import { saddleservice } from "../api/service.js";
 import { filesessions } from "../sessions/file.js";
-import { extractwithschema } from "../scrape/schema.js";
+import { extractwithschema, extractstructured } from "../scrape/schema.js";
 import { parseSitemap } from "../scrape/sitemap.js";
 import { mcpserver } from "../mcp/server.js";
 import { runtimename, runtimefeatures } from "../runtime/detect.js";
@@ -90,7 +90,7 @@ import { browseragent } from "../browser/agent.js";
 import { actionbatch, actionfailure, actionresult } from "../browser/actions.js";
 import { browsercontext } from "../browser/context.js";
 import { actionrecorder } from "../browser/recorder.js";
-import { assertfreshsnapshot, pagesnapshot, snapshotdiff, snapshotref } from "../browser/snapshot.js";
+import { assertfreshsnapshot, pagesnapshot, snapshotdiff, snapshotref, projectcontext } from "../browser/snapshot.js";
 import { webscrapeerror, classifyerror } from "../core/errors.js";
 import { retrypolicy, circuitbreaker } from "../runtime/retry.js";
 import { nodeserver } from "../server/node.js";
@@ -517,13 +517,16 @@ test("resumes a remote run through legal transitions and preserves history", asy
     async resume(record) { calls.push(`resume:${record.runid}`); },
     async status() { calls.push("status"); return { status: "running" }; },
     async cancel() { calls.push("cancel"); return { accepted: true }; }
-  }, { requestid: "request1", name: "job" });
+  }, { requestid: "request1", name: "job", compensate: async ({ run: cancelled }) => { calls.push(`compensate:${cancelled.status}`); return { released: true }; } });
   await run.submit();
   const current = await run.resume();
   assert.equal(current.status, "running");
-  await run.cancel();
+  const cancelled = await run.cancel();
   assert.equal(run.get().status, "cancelled");
-  assert.deepEqual(calls, ["submit", "resume:run1", "status", "cancel"]);
+  assert.equal(cancelled.compensation.status, "succeeded");
+  assert.deepEqual(calls, ["submit", "resume:run1", "status", "cancel", "compensate:cancelled"]);
+  await run.cancel();
+  assert.deepEqual(calls, ["submit", "resume:run1", "status", "cancel", "compensate:cancelled"]);
   assert.equal(transitionrun(runrecord({ requestid: "r", name: "n" }), "submitted").attempt, 1);
 });
 
@@ -680,6 +683,21 @@ test("extracts fields from a safe schema and serves MCP tools", async () => {
   const server = mcpserver({ scrape: async (url) => ({ url, links: [] }) });
   const response = await server.handle({ jsonrpc: "2.0", id: 1, method: "tools/call", params: { name: "scrape", arguments: { url: "https://example.com" } } });
   assert.equal(response.result.content[0].type, "text");
+});
+
+test("returns bounded structured extraction with field provenance", () => {
+  const result = extractstructured("<h1>Saddle</h1><p>bounded text</p>", { heading: { selector: "h1" }, body: { selector: "p" } }, { url: "https://example.com", now: 1, maxbytes: 80 });
+  assert.equal(result.provenance.heading.sourceurl, "https://example.com");
+  assert.equal(result.provenance.heading.selector, "h1");
+  assert.equal(result.extractedat, new Date(1).toISOString());
+  assert.equal(result.bytes <= result.maxbytes, true);
+});
+
+test("accepts a caller-owned structured extraction parser", () => {
+  const seen = [];
+  const result = extractstructured("ignored", { title: "title" }, { url: "https://example.com", parser: (input) => { seen.push(input.url); return { title: "caller-value" }; } });
+  assert.deepEqual(seen, ["https://example.com"]);
+  assert.equal(result.values.title, "caller-value");
 });
 
 test("detects universal runtime capabilities and creates a deadline", () => {
@@ -988,6 +1006,15 @@ test("binds browser action references to fresh snapshots and reports diffs", () 
   const diff = snapshotdiff(first, second);
   assert.equal(diff.added[0].ref, "e2");
   assert.equal(diff.changed[0].name, "Running");
+});
+
+test("projects browser snapshots through an allowlist and byte budget", () => {
+  const snapshot = pagesnapshot({ snapshotid: "budget1", url: "https://example.com", title: "Saddle", text: "x".repeat(500), elements: [{ ref: "e1", role: "button", name: "Run" }, { ref: "e2", role: "link", name: "Docs" }] });
+  const projected = projectcontext(snapshot, { fields: ["snapshotid", "title", "elements", "text"], maxbytes: 220 });
+  assert.equal(projected.context.snapshotid, "budget1");
+  assert.equal(projected.bytes <= 220, true);
+  assert.equal(projected.context.elements[0].ref, "e1");
+  assert.equal(projected.truncated.length > 0, true);
 });
 
 test("tracks browser tabs and frames without owning a browser", () => {

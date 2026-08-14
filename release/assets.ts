@@ -4,7 +4,7 @@
  */
 
 import { createHash } from "node:crypto";
-import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { mkdir, readFile, stat, writeFile } from "node:fs/promises";
 import { basename, dirname, join, relative, resolve, sep } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -26,13 +26,15 @@ export async function createassets(options = {}) {
   const subjects = await Promise.all(artifacts.map(async (artifact) => {
     const name = relative(artifactroot, artifact).replaceAll("\\", "/");
     validateArtifactName(basename(name));
-    return { name, digest: await sha256(artifact) };
+    const details = await stat(artifact);
+    return { name, digest: await sha256(artifact), bytes: details.size, updatedat: Math.trunc(details.mtimeMs) };
   }));
   await mkdir(output, { recursive: true });
   const checksums = `${subjects.map((subject) => `${subject.digest}  ${subject.name}`).join("\n")}${subjects.length ? "\n" : ""}`;
   const sbom = createsbom(packagejson, lockjson);
   const provenance = createprovenance(packagejson, subjects, { ...options, version });
-  const manifest = { name: String(packagejson.name), version, surface, files: subjects.map((subject) => basename(subject.name)), signing: String(options.signing ?? "caller-owned") };
+  const retention = options.retention ? retentionplan(subjects, options.retention) : undefined;
+  const manifest = { name: String(packagejson.name), version, surface, files: subjects.map((subject) => basename(subject.name)), signing: String(options.signing ?? "caller-owned"), ...(retention ? { retention: retention.policy, retentionplan: retention.decisions, retentionevaluatedat: retention.evaluatedat } : {}) };
   const files = {
     checksums: join(output, `sha256.${surface}.${version}`),
     manifest: join(output, `manifest.${surface}.${version}.json`),
@@ -43,7 +45,34 @@ export async function createassets(options = {}) {
   await writeFile(files.manifest, `${JSON.stringify(manifest, null, 2)}\n`);
   await writeFile(files.sbom, `${JSON.stringify(sbom, null, 2)}\n`);
   await writeFile(files.provenance, `${JSON.stringify(provenance)}\n`);
-  return { output, files, subjects, sbom, provenance };
+  return { output, files, subjects, sbom, provenance, retention };
+}
+
+/** Computes deterministic keep or prune decisions without deleting caller files. */
+export function retentionplan(artifacts = [], options = {}) {
+  const policy = normalizeretention(options);
+  const evaluatedat = Number(options.evaluatedat ?? options.now ?? 0);
+  if (!Number.isSafeInteger(evaluatedat) || evaluatedat < 0) throw new RangeError("retention evaluatedat must be a non-negative safe integer");
+  const entries = [...new Map(artifacts.map((artifact) => {
+    const name = String(artifact.name ?? "");
+    if (!name) throw new TypeError("retention artifact requires name");
+    return [name, { name, bytes: normalizebytes(artifact.bytes), updatedat: normalizeupdatedat(artifact.updatedat) }];
+  })).values()].sort(comparefreshness);
+  const decisions = entries.map((entry) => ({ ...entry, action: "keep", reasons: [] }));
+  for (const decision of decisions) {
+    if (policy.maxagedays !== undefined && evaluatedat > 0 && decision.updatedat + policy.maxagedays * 86400000 < evaluatedat) { decision.action = "prune"; decision.reasons.push("max-age"); }
+  }
+  if (policy.maxcount !== undefined) decisions.slice(policy.maxcount).forEach((decision) => { if (decision.action === "keep") { decision.action = "prune"; decision.reasons.push("max-count"); } });
+  if (policy.maxbytes !== undefined) {
+    let total = decisions.filter((decision) => decision.action === "keep").reduce((sum, decision) => sum + decision.bytes, 0);
+    for (const decision of [...decisions].reverse()) {
+      if (total <= policy.maxbytes || decision.action !== "keep") continue;
+      decision.action = "prune";
+      decision.reasons.push("max-bytes");
+      total -= decision.bytes;
+    }
+  }
+  return { policy, evaluatedat, decisions: decisions.sort((left, right) => left.name.localeCompare(right.name)) };
 }
 
 /** Creates a compact CycloneDX component list from the root lockfile dependencies. */
@@ -85,9 +114,29 @@ function parsearguments(argumentslist) {
     else if (argument === "--artifact") options.artifacts.push(argumentslist[++index]);
     else if (argument === "--build-type") options.buildtype = argumentslist[++index];
     else if (argument === "--builder") options.builder = argumentslist[++index];
+    else if (argument === "--max-age-days") (options.retention ??= {}).maxagedays = Number(argumentslist[++index]);
+    else if (argument === "--max-count") (options.retention ??= {}).maxcount = Number(argumentslist[++index]);
+    else if (argument === "--max-bytes") (options.retention ??= {}).maxbytes = Number(argumentslist[++index]);
+    else if (argument === "--evaluated-at") (options.retention ??= {}).evaluatedat = Number(argumentslist[++index]);
     else throw new TypeError(`unsupported release asset argument: ${argument}`);
   }
   return options;
 }
+
+function normalizeretention(options) {
+  const result = {};
+  if (options.maxagedays !== undefined) result.maxagedays = normalizepolicyinteger(options.maxagedays, "maxagedays");
+  if (options.maxcount !== undefined) result.maxcount = normalizepolicyinteger(options.maxcount, "maxcount");
+  if (options.maxbytes !== undefined) result.maxbytes = normalizepolicyinteger(options.maxbytes, "maxbytes");
+  return result;
+}
+
+function normalizepolicyinteger(value, name) { const normalized = Number(value); if (!Number.isSafeInteger(normalized) || normalized <= 0) throw new RangeError(`${name} must be a positive safe integer`); return normalized; }
+
+function normalizebytes(value) { const normalized = Number(value ?? 0); if (!Number.isSafeInteger(normalized) || normalized < 0) throw new RangeError("retention artifact bytes must be a non-negative safe integer"); return normalized; }
+
+function normalizeupdatedat(value) { const normalized = Number(value ?? 0); if (!Number.isSafeInteger(normalized) || normalized < 0) throw new RangeError("retention artifact updatedat must be a non-negative safe integer"); return normalized; }
+
+function comparefreshness(left, right) { return right.updatedat - left.updatedat || right.bytes - left.bytes || left.name.localeCompare(right.name); }
 
 if (process.argv[1] === fileURLToPath(import.meta.url)) createassets(parsearguments(process.argv.slice(2))).then(({ output }) => { console.log(`release assets: ${output}`); }).catch((error) => { console.error(error.message); process.exitCode = 1; });

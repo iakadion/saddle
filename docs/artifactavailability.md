@@ -98,3 +98,19 @@ Version 1.8.12 is prepared to publish the expanded matrix below. The release wor
 | Browser extension | Manifest V3 | `saddle.extension.1.8.12.zip` |
 
 Each surface also emits `sha256.*.1.8.12`, `manifest.*.1.8.12.json` and, where enabled by the release path, SBOM and provenance metadata. The manifest must state `unsigned`, `ci-test-key`, `caller-owned`, `notarized` or the verified provider status actually produced by CI.
+
+## 1.8.13 release matrix
+
+Version 1.8.13 keeps the release-tag-derived matrix and adds deterministic retention metadata to generated artifact manifests. The implementation records retention policy and keep/prune decisions but never removes caller-owned files. Final URLs, checksums, sizes and signing states remain pending until the corresponding release workflow completes.
+
+| Surface | Architectures | Artifact naming contract |
+| --- | --- | --- |
+| Linux desktop browser | x64, arm64 | `saddle.browser.1.8.13.<architecture>.deb`, `.rpm`, `.appimage` |
+| Windows desktop browser | x86, x64, arm64 | `saddle.browser.1.8.13.<architecture>.exe`, `.msi` |
+| macOS desktop browser | x64, arm64 | `saddle.browser.1.8.13.<architecture>.dmg`, `.app.zip` |
+| Android | caller-configured signing | `saddle.apk.1.8.13.apk`, `saddle.aab.1.8.13.aab` |
+| iOS | caller-configured signing and provisioning | `saddle.ipa.1.8.13.ipa`, `saddle.app.1.8.13.app.zip` |
+| Container | OCI | `saddle.container.1.8.13.tar.gz` |
+| Browser extension | Manifest V3 | `saddle.extension.1.8.13.zip` |
+
+Each surface also emits `sha256.*.1.8.13`, `manifest.*.1.8.13.json` and, where enabled by the release path, SBOM and provenance metadata. The manifest may additionally carry `retention`, `retentionplan` and `retentionevaluatedat`; these fields are advisory execution decisions and do not imply deletion or publication.
