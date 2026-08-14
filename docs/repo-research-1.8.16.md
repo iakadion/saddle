@@ -110,6 +110,19 @@ The evidence reinforces 1.8.15's declarative PWA, extension, DNS and Mini App re
 
 The sample corroborates one candidate for later implementation: an **origin-bearing tool result envelope** that separates user, caller, adapter and remote-source claims without trusting a model-generated label. It must be schema-validatable, serializable and side-effect free. Implementation remains deferred until at least two additional protocol or security sources are reviewed and existing `protocol/` exports are mapped.
 
+## CI, runner, and forge evidence
+
+| Candidate | Primary source | Evidence observed | Relevance to Saddle | Disposition |
+|---|---|---|---|---|
+| `actions/runner` | [repository][33] | The MIT runner is the execution application for a GitHub Actions job in hosted or self-hosted environments, with OS-specific release distributions. | It corroborates treating a runner as execution infrastructure rather than a library-owned capability. | Keep runner discovery and dispatch as adapter data; do not control runner lifecycle from Saddle. |
+| `cisco-open/forge` | [repository][34] | The Apache-2.0 platform separates tenant labels, runner images, isolation lanes, placement, credentials and lifecycle cleanup under an operator-owned control plane. | It corroborates stable, declarative runner capability reports and caller/provider ownership boundaries. | Consider label/capability evidence only; reject AWS, Kubernetes, tenant management and IaC dependencies. |
+| `forgejo/forgejo` | [repository][35] | The canonical repository was selected as a forge candidate, but primary page extraction returned no readable content in this run. | It remains in the candidate universe but has no accepted finding yet. | Defer until canonical documentation or repository metadata can be captured. |
+| `forgejo/runner` | [repository][36] | The runner repository was selected for workflow compatibility analysis, but primary page extraction returned no readable content in this run. | It remains a pending candidate rather than evidence. | Defer; do not infer semantics from third-party summaries. |
+
+## CI disposition
+
+The completed sources reinforce the existing 1.8.15 chain capability model. A future **runner attestation input** may bind a caller-reported runner label set, operating system, architecture, ephemeral status and policy identifiers to a dispatch plan. It must not imply that the runner is owned, reachable, authenticated, isolated or safe without adapter-provided evidence.
+
 ## References
 
 [1]: https://github.com/browser-use/browser-use "browser-use/browser-use"
@@ -144,3 +157,7 @@ The sample corroborates one candidate for later implementation: an **origin-bear
 [30]: https://github.com/modelcontextprotocol/servers "modelcontextprotocol/servers"
 [31]: https://github.com/infiniflow/ragflow "infiniflow/ragflow"
 [32]: https://github.com/mondaycom/agent-tool-protocol "mondaycom/agent-tool-protocol"
+[33]: https://github.com/actions/runner "actions/runner"
+[34]: https://github.com/cisco-open/forge "cisco-open/forge"
+[35]: https://github.com/forgejo/forgejo "forgejo/forgejo"
+[36]: https://github.com/forgejo/runner "forgejo/runner"
