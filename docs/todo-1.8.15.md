@@ -43,14 +43,14 @@
 
 ## 2. Storage aggregation and working-set topology
 
-- [ ] Define a provider-neutral storage-pool descriptor composed only of caller-supplied storage adapters and explicit read/write policies.
-- [ ] Define a storage-pool member descriptor with identifier, priority, capability report, authority state, availability state, and health evidence.
+- [x] Define a provider-neutral storage-pool descriptor composed only of caller-supplied storage adapters and explicit read/write policies.
+- [x] Define a storage-pool member descriptor with identifier, priority, capability report, authority state, availability state, and health evidence.
 - [ ] Define a storage-pool read policy supporting first-healthy, verified-first, priority-first, and caller-provided selection strategies.
 - [ ] Define a storage-pool write policy supporting primary-only, best-effort mirror, quorum, and explicit fan-out modes.
-- [ ] Define a storage-pool repair policy that can plan a missing-replica repair without performing it implicitly.
+- [x] Define a storage-pool repair policy that can plan a missing-replica repair without performing it implicitly.
 - [ ] Define a storage-pool conflict policy that preserves version identity and never overwrites concurrent data without caller authorization.
-- [ ] Define a storage-pool capability report that distinguishes range reads, strong checksums, list pagination, conditional writes, delete support, and object size limits.
-- [ ] Define a storage-pool error model that reports per-provider evidence without leaking endpoint secrets or internal object paths.
+- [x] Define a storage-pool capability report that distinguishes range reads, strong checksums, list pagination, conditional writes, delete support, and object size limits.
+- [x] Define a storage-pool error model that reports per-provider evidence without leaking endpoint secrets or internal object paths.
 - [ ] Define a storage-pool health model with bounded probes and injected clocks; do not add background polling to the library core.
 - [ ] Define a storage-pool operation budget for attempts, bytes, elapsed time, and parallelism.
 - [ ] Define a storage-pool immutable manifest that records replica outcomes, content digest, size, creation time, and caller-provided metadata.
@@ -60,35 +60,35 @@
 - [ ] Define a fake multi-backend transport with deterministic availability, corruption, latency, pagination, and conditional-write scenarios.
 - [ ] Implement a serializable storage-pool input validator with unknown-key rejection at the public boundary.
 - [ ] Implement capability negotiation that excludes unsupported members before an operation begins.
-- [ ] Implement deterministic member ordering with stable tie breakers and no random provider selection.
+- [x] Implement deterministic member ordering with stable tie breakers and no random provider selection.
 - [ ] Implement a bounded read plan generator that produces candidate order, byte budget, and verification steps.
 - [ ] Implement a bounded write plan generator that produces primary, mirror, quorum, and repair intents without automatic external side effects.
-- [ ] Implement a verified read executor using injected adapters and mandatory checksum comparison where a digest is available.
-- [ ] Implement a write executor with explicit per-member outcomes and caller-selected compensation behavior.
-- [ ] Implement a repair-plan generator that only proposes missing or stale replicas after digest comparison.
+- [x] Implement a verified read executor using injected adapters and mandatory checksum comparison where a digest is available.
+- [x] Implement a write executor with explicit per-member outcomes and caller-selected compensation behavior.
+- [x] Implement a repair-plan generator that only proposes missing or stale replicas after digest comparison.
 - [ ] Implement a deterministic object-location report that never claims availability after a failed write.
 - [ ] Implement pagination pass-through without collecting an unbounded backend listing into memory.
 - [ ] Implement range-read validation with offset, length, total-size, and digest-boundary checks.
-- [ ] Implement a fail-closed mode when a read response does not meet the expected size or digest.
+- [x] Implement a fail-closed mode when a read response does not meet the expected size or digest.
 - [ ] Implement a best-effort mode that returns all evidence but remains explicit that replica verification failed.
 - [ ] Implement a pool metrics snapshot with low-cardinality counters for attempts, hits, misses, mismatches, bytes, and elapsed time.
 - [ ] Implement clear unsupported-capability errors for conditional writes, ranges, deletions, or repairs not offered by a selected adapter.
-- [ ] Test an empty pool rejection path.
-- [ ] Test a duplicate member identifier rejection path.
-- [ ] Test an unavailable primary with a verified secondary read path.
-- [ ] Test a corrupt primary with a verified secondary read path.
-- [ ] Test a digest mismatch that fails closed when strict verification is enabled.
+- [x] Test an empty pool rejection path.
+- [x] Test a duplicate member identifier rejection path.
+- [x] Test an unavailable primary with a verified secondary read path.
+- [x] Test a corrupt primary with a verified secondary read path.
+- [x] Test a digest mismatch that fails closed when strict verification is enabled.
 - [ ] Test a mirror write that records one success and one failure without falsely reporting quorum success.
 - [ ] Test a quorum write that succeeds only when the configured minimum is met.
 - [ ] Test a cancellation signal that stops remaining writes without inventing rollback success.
-- [ ] Test a repair plan that does not mutate any adapter until the caller executes it.
+- [x] Test a repair plan that does not mutate any adapter until the caller executes it.
 - [ ] Test pagination with deterministic continuation tokens and a hard page limit.
 - [ ] Test range reads that reject negative offsets, unsafe lengths, and overrun ranges.
 - [ ] Test metrics that remain bounded across repeated pool operations.
 - [ ] Test serialization and cloning of every public storage-pool record.
 - [ ] Document how a caller can combine authorized object stores without suggesting account pooling, registry abuse, or quota circumvention.
 - [ ] Document the physical distinction between remote object storage, local cache, process memory, and GPU memory.
-- [ ] Expose the storage-pool contract through an explicit additive export only after package-import validation passes.
+- [x] Expose the storage-pool contract through an explicit additive export only after package-import validation passes.
 
 ## 3. Memory tiers and storage-to-working-set bridge
 

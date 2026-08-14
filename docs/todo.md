@@ -700,3 +700,9 @@ The following blocks are the execution order for the complete ecosystem. A block
 - [ ] Define a public-repository research rubric and category quota for the 1.8.16 comparative analysis, targeting 100–300 relevant repositories without treating any external implementation as a copy source.
 - [x] Create `docs/todo-1.8.16.md` with 600–900 individually checkable steps covering repository research, evidence capture, gap selection, implementation, tests, documentation, release and post-release verification.
 - [x] Review both versioned plans for architectural constraints, security, feasibility, feature ownership and release-gate dependencies before beginning implementation.
+
+### Authorized execution order
+
+- [ ] Execute the selected 1.8.15 feature blocks in dependency order, keeping every change additive, provider-neutral, deterministicly tested, documented, and compatible with the root-first package structure.
+- [ ] Complete the 1.8.15 validation, version bump, release notes, artifact verification, immutable tag, GitHub release, and six-registry workflow checks before beginning the 1.8.16 research sample.
+- [ ] Start the 1.8.16 comparative research only after 1.8.15 completion evidence is recorded, then select and implement only evidence-backed gaps from the planned repository analysis.

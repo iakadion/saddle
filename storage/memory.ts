@@ -9,8 +9,8 @@ import { storageadapter } from "./adapter.js";
 /** Creates a transport-neutral in-memory storage adapter with optional capacity limits. */
 export function memorystorage(options = {}) {
   const values = new Map();
-  const maxbytes = Number(options.maxbytes ?? Number.POSITIVE_INFINITY);
-  if (!Number.isFinite(maxbytes) || maxbytes < 0) throw new TypeError("memory storage maxbytes is invalid");
+  const maxbytes = options.maxbytes === undefined ? Number.POSITIVE_INFINITY : Number(options.maxbytes);
+  if ((!Number.isFinite(maxbytes) && maxbytes !== Number.POSITIVE_INFINITY) || maxbytes < 0) throw new TypeError("memory storage maxbytes is invalid");
   let usedbytes = 0;
 
   function manifest(key, data, input = {}) { return artifactmanifest({ key, sizebytes: data.byteLength, sha256: sha256(data), contenttype: input.contenttype ?? "application/octet-stream", createdat: input.createdat ?? Date.now(), metadata: input.metadata }); }

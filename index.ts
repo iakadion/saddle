@@ -22,6 +22,7 @@ export * from "./storage/adapter.js";
 export * from "./storage/cache.js";
 export * from "./storage/content.js";
 export * from "./storage/memory.js";
+export * from "./storage/pool.js";
 export * from "./storage/sync.js";
 export * from "./runners/health.js";
 export * from "./runners/heartbeat.js";

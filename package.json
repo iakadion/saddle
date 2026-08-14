@@ -56,6 +56,7 @@
     "./memory-node": "./dist/memory/bridge.js",
     "./memory-engine": "./dist/memory/engine.js",
     "./storage": "./dist/storage/index.js",
+    "./storage-pool": "./dist/storage/pool.js",
     "./storage-node": "./dist/storage/local.js",
     "./runners": "./dist/runners/scheduler.js",
     "./sessions": "./dist/domain/sessions.js",

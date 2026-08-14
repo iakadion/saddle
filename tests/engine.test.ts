@@ -20,6 +20,7 @@ import { contentstorage } from "../storage/content.js";
 import { s3compatible } from "../storage/s3compatible.js";
 import { tieredcache } from "../storage/cache.js";
 import { comparemanifests, objectmanifest, storagecapabilities, syncobject } from "../storage/sync.js";
+import { storagepool } from "../storage/pool.js";
 import { validatesession } from "../domain/sessions.js";
 import { detectcontenttype, normalizeresponse, normalizeresult } from "../scrape/normalize.js";
 import { sessionstore } from "../sessions/store.js";
@@ -1063,4 +1064,40 @@ test("bounds recorder events and exports immutable manifests", () => {
   assert.equal(recorder.manifest().events[1].payload.value, "safe");
   recorder.clear();
   assert.deepEqual(recorder.manifest().events, []);
+});
+
+test("reads a verified object from the next healthy storage-pool member", async () => {
+  const good = new TextEncoder().encode("verified replica");
+  const primary = await import("../storage/memory.js").then(({ memorystorage }) => memorystorage());
+  const secondary = await import("../storage/memory.js").then(({ memorystorage }) => memorystorage());
+  await primary.put({ key: "shared.bin", data: new TextEncoder().encode("corrupt replica") });
+  await secondary.put({ key: "shared.bin", data: good });
+  const pool = storagepool({ members: [{ id: "primary", priority: 0, storage: primary }, { id: "secondary", priority: 1, storage: secondary }], clock: () => 100 });
+  const output = await pool.read("shared.bin", { sha256: sha256(good) });
+  assert.equal(output.memberid, "secondary");
+  assert.equal(new TextDecoder().decode(output.data), "verified replica");
+  assert.equal(output.verified, true);
+  assert.equal(pool.metrics().mismatches, 1);
+});
+
+test("records quorum writes and keeps repair planning side-effect free", async () => {
+  const { memorystorage } = await import("../storage/memory.js");
+  const first = memorystorage();
+  const failure = { async get() { throw new Error("missing"); }, async put() { throw new Error("offline"); } };
+  const pool = storagepool({ members: [{ id: "first", storage: first }, { id: "offline", storage: failure }] });
+  const output = await pool.put({ key: "result.bin", data: new Uint8Array([1, 2, 3]) });
+  assert.equal(output.state, "partial");
+  assert.equal(output.written, 1);
+  assert.deepEqual(pool.repairplan("result.bin", { sourceid: "first", sha256: output.sha256 }).targets, ["offline"]);
+  assert.equal(await first.get("result.bin").then((value) => value.byteLength), 3);
+  await assert.rejects(() => pool.put({ key: "next.bin", data: new Uint8Array([4]) }, { quorum: 2 }), (error) => error.code === "STORAGE_POOL_QUORUM_FAILED");
+});
+
+test("rejects ambiguous storage-pool membership and exposes capability evidence", () => {
+  const storage = { async get() {}, async put() {} };
+  assert.throws(() => storagepool({ members: [] }), /non-empty/);
+  assert.throws(() => storagepool({ members: [{ id: "same", storage }, { id: "same", storage }] }), /duplicated/);
+  const pool = storagepool({ members: [{ id: "only", storage }] });
+  assert.deepEqual(pool.members(), [{ id: "only", priority: 0 }]);
+  assert.deepEqual(pool.capabilities(), [{ id: "only", priority: 0, capabilities: { range: false, conditional: false, metadata: false, delete: false } }]);
 });
