@@ -15,7 +15,7 @@ Saddle 1.8.16 adds a pure, policy-evaluable release-evidence layer above existin
 
 ## Artifact contract
 
-The release workflows derive artifact names and package versions from `v1.8.16`. This notes file declares the expected matrix before workflow completion; attachment and signing status remain post-tag facts and must be recorded only after the corresponding workflow reports them.
+The release workflows derived artifact names and package versions from `v1.8.16`. The matrix below matches the attached release assets after the platform workflows completed; signing status remains explicit rather than inferred from a filename.
 
 | Group | Expected attached assets |
 |---|---|
@@ -28,11 +28,15 @@ The release workflows derive artifact names and package versions from `v1.8.16`.
 | Manifests | `manifest.android.1.8.16.json`, `manifest.container.1.8.16.json`, `manifest.desktop.linux.arm64.1.8.16.json`, `manifest.desktop.linux.x64.1.8.16.json`, `manifest.desktop.macos.arm64.1.8.16.json`, `manifest.desktop.macos.x64.1.8.16.json`, `manifest.desktop.windows.arm64.1.8.16.json`, `manifest.desktop.windows.x64.1.8.16.json`, `manifest.desktop.windows.x86.1.8.16.json` |
 | Checksums | `sha256.android.1.8.16`, `sha256.container.1.8.16`, `sha256.desktop.linux.arm64.1.8.16`, `sha256.desktop.linux.x64.1.8.16`, `sha256.desktop.macos.arm64.1.8.16`, `sha256.desktop.macos.x64.1.8.16`, `sha256.desktop.windows.arm64.1.8.16`, `sha256.desktop.windows.x64.1.8.16`, `sha256.desktop.windows.x86.1.8.16` |
 
-The expected total is **38 attached assets**: 20 primary artifacts, nine manifests, and nine checksum files. iOS artifacts are not listed because Apple signing, provisioning, and export credentials remain caller-owned and no IPA or app archive is presumed.
+The release contains **38 attached assets**: 20 primary artifacts, nine manifests, and nine checksum files. iOS artifacts are absent because Apple signing, provisioning, and export credentials remain caller-owned and no IPA or app archive was built.
 
 ## Publication and verification policy
 
 The six registry workflows publish from the same validated release tag, in container-first order: GHCR, GitHub Packages npm, public npmjs, Maven, NuGet GitHub Packages, and RubyGems. The GHCR workflow must build, scan, push, pull, inspect its OCI version label, and complete a smoke check. The release does not claim SignPath approval, Authenticode trust, Apple notarization, production Android signing, SBOM validation, vulnerability status, or registry availability unless the completed workflow output independently supports that claim.
+
+## Verified publication results
+
+The release validation, security, container artifact, desktop artifact, target-plan, and extension workflows completed successfully. The six tag-driven registry workflows also completed successfully: GHCR, GitHub Packages npm, public npmjs, Maven, NuGet GitHub Packages, and RubyGems. The release-event Android job correctly stopped when production Android signing secrets were unavailable. Manual run `31839378707` then produced and attached the APK and AAB through the explicitly allowed `ci-test-key` path; it is not presented as a production Android signing result.
 
 ## References
 

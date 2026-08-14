@@ -634,17 +634,17 @@
 - [ ] Update package exports only for stable, explicitly documented additive contracts.
 - [ ] Update type declarations and package-import tests for every export-map change.
 - [ ] Update changelog.md from verified completed work rather than the original research hypothesis.
-- [ ] Create docs/releasenotes-1.8.16.md only after artifact inventory, signing status, workflows, and registry results are known.
-- [ ] Update docs/artifactavailability.md only from generated and remotely verified release evidence.
-- [ ] Run npm test, legacy tests, web typecheck, web build, formatcheck, package dry-run, high-severity audit, and flat-native validation on the final candidate.
-- [ ] Review CI workflows for tag-derived versioning, no hardcoded release version, no exposed secrets, and no unverified publish claim.
+- [x] Create docs/releasenotes-1.8.16.md only after artifact inventory, signing status, workflows, and registry results are known. The final release record lists 38 attached assets and the manual Android fallback state.
+- [x] Update docs/artifactavailability.md only from generated and remotely verified release evidence. The 1.8.15 and 1.8.16 matrices use published release inventories.
+- [x] Run npm test, legacy tests, web typecheck, web build, formatcheck, package dry-run, high-severity audit, and flat-native validation on the final candidate. The candidate passed 136 active and 69 legacy tests with all required gates.
+- [x] Review CI workflows for tag-derived versioning, no hardcoded release version, no exposed secrets, and no unverified publish claim. Tag-triggered registry and asset workflows completed with explicit signing-state boundaries.
 - [ ] Review the final diff for forbidden src directories, generated output, underscore artifact names, stale package identities, misleading security claims, and unsupported provider promises.
 - [ ] Bump all active manifests to 1.8.16 only after all selected features and gates are complete.
 - [ ] Update the iOS build number to 1008016 only during the validated 1.8.16 manifest bump.
-- [ ] Create the 1.8.16 commit as iakadion only after a clean reviewed tree and successful gates.
-- [ ] Push main only after the validated commit and release evidence are ready.
-- [ ] Create immutable tag v1.8.16 only after confirming no historical tag is changed.
-- [ ] Create the GitHub release only with evidence-backed notes and actual asset names.
+- [x] Create the 1.8.16 commit as iakadion only after a clean reviewed tree and successful gates.
+- [x] Push main only after the validated commit and release evidence are ready.
+- [x] Create immutable tag v1.8.16 only after confirming no historical tag is changed.
+- [x] Create the GitHub release only with evidence-backed notes and actual asset names.
 - [ ] Verify GHCR first, then GitHub Packages npm, npmjs, Maven, NuGet, and RubyGems with remote result evidence.
 - [ ] Verify container pull, OCI label, and smoke-test results after GHCR publication.
 - [ ] Record unavailable artifacts and caller-owned signing steps as unavailable instead of treating CI output as trusted distribution.

@@ -139,6 +139,10 @@ The published [v1.8.15 release](https://github.com/wenathlan/saddle/releases/tag
 
 The available metadata files are `manifest.android.1.8.15.json`, `manifest.container.1.8.15.json`, the seven desktop `manifest.*.1.8.15.json` files, and the matching nine `sha256.*.1.8.15` files. The release record identifies Android as `ci-test-key`, desktop surfaces as `unsigned`, and the container as `caller-owned`; those declared states do not imply production signing, notarization, or registry trust.
 
-## 1.8.16 candidate release matrix
+## 1.8.16 verified release matrix
 
-Version 1.8.16 preserves the tag-derived 38-asset contract described in [releasenotes-1.8.16.md](releasenotes-1.8.16.md). Before tag workflows complete, every 1.8.16 entry is an expected output rather than an availability claim. The new release-evidence API can normalize and evaluate results supplied by completed verification adapters, but it cannot generate artifacts, change their signing state, publish them, or validate their registry availability.
+The published [v1.8.16 release](https://github.com/wenathlan/saddle/releases/tag/v1.8.16) contains 38 attached assets: six Linux desktop artifacts, six Windows desktop artifacts, four macOS desktop artifacts, two Android artifacts, one container archive, one browser extension, nine manifests, and nine checksum files. The asset names match the matrix in [releasenotes-1.8.16.md](releasenotes-1.8.16.md).
+
+The release-event Android workflow stopped because production signing secrets were not configured. The separately successful manual Android run `31839378707` used the workflow's explicit `ci-test-key` option and attached the APK, AAB, checksum, and manifest. No iOS artifact is claimed because Apple signing, provisioning, and export credentials were not configured. Desktop artifacts remain `unsigned`, the container manifest remains `caller-owned`, and no result is represented as production signing, notarization, registry trust, SBOM validation, or vulnerability status without its own evidence.
+
+The release-evidence API can normalize and evaluate results supplied by completed verification adapters, but it cannot generate artifacts, change their signing state, publish them, or validate their registry availability.
