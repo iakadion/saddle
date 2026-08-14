@@ -175,7 +175,7 @@
 ## 5. Compute provider and V4 execution planning
 
 - [ ] Define a provider-chain request with caller-authorized providers, required capabilities, optional preferences, execution budget, and cancellation semantics.
-- [ ] Define a provider capability report for architecture, operating system, container support, WASM support, network policy, storage policy, timeout, memory, CPU, and artifact policy.
+- [x] Define a provider capability report for architecture, operating system, container support, WASM support, network policy, storage policy, timeout, memory, CPU, and artifact policy.
 - [x] Define a provider eligibility evaluator that never assumes a public CI service is unlimited, persistent, or authorized for arbitrary workloads.
 - [x] Define a provider selection explanation with selected candidate, excluded candidates, reasons, capability evidence, and stable tie breakers.
 - [ ] Define a dry-run dispatch plan that can be rendered as GitHub, GitLab, Forgejo, Gitea, Codeberg, local CLI, or caller-owned runner payloads without sending any request.
@@ -195,7 +195,7 @@
 - [x] Test a chain with no eligible providers.
 - [ ] Test stable selection under equal provider scores.
 - [x] Test a provider rejected for missing required container capability.
-- [ ] Test a provider rejected for a smaller declared time or memory budget.
+- [x] Test a provider rejected for a smaller declared time or memory budget.
 - [ ] Test a caller preference that changes selection only among otherwise eligible providers.
 - [ ] Test a dry-run plan that cannot dispatch without an injected adapter.
 - [x] Test a cancellation plan that retains unknown remote state rather than claiming completed cleanup.

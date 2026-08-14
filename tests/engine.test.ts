@@ -1194,14 +1194,15 @@ test("inspects archive metadata before a caller-owned extraction adapter runs", 
 
 test("selects an eligible provider deterministically and leaves dispatch caller-owned", () => {
   const chain = providerchain({ providers: [
-    { id: "small", priority: 0, status: "available", capabilities: ["wasm"], cpu: 1, memorybytes: 2, maxmilliseconds: 5 },
-    { id: "worker", priority: 1, status: "available", capabilities: ["wasm", "container"], cpu: 2, memorybytes: 10, maxmilliseconds: 20 },
-    { id: "offline", priority: 2, status: "offline", capabilities: ["wasm", "container"], cpu: 4, memorybytes: 20, maxmilliseconds: 30 }
+    { id: "small", priority: 0, status: "available", capabilities: ["wasm"], architecture: "x64", operatingSystem: "linux", networkpolicy: "restricted", cpu: 1, memorybytes: 2, maxmilliseconds: 5 },
+    { id: "worker", priority: 1, status: "available", capabilities: ["wasm", "container"], architecture: "x64", operatingSystem: "linux", networkpolicy: "restricted", cpu: 2, memorybytes: 10, maxmilliseconds: 20 },
+    { id: "offline", priority: 2, status: "offline", capabilities: ["wasm", "container"], architecture: "arm64", operatingSystem: "linux", networkpolicy: "none", cpu: 4, memorybytes: 20, maxmilliseconds: 30 }
   ] });
-  const plan = chain.dispatchplan({ capabilities: ["container"], mincpu: 2, minmemorybytes: 8, minmilliseconds: 10 });
+  const plan = chain.dispatchplan({ capabilities: ["container"], architecture: "x64", operatingSystem: "linux", networkpolicy: "restricted", mincpu: 2, minmemorybytes: 8, minmilliseconds: 10 });
   assert.equal(plan.state, "caller-dispatches");
   assert.equal(plan.provider.id, "worker");
   assert.equal(plan.rejected[0].id, "small");
+  assert.equal(plan.provider.architecture, "x64");
   assert.throws(() => chain.select({ capabilities: ["gpu"] }), (error) => error.code === "PROVIDER_CHAIN_UNAVAILABLE");
 });
 
