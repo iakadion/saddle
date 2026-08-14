@@ -66,6 +66,29 @@ export function releasereadiness(input: Record<string, unknown> = {}) {
   return { version: 1, sourcetag, manifestversions, requiredgates, artifactplandigest, targets, signingstatus, evaluation, decision, ready: decision === "accepted", reasons: ordered };
 }
 
+/** Maps an already-completed local checksum verification result to evidence records. */
+export function evidencefromverification(input: Record<string, unknown> = {}) {
+  const verification = objectvalue(input.verification, "verification result");
+  if (verification.valid !== true) throw new TypeError("verification result must be valid");
+  const releaseversion = requiredtext(verification.version, "release version");
+  const signingstatus = requiredtext(verification.signing, "signing status");
+  const files = requiredarray(verification.files, "verification files");
+  if (files.length === 0) throw new TypeError("verification files must not be empty");
+  const names = new Set<string>();
+  const producer = optionaltext(input.producer);
+  const workflow = optionaltext(input.workflow);
+  const verificationmethod = optionaltext(input.verificationmethod) ?? "checksum-manifest";
+  const verifiedat = optionaltime(input.verifiedat, "verification time");
+  const evidence = files.map((file) => {
+    const entry = objectvalue(file, "verification file");
+    const name = requiredtext(entry.name, "artifact name");
+    if (names.has(name)) throw new TypeError(`duplicate verification artifact: ${name}`);
+    names.add(name);
+    return releaseevidence({ kind: "checksum", status: "checked", subjectdigest: entry.digest, producer, workflow, verificationmethod, verifiedat, metadata: { artifact: name, releaseversion, signingstatus } });
+  });
+  return { version: 1, releaseversion, signingstatus, evidence };
+}
+
 function evidenceaccepted(entry: ReturnType<typeof releaseevidence>, policy: { allowedstatuses: Set<string>; expectedproducer: Record<string, string>; expectedworkflow: Record<string, string>; subjectdigest?: string }, reasons: Set<string>) {
   let accepted = true;
   if (entry.status === "rejected") { reasons.add(`evidence-rejected:${entry.kind}`); accepted = false; }
@@ -81,6 +104,7 @@ function requiredtext(value: unknown, label: string) { const text = optionaltext
 function optionaltext(value: unknown) { const text = value === undefined || value === null ? undefined : String(value).trim(); return text || undefined; }
 function optionaldigest(value: unknown, label: string) { const digest = optionaltext(value)?.toLowerCase(); if (digest && !/^[a-f0-9]{64}$/.test(digest)) throw new TypeError(`${label} must be a sha256 hex digest`); return digest; }
 function optionaltime(value: unknown, label: string) { if (value === undefined || value === null) return undefined; const time = Number(value); if (!Number.isFinite(time) || time < 0) throw new TypeError(`${label} must be a non-negative finite number`); return time; }
+function requiredarray(value: unknown, label: string) { if (!Array.isArray(value)) throw new TypeError(`${label} must be an array`); return value; }
 function stringlist(value: unknown, label: string) { if (value === undefined || value === null) return []; if (!Array.isArray(value)) throw new TypeError(`${label} must be an array`); return [...new Set(value.map((item) => requiredtext(item, label)))].sort(); }
 function textmap(value: unknown, label: string) { if (value === undefined || value === null) return {} as Record<string, string>; const source = objectvalue(value, label); return Object.fromEntries(Object.entries(source).map(([key, item]) => [requiredtext(key, label), requiredtext(item, label)])); }
 function objectcopy(value: unknown) { return value && typeof value === "object" && !Array.isArray(value) ? { ...(value as Record<string, unknown>) } : {}; }

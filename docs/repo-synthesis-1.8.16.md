@@ -35,9 +35,9 @@ Candidates were scored qualitatively against five mandatory criteria: evidence a
 | Storage identity receipt | High | Low | High | Medium | Rejected as overlapping existing storage contracts |
 | Runtime sandbox controller | High | High | Low | High | Rejected: privileged execution is out of core scope |
 
-## First implementation block: release evidence evaluation
+## Implemented evidence blocks
 
-The first 1.8.16 block will add a pure `release/evidence.ts` contract, exported through the package map, with no external dependencies and no network or filesystem side effects. It will:
+The first 1.8.16 block adds a pure `release/evidence.ts` contract, exported through the package map, with no external dependencies and no network or filesystem side effects. It:
 
 1. Normalize a caller-supplied evidence record for an artifact subject digest, producer identity, evidence kind, verification method and timestamp.
 2. Distinguish `notProvided`, `declared`, `parsed`, `checked`, `verified`, `rejected` and `unknown` states.
@@ -45,6 +45,7 @@ The first 1.8.16 block will add a pure `release/evidence.ts` contract, exported 
 4. Allow a caller-defined policy with required evidence kinds, expected producer identity, expected workflow identity and allowed verification states.
 5. Return a serializable decision of `accepted`, `rejected` or `insufficient`, with reason codes rather than claims such as “secure,” “trusted,” “signed,” “compliant,” or “vulnerability-free.”
 6. Produce a release readiness receipt that binds source tag, observed manifest versions, required gates, artifact-plan digest, target list, signing state and missing evidence without creating tags, changing manifests, invoking workflows, publishing, signing or checking a registry.
+7. Convert an already-completed local `verifyassets` checksum result into `checked` checksum evidence while preserving the verifier's explicit signing state as metadata.
 
 ## Explicit non-goals
 

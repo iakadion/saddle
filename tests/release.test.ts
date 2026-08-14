@@ -10,6 +10,7 @@ import { join } from "node:path";
 import { createassets } from "../release/assets.js";
 import { retentionplan } from "../release/assets.js";
 import { verifyassets } from "../release/verify.js";
+import { evaluateevidence, evidencefromverification } from "../release/evidence.js";
 
 test("creates reproducible checksums, SBOM and provenance subjects", async () => {
   const directory = await mkdtemp(join(tmpdir(), "saddle-release-"));
@@ -71,6 +72,30 @@ test("verifies release checksums and explicit signing status", async () => {
     assert.equal(result.signing, "unsigned");
     await writeFile(artifact, "tampered artifact\n");
     await assert.rejects(verifyassets({ checksums: created.files.checksums, manifest: created.files.manifest, artifactroot: directory, version: "1.8.12" }), /checksum mismatch/);
+  } finally {
+    await rm(directory, { force: true, recursive: true });
+  }
+});
+
+test("maps verified local checksums into policy-evaluable release evidence", async () => {
+  const directory = await mkdtemp(join(tmpdir(), "saddle-release-evidence-"));
+  try {
+    const artifact = join(directory, "saddle.browser.1.8.16.x64.exe");
+    const output = join(directory, "assets");
+    const packagefile = join(directory, "package.json");
+    const lockfile = join(directory, "package-lock.json");
+    await writeFile(artifact, "evidence payload\n");
+    await writeFile(packagefile, JSON.stringify({ name: "@wenathlan/example", version: "1.8.16" }));
+    await writeFile(lockfile, JSON.stringify({ packages: { "": {} } }));
+    const created = await createassets({ packagefile, lockfile, output, artifactroot: directory, artifacts: [artifact], version: "1.8.16", surface: "desktop.windows.x64", signing: "unsigned" });
+    const verification = await verifyassets({ checksums: created.files.checksums, manifest: created.files.manifest, artifactroot: directory, version: "1.8.16" });
+    const envelope = evidencefromverification({ verification, producer: "local-release-test", workflow: "verify.yml", verifiedat: 1 });
+    assert.equal(envelope.signingstatus, "unsigned");
+    assert.equal(envelope.evidence[0].status, "checked");
+    assert.equal(envelope.evidence[0].metadata.artifact, "saddle.browser.1.8.16.x64.exe");
+    const evaluation = evaluateevidence({ subjectdigest: verification.files[0].digest, evidence: envelope.evidence, policy: { requiredkinds: ["checksum"], allowedstatuses: ["checked"], expectedproducer: { checksum: "local-release-test" }, expectedworkflow: { checksum: "verify.yml" } } });
+    assert.equal(evaluation.decision, "accepted");
+    assert.throws(() => evidencefromverification({ verification: { ...verification, valid: false } }), /must be valid/);
   } finally {
     await rm(directory, { force: true, recursive: true });
   }
