@@ -22,6 +22,7 @@ import { tieredcache } from "../storage/cache.js";
 import { comparemanifests, objectmanifest, storagecapabilities, syncobject } from "../storage/sync.js";
 import { storagepool } from "../storage/pool.js";
 import { bridgeplan, materializationrecord, workingadmission } from "../memory/planner.js";
+import { cachedecision, executeisolated, magicbytes, transformationcache, transformationkey, wasmplan } from "../binary/transform.js";
 import { validatesession } from "../domain/sessions.js";
 import { detectcontenttype, normalizeresponse, normalizeresult } from "../scrape/normalize.js";
 import { sessionstore } from "../sessions/store.js";
@@ -1122,4 +1123,25 @@ test("keeps host-memory bridge operations declarative and capability gated", () 
   const record = materializationrecord({ id: "object1", sha256: "a".repeat(64), sizebytes: 1, tier: "l3" });
   assert.equal(record.state, "planned");
   assert.throws(() => workingadmission([{ id: "same", sizebytes: 1 }, { id: "same", sizebytes: 1 }]), /unique/);
+});
+
+test("plans WASM transformations from magic bytes with reproducible cache identity", () => {
+  const source = sha256(new Uint8Array([0, 97, 115, 109]));
+  const compiler = "b".repeat(64);
+  const plan = wasmplan({ source, imports: ["env.log"], budget: { maxbytes: 1024, maxoutputbytes: 512, maxmilliseconds: 20 } });
+  assert.deepEqual(magicbytes(new Uint8Array([0, 97, 115, 109])).format, "wasm");
+  assert.equal(magicbytes(new Uint8Array([77, 90])).format, "pe");
+  const key = transformationkey({ plan, compiler });
+  const manifest = transformationcache({ key, source, compiler, policyversion: 1, verified: true, outputs: [{ name: "module.wasm", sha256: source, sizebytes: 4 }] });
+  assert.equal(cachedecision(manifest, manifest).reusable, true);
+  assert.deepEqual(cachedecision(manifest, { ...manifest, policyversion: 2 }).reasons, ["policyversion"]);
+});
+
+test("executes transformations only through injected isolated adapters and verifies outputs", async () => {
+  const data = new Uint8Array([0, 97, 115, 109]);
+  const plan = { source: sha256(data), imports: [], budget: { maxbytes: 8, maxoutputbytes: 8, maxmilliseconds: 10 } };
+  const output = await executeisolated(plan, { execute: async () => ({ outputs: [{ name: "module.wasm", data, sha256: sha256(data) }] }) });
+  assert.equal(output.outputs[0].sizebytes, 4);
+  await assert.rejects(() => executeisolated(plan), (error) => error.code === "ISOLATED_EXECUTION_UNAVAILABLE");
+  await assert.rejects(() => executeisolated(plan, { execute: async () => ({ outputs: [{ name: "wrong", data, sha256: "f".repeat(64) }] }) }), (error) => error.code === "ISOLATED_EXECUTION_DIGEST_MISMATCH");
 });

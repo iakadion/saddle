@@ -134,24 +134,24 @@
 - [ ] Define an executable-input descriptor with media type, magic-byte evidence, digest, declared size, origin, ownership, and expected output contract.
 - [ ] Define a wasm-module descriptor with source format, import policy, memory limit, fuel or time budget, output limit, and integrity metadata.
 - [ ] Define a wasm-capability descriptor for compile, instantiate, streaming instantiation, threads, SIMD, WASI, and host import support.
-- [ ] Define a binary-transformation request as a plan that requires an injected compiler, emulator, container, or sandbox adapter.
-- [ ] Define a binary-execution request that is rejected by default unless an explicit isolated execution adapter accepts it.
+- [x] Define a binary-transformation request as a plan that requires an injected compiler, emulator, container, or sandbox adapter.
+- [x] Define a binary-execution request that is rejected by default unless an explicit isolated execution adapter accepts it.
 - [ ] Define a result record that distinguishes transformation, compilation, execution, rendering, cache retrieval, timeout, policy denial, and adapter unavailability.
 - [ ] Define import allowlists and host-function deny lists for WASM contracts.
 - [ ] Define CPU, wall-clock, memory, output-byte, file-count, and network capability budgets as portable request constraints.
-- [ ] Define a content-addressed transformation key derived from input digest, normalized options, compiler identity, target descriptor, and policy version.
-- [ ] Define a binary-cache manifest with source digest, transformation key, output digests, adapter identity, policy version, timestamp, and verification state.
+- [x] Define a content-addressed transformation key derived from input digest, normalized options, compiler identity, target descriptor, and policy version.
+- [x] Define a binary-cache manifest with source digest, transformation key, output digests, adapter identity, policy version, timestamp, and verification state.
 - [ ] Define a cache eligibility policy that prohibits caching outputs that contain secrets, personal data, unstable environment state, or unverified executable output.
 - [ ] Define a cache retrieval policy that revalidates toolchain identity and output checksums before reuse.
 - [ ] Define archive extraction limits for entry count, depth, path traversal, expansion ratio, output size, and executable-bit preservation.
 - [ ] Define a rendering-result contract for headless tasks that returns only caller-authorized artifacts and provenance.
 - [ ] Implement validators for executable inputs, WASM modules, sandbox budgets, transformation keys, binary cache manifests, and archive limits.
-- [ ] Implement magic-byte classification for allowed binary and archive formats without trusting filename extensions.
-- [ ] Implement a deterministic transformation-key generator using canonicalized inputs.
+- [x] Implement magic-byte classification for allowed binary and archive formats without trusting filename extensions.
+- [x] Implement a deterministic transformation-key generator using canonicalized inputs.
 - [ ] Implement a binary-cache lookup planner that verifies keys, digests, expiry, policy version, and adapter identity.
 - [ ] Implement a binary-cache commit planner that is side-effect-free until a caller-owned storage adapter persists the manifest and artifacts.
-- [ ] Implement a WASM plan builder that requires declared imports and resource budgets.
-- [ ] Implement an unavailable-execution result for browser, serverless, extension, or non-isolated environments.
+- [x] Implement a WASM plan builder that requires declared imports and resource budgets.
+- [x] Implement an unavailable-execution result for browser, serverless, extension, or non-isolated environments.
 - [ ] Implement a fake WASM adapter that simulates compile, instantiate, output, trap, timeout, denied import, and checksum mismatch paths.
 - [ ] Implement a fake binary sandbox adapter that simulates artifact output and cancellation without starting a process or container.
 - [ ] Implement a fake archive adapter that returns bounded entries and traversal violations without reading untrusted archives.
@@ -159,18 +159,18 @@
 - [ ] Test an unknown binary format denial path.
 - [ ] Test a WASM request with an undeclared import denial path.
 - [ ] Test a WASM request with a resource budget denial path.
-- [ ] Test a successful fake WASM transformation with output digest verification.
+- [x] Test a successful fake WASM transformation with output digest verification.
 - [ ] Test a fake WASM trap result with normalized error evidence.
-- [ ] Test a transformation cache hit with an exact matching key and adapter identity.
-- [ ] Test a cache miss after policy version changes.
+- [x] Test a transformation cache hit with an exact matching key and adapter identity.
+- [x] Test a cache miss after policy version changes.
 - [ ] Test a cache miss after compiler or emulator identity changes.
 - [ ] Test cache refusal for secret-bearing or unverified outputs.
 - [ ] Test archive entry-count, depth, expansion, and traversal limits.
 - [ ] Test cancellation that marks a partial transformation non-cacheable.
 - [ ] Test that no binary request causes a process, Docker container, shell command, network request, or host mount in the shared-core tests.
-- [ ] Document that WASM is a portable execution format but not a general permission to execute arbitrary uploaded binaries.
-- [ ] Document the caller-owned responsibility for container, microVM, emulator, compiler, and native-binary isolation adapters.
-- [ ] Expose the contracts through an additive explicit export only after every package target import remains valid.
+- [x] Document that WASM is a portable execution format but not a general permission to execute arbitrary uploaded binaries.
+- [x] Document the caller-owned responsibility for container, microVM, emulator, compiler, and native-binary isolation adapters.
+- [x] Expose the contracts through an additive explicit export only after every package target import remains valid.
 
 ## 5. Compute provider and V4 execution planning
 

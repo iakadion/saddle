@@ -77,7 +77,8 @@
     "./hash": "./dist/core/hash.js",
     "./release-assets": "./dist/release/assets.js",
     "./release-verify": "./dist/release/verify.js",
-    "./worker": "./dist/runtime/worker.js"
+    "./worker": "./dist/runtime/worker.js",
+    "./binary-transform": "./dist/binary/transform.js"
   },
   "files": [
     "dist",
