@@ -176,67 +176,67 @@
 
 - [ ] Define a provider-chain request with caller-authorized providers, required capabilities, optional preferences, execution budget, and cancellation semantics.
 - [ ] Define a provider capability report for architecture, operating system, container support, WASM support, network policy, storage policy, timeout, memory, CPU, and artifact policy.
-- [ ] Define a provider eligibility evaluator that never assumes a public CI service is unlimited, persistent, or authorized for arbitrary workloads.
-- [ ] Define a provider selection explanation with selected candidate, excluded candidates, reasons, capability evidence, and stable tie breakers.
+- [x] Define a provider eligibility evaluator that never assumes a public CI service is unlimited, persistent, or authorized for arbitrary workloads.
+- [x] Define a provider selection explanation with selected candidate, excluded candidates, reasons, capability evidence, and stable tie breakers.
 - [ ] Define a dry-run dispatch plan that can be rendered as GitHub, GitLab, Forgejo, Gitea, Codeberg, local CLI, or caller-owned runner payloads without sending any request.
 - [ ] Define an execution lease record compatible with the existing resumable workflow and persistent queue contracts.
-- [ ] Define an artifact handoff record from runner to authorized storage pool with integrity and retention boundaries.
+- [x] Define an artifact handoff record from runner to authorized storage pool with integrity and retention boundaries.
 - [ ] Define a repository-as-processor vocabulary only as an orchestration abstraction; do not claim repository files execute without a real runner.
 - [ ] Define static control-plane artifacts as data and status surfaces, not as a covert compute or storage mechanism.
 - [ ] Define a Pages or CDN delivery plan that supports public immutable manifests without publishing private artifacts or credentials.
 - [ ] Implement validator coverage for provider-chain requests, reports, budgets, dispatch plans, leases, and handoff records.
-- [ ] Implement deterministic provider eligibility filtering based on declared reports.
+- [x] Implement deterministic provider eligibility filtering based on declared reports.
 - [ ] Implement stable provider scoring with transparent caller-configured weights and no provider-specific hardcoding.
-- [ ] Implement a selection report preserving rejected-provider reasons.
+- [x] Implement a selection report preserving rejected-provider reasons.
 - [ ] Implement dry-run dispatch payload builders as injected forge adapters.
-- [ ] Implement a runner-to-storage handoff planner that requires output digests and explicit retention selection.
+- [x] Implement a runner-to-storage handoff planner that requires output digests and explicit retention selection.
 - [ ] Implement a provider-chain cancellation planner that delegates actual remote cancellation to existing caller-owned adapters.
 - [ ] Implement fake provider adapters for unavailable, quota-exhausted, incompatible, slow, canceled, successful, and artifact-mismatch outcomes.
-- [ ] Test a chain with no eligible providers.
+- [x] Test a chain with no eligible providers.
 - [ ] Test stable selection under equal provider scores.
-- [ ] Test a provider rejected for missing required container capability.
+- [x] Test a provider rejected for missing required container capability.
 - [ ] Test a provider rejected for a smaller declared time or memory budget.
 - [ ] Test a caller preference that changes selection only among otherwise eligible providers.
 - [ ] Test a dry-run plan that cannot dispatch without an injected adapter.
 - [ ] Test a cancellation plan that retains unknown remote state rather than claiming completed cleanup.
-- [ ] Test an artifact handoff rejected for absent digest or retention policy.
+- [x] Test an artifact handoff rejected for absent digest or retention policy.
 - [ ] Test a provider report with an unsupported field rejection.
 - [ ] Test low-cardinality selection metrics and bounded selection evidence.
 - [ ] Document the difference between an authorized runner, a workflow trigger, a static host, and a repository.
 - [ ] Document that scheduled or event-driven execution must be configured by the deployer and not started by importing the library.
 - [ ] Document that container orchestration, server uptime, Kubernetes, cron, systemd, and fixed infrastructure belong to caller-owned deployment adapters.
-- [ ] Expose the provider-chain contract without changing existing scheduler semantics until compatibility tests are complete.
+- [x] Expose the provider-chain contract without changing existing scheduler semantics until compatibility tests are complete.
 
 ## 6. Delivery, web adapters, and application surfaces
 
-- [ ] Define a chunk-delivery manifest for verified JavaScript, WASM, binary-derived, and static artifacts with media type, digest, size, order, and integrity metadata.
-- [ ] Define a delivery policy that prohibits dynamic code execution through chunk metadata and requires content-addressed immutable references.
+- [x] Define a chunk-delivery manifest for verified JavaScript, WASM, binary-derived, and static artifacts with media type, digest, size, order, and integrity metadata.
+- [x] Define a delivery policy that prohibits dynamic code execution through chunk metadata and requires content-addressed immutable references.
 - [ ] Define a CDN capability report for immutable caching, purge support, range delivery, integrity headers, CORS policy, and public/private visibility.
-- [ ] Define PWA integration as a caller-owned web adapter with offline scope, cache policy, update policy, and permission boundaries.
-- [ ] Define service-worker integration as an optional host surface and never as a long-lived library background worker.
+- [x] Define PWA integration as a caller-owned web adapter with offline scope, cache policy, update policy, and permission boundaries.
+- [x] Define service-worker integration as an optional host surface and never as a long-lived library background worker.
 - [ ] Define a Telegram Mini App adapter contract that carries caller-supplied validation, origin policy, capability reports, and no embedded bot token.
 - [ ] Define an application-bridge record that maps browser, desktop, mobile, extension, and mini-app capability reports without selecting a vendor.
 - [ ] Define a subdomain and DNS requirement descriptor that records ownership, DNS provider, DNSSEC support, HTTPS ownership, and explicit user configuration.
-- [ ] Define no-op outcomes when a host lacks PWA, service-worker, mini-app, DNS, or CDN capabilities.
+- [x] Define no-op outcomes when a host lacks PWA, service-worker, mini-app, DNS, or CDN capabilities.
 - [ ] Implement validators for delivery manifests, CDN reports, PWA policies, mini-app descriptors, bridge records, and DNS requirement descriptors.
-- [ ] Implement integrity manifest generation using existing hash primitives and content-type allowlists.
-- [ ] Implement chunk sequence verification with missing, duplicate, out-of-order, digest mismatch, and size mismatch errors.
-- [ ] Implement a host-neutral PWA planning helper that returns declarative resources without registering a service worker.
+- [x] Implement integrity manifest generation using existing hash primitives and content-type allowlists.
+- [x] Implement chunk sequence verification with missing, duplicate, out-of-order, digest mismatch, and size mismatch errors.
+- [x] Implement a host-neutral PWA planning helper that returns declarative resources without registering a service worker.
 - [ ] Implement a host-neutral Mini App planning helper that returns validation requirements without accepting opaque platform tokens in the library.
 - [ ] Implement a host-neutral DNS planning helper that distinguishes contract documentation from any real registrar or DNS mutation.
 - [ ] Implement fake delivery, PWA, Mini App, and DNS adapters for deterministic success and failure paths.
 - [ ] Test chunk manifests with supported and unsupported content types.
 - [ ] Test chunk order and total-size validation.
-- [ ] Test integrity metadata serialization and verification.
+- [x] Test integrity metadata serialization and verification.
 - [ ] Test a PWA plan with offline caching disabled.
 - [ ] Test a PWA plan that requires explicit update behavior.
 - [ ] Test a Mini App plan that rejects missing origin or caller validation configuration.
 - [ ] Test that service-worker registration is never performed by importing or invoking a planning helper.
 - [ ] Test that DNS planning cannot mutate any zone or registrar without a caller-owned adapter.
-- [ ] Document content-delivery limitations, especially that static delivery does not execute containers or native binaries in a browser.
+- [x] Document content-delivery limitations, especially that static delivery does not execute containers or native binaries in a browser.
 - [ ] Document optional PWA, Mini App, extension, desktop, and mobile adapter ownership boundaries.
 - [ ] Document domain, DNSSEC, Anycast, certificate, and registrar work as deployer decisions with no automatic purchase, registration, or change operation.
-- [ ] Expose delivery planning through an additive export only after browser-safe export graph checks pass.
+- [x] Expose delivery planning through an additive export only after browser-safe export graph checks pass.
 
 ## 7. Detailed cross-domain execution matrix
 

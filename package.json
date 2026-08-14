@@ -60,6 +60,7 @@
     "./storage-pool": "./dist/storage/pool.js",
     "./storage-node": "./dist/storage/local.js",
     "./runners": "./dist/runners/scheduler.js",
+    "./provider-chain": "./dist/runners/chain.js",
     "./sessions": "./dist/domain/sessions.js",
     "./modes": "./dist/modes/resolve.js",
     "./mode": "./dist/modes/matrix.js",
@@ -77,6 +78,7 @@
     "./hash": "./dist/core/hash.js",
     "./release-assets": "./dist/release/assets.js",
     "./release-verify": "./dist/release/verify.js",
+    "./delivery": "./dist/delivery/manifest.js",
     "./worker": "./dist/runtime/worker.js",
     "./binary-transform": "./dist/binary/transform.js"
   },

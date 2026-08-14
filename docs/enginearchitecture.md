@@ -35,6 +35,8 @@ The public contract uses plain objects and factory functions. The engine never r
 | `storagepool` | read verified replicas, write to an explicit quorum, describe capabilities, and produce a repair plan | caller-authorized adapters with explicit priority and no background replication |
 | `localmemory` | prepare, sync, and cleanup a working set | tmpfs, mmap, sqlite, r2, or a remote bridge |
 | `workingbudget` / `workingadmission` / `bridgeplan` | plan bounded materialization and host-memory operations | caller-owned host adapter; the transport-neutral core never mounts, swaps, or executes a shell command |
+| `providerchain` / `artifacthandoff` | select a declared eligible runner and prepare immutable transfer evidence | caller-authorized provider reports and a caller-owned dispatch or storage adapter |
+| `deliverymanifest` / `verifydelivery` / `pwaplan` | verify immutable transport chunks and describe offline registration requirements | caller-owned CDN or web host; no dynamic import or service-worker registration from the core |
 | `scheduler` | select the first available provider by stable priority | github, forgejo, gitea, gitlab, hf, kaggle, or custom |
 | `engine` | coordinate the lifecycle and emit events | library, cli, browser, desktop, mobile, or service |
 | `validatesession` | accept a versioned session record | browser capture, replay, or external event source |
@@ -44,6 +46,10 @@ The public contract uses plain objects and factory functions. The engine never r
 `workingadmission` selects serializable candidates against byte and entry budgets without reading data. `bridgeplan` can describe `temporaryfile`, `mmap`, `tmpfs`, `zram`, or `swap` only when a caller declares the capability. A returned `caller-executes` result contains preconditions and cleanup ownership; an unsupported capability is reported without a probe or side effect.
 
 `magicbytes`, `wasmplan`, `transformationkey`, `transformationcache`, and `executeisolated` define a separate binary boundary. The module classifies verified byte prefixes, plans bounded WASM work, invalidates cache reuse when source, compiler, key, or policy differ, and calls an injected isolated adapter only. It never creates a process, a container, a filesystem mount, or a network connection by itself.
+
+`providerchain` consumes only explicit provider reports. It rejects unavailable, under-capacity, or capability-incompatible candidates with evidence, chooses the remaining candidate by stable priority, and emits a `caller-dispatches` plan rather than a remote request. `artifacthandoff` requires an artifact digest, size, provider identity, and retention choice before a caller transfers output to storage.
+
+`deliverymanifest` keeps ordered chunks immutable through content type, size, and SHA-256 metadata. `verifydelivery` checks received bytes without evaluating JavaScript or WASM. `pwaplan` only describes scope, offline intent, update policy, and declared service-worker support; the host decides whether to register anything.
 
 ## execution lifecycle
 

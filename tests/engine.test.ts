@@ -23,6 +23,8 @@ import { comparemanifests, objectmanifest, storagecapabilities, syncobject } fro
 import { storagepool } from "../storage/pool.js";
 import { bridgeplan, materializationrecord, workingadmission } from "../memory/planner.js";
 import { cachedecision, executeisolated, magicbytes, transformationcache, transformationkey, wasmplan } from "../binary/transform.js";
+import { artifacthandoff, providerchain } from "../runners/chain.js";
+import { deliverymanifest, pwaplan, verifydelivery } from "../delivery/manifest.js";
 import { validatesession } from "../domain/sessions.js";
 import { detectcontenttype, normalizeresponse, normalizeresult } from "../scrape/normalize.js";
 import { sessionstore } from "../sessions/store.js";
@@ -1144,4 +1146,38 @@ test("executes transformations only through injected isolated adapters and verif
   assert.equal(output.outputs[0].sizebytes, 4);
   await assert.rejects(() => executeisolated(plan), (error) => error.code === "ISOLATED_EXECUTION_UNAVAILABLE");
   await assert.rejects(() => executeisolated(plan, { execute: async () => ({ outputs: [{ name: "wrong", data, sha256: "f".repeat(64) }] }) }), (error) => error.code === "ISOLATED_EXECUTION_DIGEST_MISMATCH");
+});
+
+test("selects an eligible provider deterministically and leaves dispatch caller-owned", () => {
+  const chain = providerchain({ providers: [
+    { id: "small", priority: 0, status: "available", capabilities: ["wasm"], cpu: 1, memorybytes: 2, maxmilliseconds: 5 },
+    { id: "worker", priority: 1, status: "available", capabilities: ["wasm", "container"], cpu: 2, memorybytes: 10, maxmilliseconds: 20 },
+    { id: "offline", priority: 2, status: "offline", capabilities: ["wasm", "container"], cpu: 4, memorybytes: 20, maxmilliseconds: 30 }
+  ] });
+  const plan = chain.dispatchplan({ capabilities: ["container"], mincpu: 2, minmemorybytes: 8, minmilliseconds: 10 });
+  assert.equal(plan.state, "caller-dispatches");
+  assert.equal(plan.provider.id, "worker");
+  assert.equal(plan.rejected[0].id, "small");
+  assert.throws(() => chain.select({ capabilities: ["gpu"] }), (error) => error.code === "PROVIDER_CHAIN_UNAVAILABLE");
+});
+
+test("requires verified evidence before an artifact handoff can be transferred", () => {
+  const handoff = artifacthandoff({ key: "artifact.bin", sha256: "c".repeat(64), sizebytes: 3, providerid: "worker", retention: "release" });
+  assert.equal(handoff.state, "caller-transfers");
+  assert.throws(() => artifacthandoff({ key: "artifact.bin", sha256: "invalid", sizebytes: 3, providerid: "worker", retention: "release" }), /sha256/);
+});
+
+test("verifies immutable delivery chunks without evaluating their content", () => {
+  const data = new Uint8Array([0, 97, 115, 109]);
+  const manifest = deliverymanifest({ id: "runtime", chunks: [{ id: "part0", index: 0, sha256: sha256(data), sizebytes: 4, contenttype: "application/wasm" }] });
+  assert.equal(verifydelivery(manifest, [{ id: "part0", data }]).valid, true);
+  assert.equal(verifydelivery(manifest, [{ id: "part0", data: new Uint8Array([1]) }]).results[0].state, "mismatch");
+  assert.throws(() => deliverymanifest({ id: "invalid", chunks: [{ id: "part0", index: 1, sha256: sha256(data), sizebytes: 4 }] }), /contiguous/);
+});
+
+test("keeps PWA registration declarative and capability gated", () => {
+  assert.equal(pwaplan({ scope: "/saddle/", offline: true }).state, "unsupported");
+  const plan = pwaplan({ scope: "/saddle/", offline: true, capabilities: { serviceworker: true } });
+  assert.equal(plan.state, "caller-registers");
+  assert.equal(plan.cache, "caller-configures");
 });
