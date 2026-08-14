@@ -17,6 +17,7 @@ RUN npm install --global npm@12.0.2 \
     && tar -xzf brace-expansion-5.0.9.tgz --strip-components=1 -C /usr/local/lib/node_modules/npm/node_modules/brace-expansion \
     && tar -xzf ip-address-10.3.1.tgz --strip-components=1 -C /usr/local/lib/node_modules/npm/node_modules/ip-address \
     && rm -rf "$tempdir" \
+    && cd /app \
     && npm ci --omit=dev --ignore-scripts --legacy-peer-deps
 COPY . .
 
