@@ -1206,6 +1206,16 @@ test("selects an eligible provider deterministically and leaves dispatch caller-
   assert.throws(() => chain.select({ capabilities: ["gpu"] }), (error) => error.code === "PROVIDER_CHAIN_UNAVAILABLE");
 });
 
+test("applies provider preferences only after eligibility filtering", () => {
+  const chain = providerchain({ providers: [
+    { id: "first", priority: 0, status: "available", capabilities: ["wasm"] },
+    { id: "preferred", priority: 1, status: "available", capabilities: ["wasm"] },
+    { id: "ineligible", priority: 2, status: "available", capabilities: [] }
+  ] });
+  assert.equal(chain.select({ capabilities: ["wasm"], preferredids: ["preferred"] }).selected.id, "preferred");
+  assert.equal(chain.select({ capabilities: ["wasm"], preferredids: ["ineligible"] }).selected.id, "first");
+});
+
 test("renders provider dispatch plans only through injected adapters", async () => {
   const plan = { state: "caller-dispatches", provider: { id: "worker" }, request: {} };
   assert.deepEqual(await renderdispatch(plan, { render: async (value) => ({ provider: value.provider.id }) }), { provider: "worker" });

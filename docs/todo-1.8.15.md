@@ -196,7 +196,7 @@
 - [ ] Test stable selection under equal provider scores.
 - [x] Test a provider rejected for missing required container capability.
 - [x] Test a provider rejected for a smaller declared time or memory budget.
-- [ ] Test a caller preference that changes selection only among otherwise eligible providers.
+- [x] Test a caller preference that changes selection only among otherwise eligible providers.
 - [x] Test a dry-run plan that cannot dispatch without an injected adapter.
 - [x] Test a cancellation plan that retains unknown remote state rather than claiming completed cleanup.
 - [x] Test an artifact handoff rejected for absent digest or retention policy.
