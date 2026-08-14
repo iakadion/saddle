@@ -175,6 +175,19 @@ The sources reinforce a possible 1.8.16 **provider feature matrix** that capture
 
 The combined sources support a later **durability capability receipt** with declared `checkpointStore`, `leaseAuthority`, `deduplicationScope`, `retryAuthority`, `scheduleAuthority`, `cancellationConfirmation` and `retentionOwner` fields. It must never promise exactly-once external side effects, automatic recovery or background execution without an adapter that has positively provided those capabilities.
 
+## Additional browser automation evidence
+
+| Candidate | Primary source | Evidence observed | Relevance to Saddle | Disposition |
+|---|---|---|---|---|
+| `microsoft/playwright` | [repository][53] | The Apache-2.0 framework offers isolated browser contexts, accessibility-oriented locators, stable references, traces and artifact capture. | It corroborates Saddle's bounded browser snapshot, stable-ref and trace-oriented contracts. | Consider adapter-independent trace/snapshot receipt fields; do not add a browser binary or automation runtime dependency. |
+| `puppeteer/puppeteer` | [repository][54] | The Apache-2.0 library controls browsers via DevTools/BiDi and separates browser download from the lighter core library. | It reinforces explicit browser lifecycle and dependency acquisition. | Keep browser launch/configuration in adapters; do not trigger downloads or launch browsers from core. |
+| `browser-use/browser-use` | [repository][55] | The MIT agent advertises profile reuse, hosted execution, proxy rotation, stealth and CAPTCHA-related capabilities alongside agent control. | It is useful negative evidence for separating consented browser context from anti-detection functionality. | Retain user-controlled context descriptors; reject stealth, proxy rotation, CAPTCHA circumvention, profile synchronization and credential reuse features. |
+| `vercel-labs/agent-browser` | [repository][56] | The Apache-2.0 CLI exposes accessibility snapshots, stable tab/ref handles, tracing, output limits and explicit session commands. | It corroborates explicit handles, fresh snapshots after state changes and structured observability. | Consider an adapter-neutral stale-reference/trace receipt; do not add a CLI daemon, CDP client, cookie import or browser control surface. |
+
+## Additional browser disposition
+
+The evidence supports a future **browser interaction receipt** that records snapshot identity, reference scope, session isolation claim, trace artifact digest and an explicit `userContextProvided` flag. It must expire refs when a snapshot changes, avoid carrying cookie or credential contents, require user confirmation for sensitive browser actions and forbid any stealth, CAPTCHA, fingerprint or anti-bot bypass mode.
+
 ## References
 
 [1]: https://github.com/browser-use/browser-use "browser-use/browser-use"
@@ -229,3 +242,7 @@ The combined sources support a later **durability capability receipt** with decl
 [50]: https://github.com/vercel/workflow "vercel/workflow"
 [51]: https://github.com/taskforcesh/bullmq "taskforcesh/bullmq"
 [52]: https://github.com/Webslash/duty "Webslash/duty"
+[53]: https://github.com/microsoft/playwright "microsoft/playwright"
+[54]: https://github.com/puppeteer/puppeteer "puppeteer/puppeteer"
+[55]: https://github.com/browser-use/browser-use "browser-use/browser-use"
+[56]: https://github.com/vercel-labs/agent-browser "vercel-labs/agent-browser"
