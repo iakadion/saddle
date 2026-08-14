@@ -26,6 +26,7 @@ import { cachedecision, executeisolated, magicbytes, transformationcache, transf
 import { archiveinspection, extractarchive } from "../binary/archive.js";
 import { artifacthandoff, providerchain } from "../runners/chain.js";
 import { deliverymanifest, pwaplan, verifydelivery } from "../delivery/manifest.js";
+import { applicationbridge, dnsplan, miniappplan } from "../surfaces/requirements.js";
 import { validatesession } from "../domain/sessions.js";
 import { detectcontenttype, normalizeresponse, normalizeresult } from "../scrape/normalize.js";
 import { sessionstore } from "../sessions/store.js";
@@ -1190,4 +1191,13 @@ test("keeps PWA registration declarative and capability gated", () => {
   const plan = pwaplan({ scope: "/saddle/", offline: true, capabilities: { serviceworker: true } });
   assert.equal(plan.state, "caller-registers");
   assert.equal(plan.cache, "caller-configures");
+});
+
+test("keeps Mini App validation and DNS mutation caller-owned", () => {
+  const miniapp = miniappplan({ origin: "https://app.example/", validation: "signed-init-data", capabilities: ["open-link"] });
+  assert.equal(miniapp.state, "caller-validates");
+  assert.throws(() => miniappplan({ origin: "https://app.example/", validation: "signed-init-data", token: "forbidden" }), /credentials/);
+  assert.equal(dnsplan({ hostname: "app.example", owner: "team", dnssec: true, https: true }).state, "caller-configures");
+  const bridge = applicationbridge({ surfaces: [{ id: "web", target: "browser", capabilities: ["fetch"] }, { id: "mobile", target: "mobile", capabilities: ["storage"] }] });
+  assert.equal(bridge.surfaces.length, 2);
 });

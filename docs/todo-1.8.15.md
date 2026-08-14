@@ -214,28 +214,28 @@
 - [ ] Define a CDN capability report for immutable caching, purge support, range delivery, integrity headers, CORS policy, and public/private visibility.
 - [x] Define PWA integration as a caller-owned web adapter with offline scope, cache policy, update policy, and permission boundaries.
 - [x] Define service-worker integration as an optional host surface and never as a long-lived library background worker.
-- [ ] Define a Telegram Mini App adapter contract that carries caller-supplied validation, origin policy, capability reports, and no embedded bot token.
-- [ ] Define an application-bridge record that maps browser, desktop, mobile, extension, and mini-app capability reports without selecting a vendor.
-- [ ] Define a subdomain and DNS requirement descriptor that records ownership, DNS provider, DNSSEC support, HTTPS ownership, and explicit user configuration.
+- [x] Define a Telegram Mini App adapter contract that carries caller-supplied validation, origin policy, capability reports, and no embedded bot token.
+- [x] Define an application-bridge record that maps browser, desktop, mobile, extension, and mini-app capability reports without selecting a vendor.
+- [x] Define a subdomain and DNS requirement descriptor that records ownership, DNS provider, DNSSEC support, HTTPS ownership, and explicit user configuration.
 - [x] Define no-op outcomes when a host lacks PWA, service-worker, mini-app, DNS, or CDN capabilities.
 - [ ] Implement validators for delivery manifests, CDN reports, PWA policies, mini-app descriptors, bridge records, and DNS requirement descriptors.
 - [x] Implement integrity manifest generation using existing hash primitives and content-type allowlists.
 - [x] Implement chunk sequence verification with missing, duplicate, out-of-order, digest mismatch, and size mismatch errors.
 - [x] Implement a host-neutral PWA planning helper that returns declarative resources without registering a service worker.
-- [ ] Implement a host-neutral Mini App planning helper that returns validation requirements without accepting opaque platform tokens in the library.
-- [ ] Implement a host-neutral DNS planning helper that distinguishes contract documentation from any real registrar or DNS mutation.
+- [x] Implement a host-neutral Mini App planning helper that returns validation requirements without accepting opaque platform tokens in the library.
+- [x] Implement a host-neutral DNS planning helper that distinguishes contract documentation from any real registrar or DNS mutation.
 - [ ] Implement fake delivery, PWA, Mini App, and DNS adapters for deterministic success and failure paths.
 - [ ] Test chunk manifests with supported and unsupported content types.
 - [ ] Test chunk order and total-size validation.
 - [x] Test integrity metadata serialization and verification.
 - [ ] Test a PWA plan with offline caching disabled.
 - [ ] Test a PWA plan that requires explicit update behavior.
-- [ ] Test a Mini App plan that rejects missing origin or caller validation configuration.
+- [x] Test a Mini App plan that rejects missing origin or caller validation configuration.
 - [ ] Test that service-worker registration is never performed by importing or invoking a planning helper.
-- [ ] Test that DNS planning cannot mutate any zone or registrar without a caller-owned adapter.
+- [x] Test that DNS planning cannot mutate any zone or registrar without a caller-owned adapter.
 - [x] Document content-delivery limitations, especially that static delivery does not execute containers or native binaries in a browser.
-- [ ] Document optional PWA, Mini App, extension, desktop, and mobile adapter ownership boundaries.
-- [ ] Document domain, DNSSEC, Anycast, certificate, and registrar work as deployer decisions with no automatic purchase, registration, or change operation.
+- [x] Document optional PWA, Mini App, extension, desktop, and mobile adapter ownership boundaries.
+- [x] Document domain, DNSSEC, Anycast, certificate, and registrar work as deployer decisions with no automatic purchase, registration, or change operation.
 - [x] Expose delivery planning through an additive export only after browser-safe export graph checks pass.
 
 ## 7. Detailed cross-domain execution matrix

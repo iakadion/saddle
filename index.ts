@@ -102,6 +102,7 @@ export * from "./surfaces/n8n.js";
 export * from "./surfaces/adapters.js";
 export * from "./surfaces/controls.js";
 export * from "./surfaces/operations.js";
+export * from "./surfaces/requirements.js";
 export * from "./library/public.js";
 export * from "./runtime/retry.js";
 export * from "./storage/githubcontents.js";
