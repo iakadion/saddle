@@ -240,6 +240,19 @@ The sources support a potential **context provenance envelope** with `sourceDige
 
 The combined evidence supports a future **evidence policy result** with `subjectDigest`, `expectedIdentity`, `expectedWorkflow`, `evidenceKind`, `evidenceStatus`, `policyDecision`, `reasons` and `verificationTime`. It must distinguish `absent`, `declared`, `downloaded`, `checked` and `verified` evidence and cannot label an artifact as signed, secure, compliant or trusted without a verifier result supplied by the caller.
 
+## Additional release-engineering evidence
+
+| Candidate | Primary source | Evidence observed | Relevance to Saddle | Disposition |
+|---|---|---|---|---|
+| `semantic-release/semantic-release` | [repository][73] | The MIT tool makes a release pipeline explicit: verify conditions, identify prior tag, analyze changes, generate notes, prepare, publish and notify. | It corroborates ordered release gates and the distinction between preparation and publication. | Consider a data-only release readiness result; do not install plugins, analyze commits automatically or publish. |
+| `googleapis/release-please` | [repository][74] | The Apache-2.0 tool prepares release PRs, updates manifests and changelogs, tags and creates releases, while explicitly not handling package publication. | It corroborates separating release preparation from registry publication. | Retain Saddle's tag-derived workflows; consider a manifest-version consistency receipt only. |
+| `changesets/changesets` | [repository][75] | The MIT tool collects contributor-declared changes to manage versions, changelogs and publishing, notably for interdependent packages. | It demonstrates traceable change intent as distinct from generated build output. | Consider a change-impact record; do not adopt a monorepo versioning system. |
+| `goreleaser/goreleaser` | [repository][76] | The MIT release tool focuses on multi-platform release engineering and CI-oriented distribution. | It corroborates that packaging matrices belong in release pipelines rather than a shared runtime. | Retain target-plan contracts; do not add an external packaging engine or sign/publish abstraction. |
+
+## Additional release disposition
+
+The sources support a future **release readiness receipt** with `sourceTag`, `manifestVersions`, `requiredGates`, `artifactPlanDigest`, `publicationTargets`, `credentialOwner`, `signingStatus` and `verificationRequirements`. It must remain descriptive: it cannot create tags, alter version files, trigger CI, publish, sign or assert artifact availability.
+
 ## References
 
 [1]: https://github.com/browser-use/browser-use "browser-use/browser-use"
@@ -314,3 +327,7 @@ The combined evidence supports a future **evidence policy result** with `subject
 [70]: https://github.com/ossf/scorecard "ossf/scorecard"
 [71]: https://github.com/DependencyTrack/dependency-track "DependencyTrack/dependency-track"
 [72]: https://github.com/open-policy-agent/opa "open-policy-agent/opa"
+[73]: https://github.com/semantic-release/semantic-release "semantic-release/semantic-release"
+[74]: https://github.com/googleapis/release-please "googleapis/release-please"
+[75]: https://github.com/changesets/changesets "changesets/changesets"
+[76]: https://github.com/goreleaser/goreleaser "goreleaser/goreleaser"
