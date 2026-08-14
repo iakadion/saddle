@@ -677,4 +677,4 @@
 - [x] Update every active 1.8.16 version metadata location to 1.8.17 after the implementation scope is validated.
 - [x] Update release notes, changelog, registry and artifact documentation with an accurate platform matrix and no unverified image claims.
 - [x] Validate YAML formatting, package and engine gates, workflow logic, package dry-run, high-severity audit, flat-native validation, and whitespace before creating the 1.8.17 tag.
-- [ ] Publish and inspect the 1.8.17 release, all registry workflows, container manifest platforms, post-push label checks, and smoke-test results.
+- [x] Publish and inspect the 1.8.17 release, all registry workflows, container manifest platforms, post-push label checks, and smoke-test results. The public release contains 38 assets; GHCR run `31847952976` verified `linux/amd64`, `linux/arm64`, and `linux/ppc64le` and completed the amd64 label and CLI smoke checks.

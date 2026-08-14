@@ -30,6 +30,12 @@ The release workflows derive all names from `v1.8.17`. The expected artifact mat
 
 These notes describe the release candidate and expected outputs. Registry availability, image index contents, scan results, signatures, SBOM validity, Android signing, iOS artifacts, and any platform-specific execution claim are recorded only after the relevant workflow output independently confirms them.
 
+## Verified publication results
+
+The published [v1.8.17 release](https://github.com/wenathlan/saddle/releases/tag/v1.8.17) is neither a draft nor a prerelease and contains **38 attached assets**: 20 primary artifacts, nine manifests, and nine checksum files. The desktop, mobile, extension, and target workflows completed successfully. The Android manifest records `ci-test-key` and the container manifest records `caller-owned`; neither state is presented as production signing or registry trust.
+
+The six tag-driven registry workflows completed successfully in container-first order: GHCR, GitHub Packages npm, public npmjs, Maven, NuGet GitHub Packages, and RubyGems. GHCR run `31847952976` passed its QEMU-enabled build, scan, publication, manifest-index assertion for `linux/amd64`, `linux/arm64`, and `linux/ppc64le`, amd64 pull, OCI version-label comparison, and `saddle help` smoke test.
+
 ## References
 
 [1]: https://docs.docker.com/build/building/multi-platform/ "Docker multi-platform builds"

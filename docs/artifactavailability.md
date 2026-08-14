@@ -152,3 +152,9 @@ The release-evidence API can normalize and evaluate results supplied by complete
 The 1.8.17 candidate keeps the established release asset contract while expanding the GHCR image index to `linux/amd64`, `linux/arm64`, and `linux/ppc64le`. The workflow must inspect the pushed index before this document treats those platform variants as available. The attached `saddle.container.1.8.17.tar.gz` remains one archive artifact and is not evidence of a Windows container variant.
 
 `windows/amd64`, `linux/arm/v7`, and `linux/386` are not claimed by this candidate. A Windows image requires its own versioned Windows base, Dockerfile, runner, and compatibility validation; the existing Debian Linux Dockerfile cannot produce it by adding a platform string. `unknown` descriptors are not runnable targets. The platform decision and evidence limits are detailed in [containerplatforms-1.8.17.md](containerplatforms-1.8.17.md).
+
+## 1.8.17 verified container publication
+
+The published [v1.8.17 release](https://github.com/wenathlan/saddle/releases/tag/v1.8.17) contains 38 attached assets, including `saddle.container.1.8.17.tar.gz`, `manifest.container.1.8.17.json`, and `sha256.container.1.8.17`. GHCR workflow run `31847952976` completed successfully after QEMU-enabled Buildx published and inspected the Linux OCI index. Its post-push assertion accepted exactly `linux/amd64`, `linux/arm64`, and `linux/ppc64le`; the amd64 variant was pulled, its OCI version label was compared with `1.8.17`, and `saddle help` completed.
+
+The release container manifest identifies `ghcr.io/wenathlan/saddle:1.8.17` and preserves `caller-owned` as its signing state. The Android manifest records `ci-test-key`. Those explicit metadata states do not imply production signing, Windows container availability, notarization, vulnerability status, or any independent trust property.
