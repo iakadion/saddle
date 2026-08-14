@@ -949,6 +949,25 @@ test("restores a persistent queue and maps migration versions", async () => {
   assert.equal(migrationplan({ current: 1, dialect: "postgres" }).length, 2);
 });
 
+test("leases persistent queue items and preserves idempotency keys", async () => {
+  const root = await mkdtemp(join(tmpdir(), "saddlelease"));
+  const path = join(root, "queue.json");
+  let now = 1000;
+  const queue = persistentqueue({ path, clock: () => now, leasems: 20 });
+  const first = await queue.enqueue({ value: 1 }, { idempotencykey: "same" });
+  const duplicate = await queue.enqueue({ value: 2 }, { idempotencykey: "same" });
+  assert.equal(duplicate.id, first.id);
+  const claimed = await queue.claim();
+  assert.equal(claimed.leaseexpiresat, 1020);
+  now = 1010;
+  const renewed = await queue.renew(claimed.id, 20);
+  assert.equal(renewed.leaseexpiresat, 1030);
+  now = 1031;
+  assert.equal((await queue.list("queued")).length, 1);
+  const reclaimed = await queue.claim({ leasems: 20 });
+  assert.equal(reclaimed.attempts, 2);
+});
+
 test("frames MCP JSONL and blocks private network targets", async () => {
   const server = mcpserver({ scrape: async (url) => ({ url }) });
   const transport = mcptransport(server);

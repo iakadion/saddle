@@ -628,10 +628,17 @@ The following blocks are the execution order for the complete ecosystem. A block
 
 ### Version 1.8.12 commit and 1.8.21 research
 
-- [ ] Audit every active version identifier and release-facing manifest before committing 1.8.12.
-- [ ] Create and push the authorized 1.8.12 commit without changing immutable tag `v1.8.11`.
-- [ ] Define a comparable-repository selection rubric for storage, browser, scraper, workflow, memory, packaging and cross-runtime features.
-- [ ] Research up to 50 public repositories with working implementations and preserve URLs, license, activity and feature evidence.
+- [x] Audit every active version identifier and release-facing manifest before committing 1.8.12.
+- [x] Create and push the authorized 1.8.12 commit without changing immutable tag `v1.8.11`.
+- [x] Define a comparable-repository selection rubric for storage, browser, scraper, workflow, memory, packaging and cross-runtime features.
+- [ ] Research up to 60 public repositories with working implementations and preserve URLs, license, activity and feature evidence.
 - [ ] Compare implementation patterns against Saddle's root-first, caller-owned and transport-neutral architecture.
 - [ ] Select only implementable, non-infringing gaps for 1.8.21 and document rejected patterns with reasons.
 - [ ] Implement and verify the selected 1.8.21 features before any 1.8.21 tag or release.
+
+### Release note and version policy
+
+- [x] Keep the historical 1.8.12 release notes intact while bumping active code and manifests to `1.8.13`.
+- [x] Add or update the canonical 1.8.12 release notes with generated artifact contracts and actual signing status.
+- [x] Keep the uploaded README and SKILL as non-deterministic scope and architecture references; do not rewrite them as an execution script.
+- [ ] Complete the 60-repository code and feature analysis, then select independent implementation gaps for 1.8.21.

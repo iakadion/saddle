@@ -1,0 +1,786 @@
+{
+  "count": 43,
+  "categories": [
+    "browser automation",
+    "web scraping crawler",
+    "s3 compatible storage",
+    "browser extension automation",
+    "package release artifacts"
+  ],
+  "repositories": [
+    {
+      "description": "Browser automation CLI for AI agents",
+      "forksCount": 2672,
+      "fullName": "vercel-labs/agent-browser",
+      "isArchived": false,
+      "language": "Rust",
+      "license": {
+        "key": "apache-2.0",
+        "name": "Apache License 2.0",
+        "url": "https://api.github.com/licenses/apache-2.0"
+      },
+      "stargazersCount": 40570,
+      "updatedAt": "2026-08-13T23:54:31Z",
+      "url": "https://github.com/vercel-labs/agent-browser",
+      "categories": [
+        "browser automation"
+      ]
+    },
+    {
+      "description": "A browser automation framework and ecosystem.",
+      "forksCount": 8712,
+      "fullName": "SeleniumHQ/selenium",
+      "isArchived": false,
+      "language": "Java",
+      "license": {
+        "key": "apache-2.0",
+        "name": "Apache License 2.0",
+        "url": "https://api.github.com/licenses/apache-2.0"
+      },
+      "stargazersCount": 34368,
+      "updatedAt": "2026-08-13T16:25:32Z",
+      "url": "https://github.com/SeleniumHQ/selenium",
+      "categories": [
+        "browser automation"
+      ]
+    },
+    {
+      "description": "A high-level browser automation library.",
+      "forksCount": 1064,
+      "fullName": "segment-boneyard/nightmare",
+      "isArchived": false,
+      "language": "JavaScript",
+      "license": {
+        "key": "",
+        "name": "",
+        "url": ""
+      },
+      "stargazersCount": 19779,
+      "updatedAt": "2026-08-13T07:21:30Z",
+      "url": "https://github.com/segment-boneyard/nightmare",
+      "categories": [
+        "browser automation"
+      ]
+    },
+    {
+      "description": "High-performance browser automation bridge and multi-instance orchestrator with advanced stealth injection and real-time dashboard.",
+      "forksCount": 751,
+      "fullName": "pinchtab/pinchtab",
+      "isArchived": false,
+      "language": "Go",
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "stargazersCount": 10034,
+      "updatedAt": "2026-08-13T22:48:20Z",
+      "url": "https://github.com/pinchtab/pinchtab",
+      "categories": [
+        "browser automation"
+      ]
+    },
+    {
+      "description": "Laravel Dusk provides simple end-to-end testing and browser automation.",
+      "forksCount": 329,
+      "fullName": "laravel/dusk",
+      "isArchived": false,
+      "language": "PHP",
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "stargazersCount": 1944,
+      "updatedAt": "2026-08-13T12:09:45Z",
+      "url": "https://github.com/laravel/dusk",
+      "categories": [
+        "browser automation"
+      ]
+    },
+    {
+      "description": "AI Browser Automation",
+      "forksCount": 196,
+      "fullName": "hyperbrowserai/HyperAgent",
+      "isArchived": false,
+      "language": "TypeScript",
+      "license": {
+        "key": "other",
+        "name": "Other",
+        "url": ""
+      },
+      "stargazersCount": 1530,
+      "updatedAt": "2026-08-13T07:30:36Z",
+      "url": "https://github.com/hyperbrowserai/HyperAgent",
+      "categories": [
+        "browser automation"
+      ]
+    },
+    {
+      "description": "Laboratório de web scraping: crawler de artigos da Wikipédia com BeautifulSoup e extração do IMDb Top 250 com Selenium, lidando com conteúdo dinâmico e paginação",
+      "forksCount": 0,
+      "fullName": "luizahackenhaarnaziazeno/Lab1-Coleta-Preparacao-E-Analise-De-Dados",
+      "isArchived": false,
+      "language": "Jupyter Notebook",
+      "license": {
+        "key": "",
+        "name": "",
+        "url": ""
+      },
+      "stargazersCount": 1,
+      "updatedAt": "2026-07-16T01:59:09Z",
+      "url": "https://github.com/luizahackenhaarnaziazeno/Lab1-Coleta-Preparacao-E-Analise-De-Dados",
+      "categories": [
+        "web scraping crawler"
+      ]
+    },
+    {
+      "description": "Mirrored from visvantha-testable/web-scraping-crawler-framework",
+      "forksCount": 0,
+      "fullName": "VISVANTHA/web-scraping-crawler-framework",
+      "isArchived": false,
+      "language": "Python",
+      "license": {
+        "key": "",
+        "name": "",
+        "url": ""
+      },
+      "stargazersCount": 0,
+      "updatedAt": "2026-08-13T07:25:26Z",
+      "url": "https://github.com/VISVANTHA/web-scraping-crawler-framework",
+      "categories": [
+        "web scraping crawler"
+      ]
+    },
+    {
+      "description": "Trabalho da DCG de Recuperação da Informação sobre WebScraping/Crawler, utilizando Python e scrapy",
+      "forksCount": 0,
+      "fullName": "EnriqueCarvalho/WebScraping-Crawler",
+      "isArchived": false,
+      "language": "",
+      "license": {
+        "key": "",
+        "name": "",
+        "url": ""
+      },
+      "stargazersCount": 0,
+      "updatedAt": "2023-01-11T00:19:47Z",
+      "url": "https://github.com/EnriqueCarvalho/WebScraping-Crawler",
+      "categories": [
+        "web scraping crawler"
+      ]
+    },
+    {
+      "description": "",
+      "forksCount": 0,
+      "fullName": "Bryanskie/Web_Scraping_-_Crawler",
+      "isArchived": false,
+      "language": "Python",
+      "license": {
+        "key": "",
+        "name": "",
+        "url": ""
+      },
+      "stargazersCount": 0,
+      "updatedAt": "2025-10-29T15:12:08Z",
+      "url": "https://github.com/Bryanskie/Web_Scraping_-_Crawler",
+      "categories": [
+        "web scraping crawler"
+      ]
+    },
+    {
+      "description": "",
+      "forksCount": 0,
+      "fullName": "prnvvj/Web-Scraping-Crawlers",
+      "isArchived": false,
+      "language": "Jupyter Notebook",
+      "license": {
+        "key": "",
+        "name": "",
+        "url": ""
+      },
+      "stargazersCount": 0,
+      "updatedAt": "2023-04-04T03:10:36Z",
+      "url": "https://github.com/prnvvj/Web-Scraping-Crawlers",
+      "categories": [
+        "web scraping crawler"
+      ]
+    },
+    {
+      "description": "",
+      "forksCount": 0,
+      "fullName": "yurivarao/web_scraping_crawler",
+      "isArchived": false,
+      "language": "Python",
+      "license": {
+        "key": "",
+        "name": "",
+        "url": ""
+      },
+      "stargazersCount": 0,
+      "updatedAt": "2021-02-21T02:03:43Z",
+      "url": "https://github.com/yurivarao/web_scraping_crawler",
+      "categories": [
+        "web scraping crawler"
+      ]
+    },
+    {
+      "description": "Official s3cmd repo -- Command line tool for managing S3 compatible storage services (including Amazon S3 and CloudFront).",
+      "forksCount": 905,
+      "fullName": "s3tools/s3cmd",
+      "isArchived": false,
+      "language": "Python",
+      "license": {
+        "key": "gpl-2.0",
+        "name": "GNU General Public License v2.0",
+        "url": "https://api.github.com/licenses/gpl-2.0"
+      },
+      "stargazersCount": 4899,
+      "updatedAt": "2026-08-13T12:04:59Z",
+      "url": "https://github.com/s3tools/s3cmd",
+      "categories": [
+        "s3 compatible storage"
+      ]
+    },
+    {
+      "description": "Lightweight file hosting platform built on top of S3-compatible storage",
+      "forksCount": 282,
+      "fullName": "saltbo/zpan",
+      "isArchived": false,
+      "language": "TypeScript",
+      "license": {
+        "key": "agpl-3.0",
+        "name": "GNU Affero General Public License v3.0",
+        "url": "https://api.github.com/licenses/agpl-3.0"
+      },
+      "stargazersCount": 2049,
+      "updatedAt": "2026-08-12T02:26:41Z",
+      "url": "https://github.com/saltbo/zpan",
+      "categories": [
+        "s3 compatible storage"
+      ]
+    },
+    {
+      "description": "Terraform provider for MinIO and S3-compatible storage (R2, B2, Hetzner, Spaces) — buckets, IAM, replication, lifecycle, encryption & more.",
+      "forksCount": 100,
+      "fullName": "aminueza/terraform-provider-minio",
+      "isArchived": false,
+      "language": "Go",
+      "license": {
+        "key": "agpl-3.0",
+        "name": "GNU Affero General Public License v3.0",
+        "url": "https://api.github.com/licenses/agpl-3.0"
+      },
+      "stargazersCount": 341,
+      "updatedAt": "2026-08-12T14:43:00Z",
+      "url": "https://github.com/aminueza/terraform-provider-minio",
+      "categories": [
+        "s3 compatible storage"
+      ]
+    },
+    {
+      "description": "S3-compatible storage in Zig. Zero dependencies.",
+      "forksCount": 9,
+      "fullName": "Lulzx/zs3",
+      "isArchived": false,
+      "language": "Zig",
+      "license": {
+        "key": "wtfpl",
+        "name": "Do What The F*ck You Want To Public License",
+        "url": "https://api.github.com/licenses/wtfpl"
+      },
+      "stargazersCount": 187,
+      "updatedAt": "2026-08-13T07:18:13Z",
+      "url": "https://github.com/Lulzx/zs3",
+      "categories": [
+        "s3 compatible storage"
+      ]
+    },
+    {
+      "description": "Dockerfile to run Minio (S3 compatible storage) on Dokku (mini-Heroku)",
+      "forksCount": 42,
+      "fullName": "mimischi/minio-dokku",
+      "isArchived": false,
+      "language": "Dockerfile",
+      "license": {
+        "key": "",
+        "name": "",
+        "url": ""
+      },
+      "stargazersCount": 145,
+      "updatedAt": "2026-02-05T20:53:57Z",
+      "url": "https://github.com/mimischi/minio-dokku",
+      "categories": [
+        "s3 compatible storage"
+      ]
+    },
+    {
+      "description": "Telegram-backed S3-compatible storage on Cloudflare Workers",
+      "forksCount": 22,
+      "fullName": "gps949/tg-s3",
+      "isArchived": false,
+      "language": "TypeScript",
+      "license": {
+        "key": "",
+        "name": "",
+        "url": ""
+      },
+      "stargazersCount": 68,
+      "updatedAt": "2026-08-13T10:47:47Z",
+      "url": "https://github.com/gps949/tg-s3",
+      "categories": [
+        "s3 compatible storage"
+      ]
+    },
+    {
+      "description": "Run a browser extension in a sandboxed web browser and without any fear of corrupting or loosing your real data.",
+      "forksCount": 1,
+      "fullName": "ivan-sincek/browser-extension-automation",
+      "isArchived": false,
+      "language": "Python",
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "stargazersCount": 5,
+      "updatedAt": "2026-05-09T18:23:48Z",
+      "url": "https://github.com/ivan-sincek/browser-extension-automation",
+      "categories": [
+        "browser extension automation"
+      ]
+    },
+    {
+      "description": "A browser extension automation testing tool",
+      "forksCount": 0,
+      "fullName": "sonic0002/pikabo",
+      "isArchived": false,
+      "language": "TypeScript",
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "stargazersCount": 4,
+      "updatedAt": "2026-08-07T10:11:02Z",
+      "url": "https://github.com/sonic0002/pikabo",
+      "categories": [
+        "browser extension automation"
+      ]
+    },
+    {
+      "description": "Puppeteer Browser Extension Automation is a testing project that uses Puppeteer to automate end-to-end testing of a browser extension. It enables scripted browser interactions, extension loading, and automated validation of extension behavior in a controlled Chromium environment.",
+      "forksCount": 2,
+      "fullName": "zccott/puppeteer-automation",
+      "isArchived": false,
+      "language": "JavaScript",
+      "license": {
+        "key": "",
+        "name": "",
+        "url": ""
+      },
+      "stargazersCount": 2,
+      "updatedAt": "2026-02-23T14:09:14Z",
+      "url": "https://github.com/zccott/puppeteer-automation",
+      "categories": [
+        "browser extension automation"
+      ]
+    },
+    {
+      "description": "A browser extension automation tool",
+      "forksCount": 0,
+      "fullName": "NikEmman/workwork",
+      "isArchived": false,
+      "language": "JavaScript",
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "stargazersCount": 0,
+      "updatedAt": "2026-06-06T17:14:01Z",
+      "url": "https://github.com/NikEmman/workwork",
+      "categories": [
+        "browser extension automation"
+      ]
+    },
+    {
+      "description": "Enhanced skill-creator with browser extension automation",
+      "forksCount": 0,
+      "fullName": "Dreamrealai/skill-creator-v2",
+      "isArchived": true,
+      "language": "Python",
+      "license": {
+        "key": "apache-2.0",
+        "name": "Apache License 2.0",
+        "url": "https://api.github.com/licenses/apache-2.0"
+      },
+      "stargazersCount": 0,
+      "updatedAt": "2026-04-27T04:56:35Z",
+      "url": "https://github.com/Dreamrealai/skill-creator-v2",
+      "categories": [
+        "browser extension automation"
+      ]
+    },
+    {
+      "description": "A google chrome browser extension: automation crawl web pages and get particular DOM elements,save it.",
+      "forksCount": 0,
+      "fullName": "350050183/crawl_webpage",
+      "isArchived": false,
+      "language": "JavaScript",
+      "license": {
+        "key": "",
+        "name": "",
+        "url": ""
+      },
+      "stargazersCount": 0,
+      "updatedAt": "2019-11-30T14:05:32Z",
+      "url": "https://github.com/350050183/crawl_webpage",
+      "categories": [
+        "browser extension automation"
+      ]
+    },
+    {
+      "description": "Packaged release artifacts for ai-proxy-service (source: veildawn/ai-proxy-service)",
+      "forksCount": 1,
+      "fullName": "veildawn/ai-proxy-releases",
+      "isArchived": false,
+      "language": "",
+      "license": {
+        "key": "",
+        "name": "",
+        "url": ""
+      },
+      "stargazersCount": 8,
+      "updatedAt": "2026-08-07T06:12:20Z",
+      "url": "https://github.com/veildawn/ai-proxy-releases",
+      "categories": [
+        "package release artifacts"
+      ]
+    },
+    {
+      "description": "Open Design fork — packaged release artifacts + auto-update feed",
+      "forksCount": 0,
+      "fullName": "ffantasy94/open-design-releases",
+      "isArchived": false,
+      "language": "",
+      "license": {
+        "key": "",
+        "name": "",
+        "url": ""
+      },
+      "stargazersCount": 1,
+      "updatedAt": "2026-06-29T02:20:58Z",
+      "url": "https://github.com/ffantasy94/open-design-releases",
+      "categories": [
+        "package release artifacts"
+      ]
+    },
+    {
+      "description": "C++ quiz system with UI, data layer, build scripts, and packaged release artifacts.",
+      "forksCount": 0,
+      "fullName": "burntcookiedough/quiz_system",
+      "isArchived": false,
+      "language": "C++",
+      "license": {
+        "key": "",
+        "name": "",
+        "url": ""
+      },
+      "stargazersCount": 0,
+      "updatedAt": "2026-05-04T12:29:11Z",
+      "url": "https://github.com/burntcookiedough/quiz_system",
+      "categories": [
+        "package release artifacts"
+      ]
+    },
+    {
+      "description": "Hermes skill for 嘉立创EDA / EasyEDA Pro extension development, with templates, references, and packaged release artifact.",
+      "forksCount": 0,
+      "fullName": "Jasonzld/lceda-extension-development-skill-20260409-042947",
+      "isArchived": false,
+      "language": "TypeScript",
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "stargazersCount": 0,
+      "updatedAt": "2026-04-09T11:37:51Z",
+      "url": "https://github.com/Jasonzld/lceda-extension-development-skill-20260409-042947",
+      "categories": [
+        "package release artifacts"
+      ]
+    },
+    {
+      "description": "Apache Geb: Very Groovy Browser Automation",
+      "forksCount": 235,
+      "fullName": "apache/groovy-geb",
+      "isArchived": false,
+      "language": "Groovy",
+      "license": {
+        "key": "apache-2.0",
+        "name": "Apache License 2.0",
+        "url": "https://api.github.com/licenses/apache-2.0"
+      },
+      "stargazersCount": 1174,
+      "updatedAt": "2026-08-11T08:59:34Z",
+      "url": "https://github.com/apache/groovy-geb",
+      "categories": [
+        "browser automation"
+      ]
+    },
+    {
+      "description": "Tor Browser automation with Selenium.",
+      "forksCount": 105,
+      "fullName": "webfp/tor-browser-selenium",
+      "isArchived": false,
+      "language": "Python",
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "stargazersCount": 595,
+      "updatedAt": "2026-08-12T13:36:41Z",
+      "url": "https://github.com/webfp/tor-browser-selenium",
+      "categories": [
+        "browser automation"
+      ]
+    },
+    {
+      "description": "Intuitive, robust browser automation for .Net",
+      "forksCount": 137,
+      "fullName": "featurist/coypu",
+      "isArchived": false,
+      "language": "C#",
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "stargazersCount": 565,
+      "updatedAt": "2026-07-03T02:12:42Z",
+      "url": "https://github.com/featurist/coypu",
+      "categories": [
+        "browser automation"
+      ]
+    },
+    {
+      "description": "The AI Browser Automation Framework",
+      "forksCount": 116,
+      "fullName": "browserbase/stagehand-python",
+      "isArchived": false,
+      "language": "Python",
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "stargazersCount": 510,
+      "updatedAt": "2026-08-13T07:23:03Z",
+      "url": "https://github.com/browserbase/stagehand-python",
+      "categories": [
+        "browser automation"
+      ]
+    },
+    {
+      "description": "CORTX S3 compatible storage server for CORTX",
+      "forksCount": 87,
+      "fullName": "Seagate/cortx-s3server",
+      "isArchived": true,
+      "language": "C++",
+      "license": {
+        "key": "apache-2.0",
+        "name": "Apache License 2.0",
+        "url": "https://api.github.com/licenses/apache-2.0"
+      },
+      "stargazersCount": 39,
+      "updatedAt": "2026-02-14T09:14:32Z",
+      "url": "https://github.com/Seagate/cortx-s3server",
+      "categories": [
+        "s3 compatible storage"
+      ]
+    },
+    {
+      "description": "Caches build artifacts to S3 compatible storage backends",
+      "forksCount": 32,
+      "fullName": "drone-plugins/drone-s3-cache",
+      "isArchived": false,
+      "language": "Go",
+      "license": {
+        "key": "apache-2.0",
+        "name": "Apache License 2.0",
+        "url": "https://api.github.com/licenses/apache-2.0"
+      },
+      "stargazersCount": 28,
+      "updatedAt": "2024-07-25T15:11:00Z",
+      "url": "https://github.com/drone-plugins/drone-s3-cache",
+      "categories": [
+        "s3 compatible storage"
+      ]
+    },
+    {
+      "description": "Amazon S3-compatible storage backend for openBalena",
+      "forksCount": 13,
+      "fullName": "balena-io/open-balena-s3",
+      "isArchived": false,
+      "language": "Shell",
+      "license": {
+        "key": "agpl-3.0",
+        "name": "GNU Affero General Public License v3.0",
+        "url": "https://api.github.com/licenses/agpl-3.0"
+      },
+      "stargazersCount": 13,
+      "updatedAt": "2026-08-05T04:14:44Z",
+      "url": "https://github.com/balena-io/open-balena-s3",
+      "categories": [
+        "s3 compatible storage"
+      ]
+    },
+    {
+      "description": "S3-compatible storage resource plugin for iRODS",
+      "forksCount": 16,
+      "fullName": "irods/irods_resource_plugin_s3",
+      "isArchived": false,
+      "language": "C++",
+      "license": {
+        "key": "other",
+        "name": "Other",
+        "url": ""
+      },
+      "stargazersCount": 12,
+      "updatedAt": "2026-08-10T19:25:34Z",
+      "url": "https://github.com/irods/irods_resource_plugin_s3",
+      "categories": [
+        "s3 compatible storage"
+      ]
+    },
+    {
+      "description": "These scripts are examples of web scraping activities I've worked on.",
+      "forksCount": 0,
+      "fullName": "lolox56/Web-Scraping-Crawler-work",
+      "isArchived": false,
+      "language": "Python",
+      "license": {
+        "key": "",
+        "name": "",
+        "url": ""
+      },
+      "stargazersCount": 0,
+      "updatedAt": "2019-05-14T02:28:56Z",
+      "url": "https://github.com/lolox56/Web-Scraping-Crawler-work",
+      "categories": [
+        "web scraping crawler"
+      ]
+    },
+    {
+      "description": "Web Scraping/Crawler feito em NodeJS, retirando produtos e preço (dos mais populares por categoria) do site da Kanui. ",
+      "forksCount": 0,
+      "fullName": "NicolasMenezzes/WebScraping-Kanui",
+      "isArchived": false,
+      "language": "JavaScript",
+      "license": {
+        "key": "",
+        "name": "",
+        "url": ""
+      },
+      "stargazersCount": 0,
+      "updatedAt": "2020-05-06T17:12:55Z",
+      "url": "https://github.com/NicolasMenezzes/WebScraping-Kanui",
+      "categories": [
+        "web scraping crawler"
+      ]
+    },
+    {
+      "description": "🕷️ Web scraping & crawler automation skill suite for AI agents — 爬虫自动化运维技能包",
+      "forksCount": 0,
+      "fullName": "Neohu-ceo/spider-ops",
+      "isArchived": false,
+      "language": "",
+      "license": {
+        "key": "",
+        "name": "",
+        "url": ""
+      },
+      "stargazersCount": 0,
+      "updatedAt": "2026-07-02T02:08:12Z",
+      "url": "https://github.com/Neohu-ceo/spider-ops",
+      "categories": [
+        "web scraping crawler"
+      ]
+    },
+    {
+      "description": "A collection of AI-powered coding projects, browser extensions, automation bots, prompts, UI designs, and experiments.",
+      "forksCount": 0,
+      "fullName": "mlwithshuvo7/Vibe-Coding",
+      "isArchived": false,
+      "language": "JavaScript",
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "stargazersCount": 0,
+      "updatedAt": "2026-07-18T21:34:06Z",
+      "url": "https://github.com/mlwithshuvo7/Vibe-Coding",
+      "categories": [
+        "browser extension automation"
+      ]
+    },
+    {
+      "description": "",
+      "forksCount": 0,
+      "fullName": "Ivos1991/browser_extension_automation",
+      "isArchived": false,
+      "language": "Python",
+      "license": {
+        "key": "",
+        "name": "",
+        "url": ""
+      },
+      "stargazersCount": 0,
+      "updatedAt": "2026-05-07T12:47:43Z",
+      "url": "https://github.com/Ivos1991/browser_extension_automation",
+      "categories": [
+        "browser extension automation"
+      ]
+    },
+    {
+      "description": "",
+      "forksCount": 0,
+      "fullName": "Photon101/browser-extension-automation-starter",
+      "isArchived": false,
+      "language": "JavaScript",
+      "license": {
+        "key": "",
+        "name": "",
+        "url": ""
+      },
+      "stargazersCount": 0,
+      "updatedAt": "2026-05-17T06:33:38Z",
+      "url": "https://github.com/Photon101/browser-extension-automation-starter",
+      "categories": [
+        "browser extension automation"
+      ]
+    },
+    {
+      "description": "Field-tested building blocks for browser-extension automation on Salesforce Lightning: deep Shadow DOM queries, Aura-safe events, safety-gated name matching + a Claude Code skill",
+      "forksCount": 0,
+      "fullName": "Yechan-Ahn/sfdc-automation-kit",
+      "isArchived": false,
+      "language": "JavaScript",
+      "license": {
+        "key": "mit",
+        "name": "MIT License",
+        "url": "https://api.github.com/licenses/mit"
+      },
+      "stargazersCount": 0,
+      "updatedAt": "2026-07-31T04:17:23Z",
+      "url": "https://github.com/Yechan-Ahn/sfdc-automation-kit",
+      "categories": [
+        "browser extension automation"
+      ]
+    }
+  ]
+}

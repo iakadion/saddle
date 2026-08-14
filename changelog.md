@@ -6,13 +6,20 @@
 
   All notable changes to Project saddle are documented in this file.
 
-  ## [Unreleased]
+	  ## [Unreleased]
 
-    - Future changes will be recorded here after the 1.8.11 release.
+	    - Future changes will be recorded here after the 1.8.11 release.
 
-  ## [1.8.12] - 2026-08-13
+	  ## [1.8.13] - 2026-08-14
 
-    - Standardized the project license and root legal documents on GPL-3.0-only, preserving one canonical `LICENSE` file and removing byte-identical Markdown/Text duplicates.
+	    - Added caller-owned persistent queue leases, visibility timeouts, renewals, attempt accounting and idempotency keys.
+	    - Aligned active package, native, extension and crawler metadata to `1.8.13`.
+	    - Added the canonical [1.8.13 release notes](docs/releasenotes-1.8.13.md) while preserving the historical 1.8.12 record.
+
+	  ## [1.8.12] - 2026-08-13
+
+	    - Added the canonical [1.8.12 release notes](docs/releasenotes-1.8.12.md) with the artifact matrix and explicit signing-state policy.
+	    - Standardized the project license and root legal documents on GPL-3.0-only, preserving one canonical `LICENSE` file and removing byte-identical Markdown/Text duplicates.
     - Added the public SignPath Foundation code-signing policy, GitHub Actions integration path and explicit unsigned, caller-owned, test-key and notarized status vocabulary.
     - Expanded the desktop matrix to Linux x64/arm64, Windows x86/x64/arm64 and macOS x64/arm64, with dotted lowercase artifact names and per-runner manifests and checksums.
     - Prepared Android APK/AAB and iOS IPA/app archive metadata, container and browser-extension release assets, with signing claims controlled by the actual CI state.

@@ -1,0 +1,666 @@
+QUERY:browser automation
+[1;37m[[m
+  [1;37m{[m
+    [1;34m"description"[m[1;37m:[m [32m"A browser automation framework and ecosystem."[m[1;37m,[m
+    [1;34m"forksCount"[m[1;37m:[m 8712[1;37m,[m
+    [1;34m"fullName"[m[1;37m:[m [32m"SeleniumHQ/selenium"[m[1;37m,[m
+    [1;34m"isArchived"[m[1;37m:[m [33mfalse[m[1;37m,[m
+    [1;34m"language"[m[1;37m:[m [32m"Java"[m[1;37m,[m
+    [1;34m"license"[m[1;37m:[m [1;37m{[m
+      [1;34m"key"[m[1;37m:[m [32m"apache-2.0"[m[1;37m,[m
+      [1;34m"name"[m[1;37m:[m [32m"Apache License 2.0"[m[1;37m,[m
+      [1;34m"url"[m[1;37m:[m [32m"https://api.github.com/licenses/apache-2.0"[m
+    [1;37m}[m[1;37m,[m
+    [1;34m"stargazersCount"[m[1;37m:[m 34368[1;37m,[m
+    [1;34m"updatedAt"[m[1;37m:[m [32m"2026-08-13T16:25:32Z"[m[1;37m,[m
+    [1;34m"url"[m[1;37m:[m [32m"https://github.com/SeleniumHQ/selenium"[m
+  [1;37m}[m[1;37m,[m
+  [1;37m{[m
+    [1;34m"description"[m[1;37m:[m [32m"Browser automation CLI for AI agents"[m[1;37m,[m
+    [1;34m"forksCount"[m[1;37m:[m 2672[1;37m,[m
+    [1;34m"fullName"[m[1;37m:[m [32m"vercel-labs/agent-browser"[m[1;37m,[m
+    [1;34m"isArchived"[m[1;37m:[m [33mfalse[m[1;37m,[m
+    [1;34m"language"[m[1;37m:[m [32m"Rust"[m[1;37m,[m
+    [1;34m"license"[m[1;37m:[m [1;37m{[m
+      [1;34m"key"[m[1;37m:[m [32m"apache-2.0"[m[1;37m,[m
+      [1;34m"name"[m[1;37m:[m [32m"Apache License 2.0"[m[1;37m,[m
+      [1;34m"url"[m[1;37m:[m [32m"https://api.github.com/licenses/apache-2.0"[m
+    [1;37m}[m[1;37m,[m
+    [1;34m"stargazersCount"[m[1;37m:[m 40570[1;37m,[m
+    [1;34m"updatedAt"[m[1;37m:[m [32m"2026-08-13T23:54:31Z"[m[1;37m,[m
+    [1;34m"url"[m[1;37m:[m [32m"https://github.com/vercel-labs/agent-browser"[m
+  [1;37m}[m[1;37m,[m
+  [1;37m{[m
+    [1;34m"description"[m[1;37m:[m [32m"A high-level browser automation library."[m[1;37m,[m
+    [1;34m"forksCount"[m[1;37m:[m 1064[1;37m,[m
+    [1;34m"fullName"[m[1;37m:[m [32m"segment-boneyard/nightmare"[m[1;37m,[m
+    [1;34m"isArchived"[m[1;37m:[m [33mfalse[m[1;37m,[m
+    [1;34m"language"[m[1;37m:[m [32m"JavaScript"[m[1;37m,[m
+    [1;34m"license"[m[1;37m:[m [1;37m{[m
+      [1;34m"key"[m[1;37m:[m [32m""[m[1;37m,[m
+      [1;34m"name"[m[1;37m:[m [32m""[m[1;37m,[m
+      [1;34m"url"[m[1;37m:[m [32m""[m
+    [1;37m}[m[1;37m,[m
+    [1;34m"stargazersCount"[m[1;37m:[m 19779[1;37m,[m
+    [1;34m"updatedAt"[m[1;37m:[m [32m"2026-08-13T07:21:30Z"[m[1;37m,[m
+    [1;34m"url"[m[1;37m:[m [32m"https://github.com/segment-boneyard/nightmare"[m
+  [1;37m}[m[1;37m,[m
+  [1;37m{[m
+    [1;34m"description"[m[1;37m:[m [32m"AI Browser Automation"[m[1;37m,[m
+    [1;34m"forksCount"[m[1;37m:[m 196[1;37m,[m
+    [1;34m"fullName"[m[1;37m:[m [32m"hyperbrowserai/HyperAgent"[m[1;37m,[m
+    [1;34m"isArchived"[m[1;37m:[m [33mfalse[m[1;37m,[m
+    [1;34m"language"[m[1;37m:[m [32m"TypeScript"[m[1;37m,[m
+    [1;34m"license"[m[1;37m:[m [1;37m{[m
+      [1;34m"key"[m[1;37m:[m [32m"other"[m[1;37m,[m
+      [1;34m"name"[m[1;37m:[m [32m"Other"[m[1;37m,[m
+      [1;34m"url"[m[1;37m:[m [32m""[m
+    [1;37m}[m[1;37m,[m
+    [1;34m"stargazersCount"[m[1;37m:[m 1530[1;37m,[m
+    [1;34m"updatedAt"[m[1;37m:[m [32m"2026-08-13T07:30:36Z"[m[1;37m,[m
+    [1;34m"url"[m[1;37m:[m [32m"https://github.com/hyperbrowserai/HyperAgent"[m
+  [1;37m}[m[1;37m,[m
+  [1;37m{[m
+    [1;34m"description"[m[1;37m:[m [32m"Apache Geb: Very Groovy Browser Automation"[m[1;37m,[m
+    [1;34m"forksCount"[m[1;37m:[m 235[1;37m,[m
+    [1;34m"fullName"[m[1;37m:[m [32m"apache/groovy-geb"[m[1;37m,[m
+    [1;34m"isArchived"[m[1;37m:[m [33mfalse[m[1;37m,[m
+    [1;34m"language"[m[1;37m:[m [32m"Groovy"[m[1;37m,[m
+    [1;34m"license"[m[1;37m:[m [1;37m{[m
+      [1;34m"key"[m[1;37m:[m [32m"apache-2.0"[m[1;37m,[m
+      [1;34m"name"[m[1;37m:[m [32m"Apache License 2.0"[m[1;37m,[m
+      [1;34m"url"[m[1;37m:[m [32m"https://api.github.com/licenses/apache-2.0"[m
+    [1;37m}[m[1;37m,[m
+    [1;34m"stargazersCount"[m[1;37m:[m 1174[1;37m,[m
+    [1;34m"updatedAt"[m[1;37m:[m [32m"2026-08-11T08:59:34Z"[m[1;37m,[m
+    [1;34m"url"[m[1;37m:[m [32m"https://github.com/apache/groovy-geb"[m
+  [1;37m}[m[1;37m,[m
+  [1;37m{[m
+    [1;34m"description"[m[1;37m:[m [32m"High-performance browser automation bridge and multi-instance orchestrator with advanced stealth injection and real-time dashboard."[m[1;37m,[m
+    [1;34m"forksCount"[m[1;37m:[m 751[1;37m,[m
+    [1;34m"fullName"[m[1;37m:[m [32m"pinchtab/pinchtab"[m[1;37m,[m
+    [1;34m"isArchived"[m[1;37m:[m [33mfalse[m[1;37m,[m
+    [1;34m"language"[m[1;37m:[m [32m"Go"[m[1;37m,[m
+    [1;34m"license"[m[1;37m:[m [1;37m{[m
+      [1;34m"key"[m[1;37m:[m [32m"mit"[m[1;37m,[m
+      [1;34m"name"[m[1;37m:[m [32m"MIT License"[m[1;37m,[m
+      [1;34m"url"[m[1;37m:[m [32m"https://api.github.com/licenses/mit"[m
+    [1;37m}[m[1;37m,[m
+    [1;34m"stargazersCount"[m[1;37m:[m 10034[1;37m,[m
+    [1;34m"updatedAt"[m[1;37m:[m [32m"2026-08-13T22:48:20Z"[m[1;37m,[m
+    [1;34m"url"[m[1;37m:[m [32m"https://github.com/pinchtab/pinchtab"[m
+  [1;37m}[m[1;37m,[m
+  [1;37m{[m
+    [1;34m"description"[m[1;37m:[m [32m"Laravel Dusk provides simple end-to-end testing and browser automation."[m[1;37m,[m
+    [1;34m"forksCount"[m[1;37m:[m 329[1;37m,[m
+    [1;34m"fullName"[m[1;37m:[m [32m"laravel/dusk"[m[1;37m,[m
+    [1;34m"isArchived"[m[1;37m:[m [33mfalse[m[1;37m,[m
+    [1;34m"language"[m[1;37m:[m [32m"PHP"[m[1;37m,[m
+    [1;34m"license"[m[1;37m:[m [1;37m{[m
+      [1;34m"key"[m[1;37m:[m [32m"mit"[m[1;37m,[m
+      [1;34m"name"[m[1;37m:[m [32m"MIT License"[m[1;37m,[m
+      [1;34m"url"[m[1;37m:[m [32m"https://api.github.com/licenses/mit"[m
+    [1;37m}[m[1;37m,[m
+    [1;34m"stargazersCount"[m[1;37m:[m 1944[1;37m,[m
+    [1;34m"updatedAt"[m[1;37m:[m [32m"2026-08-13T12:09:45Z"[m[1;37m,[m
+    [1;34m"url"[m[1;37m:[m [32m"https://github.com/laravel/dusk"[m
+  [1;37m}[m[1;37m,[m
+  [1;37m{[m
+    [1;34m"description"[m[1;37m:[m [32m"The AI Browser Automation Framework"[m[1;37m,[m
+    [1;34m"forksCount"[m[1;37m:[m 116[1;37m,[m
+    [1;34m"fullName"[m[1;37m:[m [32m"browserbase/stagehand-python"[m[1;37m,[m
+    [1;34m"isArchived"[m[1;37m:[m [33mfalse[m[1;37m,[m
+    [1;34m"language"[m[1;37m:[m [32m"Python"[m[1;37m,[m
+    [1;34m"license"[m[1;37m:[m [1;37m{[m
+      [1;34m"key"[m[1;37m:[m [32m"mit"[m[1;37m,[m
+      [1;34m"name"[m[1;37m:[m [32m"MIT License"[m[1;37m,[m
+      [1;34m"url"[m[1;37m:[m [32m"https://api.github.com/licenses/mit"[m
+    [1;37m}[m[1;37m,[m
+    [1;34m"stargazersCount"[m[1;37m:[m 510[1;37m,[m
+    [1;34m"updatedAt"[m[1;37m:[m [32m"2026-08-13T07:23:03Z"[m[1;37m,[m
+    [1;34m"url"[m[1;37m:[m [32m"https://github.com/browserbase/stagehand-python"[m
+  [1;37m}[m[1;37m,[m
+  [1;37m{[m
+    [1;34m"description"[m[1;37m:[m [32m"Tor Browser automation with Selenium."[m[1;37m,[m
+    [1;34m"forksCount"[m[1;37m:[m 105[1;37m,[m
+    [1;34m"fullName"[m[1;37m:[m [32m"webfp/tor-browser-selenium"[m[1;37m,[m
+    [1;34m"isArchived"[m[1;37m:[m [33mfalse[m[1;37m,[m
+    [1;34m"language"[m[1;37m:[m [32m"Python"[m[1;37m,[m
+    [1;34m"license"[m[1;37m:[m [1;37m{[m
+      [1;34m"key"[m[1;37m:[m [32m"mit"[m[1;37m,[m
+      [1;34m"name"[m[1;37m:[m [32m"MIT License"[m[1;37m,[m
+      [1;34m"url"[m[1;37m:[m [32m"https://api.github.com/licenses/mit"[m
+    [1;37m}[m[1;37m,[m
+    [1;34m"stargazersCount"[m[1;37m:[m 595[1;37m,[m
+    [1;34m"updatedAt"[m[1;37m:[m [32m"2026-08-12T13:36:41Z"[m[1;37m,[m
+    [1;34m"url"[m[1;37m:[m [32m"https://github.com/webfp/tor-browser-selenium"[m
+  [1;37m}[m[1;37m,[m
+  [1;37m{[m
+    [1;34m"description"[m[1;37m:[m [32m"Intuitive, robust browser automation for .Net"[m[1;37m,[m
+    [1;34m"forksCount"[m[1;37m:[m 137[1;37m,[m
+    [1;34m"fullName"[m[1;37m:[m [32m"featurist/coypu"[m[1;37m,[m
+    [1;34m"isArchived"[m[1;37m:[m [33mfalse[m[1;37m,[m
+    [1;34m"language"[m[1;37m:[m [32m"C#"[m[1;37m,[m
+    [1;34m"license"[m[1;37m:[m [1;37m{[m
+      [1;34m"key"[m[1;37m:[m [32m"mit"[m[1;37m,[m
+      [1;34m"name"[m[1;37m:[m [32m"MIT License"[m[1;37m,[m
+      [1;34m"url"[m[1;37m:[m [32m"https://api.github.com/licenses/mit"[m
+    [1;37m}[m[1;37m,[m
+    [1;34m"stargazersCount"[m[1;37m:[m 565[1;37m,[m
+    [1;34m"updatedAt"[m[1;37m:[m [32m"2026-07-03T02:12:42Z"[m[1;37m,[m
+    [1;34m"url"[m[1;37m:[m [32m"https://github.com/featurist/coypu"[m
+  [1;37m}[m
+[1;37m][m
+QUERY:web scraping crawler
+[1;37m[[m
+  [1;37m{[m
+    [1;34m"description"[m[1;37m:[m [32m"Mirrored from visvantha-testable/web-scraping-crawler-framework"[m[1;37m,[m
+    [1;34m"forksCount"[m[1;37m:[m 0[1;37m,[m
+    [1;34m"fullName"[m[1;37m:[m [32m"VISVANTHA/web-scraping-crawler-framework"[m[1;37m,[m
+    [1;34m"isArchived"[m[1;37m:[m [33mfalse[m[1;37m,[m
+    [1;34m"language"[m[1;37m:[m [32m"Python"[m[1;37m,[m
+    [1;34m"license"[m[1;37m:[m [1;37m{[m
+      [1;34m"key"[m[1;37m:[m [32m""[m[1;37m,[m
+      [1;34m"name"[m[1;37m:[m [32m""[m[1;37m,[m
+      [1;34m"url"[m[1;37m:[m [32m""[m
+    [1;37m}[m[1;37m,[m
+    [1;34m"stargazersCount"[m[1;37m:[m 0[1;37m,[m
+    [1;34m"updatedAt"[m[1;37m:[m [32m"2026-08-13T07:25:26Z"[m[1;37m,[m
+    [1;34m"url"[m[1;37m:[m [32m"https://github.com/VISVANTHA/web-scraping-crawler-framework"[m
+  [1;37m}[m[1;37m,[m
+  [1;37m{[m
+    [1;34m"description"[m[1;37m:[m [32m"Trabalho da DCG de Recuperação da Informação sobre WebScraping/Crawler, utilizando Python e scrapy"[m[1;37m,[m
+    [1;34m"forksCount"[m[1;37m:[m 0[1;37m,[m
+    [1;34m"fullName"[m[1;37m:[m [32m"EnriqueCarvalho/WebScraping-Crawler"[m[1;37m,[m
+    [1;34m"isArchived"[m[1;37m:[m [33mfalse[m[1;37m,[m
+    [1;34m"language"[m[1;37m:[m [32m""[m[1;37m,[m
+    [1;34m"license"[m[1;37m:[m [1;37m{[m
+      [1;34m"key"[m[1;37m:[m [32m""[m[1;37m,[m
+      [1;34m"name"[m[1;37m:[m [32m""[m[1;37m,[m
+      [1;34m"url"[m[1;37m:[m [32m""[m
+    [1;37m}[m[1;37m,[m
+    [1;34m"stargazersCount"[m[1;37m:[m 0[1;37m,[m
+    [1;34m"updatedAt"[m[1;37m:[m [32m"2023-01-11T00:19:47Z"[m[1;37m,[m
+    [1;34m"url"[m[1;37m:[m [32m"https://github.com/EnriqueCarvalho/WebScraping-Crawler"[m
+  [1;37m}[m[1;37m,[m
+  [1;37m{[m
+    [1;34m"description"[m[1;37m:[m [32m""[m[1;37m,[m
+    [1;34m"forksCount"[m[1;37m:[m 0[1;37m,[m
+    [1;34m"fullName"[m[1;37m:[m [32m"Bryanskie/Web_Scraping_-_Crawler"[m[1;37m,[m
+    [1;34m"isArchived"[m[1;37m:[m [33mfalse[m[1;37m,[m
+    [1;34m"language"[m[1;37m:[m [32m"Python"[m[1;37m,[m
+    [1;34m"license"[m[1;37m:[m [1;37m{[m
+      [1;34m"key"[m[1;37m:[m [32m""[m[1;37m,[m
+      [1;34m"name"[m[1;37m:[m [32m""[m[1;37m,[m
+      [1;34m"url"[m[1;37m:[m [32m""[m
+    [1;37m}[m[1;37m,[m
+    [1;34m"stargazersCount"[m[1;37m:[m 0[1;37m,[m
+    [1;34m"updatedAt"[m[1;37m:[m [32m"2025-10-29T15:12:08Z"[m[1;37m,[m
+    [1;34m"url"[m[1;37m:[m [32m"https://github.com/Bryanskie/Web_Scraping_-_Crawler"[m
+  [1;37m}[m[1;37m,[m
+  [1;37m{[m
+    [1;34m"description"[m[1;37m:[m [32m""[m[1;37m,[m
+    [1;34m"forksCount"[m[1;37m:[m 0[1;37m,[m
+    [1;34m"fullName"[m[1;37m:[m [32m"prnvvj/Web-Scraping-Crawlers"[m[1;37m,[m
+    [1;34m"isArchived"[m[1;37m:[m [33mfalse[m[1;37m,[m
+    [1;34m"language"[m[1;37m:[m [32m"Jupyter Notebook"[m[1;37m,[m
+    [1;34m"license"[m[1;37m:[m [1;37m{[m
+      [1;34m"key"[m[1;37m:[m [32m""[m[1;37m,[m
+      [1;34m"name"[m[1;37m:[m [32m""[m[1;37m,[m
+      [1;34m"url"[m[1;37m:[m [32m""[m
+    [1;37m}[m[1;37m,[m
+    [1;34m"stargazersCount"[m[1;37m:[m 0[1;37m,[m
+    [1;34m"updatedAt"[m[1;37m:[m [32m"2023-04-04T03:10:36Z"[m[1;37m,[m
+    [1;34m"url"[m[1;37m:[m [32m"https://github.com/prnvvj/Web-Scraping-Crawlers"[m
+  [1;37m}[m[1;37m,[m
+  [1;37m{[m
+    [1;34m"description"[m[1;37m:[m [32m""[m[1;37m,[m
+    [1;34m"forksCount"[m[1;37m:[m 0[1;37m,[m
+    [1;34m"fullName"[m[1;37m:[m [32m"yurivarao/web_scraping_crawler"[m[1;37m,[m
+    [1;34m"isArchived"[m[1;37m:[m [33mfalse[m[1;37m,[m
+    [1;34m"language"[m[1;37m:[m [32m"Python"[m[1;37m,[m
+    [1;34m"license"[m[1;37m:[m [1;37m{[m
+      [1;34m"key"[m[1;37m:[m [32m""[m[1;37m,[m
+      [1;34m"name"[m[1;37m:[m [32m""[m[1;37m,[m
+      [1;34m"url"[m[1;37m:[m [32m""[m
+    [1;37m}[m[1;37m,[m
+    [1;34m"stargazersCount"[m[1;37m:[m 0[1;37m,[m
+    [1;34m"updatedAt"[m[1;37m:[m [32m"2021-02-21T02:03:43Z"[m[1;37m,[m
+    [1;34m"url"[m[1;37m:[m [32m"https://github.com/yurivarao/web_scraping_crawler"[m
+  [1;37m}[m[1;37m,[m
+  [1;37m{[m
+    [1;34m"description"[m[1;37m:[m [32m"These scripts are examples of web scraping activities I've worked on."[m[1;37m,[m
+    [1;34m"forksCount"[m[1;37m:[m 0[1;37m,[m
+    [1;34m"fullName"[m[1;37m:[m [32m"lolox56/Web-Scraping-Crawler-work"[m[1;37m,[m
+    [1;34m"isArchived"[m[1;37m:[m [33mfalse[m[1;37m,[m
+    [1;34m"language"[m[1;37m:[m [32m"Python"[m[1;37m,[m
+    [1;34m"license"[m[1;37m:[m [1;37m{[m
+      [1;34m"key"[m[1;37m:[m [32m""[m[1;37m,[m
+      [1;34m"name"[m[1;37m:[m [32m""[m[1;37m,[m
+      [1;34m"url"[m[1;37m:[m [32m""[m
+    [1;37m}[m[1;37m,[m
+    [1;34m"stargazersCount"[m[1;37m:[m 0[1;37m,[m
+    [1;34m"updatedAt"[m[1;37m:[m [32m"2019-05-14T02:28:56Z"[m[1;37m,[m
+    [1;34m"url"[m[1;37m:[m [32m"https://github.com/lolox56/Web-Scraping-Crawler-work"[m
+  [1;37m}[m[1;37m,[m
+  [1;37m{[m
+    [1;34m"description"[m[1;37m:[m [32m"Web Scraping/Crawler feito em NodeJS, retirando produtos e preço (dos mais populares por categoria) do site da Kanui. "[m[1;37m,[m
+    [1;34m"forksCount"[m[1;37m:[m 0[1;37m,[m
+    [1;34m"fullName"[m[1;37m:[m [32m"NicolasMenezzes/WebScraping-Kanui"[m[1;37m,[m
+    [1;34m"isArchived"[m[1;37m:[m [33mfalse[m[1;37m,[m
+    [1;34m"language"[m[1;37m:[m [32m"JavaScript"[m[1;37m,[m
+    [1;34m"license"[m[1;37m:[m [1;37m{[m
+      [1;34m"key"[m[1;37m:[m [32m""[m[1;37m,[m
+      [1;34m"name"[m[1;37m:[m [32m""[m[1;37m,[m
+      [1;34m"url"[m[1;37m:[m [32m""[m
+    [1;37m}[m[1;37m,[m
+    [1;34m"stargazersCount"[m[1;37m:[m 0[1;37m,[m
+    [1;34m"updatedAt"[m[1;37m:[m [32m"2020-05-06T17:12:55Z"[m[1;37m,[m
+    [1;34m"url"[m[1;37m:[m [32m"https://github.com/NicolasMenezzes/WebScraping-Kanui"[m
+  [1;37m}[m[1;37m,[m
+  [1;37m{[m
+    [1;34m"description"[m[1;37m:[m [32m"🕷️ Web scraping & crawler automation skill suite for AI agents — 爬虫自动化运维技能包"[m[1;37m,[m
+    [1;34m"forksCount"[m[1;37m:[m 0[1;37m,[m
+    [1;34m"fullName"[m[1;37m:[m [32m"Neohu-ceo/spider-ops"[m[1;37m,[m
+    [1;34m"isArchived"[m[1;37m:[m [33mfalse[m[1;37m,[m
+    [1;34m"language"[m[1;37m:[m [32m""[m[1;37m,[m
+    [1;34m"license"[m[1;37m:[m [1;37m{[m
+      [1;34m"key"[m[1;37m:[m [32m""[m[1;37m,[m
+      [1;34m"name"[m[1;37m:[m [32m""[m[1;37m,[m
+      [1;34m"url"[m[1;37m:[m [32m""[m
+    [1;37m}[m[1;37m,[m
+    [1;34m"stargazersCount"[m[1;37m:[m 0[1;37m,[m
+    [1;34m"updatedAt"[m[1;37m:[m [32m"2026-07-02T02:08:12Z"[m[1;37m,[m
+    [1;34m"url"[m[1;37m:[m [32m"https://github.com/Neohu-ceo/spider-ops"[m
+  [1;37m}[m[1;37m,[m
+  [1;37m{[m
+    [1;34m"description"[m[1;37m:[m [32m"Laboratório de web scraping: crawler de artigos da Wikipédia com BeautifulSoup e extração do IMDb Top 250 com Selenium, lidando com conteúdo dinâmico e paginação"[m[1;37m,[m
+    [1;34m"forksCount"[m[1;37m:[m 0[1;37m,[m
+    [1;34m"fullName"[m[1;37m:[m [32m"luizahackenhaarnaziazeno/Lab1-Coleta-Preparacao-E-Analise-De-Dados"[m[1;37m,[m
+    [1;34m"isArchived"[m[1;37m:[m [33mfalse[m[1;37m,[m
+    [1;34m"language"[m[1;37m:[m [32m"Jupyter Notebook"[m[1;37m,[m
+    [1;34m"license"[m[1;37m:[m [1;37m{[m
+      [1;34m"key"[m[1;37m:[m [32m""[m[1;37m,[m
+      [1;34m"name"[m[1;37m:[m [32m""[m[1;37m,[m
+      [1;34m"url"[m[1;37m:[m [32m""[m
+    [1;37m}[m[1;37m,[m
+    [1;34m"stargazersCount"[m[1;37m:[m 1[1;37m,[m
+    [1;34m"updatedAt"[m[1;37m:[m [32m"2026-07-16T01:59:09Z"[m[1;37m,[m
+    [1;34m"url"[m[1;37m:[m [32m"https://github.com/luizahackenhaarnaziazeno/Lab1-Coleta-Preparacao-E-Analise-De-Dados"[m
+  [1;37m}[m
+[1;37m][m
+QUERY:workflow engine ci cd
+[1;37m[[m[1;37m][m
+QUERY:s3 compatible storage
+[1;37m[[m
+  [1;37m{[m
+    [1;34m"description"[m[1;37m:[m [32m"Lightweight file hosting platform built on top of S3-compatible storage"[m[1;37m,[m
+    [1;34m"forksCount"[m[1;37m:[m 282[1;37m,[m
+    [1;34m"fullName"[m[1;37m:[m [32m"saltbo/zpan"[m[1;37m,[m
+    [1;34m"isArchived"[m[1;37m:[m [33mfalse[m[1;37m,[m
+    [1;34m"language"[m[1;37m:[m [32m"TypeScript"[m[1;37m,[m
+    [1;34m"license"[m[1;37m:[m [1;37m{[m
+      [1;34m"key"[m[1;37m:[m [32m"agpl-3.0"[m[1;37m,[m
+      [1;34m"name"[m[1;37m:[m [32m"GNU Affero General Public License v3.0"[m[1;37m,[m
+      [1;34m"url"[m[1;37m:[m [32m"https://api.github.com/licenses/agpl-3.0"[m
+    [1;37m}[m[1;37m,[m
+    [1;34m"stargazersCount"[m[1;37m:[m 2049[1;37m,[m
+    [1;34m"updatedAt"[m[1;37m:[m [32m"2026-08-12T02:26:41Z"[m[1;37m,[m
+    [1;34m"url"[m[1;37m:[m [32m"https://github.com/saltbo/zpan"[m
+  [1;37m}[m[1;37m,[m
+  [1;37m{[m
+    [1;34m"description"[m[1;37m:[m [32m"Official s3cmd repo -- Command line tool for managing S3 compatible storage services (including Amazon S3 and CloudFront)."[m[1;37m,[m
+    [1;34m"forksCount"[m[1;37m:[m 905[1;37m,[m
+    [1;34m"fullName"[m[1;37m:[m [32m"s3tools/s3cmd"[m[1;37m,[m
+    [1;34m"isArchived"[m[1;37m:[m [33mfalse[m[1;37m,[m
+    [1;34m"language"[m[1;37m:[m [32m"Python"[m[1;37m,[m
+    [1;34m"license"[m[1;37m:[m [1;37m{[m
+      [1;34m"key"[m[1;37m:[m [32m"gpl-2.0"[m[1;37m,[m
+      [1;34m"name"[m[1;37m:[m [32m"GNU General Public License v2.0"[m[1;37m,[m
+      [1;34m"url"[m[1;37m:[m [32m"https://api.github.com/licenses/gpl-2.0"[m
+    [1;37m}[m[1;37m,[m
+    [1;34m"stargazersCount"[m[1;37m:[m 4899[1;37m,[m
+    [1;34m"updatedAt"[m[1;37m:[m [32m"2026-08-13T12:04:59Z"[m[1;37m,[m
+    [1;34m"url"[m[1;37m:[m [32m"https://github.com/s3tools/s3cmd"[m
+  [1;37m}[m[1;37m,[m
+  [1;37m{[m
+    [1;34m"description"[m[1;37m:[m [32m"CORTX S3 compatible storage server for CORTX"[m[1;37m,[m
+    [1;34m"forksCount"[m[1;37m:[m 87[1;37m,[m
+    [1;34m"fullName"[m[1;37m:[m [32m"Seagate/cortx-s3server"[m[1;37m,[m
+    [1;34m"isArchived"[m[1;37m:[m [33mtrue[m[1;37m,[m
+    [1;34m"language"[m[1;37m:[m [32m"C++"[m[1;37m,[m
+    [1;34m"license"[m[1;37m:[m [1;37m{[m
+      [1;34m"key"[m[1;37m:[m [32m"apache-2.0"[m[1;37m,[m
+      [1;34m"name"[m[1;37m:[m [32m"Apache License 2.0"[m[1;37m,[m
+      [1;34m"url"[m[1;37m:[m [32m"https://api.github.com/licenses/apache-2.0"[m
+    [1;37m}[m[1;37m,[m
+    [1;34m"stargazersCount"[m[1;37m:[m 39[1;37m,[m
+    [1;34m"updatedAt"[m[1;37m:[m [32m"2026-02-14T09:14:32Z"[m[1;37m,[m
+    [1;34m"url"[m[1;37m:[m [32m"https://github.com/Seagate/cortx-s3server"[m
+  [1;37m}[m[1;37m,[m
+  [1;37m{[m
+    [1;34m"description"[m[1;37m:[m [32m"Dockerfile to run Minio (S3 compatible storage) on Dokku (mini-Heroku)"[m[1;37m,[m
+    [1;34m"forksCount"[m[1;37m:[m 42[1;37m,[m
+    [1;34m"fullName"[m[1;37m:[m [32m"mimischi/minio-dokku"[m[1;37m,[m
+    [1;34m"isArchived"[m[1;37m:[m [33mfalse[m[1;37m,[m
+    [1;34m"language"[m[1;37m:[m [32m"Dockerfile"[m[1;37m,[m
+    [1;34m"license"[m[1;37m:[m [1;37m{[m
+      [1;34m"key"[m[1;37m:[m [32m""[m[1;37m,[m
+      [1;34m"name"[m[1;37m:[m [32m""[m[1;37m,[m
+      [1;34m"url"[m[1;37m:[m [32m""[m
+    [1;37m}[m[1;37m,[m
+    [1;34m"stargazersCount"[m[1;37m:[m 145[1;37m,[m
+    [1;34m"updatedAt"[m[1;37m:[m [32m"2026-02-05T20:53:57Z"[m[1;37m,[m
+    [1;34m"url"[m[1;37m:[m [32m"https://github.com/mimischi/minio-dokku"[m
+  [1;37m}[m[1;37m,[m
+  [1;37m{[m
+    [1;34m"description"[m[1;37m:[m [32m"Telegram-backed S3-compatible storage on Cloudflare Workers"[m[1;37m,[m
+    [1;34m"forksCount"[m[1;37m:[m 22[1;37m,[m
+    [1;34m"fullName"[m[1;37m:[m [32m"gps949/tg-s3"[m[1;37m,[m
+    [1;34m"isArchived"[m[1;37m:[m [33mfalse[m[1;37m,[m
+    [1;34m"language"[m[1;37m:[m [32m"TypeScript"[m[1;37m,[m
+    [1;34m"license"[m[1;37m:[m [1;37m{[m
+      [1;34m"key"[m[1;37m:[m [32m""[m[1;37m,[m
+      [1;34m"name"[m[1;37m:[m [32m""[m[1;37m,[m
+      [1;34m"url"[m[1;37m:[m [32m""[m
+    [1;37m}[m[1;37m,[m
+    [1;34m"stargazersCount"[m[1;37m:[m 68[1;37m,[m
+    [1;34m"updatedAt"[m[1;37m:[m [32m"2026-08-13T10:47:47Z"[m[1;37m,[m
+    [1;34m"url"[m[1;37m:[m [32m"https://github.com/gps949/tg-s3"[m
+  [1;37m}[m[1;37m,[m
+  [1;37m{[m
+    [1;34m"description"[m[1;37m:[m [32m"Caches build artifacts to S3 compatible storage backends"[m[1;37m,[m
+    [1;34m"forksCount"[m[1;37m:[m 32[1;37m,[m
+    [1;34m"fullName"[m[1;37m:[m [32m"drone-plugins/drone-s3-cache"[m[1;37m,[m
+    [1;34m"isArchived"[m[1;37m:[m [33mfalse[m[1;37m,[m
+    [1;34m"language"[m[1;37m:[m [32m"Go"[m[1;37m,[m
+    [1;34m"license"[m[1;37m:[m [1;37m{[m
+      [1;34m"key"[m[1;37m:[m [32m"apache-2.0"[m[1;37m,[m
+      [1;34m"name"[m[1;37m:[m [32m"Apache License 2.0"[m[1;37m,[m
+      [1;34m"url"[m[1;37m:[m [32m"https://api.github.com/licenses/apache-2.0"[m
+    [1;37m}[m[1;37m,[m
+    [1;34m"stargazersCount"[m[1;37m:[m 28[1;37m,[m
+    [1;34m"updatedAt"[m[1;37m:[m [32m"2024-07-25T15:11:00Z"[m[1;37m,[m
+    [1;34m"url"[m[1;37m:[m [32m"https://github.com/drone-plugins/drone-s3-cache"[m
+  [1;37m}[m[1;37m,[m
+  [1;37m{[m
+    [1;34m"description"[m[1;37m:[m [32m"Terraform provider for MinIO and S3-compatible storage (R2, B2, Hetzner, Spaces) — buckets, IAM, replication, lifecycle, encryption & more."[m[1;37m,[m
+    [1;34m"forksCount"[m[1;37m:[m 100[1;37m,[m
+    [1;34m"fullName"[m[1;37m:[m [32m"aminueza/terraform-provider-minio"[m[1;37m,[m
+    [1;34m"isArchived"[m[1;37m:[m [33mfalse[m[1;37m,[m
+    [1;34m"language"[m[1;37m:[m [32m"Go"[m[1;37m,[m
+    [1;34m"license"[m[1;37m:[m [1;37m{[m
+      [1;34m"key"[m[1;37m:[m [32m"agpl-3.0"[m[1;37m,[m
+      [1;34m"name"[m[1;37m:[m [32m"GNU Affero General Public License v3.0"[m[1;37m,[m
+      [1;34m"url"[m[1;37m:[m [32m"https://api.github.com/licenses/agpl-3.0"[m
+    [1;37m}[m[1;37m,[m
+    [1;34m"stargazersCount"[m[1;37m:[m 341[1;37m,[m
+    [1;34m"updatedAt"[m[1;37m:[m [32m"2026-08-12T14:43:00Z"[m[1;37m,[m
+    [1;34m"url"[m[1;37m:[m [32m"https://github.com/aminueza/terraform-provider-minio"[m
+  [1;37m}[m[1;37m,[m
+  [1;37m{[m
+    [1;34m"description"[m[1;37m:[m [32m"S3-compatible storage in Zig. Zero dependencies."[m[1;37m,[m
+    [1;34m"forksCount"[m[1;37m:[m 9[1;37m,[m
+    [1;34m"fullName"[m[1;37m:[m [32m"Lulzx/zs3"[m[1;37m,[m
+    [1;34m"isArchived"[m[1;37m:[m [33mfalse[m[1;37m,[m
+    [1;34m"language"[m[1;37m:[m [32m"Zig"[m[1;37m,[m
+    [1;34m"license"[m[1;37m:[m [1;37m{[m
+      [1;34m"key"[m[1;37m:[m [32m"wtfpl"[m[1;37m,[m
+      [1;34m"name"[m[1;37m:[m [32m"Do What The F*ck You Want To Public License"[m[1;37m,[m
+      [1;34m"url"[m[1;37m:[m [32m"https://api.github.com/licenses/wtfpl"[m
+    [1;37m}[m[1;37m,[m
+    [1;34m"stargazersCount"[m[1;37m:[m 187[1;37m,[m
+    [1;34m"updatedAt"[m[1;37m:[m [32m"2026-08-13T07:18:13Z"[m[1;37m,[m
+    [1;34m"url"[m[1;37m:[m [32m"https://github.com/Lulzx/zs3"[m
+  [1;37m}[m[1;37m,[m
+  [1;37m{[m
+    [1;34m"description"[m[1;37m:[m [32m"S3-compatible storage resource plugin for iRODS"[m[1;37m,[m
+    [1;34m"forksCount"[m[1;37m:[m 16[1;37m,[m
+    [1;34m"fullName"[m[1;37m:[m [32m"irods/irods_resource_plugin_s3"[m[1;37m,[m
+    [1;34m"isArchived"[m[1;37m:[m [33mfalse[m[1;37m,[m
+    [1;34m"language"[m[1;37m:[m [32m"C++"[m[1;37m,[m
+    [1;34m"license"[m[1;37m:[m [1;37m{[m
+      [1;34m"key"[m[1;37m:[m [32m"other"[m[1;37m,[m
+      [1;34m"name"[m[1;37m:[m [32m"Other"[m[1;37m,[m
+      [1;34m"url"[m[1;37m:[m [32m""[m
+    [1;37m}[m[1;37m,[m
+    [1;34m"stargazersCount"[m[1;37m:[m 12[1;37m,[m
+    [1;34m"updatedAt"[m[1;37m:[m [32m"2026-08-10T19:25:34Z"[m[1;37m,[m
+    [1;34m"url"[m[1;37m:[m [32m"https://github.com/irods/irods_resource_plugin_s3"[m
+  [1;37m}[m[1;37m,[m
+  [1;37m{[m
+    [1;34m"description"[m[1;37m:[m [32m"Amazon S3-compatible storage backend for openBalena"[m[1;37m,[m
+    [1;34m"forksCount"[m[1;37m:[m 13[1;37m,[m
+    [1;34m"fullName"[m[1;37m:[m [32m"balena-io/open-balena-s3"[m[1;37m,[m
+    [1;34m"isArchived"[m[1;37m:[m [33mfalse[m[1;37m,[m
+    [1;34m"language"[m[1;37m:[m [32m"Shell"[m[1;37m,[m
+    [1;34m"license"[m[1;37m:[m [1;37m{[m
+      [1;34m"key"[m[1;37m:[m [32m"agpl-3.0"[m[1;37m,[m
+      [1;34m"name"[m[1;37m:[m [32m"GNU Affero General Public License v3.0"[m[1;37m,[m
+      [1;34m"url"[m[1;37m:[m [32m"https://api.github.com/licenses/agpl-3.0"[m
+    [1;37m}[m[1;37m,[m
+    [1;34m"stargazersCount"[m[1;37m:[m 13[1;37m,[m
+    [1;34m"updatedAt"[m[1;37m:[m [32m"2026-08-05T04:14:44Z"[m[1;37m,[m
+    [1;34m"url"[m[1;37m:[m [32m"https://github.com/balena-io/open-balena-s3"[m
+  [1;37m}[m
+[1;37m][m
+QUERY:task queue durable workflow
+[1;37m[[m[1;37m][m
+QUERY:browser extension automation
+[1;37m[[m
+  [1;37m{[m
+    [1;34m"description"[m[1;37m:[m [32m"A browser extension automation testing tool"[m[1;37m,[m
+    [1;34m"forksCount"[m[1;37m:[m 0[1;37m,[m
+    [1;34m"fullName"[m[1;37m:[m [32m"sonic0002/pikabo"[m[1;37m,[m
+    [1;34m"isArchived"[m[1;37m:[m [33mfalse[m[1;37m,[m
+    [1;34m"language"[m[1;37m:[m [32m"TypeScript"[m[1;37m,[m
+    [1;34m"license"[m[1;37m:[m [1;37m{[m
+      [1;34m"key"[m[1;37m:[m [32m"mit"[m[1;37m,[m
+      [1;34m"name"[m[1;37m:[m [32m"MIT License"[m[1;37m,[m
+      [1;34m"url"[m[1;37m:[m [32m"https://api.github.com/licenses/mit"[m
+    [1;37m}[m[1;37m,[m
+    [1;34m"stargazersCount"[m[1;37m:[m 4[1;37m,[m
+    [1;34m"updatedAt"[m[1;37m:[m [32m"2026-08-07T10:11:02Z"[m[1;37m,[m
+    [1;34m"url"[m[1;37m:[m [32m"https://github.com/sonic0002/pikabo"[m
+  [1;37m}[m[1;37m,[m
+  [1;37m{[m
+    [1;34m"description"[m[1;37m:[m [32m"Run a browser extension in a sandboxed web browser and without any fear of corrupting or loosing your real data."[m[1;37m,[m
+    [1;34m"forksCount"[m[1;37m:[m 1[1;37m,[m
+    [1;34m"fullName"[m[1;37m:[m [32m"ivan-sincek/browser-extension-automation"[m[1;37m,[m
+    [1;34m"isArchived"[m[1;37m:[m [33mfalse[m[1;37m,[m
+    [1;34m"language"[m[1;37m:[m [32m"Python"[m[1;37m,[m
+    [1;34m"license"[m[1;37m:[m [1;37m{[m
+      [1;34m"key"[m[1;37m:[m [32m"mit"[m[1;37m,[m
+      [1;34m"name"[m[1;37m:[m [32m"MIT License"[m[1;37m,[m
+      [1;34m"url"[m[1;37m:[m [32m"https://api.github.com/licenses/mit"[m
+    [1;37m}[m[1;37m,[m
+    [1;34m"stargazersCount"[m[1;37m:[m 5[1;37m,[m
+    [1;34m"updatedAt"[m[1;37m:[m [32m"2026-05-09T18:23:48Z"[m[1;37m,[m
+    [1;34m"url"[m[1;37m:[m [32m"https://github.com/ivan-sincek/browser-extension-automation"[m
+  [1;37m}[m[1;37m,[m
+  [1;37m{[m
+    [1;34m"description"[m[1;37m:[m [32m"Puppeteer Browser Extension Automation is a testing project that uses Puppeteer to automate end-to-end testing of a browser extension. It enables scripted browser interactions, extension loading, and automated validation of extension behavior in a controlled Chromium environment."[m[1;37m,[m
+    [1;34m"forksCount"[m[1;37m:[m 2[1;37m,[m
+    [1;34m"fullName"[m[1;37m:[m [32m"zccott/puppeteer-automation"[m[1;37m,[m
+    [1;34m"isArchived"[m[1;37m:[m [33mfalse[m[1;37m,[m
+    [1;34m"language"[m[1;37m:[m [32m"JavaScript"[m[1;37m,[m
+    [1;34m"license"[m[1;37m:[m [1;37m{[m
+      [1;34m"key"[m[1;37m:[m [32m""[m[1;37m,[m
+      [1;34m"name"[m[1;37m:[m [32m""[m[1;37m,[m
+      [1;34m"url"[m[1;37m:[m [32m""[m
+    [1;37m}[m[1;37m,[m
+    [1;34m"stargazersCount"[m[1;37m:[m 2[1;37m,[m
+    [1;34m"updatedAt"[m[1;37m:[m [32m"2026-02-23T14:09:14Z"[m[1;37m,[m
+    [1;34m"url"[m[1;37m:[m [32m"https://github.com/zccott/puppeteer-automation"[m
+  [1;37m}[m[1;37m,[m
+  [1;37m{[m
+    [1;34m"description"[m[1;37m:[m [32m"A browser extension automation tool"[m[1;37m,[m
+    [1;34m"forksCount"[m[1;37m:[m 0[1;37m,[m
+    [1;34m"fullName"[m[1;37m:[m [32m"NikEmman/workwork"[m[1;37m,[m
+    [1;34m"isArchived"[m[1;37m:[m [33mfalse[m[1;37m,[m
+    [1;34m"language"[m[1;37m:[m [32m"JavaScript"[m[1;37m,[m
+    [1;34m"license"[m[1;37m:[m [1;37m{[m
+      [1;34m"key"[m[1;37m:[m [32m"mit"[m[1;37m,[m
+      [1;34m"name"[m[1;37m:[m [32m"MIT License"[m[1;37m,[m
+      [1;34m"url"[m[1;37m:[m [32m"https://api.github.com/licenses/mit"[m
+    [1;37m}[m[1;37m,[m
+    [1;34m"stargazersCount"[m[1;37m:[m 0[1;37m,[m
+    [1;34m"updatedAt"[m[1;37m:[m [32m"2026-06-06T17:14:01Z"[m[1;37m,[m
+    [1;34m"url"[m[1;37m:[m [32m"https://github.com/NikEmman/workwork"[m
+  [1;37m}[m[1;37m,[m
+  [1;37m{[m
+    [1;34m"description"[m[1;37m:[m [32m"Enhanced skill-creator with browser extension automation"[m[1;37m,[m
+    [1;34m"forksCount"[m[1;37m:[m 0[1;37m,[m
+    [1;34m"fullName"[m[1;37m:[m [32m"Dreamrealai/skill-creator-v2"[m[1;37m,[m
+    [1;34m"isArchived"[m[1;37m:[m [33mtrue[m[1;37m,[m
+    [1;34m"language"[m[1;37m:[m [32m"Python"[m[1;37m,[m
+    [1;34m"license"[m[1;37m:[m [1;37m{[m
+      [1;34m"key"[m[1;37m:[m [32m"apache-2.0"[m[1;37m,[m
+      [1;34m"name"[m[1;37m:[m [32m"Apache License 2.0"[m[1;37m,[m
+      [1;34m"url"[m[1;37m:[m [32m"https://api.github.com/licenses/apache-2.0"[m
+    [1;37m}[m[1;37m,[m
+    [1;34m"stargazersCount"[m[1;37m:[m 0[1;37m,[m
+    [1;34m"updatedAt"[m[1;37m:[m [32m"2026-04-27T04:56:35Z"[m[1;37m,[m
+    [1;34m"url"[m[1;37m:[m [32m"https://github.com/Dreamrealai/skill-creator-v2"[m
+  [1;37m}[m[1;37m,[m
+  [1;37m{[m
+    [1;34m"description"[m[1;37m:[m [32m"A google chrome browser extension: automation crawl web pages and get particular DOM elements,save it."[m[1;37m,[m
+    [1;34m"forksCount"[m[1;37m:[m 0[1;37m,[m
+    [1;34m"fullName"[m[1;37m:[m [32m"350050183/crawl_webpage"[m[1;37m,[m
+    [1;34m"isArchived"[m[1;37m:[m [33mfalse[m[1;37m,[m
+    [1;34m"language"[m[1;37m:[m [32m"JavaScript"[m[1;37m,[m
+    [1;34m"license"[m[1;37m:[m [1;37m{[m
+      [1;34m"key"[m[1;37m:[m [32m""[m[1;37m,[m
+      [1;34m"name"[m[1;37m:[m [32m""[m[1;37m,[m
+      [1;34m"url"[m[1;37m:[m [32m""[m
+    [1;37m}[m[1;37m,[m
+    [1;34m"stargazersCount"[m[1;37m:[m 0[1;37m,[m
+    [1;34m"updatedAt"[m[1;37m:[m [32m"2019-11-30T14:05:32Z"[m[1;37m,[m
+    [1;34m"url"[m[1;37m:[m [32m"https://github.com/350050183/crawl_webpage"[m
+  [1;37m}[m[1;37m,[m
+  [1;37m{[m
+    [1;34m"description"[m[1;37m:[m [32m"A collection of AI-powered coding projects, browser extensions, automation bots, prompts, UI designs, and experiments."[m[1;37m,[m
+    [1;34m"forksCount"[m[1;37m:[m 0[1;37m,[m
+    [1;34m"fullName"[m[1;37m:[m [32m"mlwithshuvo7/Vibe-Coding"[m[1;37m,[m
+    [1;34m"isArchived"[m[1;37m:[m [33mfalse[m[1;37m,[m
+    [1;34m"language"[m[1;37m:[m [32m"JavaScript"[m[1;37m,[m
+    [1;34m"license"[m[1;37m:[m [1;37m{[m
+      [1;34m"key"[m[1;37m:[m [32m"mit"[m[1;37m,[m
+      [1;34m"name"[m[1;37m:[m [32m"MIT License"[m[1;37m,[m
+      [1;34m"url"[m[1;37m:[m [32m"https://api.github.com/licenses/mit"[m
+    [1;37m}[m[1;37m,[m
+    [1;34m"stargazersCount"[m[1;37m:[m 0[1;37m,[m
+    [1;34m"updatedAt"[m[1;37m:[m [32m"2026-07-18T21:34:06Z"[m[1;37m,[m
+    [1;34m"url"[m[1;37m:[m [32m"https://github.com/mlwithshuvo7/Vibe-Coding"[m
+  [1;37m}[m[1;37m,[m
+  [1;37m{[m
+    [1;34m"description"[m[1;37m:[m [32m""[m[1;37m,[m
+    [1;34m"forksCount"[m[1;37m:[m 0[1;37m,[m
+    [1;34m"fullName"[m[1;37m:[m [32m"Ivos1991/browser_extension_automation"[m[1;37m,[m
+    [1;34m"isArchived"[m[1;37m:[m [33mfalse[m[1;37m,[m
+    [1;34m"language"[m[1;37m:[m [32m"Python"[m[1;37m,[m
+    [1;34m"license"[m[1;37m:[m [1;37m{[m
+      [1;34m"key"[m[1;37m:[m [32m""[m[1;37m,[m
+      [1;34m"name"[m[1;37m:[m [32m""[m[1;37m,[m
+      [1;34m"url"[m[1;37m:[m [32m""[m
+    [1;37m}[m[1;37m,[m
+    [1;34m"stargazersCount"[m[1;37m:[m 0[1;37m,[m
+    [1;34m"updatedAt"[m[1;37m:[m [32m"2026-05-07T12:47:43Z"[m[1;37m,[m
+    [1;34m"url"[m[1;37m:[m [32m"https://github.com/Ivos1991/browser_extension_automation"[m
+  [1;37m}[m[1;37m,[m
+  [1;37m{[m
+    [1;34m"description"[m[1;37m:[m [32m""[m[1;37m,[m
+    [1;34m"forksCount"[m[1;37m:[m 0[1;37m,[m
+    [1;34m"fullName"[m[1;37m:[m [32m"Photon101/browser-extension-automation-starter"[m[1;37m,[m
+    [1;34m"isArchived"[m[1;37m:[m [33mfalse[m[1;37m,[m
+    [1;34m"language"[m[1;37m:[m [32m"JavaScript"[m[1;37m,[m
+    [1;34m"license"[m[1;37m:[m [1;37m{[m
+      [1;34m"key"[m[1;37m:[m [32m""[m[1;37m,[m
+      [1;34m"name"[m[1;37m:[m [32m""[m[1;37m,[m
+      [1;34m"url"[m[1;37m:[m [32m""[m
+    [1;37m}[m[1;37m,[m
+    [1;34m"stargazersCount"[m[1;37m:[m 0[1;37m,[m
+    [1;34m"updatedAt"[m[1;37m:[m [32m"2026-05-17T06:33:38Z"[m[1;37m,[m
+    [1;34m"url"[m[1;37m:[m [32m"https://github.com/Photon101/browser-extension-automation-starter"[m
+  [1;37m}[m[1;37m,[m
+  [1;37m{[m
+    [1;34m"description"[m[1;37m:[m [32m"Field-tested building blocks for browser-extension automation on Salesforce Lightning: deep Shadow DOM queries, Aura-safe events, safety-gated name matching + a Claude Code skill"[m[1;37m,[m
+    [1;34m"forksCount"[m[1;37m:[m 0[1;37m,[m
+    [1;34m"fullName"[m[1;37m:[m [32m"Yechan-Ahn/sfdc-automation-kit"[m[1;37m,[m
+    [1;34m"isArchived"[m[1;37m:[m [33mfalse[m[1;37m,[m
+    [1;34m"language"[m[1;37m:[m [32m"JavaScript"[m[1;37m,[m
+    [1;34m"license"[m[1;37m:[m [1;37m{[m
+      [1;34m"key"[m[1;37m:[m [32m"mit"[m[1;37m,[m
+      [1;34m"name"[m[1;37m:[m [32m"MIT License"[m[1;37m,[m
+      [1;34m"url"[m[1;37m:[m [32m"https://api.github.com/licenses/mit"[m
+    [1;37m}[m[1;37m,[m
+    [1;34m"stargazersCount"[m[1;37m:[m 0[1;37m,[m
+    [1;34m"updatedAt"[m[1;37m:[m [32m"2026-07-31T04:17:23Z"[m[1;37m,[m
+    [1;34m"url"[m[1;37m:[m [32m"https://github.com/Yechan-Ahn/sfdc-automation-kit"[m
+  [1;37m}[m
+[1;37m][m
+QUERY:cross runtime javascript engine
+[1;37m[[m[1;37m][m
+QUERY:package release artifacts
+[1;37m[[m
+  [1;37m{[m
+    [1;34m"description"[m[1;37m:[m [32m"Packaged release artifacts for ai-proxy-service (source: veildawn/ai-proxy-service)"[m[1;37m,[m
+    [1;34m"forksCount"[m[1;37m:[m 1[1;37m,[m
+    [1;34m"fullName"[m[1;37m:[m [32m"veildawn/ai-proxy-releases"[m[1;37m,[m
+    [1;34m"isArchived"[m[1;37m:[m [33mfalse[m[1;37m,[m
+    [1;34m"language"[m[1;37m:[m [32m""[m[1;37m,[m
+    [1;34m"license"[m[1;37m:[m [1;37m{[m
+      [1;34m"key"[m[1;37m:[m [32m""[m[1;37m,[m
+      [1;34m"name"[m[1;37m:[m [32m""[m[1;37m,[m
+      [1;34m"url"[m[1;37m:[m [32m""[m
+    [1;37m}[m[1;37m,[m
+    [1;34m"stargazersCount"[m[1;37m:[m 8[1;37m,[m
+    [1;34m"updatedAt"[m[1;37m:[m [32m"2026-08-07T06:12:20Z"[m[1;37m,[m
+    [1;34m"url"[m[1;37m:[m [32m"https://github.com/veildawn/ai-proxy-releases"[m
+  [1;37m}[m[1;37m,[m
+  [1;37m{[m
+    [1;34m"description"[m[1;37m:[m [32m"Open Design fork — packaged release artifacts + auto-update feed"[m[1;37m,[m
+    [1;34m"forksCount"[m[1;37m:[m 0[1;37m,[m
+    [1;34m"fullName"[m[1;37m:[m [32m"ffantasy94/open-design-releases"[m[1;37m,[m
+    [1;34m"isArchived"[m[1;37m:[m [33mfalse[m[1;37m,[m
+    [1;34m"language"[m[1;37m:[m [32m""[m[1;37m,[m
+    [1;34m"license"[m[1;37m:[m [1;37m{[m
+      [1;34m"key"[m[1;37m:[m [32m""[m[1;37m,[m
+      [1;34m"name"[m[1;37m:[m [32m""[m[1;37m,[m
+      [1;34m"url"[m[1;37m:[m [32m""[m
+    [1;37m}[m[1;37m,[m
+    [1;34m"stargazersCount"[m[1;37m:[m 1[1;37m,[m
+    [1;34m"updatedAt"[m[1;37m:[m [32m"2026-06-29T02:20:58Z"[m[1;37m,[m
+    [1;34m"url"[m[1;37m:[m [32m"https://github.com/ffantasy94/open-design-releases"[m
+  [1;37m}[m[1;37m,[m
+  [1;37m{[m
+    [1;34m"description"[m[1;37m:[m [32m"C++ quiz system with UI, data layer, build scripts, and packaged release artifacts."[m[1;37m,[m
+    [1;34m"forksCount"[m[1;37m:[m 0[1;37m,[m
+    [1;34m"fullName"[m[1;37m:[m [32m"burntcookiedough/quiz_system"[m[1;37m,[m
+    [1;34m"isArchived"[m[1;37m:[m [33mfalse[m[1;37m,[m
+    [1;34m"language"[m[1;37m:[m [32m"C++"[m[1;37m,[m
+    [1;34m"license"[m[1;37m:[m [1;37m{[m
+      [1;34m"key"[m[1;37m:[m [32m""[m[1;37m,[m
+      [1;34m"name"[m[1;37m:[m [32m""[m[1;37m,[m
+      [1;34m"url"[m[1;37m:[m [32m""[m
+    [1;37m}[m[1;37m,[m
+    [1;34m"stargazersCount"[m[1;37m:[m 0[1;37m,[m
+    [1;34m"updatedAt"[m[1;37m:[m [32m"2026-05-04T12:29:11Z"[m[1;37m,[m
+    [1;34m"url"[m[1;37m:[m [32m"https://github.com/burntcookiedough/quiz_system"[m
+  [1;37m}[m[1;37m,[m
+  [1;37m{[m
+    [1;34m"description"[m[1;37m:[m [32m"Hermes skill for 嘉立创EDA / EasyEDA Pro extension development, with templates, references, and packaged release artifact."[m[1;37m,[m
+    [1;34m"forksCount"[m[1;37m:[m 0[1;37m,[m
+    [1;34m"fullName"[m[1;37m:[m [32m"Jasonzld/lceda-extension-development-skill-20260409-042947"[m[1;37m,[m
+    [1;34m"isArchived"[m[1;37m:[m [33mfalse[m[1;37m,[m
+    [1;34m"language"[m[1;37m:[m [32m"TypeScript"[m[1;37m,[m
+    [1;34m"license"[m[1;37m:[m [1;37m{[m
+      [1;34m"key"[m[1;37m:[m [32m"mit"[m[1;37m,[m
+      [1;34m"name"[m[1;37m:[m [32m"MIT License"[m[1;37m,[m
+      [1;34m"url"[m[1;37m:[m [32m"https://api.github.com/licenses/mit"[m
+    [1;37m}[m[1;37m,[m
+    [1;34m"stargazersCount"[m[1;37m:[m 0[1;37m,[m
+    [1;34m"updatedAt"[m[1;37m:[m [32m"2026-04-09T11:37:51Z"[m[1;37m,[m
+    [1;34m"url"[m[1;37m:[m [32m"https://github.com/Jasonzld/lceda-extension-development-skill-20260409-042947"[m
+  [1;37m}[m
+[1;37m][m
