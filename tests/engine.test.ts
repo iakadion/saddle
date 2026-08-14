@@ -25,7 +25,7 @@ import { bridgeplan, materializationledger, materializationrecord, workingadmiss
 import { cachedecision, cacheeligibility, executeisolated, magicbytes, transformationcache, transformationkey, wasmplan } from "../binary/transform.js";
 import { archiveinspection, extractarchive } from "../binary/archive.js";
 import { artifacthandoff, cancellationplan, providerchain, renderdispatch } from "../runners/chain.js";
-import { deliverymanifest, pwaplan, verifydelivery } from "../delivery/manifest.js";
+import { cdncapabilities, deliverymanifest, pwaplan, verifydelivery } from "../delivery/manifest.js";
 import { applicationbridge, dnsplan, miniappplan } from "../surfaces/requirements.js";
 import { validatesession } from "../domain/sessions.js";
 import { detectcontenttype, normalizeresponse, normalizeresult } from "../scrape/normalize.js";
@@ -1261,6 +1261,7 @@ test("keeps PWA registration declarative and capability gated", () => {
   const plan = pwaplan({ scope: "/saddle/", offline: true, capabilities: { serviceworker: true } });
   assert.equal(plan.state, "caller-registers");
   assert.equal(plan.cache, "caller-configures");
+  assert.deepEqual(cdncapabilities({ immutable: true, range: true, integrityheaders: true, cors: true }), { version: 1, immutable: true, purge: false, range: true, integrityheaders: true, cors: true, visibility: "public", state: "caller-reports" });
 });
 
 test("keeps Mini App validation and DNS mutation caller-owned", () => {

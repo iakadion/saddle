@@ -211,7 +211,7 @@
 
 - [x] Define a chunk-delivery manifest for verified JavaScript, WASM, binary-derived, and static artifacts with media type, digest, size, order, and integrity metadata.
 - [x] Define a delivery policy that prohibits dynamic code execution through chunk metadata and requires content-addressed immutable references.
-- [ ] Define a CDN capability report for immutable caching, purge support, range delivery, integrity headers, CORS policy, and public/private visibility.
+- [x] Define a CDN capability report for immutable caching, purge support, range delivery, integrity headers, CORS policy, and public/private visibility.
 - [x] Define PWA integration as a caller-owned web adapter with offline scope, cache policy, update policy, and permission boundaries.
 - [x] Define service-worker integration as an optional host surface and never as a long-lived library background worker.
 - [x] Define a Telegram Mini App adapter contract that carries caller-supplied validation, origin policy, capability reports, and no embedded bot token.

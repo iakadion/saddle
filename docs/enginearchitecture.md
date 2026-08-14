@@ -61,6 +61,8 @@ The public contract uses plain objects and factory functions. The engine never r
 
 `deliverymanifest` keeps ordered chunks immutable through content type, size, and SHA-256 metadata. `verifydelivery` checks received bytes without evaluating JavaScript or WASM. `pwaplan` only describes scope, offline intent, update policy, and declared service-worker support; the host decides whether to register anything.
 
+`cdncapabilities` records only caller-reported delivery properties such as immutable caching, purge support, range delivery, integrity headers, CORS, and visibility. It never performs a CDN probe, purge, upload, or configuration mutation.
+
 `miniappplan`, `dnsplan`, and `applicationbridge` add deployment-neutral application requirements. Mini App plans reject token-bearing input and require an HTTPS origin plus a caller-selected validation method. DNS records list ownership, DNSSEC and HTTPS requirements but cannot buy a domain, change a zone, or obtain a certificate. Surface bridges only report declared capabilities for browser, desktop, mobile, extension, and Mini App targets.
 
 ## execution lifecycle

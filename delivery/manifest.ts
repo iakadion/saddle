@@ -39,6 +39,12 @@ export function pwaplan(input = {}) {
   return Object.freeze({ version: 1, scope, offline, state: serviceworker ? "caller-registers" : "unsupported", update: input.update === "manual" ? "manual" : "prompt", cache: offline ? "caller-configures" : "disabled" });
 }
 
+/** Validates a caller-reported CDN capability set without contacting a CDN provider. */
+export function cdncapabilities(input = {}) {
+  const visibility = input.visibility === "private" ? "private" : "public";
+  return Object.freeze({ version: 1, immutable: input.immutable === true, purge: input.purge === true, range: input.range === true, integrityheaders: input.integrityheaders === true, cors: input.cors === true, visibility, state: "caller-reports" });
+}
+
 const contenttypes = new Set(["application/javascript", "application/wasm", "application/octet-stream", "application/json", "text/plain"]);
 function normalizechunk(input, index) { const contenttype = String(input?.contenttype ?? "application/octet-stream"); if (!contenttypes.has(contenttype)) throw new TypeError(`delivery manifest content type is unsupported: ${contenttype}`); return Object.freeze({ id: nonempty(input?.id, "delivery manifest chunk id"), index: safeindex(input?.index ?? index), sha256: digest(input?.sha256, "delivery manifest chunk sha256"), sizebytes: positive(input?.sizebytes, "delivery manifest chunk sizebytes"), contenttype }); }
 function nonempty(value, name) { const output = String(value ?? ""); if (!output) throw new TypeError(`${name} is required`); return output; }
