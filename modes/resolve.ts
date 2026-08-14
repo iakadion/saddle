@@ -33,6 +33,16 @@ export function modecapabilities(profile) {
   };
 }
 
+/** Returns a stable cross-runtime capability report without starting infrastructure. */
+export function capabilityreport(options = {}) {
+  const overrides = { runtime: options.runtime ?? "unknown", memory: options.memory ?? "internal", file: options.file ?? "internal", dependency: options.dependency ?? "internal", visibility: options.visibility ?? "headless", pair: options.pair ?? "without" };
+  const profiles = modeaxes.execution.map((execution) => {
+    const profile = resolvemode({ ...overrides, execution });
+    return { mode: execution, capabilities: profile.capabilities, profile };
+  });
+  return { version: 1, axes: Object.fromEntries(Object.entries(modeaxes).map(([key, values]) => [key, [...values]])), overrides, profiles, infrastructure: { host: "caller-owned", port: "caller-owned", credentials: "caller-owned", provider: "caller-owned" } };
+}
+
 /** Applies one profile to a caller supplied operation. */
 export async function withmode(options, operation) { if (typeof operation !== "function") throw new TypeError("mode operation is required"); return operation(resolvemode(options)); }
 

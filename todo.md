@@ -609,3 +609,29 @@ The following blocks are the execution order for the complete ecosystem. A block
 
 - [ ] Create the authorized consolidation commit without creating a tag or release.
 - [ ] Keep the SignPath form, signing provider approval and release tags pending for a later version.
+
+### Objective driven batches 1.8.16 to 1.8.20
+
+- [x] Read the scope README as a non-deterministic objective reference and preserve it unchanged.
+- [x] Audit current engine gaps before selecting each feature; do not precommit to a file path or implementation recipe.
+- [x] Batch 1.8.16: implement the highest-value missing engine contract selected from the audit: paginated S3-compatible listing.
+- [x] Batch 1.8.16: add focused tests, documentation and verification evidence.
+- [x] Batch 1.8.17: implement the next objective-driven feature after 1.8.16 is verified: bounded recursive sitemap traversal.
+- [x] Batch 1.8.17: add focused tests, documentation and verification evidence.
+- [x] Batch 1.8.18: implement the next objective-driven feature after 1.8.17 is verified: bounded and exportable browser action recording.
+- [x] Batch 1.8.18: add focused tests, documentation and verification evidence.
+- [x] Batch 1.8.19: implement the next objective-driven feature after 1.8.18 is verified: strict workflow inputs and deterministic trigger matching.
+- [x] Batch 1.8.19: add focused tests, documentation and verification evidence.
+- [x] Batch 1.8.20: implement the next objective-driven feature after 1.8.19 is verified: cross-runtime capability report.
+- [x] Batch 1.8.20: run the complete local verification matrix and record release readiness.
+- [ ] Wait for the user's explicit notice before committing or tagging the five new batches.
+
+### Version 1.8.12 commit and 1.8.21 research
+
+- [ ] Audit every active version identifier and release-facing manifest before committing 1.8.12.
+- [ ] Create and push the authorized 1.8.12 commit without changing immutable tag `v1.8.11`.
+- [ ] Define a comparable-repository selection rubric for storage, browser, scraper, workflow, memory, packaging and cross-runtime features.
+- [ ] Research up to 50 public repositories with working implementations and preserve URLs, license, activity and feature evidence.
+- [ ] Compare implementation patterns against Saddle's root-first, caller-owned and transport-neutral architecture.
+- [ ] Select only implementable, non-infringing gaps for 1.8.21 and document rejected patterns with reasons.
+- [ ] Implement and verify the selected 1.8.21 features before any 1.8.21 tag or release.

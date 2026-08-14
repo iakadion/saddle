@@ -6,7 +6,7 @@
   <strong>Storage-backed jobs, scraping contracts and portable runners for Node.js.</strong><br/>
   <strong>Binary computing engine, agent browser, scraper and packager.</strong><br/>
   <a href="https://github.com/wenathlan/saddle/actions/workflows/ci.yml"><img src="https://github.com/wenathlan/saddle/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
-  <a href="https://github.com/wenathlan/saddle/releases/tag/v1.8.11"><img src="https://img.shields.io/badge/release-v1.8.11-d35d3d" alt="Release 1.8.11" /></a>
+  <a href="https://github.com/wenathlan/saddle/releases/tag/v1.8.12"><img src="https://img.shields.io/badge/release-v1.8.12-d35d3d" alt="Release 1.8.12" /></a>
   <a href="https://github.com/wenathlan/saddle/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-GPL--3.0--only-202a2f" alt="GPL 3.0 only license" /></a>
 </p>
 

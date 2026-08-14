@@ -42,11 +42,12 @@ function extractSitemapUrls(xml: string): string[] {
   return urls;
 }
 
-export async function fetchSitemap(url: string, options: { timeout?: number; headers?: Record<string, string> } = {}): Promise<SitemapResult> {
+export async function fetchSitemap(url: string, options: { timeout?: number; headers?: Record<string, string>; fetcher?: typeof fetch } = {}): Promise<SitemapResult> {
   const startTime = Date.now();
+  const fetcher = options.fetcher ?? fetch;
 
   try {
-    const response = await fetch(url, {
+    const response = await fetcher(url, {
       headers: {
         'User-Agent': 'DevThink-WebScrape/2.0 (sitemap parser)',
         ...options.headers,
@@ -112,20 +113,35 @@ export async function discoverSitemaps(siteUrl: string): Promise<string[]> {
   return [...new Set(found)];
 }
 
-export async function parseSitemap(url: string, options: { timeout?: number; followIndexes?: boolean; maxUrls?: number } = {}): Promise<SitemapUrl[]> {
-  const { followIndexes = true, maxUrls = 10000 } = options;
-  const result = await fetchSitemap(url, options);
-  let allUrls = [...result.urls];
+export async function parseSitemap(url: string, options: { timeout?: number; headers?: Record<string, string>; fetcher?: typeof fetch; followIndexes?: boolean; maxUrls?: number; maxDepth?: number } = {}): Promise<SitemapUrl[]> {
+  const maxUrls = Math.max(0, Number(options.maxUrls ?? 10000));
+  const maxDepth = Math.max(0, Number(options.maxDepth ?? 8));
+  const allUrls: SitemapUrl[] = [];
+  const seenSitemaps = new Set<string>();
+  const seenUrls = new Set<string>();
 
-  if (followIndexes && result.sitemaps.length > 0) {
-    for (const sitemapUrl of result.sitemaps) {
-      if (allUrls.length >= maxUrls) break;
-      try {
-        const subResult = await fetchSitemap(sitemapUrl, options);
-        allUrls.push(...subResult.urls);
-      } catch {}
+  async function visit(current: string, depth: number) {
+    const identity = sitemapidentity(current);
+    if (seenSitemaps.has(identity) || depth > maxDepth || allUrls.length >= maxUrls) return;
+    seenSitemaps.add(identity);
+    const result = await fetchSitemap(current, options);
+    for (const item of result.urls) {
+      const itemidentity = sitemapidentity(item.loc);
+      if (!seenUrls.has(itemidentity)) {
+        seenUrls.add(itemidentity);
+        allUrls.push(item);
+        if (allUrls.length >= maxUrls) return;
+      }
+    }
+    if (options.followIndexes === false || depth >= maxDepth) return;
+    for (const child of result.sitemaps) {
+      if (allUrls.length >= maxUrls) return;
+      await visit(child, depth + 1);
     }
   }
 
-  return allUrls.slice(0, maxUrls);
+  await visit(url, 0);
+  return allUrls;
 }
+
+function sitemapidentity(value: string) { try { const parsed = new URL(value); parsed.hash = ""; return parsed.href; } catch { return String(value).trim(); } }

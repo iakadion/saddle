@@ -17,6 +17,7 @@ import { engine } from "../runtime/engine.js";
 import { localstorage } from "../storage/local.js";
 import { chunkedstorage } from "../storage/chunked.js";
 import { contentstorage } from "../storage/content.js";
+import { s3compatible } from "../storage/s3compatible.js";
 import { tieredcache } from "../storage/cache.js";
 import { comparemanifests, objectmanifest, storagecapabilities, syncobject } from "../storage/sync.js";
 import { validatesession } from "../domain/sessions.js";
@@ -50,7 +51,7 @@ import { sqlpersistence, mysql2persistence } from "../persistence/sql.js";
 import { drizzlepersistence } from "../persistence/drizzle.js";
 import { prismapersistence } from "../persistence/prisma.js";
 import { workflowmanifest } from "../workflow/manifest.js";
-import { triggerregistry, triggermatch, workflowtriggers } from "../workflow/triggers.js";
+import { triggerregistry, triggermatch, workflowtriggers, validateworkflowinputs } from "../workflow/triggers.js";
 import { githubworkflow, gitlabworkflow, woodpeckerworkflow } from "../workflow/templates.js";
 import { workflowregistry } from "../workflow/registry.js";
 import { memoryengine } from "../memory/engine.js";
@@ -59,6 +60,7 @@ import { normalizeurl, crawl, persistentqueue as crawlqueue, crawlfrontier } fro
 import { saddleservice } from "../api/service.js";
 import { filesessions } from "../sessions/file.js";
 import { extractwithschema } from "../scrape/schema.js";
+import { parseSitemap } from "../scrape/sitemap.js";
 import { mcpserver } from "../mcp/server.js";
 import { runtimename, runtimefeatures } from "../runtime/detect.js";
 import { deadline } from "../runtime/abort.js";
@@ -95,7 +97,7 @@ import { nodeserver } from "../server/node.js";
 import { githubcontents } from "../storage/githubcontents.js";
 import { filehosting } from "../storage/filehosting.js";
 import { modecatalog, operationmodes, validatemode } from "../modes/matrix.js";
-import { resolvemode, withmode } from "../modes/resolve.js";
+import { resolvemode, withmode, capabilityreport } from "../modes/resolve.js";
 import { binaryplan as portablebinaryplan, binarymanifest, buildbinary } from "../binary/build.js";
 import { targetcatalog, targetmanifest } from "../surfaces/targets.js";
 import { persistentqueue } from "../queue/persistent.js";
@@ -496,6 +498,18 @@ test("normalizes workflow triggers and matches due events", () => {
   assert.equal(registry.match("triggered", { type: "webhook" }).matched, true);
 });
 
+test("validates workflow inputs and produces deterministic trigger identities", () => {
+  const manifest = workflowmanifest({ name: "typed", command: "npm test", trigger: "dispatch", inputs: { count: { type: "number", required: true }, dryrun: { type: "boolean", default: false }, mode: { type: "string", choices: ["safe", "fast"] } } });
+  const valid = validateworkflowinputs(manifest, { count: "2", mode: "safe" });
+  assert.deepEqual(valid.values, { count: 2, dryrun: false, mode: "safe" });
+  assert.equal(valid.valid, true);
+  assert.equal(validateworkflowinputs(manifest, { count: "invalid", mode: "unsafe" }).valid, false);
+  const first = triggermatch(manifest, { type: "dispatch", inputs: { count: "2", mode: "safe" } });
+  const second = triggermatch(manifest, { type: "dispatch", inputs: { mode: "safe", count: "2" } });
+  assert.equal(first.matched, true);
+  assert.equal(first.requestid, second.requestid);
+});
+
 test("resumes a remote run through legal transitions and preserves history", async () => {
   const calls = [];
   const run = resumablerun({
@@ -524,6 +538,22 @@ test("loads from the first backend and persists to all backends", async () => {
   await memory.persist("new", "saddle");
   assert.equal(new TextDecoder().decode(second.get("new").data), "saddle");
   assert.equal((await memory.safeload("missing")).success, false);
+});
+
+test("lists paginated S3-compatible objects with a caller signer", async () => {
+  const calls = [];
+  const pages = [
+    "<ListBucketResult><IsTruncated>true</IsTruncated><NextContinuationToken>next&amp;token</NextContinuationToken><Contents><Key>folder/a&amp;b.txt</Key><Size>3</Size><ETag>&quot;etag-a&quot;</ETag></Contents></ListBucketResult>",
+    "<ListBucketResult><IsTruncated>false</IsTruncated><Contents><Key>folder/c.txt</Key><Size>4</Size><LastModified>2026-08-14T00:00:00Z</LastModified></Contents></ListBucketResult>",
+  ];
+  const storage = s3compatible({ endpoint: "https://s3.example.test", bucket: "bucket", sign: async (input) => { calls.push(input); return { url: "https://s3.example.test/bucket", headers: {} }; }, fetcher: async () => new Response(pages.shift(), { status: 200 }) });
+  const entries = await storage.list("folder/", { maxkeys: 1 });
+  assert.deepEqual(entries.map((entry) => entry.key), ["folder/a&b.txt", "folder/c.txt"]);
+  assert.equal(entries[0].sha256, "etag-a");
+  assert.equal(calls.length, 2);
+  assert.equal(calls[0].query["list-type"], "2");
+  assert.equal(calls[0].query.prefix, "folder/");
+  assert.equal(calls[1].query["continuation-token"], "next&token");
 });
 
 test("bounds the hot working set with LRU eviction and byte accounting", async () => {
@@ -568,6 +598,16 @@ test("crawls breadth first with normalized same domain links", async () => {
   assert.equal(normalizeurl("https://example.com/next?utm_source=x"), "https://example.com/next");
   assert.equal(result.results.length, 2);
   assert.equal(result.results[1].title, "next");
+});
+
+test("follows nested sitemap indexes without duplicates or cycles", async () => {
+  const pages = new Map([
+    ["https://example.test/root.xml", "<sitemapindex><sitemap><loc>https://example.test/child.xml</loc></sitemap><sitemap><loc>https://example.test/root.xml</loc></sitemap></sitemapindex>"],
+    ["https://example.test/child.xml", "<sitemapindex><sitemap><loc>https://example.test/leaf.xml</loc></sitemap></sitemapindex>"],
+    ["https://example.test/leaf.xml", "<urlset><url><loc>https://example.test/a</loc></url><url><loc>https://example.test/a#fragment</loc></url><url><loc>https://example.test/b</loc></url></urlset>"],
+  ]);
+  const result = await parseSitemap("https://example.test/root.xml", { maxUrls: 2, maxDepth: 4, fetcher: async (url) => new Response(pages.get(String(url)), { status: 200 }) });
+  assert.deepEqual(result.map((entry) => entry.loc), ["https://example.test/a", "https://example.test/b"]);
 });
 
 test("prioritizes crawl frontier items and applies per-domain budgets", () => {
@@ -878,6 +918,14 @@ test("resolves open library and binary mode profiles", async () => {
   assert.equal(await withmode({ execution: "cli", memory: "physical" }, (value) => value.execution), "cli");
 });
 
+test("reports cross-runtime capabilities without owning infrastructure", () => {
+  const report = capabilityreport({ memory: "external", pair: "with" });
+  assert.equal(report.profiles.length, report.axes.execution.length);
+  assert.equal(report.profiles.find((profile) => profile.mode === "browser").capabilities.browser, true);
+  assert.equal(report.profiles.find((profile) => profile.mode === "desktopapp").profile.memory, "external");
+  assert.deepEqual(report.infrastructure, { host: "caller-owned", port: "caller-owned", credentials: "caller-owned", provider: "caller-owned" });
+});
+
 test("plans binary builds and open platform targets", async () => {
   const plan = portablebinaryplan({ target: "wasm", entry: "index.js", externaldependencies: ["socket"] });
   assert.equal(binarymanifest(plan).reproducible, true);
@@ -953,4 +1001,20 @@ test("records snapshot boundaries and action provenance", () => {
   assert.equal(manifest.eventcount, 2);
   assert.equal(manifest.events[1].snapshotid, "snap1");
   assert.equal(manifest.events[1].payload.ref, "e1");
+});
+
+test("bounds recorder events and exports immutable manifests", () => {
+  const recorder = actionrecorder({ startedat: 100, maxevents: 2 });
+  recorder.snapshot({ snapshotid: "snap1", tabid: "tab1" });
+  recorder.action({ action: "click", payload: { ref: "e1" }, tabid: "tab1" });
+  recorder.action({ action: "type", payload: { value: "safe" }, tabid: "tab1" });
+  const manifest = recorder.manifest();
+  assert.equal(manifest.eventcount, 2);
+  assert.equal(manifest.dropped, 1);
+  assert.equal(manifest.events[0].type, "action");
+  const exported = JSON.parse(recorder.exportjson());
+  exported.events[1].payload.value = "mutated outside";
+  assert.equal(recorder.manifest().events[1].payload.value, "safe");
+  recorder.clear();
+  assert.deepEqual(recorder.manifest().events, []);
 });

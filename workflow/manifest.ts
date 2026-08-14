@@ -9,6 +9,7 @@ export function workflowmanifest(options = {}) {
     name: options.name,
     command: options.command,
     trigger: options.trigger ?? ["manual", "dispatch"],
+    inputs: options.inputs ?? {},
     platforms: options.platforms ?? forgeprofiles,
     environment: options.environment ?? {},
     artifacts: options.artifacts ?? ["results/**"],
