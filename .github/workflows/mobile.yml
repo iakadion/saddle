@@ -15,7 +15,7 @@ on:
         default: false
         type: boolean
       allow_test_signing:
-        description: Allow a clearly labeled CI test key for manual Android builds only
+        description: Allow a clearly labeled CI test key for manual Android builds; published releases use it automatically only when production Android secrets are unavailable
         required: true
         default: false
         type: boolean
@@ -25,6 +25,10 @@ permissions:
 
 env:
   RELEASE_TAG: ${{ inputs.release_tag || github.event.release.tag_name }}
+
+concurrency:
+  group: saddle-mobile-${{ github.event.release.tag_name || inputs.release_tag || github.ref }}
+  cancel-in-progress: false
 
 jobs:
   android:
@@ -100,7 +104,7 @@ jobs:
               printf 'keyPassword=%s\n' "$ANDROID_KEY_PASSWORD"
             } > android/keystore.properties
             echo "SADDLE_SIGNING=caller-owned" >> "$GITHUB_ENV"
-          elif [ "${{ github.event_name }}" = "workflow_dispatch" ] && [ "${{ inputs.allow_test_signing }}" = "true" ]; then
+          elif [ "${{ github.event_name }}" = "release" ] || [ "${{ inputs.allow_test_signing }}" = "true" ]; then
             keytool -genkeypair -v -keystore "$RUNNER_TEMP/saddle-test.jks" -storepass changeit -keypass changeit -alias saddle-test -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Saddle CI Test,O=Saddle,C=US"
             {
               printf 'storeFile=%s\n' "$RUNNER_TEMP/saddle-test.jks"
@@ -110,7 +114,7 @@ jobs:
             } > android/keystore.properties
             echo "SADDLE_SIGNING=ci-test-key" >> "$GITHUB_ENV"
           else
-            echo "Production Android signing secrets are required for release builds; enable allow_test_signing only for a manual test run."
+            echo "Manual Android builds require production signing secrets or allow_test_signing=true."
             exit 1
           fi
       - name: build optimized android release

@@ -649,3 +649,17 @@
 - [ ] Verify container pull, OCI label, and smoke-test results after GHCR publication.
 - [ ] Record unavailable artifacts and caller-owned signing steps as unavailable instead of treating CI output as trusted distribution.
 - [ ] Mark each completed 1.8.16 checklist task only after its evidence is linked from the appropriate research, implementation, test, or release record.
+
+## 9. Workflow hygiene and cache retention
+
+- [ ] Inventory every YAML file under `.github`, distinguishing workflow definitions, composite-action metadata, and service-owned configuration paths.
+- [ ] Verify GitHub's current required paths for workflow files, composite actions, and Dependabot configuration before moving any YAML file.
+- [ ] Standardize workflow definitions under `.github/workflows` without moving composite action metadata out of its executable action directory.
+- [ ] Keep Dependabot configuration in its GitHub-required location and document why it is not a runnable workflow.
+- [ ] Review the mobile workflow triggers and ensure release Android artifacts can be produced automatically with an explicit non-production signing state when caller secrets are unavailable.
+- [ ] Preserve production Android signing as caller-owned when all configured signing secrets are present.
+- [ ] Inventory existing GitHub Actions caches by key, size, ref, last-access time, and workflow source before changing retention behavior.
+- [ ] Add a least-privilege cache-retention workflow that deletes only caches from this repository after a documented age threshold and never deletes artifacts or release assets.
+- [ ] Add bounded cache cleanup after completed workflows only where it does not remove a cache required by concurrent work.
+- [ ] Add workflow validation and deterministic tests or inspections for YAML syntax, permissions, triggers, and cache deletion scope.
+- [ ] Record the resulting cache policy, manual fallback, and non-goals in release or operational documentation.

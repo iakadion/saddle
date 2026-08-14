@@ -23,7 +23,7 @@ jobs:
         with:
           node-version: 26.7.0
           registry-url: https://npm.pkg.github.com
-          cache: npm
+          package-manager-cache: false
       - name: resolve release version
         id: release
         uses: ./.github/actions/releaseversion

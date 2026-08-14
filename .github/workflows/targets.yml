@@ -10,7 +10,23 @@ on:
         required: true
         default: desktopapp
         type: choice
-        options: [application, computer, desktopapp, android, ios, cli, binary, browser, extension, web, libreoffice, mcp, vsix, container]
+        options:
+          [
+            application,
+            computer,
+            desktopapp,
+            android,
+            ios,
+            cli,
+            binary,
+            browser,
+            extension,
+            web,
+            libreoffice,
+            mcp,
+            vsix,
+            container,
+          ]
       format:
         description: output format
         required: true
@@ -57,14 +73,14 @@ jobs:
           - { target: container, format: oci }
     steps:
       - name: checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
       - name: setup node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
           node-version: 26.7.0
-          cache: npm
+          package-manager-cache: false
       - name: resolve release version
         if: github.event_name == 'release'
         id: releaseversion
