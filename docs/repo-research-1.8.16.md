@@ -266,6 +266,19 @@ The sources support a future **release readiness receipt** with `sourceTag`, `ma
 
 The sources support a future **runner environment receipt** with `forgeKind`, `workflowDialect`, `runnerImage`, `os`, `architecture`, `toolchainEvidence`, `executionBoundary`, `ephemeralClaim`, `networkAuthority` and `credentialOwner`. A receipt may identify declared compatibility, but must not claim an action will run, an image is available or a runner is isolated without operator-provided evidence.
 
+## Additional extension, PWA and Mini App evidence
+
+| Candidate | Primary source | Evidence observed | Relevance to Saddle | Disposition |
+|---|---|---|---|---|
+| `wxt-dev/wxt` | [repository][81] | The MIT framework supports extension manifest variants, browser targets, TypeScript entrypoints and packaging features. | It corroborates treating extension target and manifest version as explicit build inputs. | Consider extension-target requirement validation; do not add an extension build framework. |
+| `PlasmoHQ/plasmo` | [repository][82] | The MIT framework exposes content scripts, background workers, storage, messaging, environment files and remote-code options. | It demonstrates platform powers that must remain outside Saddle's shared core. | Keep capability declarations; reject remote code, storage/messaging runtime, environment handling and automated deployment. |
+| `vite-pwa/vite-plugin-pwa` | [repository][83] | The MIT plugin generates service workers, manifest data, offline caching and update behavior. | It corroborates modeling cache strategy and lifecycle as explicit requirements. | Retain declarative PWA planning; never register a service worker or mutate a cache from core. |
+| `Telegram-Mini-Apps/tma.js` | [repository][84] | The MIT monorepo provides client/backend packages and documentation for Telegram Mini Apps. | It corroborates keeping platform lifecycle and request validation in platform-specific adapters. | Retain Mini App requirement contract; do not connect to Telegram, validate init data or handle credentials in core. |
+
+## Additional surface disposition
+
+The evidence supports a future **surface capability receipt** with `surfaceKind`, `manifestVersion`, `declaredPermissions`, `backgroundLifecycle`, `cacheStrategy`, `platformValidationRequired`, `credentialOwner` and `deploymentOwner`. It may validate contradictory requirements, but cannot register workers, request browser permissions, contact a Mini App platform or publish an extension.
+
 ## References
 
 [1]: https://github.com/browser-use/browser-use "browser-use/browser-use"
@@ -348,3 +361,7 @@ The sources support a future **runner environment receipt** with `forgeKind`, `w
 [78]: https://github.com/forgejo/forgejo "forgejo/forgejo"
 [79]: https://github.com/woodpecker-ci/woodpecker "woodpecker-ci/woodpecker"
 [80]: https://github.com/nektos/act "nektos/act"
+[81]: https://github.com/wxt-dev/wxt "wxt-dev/wxt"
+[82]: https://github.com/PlasmoHQ/plasmo "PlasmoHQ/plasmo"
+[83]: https://github.com/vite-pwa/vite-plugin-pwa "vite-pwa/vite-plugin-pwa"
+[84]: https://github.com/Telegram-Mini-Apps/telegram-apps "Telegram-Mini-Apps/tma.js"
