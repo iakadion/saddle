@@ -6,4 +6,4 @@ Saddle-owned iOS configuration stays at the `ios/` root. The nested Xcode projec
 
 The workflow runs on macOS, synchronizes the web output with `npx cap sync ios` and builds an IPA only when Apple certificates, provisioning profiles and export settings are explicitly configured. No signing material is stored in the repository, and an unsigned or unprovisioned build is never described as App Store ready.
 
-The public artifact contract is version-derived and uses the dotted lowercase pattern `saddle.ipa.1.8.12.ipa`. Generated Xcode build directories and temporary archives remain excluded from version control.
+The public artifact contract is version-derived and uses the dotted lowercase pattern `saddle.ipa.1.8.13.ipa`. Generated Xcode build directories and temporary archives remain excluded from version control.

@@ -20,7 +20,7 @@ The content bridge runs in Chrome's isolated world. It exposes bounded page meta
 
 ## deterministic release artifact
 
-The Node-only build adapter creates an isolated unpacked artifact with the release version in its manifest. A caller can run `npm run extension:build -- --version 1.8.2 --output build/extension` and package that directory with the archive tool available in the host environment. The release workflow derives the version from the published tag and attaches `saddle-extension-<version>.zip` without changing the source manifest.
+The Node-only build adapter creates an isolated unpacked artifact with the release version in its manifest. A caller can run `npm run extension:build -- --version 1.8.13 --output build/extension` and package that directory with the archive tool available in the host environment. The release workflow derives the version from the published tag and attaches `saddle.extension.<version>.zip` without changing the source manifest.
 
 ## next slices
 

@@ -46,6 +46,19 @@ The release contains **38 attached assets**. Desktop binaries are unsigned, Andr
 | Manifests | `manifest.android.1.8.13.json`, `manifest.container.1.8.13.json`, `manifest.desktop.linux.arm64.1.8.13.json`, `manifest.desktop.linux.x64.1.8.13.json`, `manifest.desktop.macos.arm64.1.8.13.json`, `manifest.desktop.macos.x64.1.8.13.json`, `manifest.desktop.windows.arm64.1.8.13.json`, `manifest.desktop.windows.x64.1.8.13.json`, `manifest.desktop.windows.x86.1.8.13.json` | metadata |
 | Checksums | `sha256.android.1.8.13`, `sha256.container.1.8.13`, `sha256.desktop.linux.arm64.1.8.13`, `sha256.desktop.linux.x64.1.8.13`, `sha256.desktop.macos.arm64.1.8.13`, `sha256.desktop.macos.x64.1.8.13`, `sha256.desktop.windows.arm64.1.8.13`, `sha256.desktop.windows.x64.1.8.13`, `sha256.desktop.windows.x86.1.8.13` | integrity metadata |
 
+## Registry publication
+
+The six registry workflows derive the version from the same `v1.8.13` release tag through `.github/actions/releaseversion`. The release-event jobs completed successfully for GitHub Packages npm, public npmjs, Maven and RubyGems. GHCR completed successfully after the corrected Buildx and image-hardening rerun. NuGet was rerun manually from `main` and completed successfully with `Saddle.1.8.13.nupkg`; the package is published to GitHub Packages NuGet under the `wenathlan` owner. Public `nuget.org` was not targeted by the repository workflow and is not claimed here.
+
+| Registry | Workflow | Verified version | Result |
+|---|---|---:|---|
+| GitHub Packages npm | `publishgithubnpm.yml` | `1.8.13` | success |
+| Public npmjs | `publishnpmjs.yml` | `1.8.13` | success |
+| GHCR | `publishghcr.yml` | `1.8.13` | success after corrected rerun |
+| Maven GitHub Packages | `publishmaven.yml` | `1.8.13` | success |
+| NuGet GitHub Packages | `publishnuget.yml` | `1.8.13` | success after explicit rerun |
+| RubyGems GitHub Packages | `publishrubygems.yml` | `1.8.13` | success |
+
 ## Verification
 
 The queue, structured extraction, browser context, workflow compensation and retention features passed the active engine and release test suites. The release validation workflow passed, and the live release contains the 38 assets listed above. The original release-event security, GHCR and mobile failures were superseded by successful corrected reruns; production signing remains pending.

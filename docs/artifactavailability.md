@@ -85,7 +85,7 @@ The release also contains `manifest.*.1.8.11.json` and `sha256.*.1.8.11` files f
 
 ## 1.8.12 release matrix
 
-Version 1.8.12 is prepared to publish the expanded matrix below. The release workflows derive the version from the `v1.8.12` tag and generate the checksum and manifest files beside each surface artifact. Sizes and final signing states remain pending until the release workflows complete; this section does not claim that an artifact exists before CI attaches it.
+Version 1.8.12 was published with the expanded matrix below. The release workflows derived the version from the `v1.8.12` tag and attached the generated checksum and manifest files beside each available surface artifact. The release contains 38 assets; iOS was not attached because caller-owned Apple signing and provisioning were not configured.
 
 | Surface | Architectures | Artifact naming contract |
 | --- | --- | --- |
@@ -97,11 +97,11 @@ Version 1.8.12 is prepared to publish the expanded matrix below. The release wor
 | Container | OCI | `saddle.container.1.8.12.tar.gz` |
 | Browser extension | Manifest V3 | `saddle.extension.1.8.12.zip` |
 
-Each surface also emits `sha256.*.1.8.12`, `manifest.*.1.8.12.json` and, where enabled by the release path, SBOM and provenance metadata. The manifest must state `unsigned`, `ci-test-key`, `caller-owned`, `notarized` or the verified provider status actually produced by CI.
+Each surface also emits `sha256.*.1.8.12`, `manifest.*.1.8.12.json` and, where enabled by the release path, SBOM and provenance metadata. The Android manifest records `ci-test-key`, desktop manifests record `unsigned` and the container manifest records `caller-owned`. No state implies production trust.
 
 ## 1.8.13 release matrix
 
-Version 1.8.13 keeps the release-tag-derived matrix and adds deterministic retention metadata to generated artifact manifests. The implementation records retention policy and keep/prune decisions but never removes caller-owned files. Final URLs, checksums, sizes and signing states remain pending until the corresponding release workflow completes.
+Version 1.8.13 keeps the release-tag-derived matrix and adds deterministic retention metadata to generated artifact manifests. The implementation records retention policy and keep/prune decisions but never removes caller-owned files. The release contains 38 assets; iOS was not attached because caller-owned Apple signing and provisioning were not configured.
 
 | Surface | Architectures | Artifact naming contract |
 | --- | --- | --- |
@@ -113,4 +113,4 @@ Version 1.8.13 keeps the release-tag-derived matrix and adds deterministic reten
 | Container | OCI | `saddle.container.1.8.13.tar.gz` |
 | Browser extension | Manifest V3 | `saddle.extension.1.8.13.zip` |
 
-Each surface also emits `sha256.*.1.8.13`, `manifest.*.1.8.13.json` and, where enabled by the release path, SBOM and provenance metadata. The manifest may additionally carry `retention`, `retentionplan` and `retentionevaluatedat`; these fields are advisory execution decisions and do not imply deletion or publication.
+Each surface also emits `sha256.*.1.8.13`, `manifest.*.1.8.13.json` and, where enabled by the release path, SBOM and provenance metadata. The Android manifest records `ci-test-key`, desktop manifests record `unsigned` and the container manifest records `caller-owned`. The manifest may additionally carry `retention`, `retentionplan` and `retentionevaluatedat`; these fields are advisory execution decisions and do not imply deletion or publication.

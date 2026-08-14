@@ -655,3 +655,12 @@ The following blocks are the execution order for the complete ecosystem. A block
 - [x] Resolve Android SDK tool paths explicitly for `apksigner` and keep AAB/APK verification fail-closed without assuming the tool is on `PATH`.
 - [x] Diagnose the failed security workflow for v1.8.12 and v1.8.13; the original failures were unverified TruffleHog results, while corrected security runs passed.
 - [x] Diagnose GHCR publication failures for v1.8.12 and v1.8.13; corrected image hardening and Buildx attestations produced a successful manual GHCR run.
+
+### Version 1.8.13 alignment and historical README consolidation
+
+- [x] Audit every version-bearing file, package manifest, release note and workflow for stale `1.8.12` values.
+- [x] Inspect all historical README versions and README-related commits using Git history only, preserving unique information and removing no valid content.
+- [x] Consolidate the current README with the missing historical information in a clean, non-duplicated structure.
+- [x] Verify NuGet metadata and publication workflow derive `1.8.13` from the release tag and package metadata.
+- [x] Verify the six package publication workflows derive the same release version and do not rely on manually edited version constants.
+- [x] Run the complete local and workflow validation matrix, then publish the corrective NuGet 1.8.13 package only if the remote metadata is still stale.
