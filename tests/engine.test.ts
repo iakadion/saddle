@@ -22,7 +22,7 @@ import { tieredcache } from "../storage/cache.js";
 import { comparemanifests, objectmanifest, storagecapabilities, syncobject } from "../storage/sync.js";
 import { storagepool } from "../storage/pool.js";
 import { bridgeplan, materializationledger, materializationrecord, workingadmission } from "../memory/planner.js";
-import { cachedecision, executeisolated, magicbytes, transformationcache, transformationkey, wasmplan } from "../binary/transform.js";
+import { cachedecision, cacheeligibility, executeisolated, magicbytes, transformationcache, transformationkey, wasmplan } from "../binary/transform.js";
 import { archiveinspection, extractarchive } from "../binary/archive.js";
 import { artifacthandoff, cancellationplan, providerchain } from "../runners/chain.js";
 import { deliverymanifest, pwaplan, verifydelivery } from "../delivery/manifest.js";
@@ -1171,6 +1171,7 @@ test("plans WASM transformations from magic bytes with reproducible cache identi
   const manifest = transformationcache({ key, source, compiler, policyversion: 1, verified: true, outputs: [{ name: "module.wasm", sha256: source, sizebytes: 4 }] });
   assert.equal(cachedecision(manifest, manifest).reusable, true);
   assert.deepEqual(cachedecision(manifest, { ...manifest, policyversion: 2 }).reasons, ["policyversion"]);
+  assert.deepEqual(cacheeligibility({ verified: true, containssecrets: true, partial: true }).reasons, ["secrets", "partial"]);
 });
 
 test("executes transformations only through injected isolated adapters and verifies outputs", async () => {

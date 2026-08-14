@@ -141,7 +141,7 @@
 - [ ] Define CPU, wall-clock, memory, output-byte, file-count, and network capability budgets as portable request constraints.
 - [x] Define a content-addressed transformation key derived from input digest, normalized options, compiler identity, target descriptor, and policy version.
 - [x] Define a binary-cache manifest with source digest, transformation key, output digests, adapter identity, policy version, timestamp, and verification state.
-- [ ] Define a cache eligibility policy that prohibits caching outputs that contain secrets, personal data, unstable environment state, or unverified executable output.
+- [x] Define a cache eligibility policy that prohibits caching outputs that contain secrets, personal data, unstable environment state, or unverified executable output.
 - [ ] Define a cache retrieval policy that revalidates toolchain identity and output checksums before reuse.
 - [x] Define archive extraction limits for entry count, depth, path traversal, expansion ratio, output size, and executable-bit preservation.
 - [ ] Define a rendering-result contract for headless tasks that returns only caller-authorized artifacts and provenance.
@@ -164,7 +164,7 @@
 - [x] Test a transformation cache hit with an exact matching key and adapter identity.
 - [x] Test a cache miss after policy version changes.
 - [ ] Test a cache miss after compiler or emulator identity changes.
-- [ ] Test cache refusal for secret-bearing or unverified outputs.
+- [x] Test cache refusal for secret-bearing or unverified outputs.
 - [x] Test archive entry-count, depth, expansion, and traversal limits.
 - [ ] Test cancellation that marks a partial transformation non-cacheable.
 - [x] Test that no binary request causes a process, Docker container, shell command, network request, or host mount in the shared-core tests.

@@ -52,6 +52,17 @@ export function cachedecision(manifest, request) {
   return Object.freeze({ reusable: reasons.length === 0, reasons: Object.freeze(reasons), manifest: cached });
 }
 
+/** Rejects cache reuse for outputs that are sensitive, environment-bound, partial, or unverified. */
+export function cacheeligibility(input = {}) {
+  const reasons = [];
+  if (input.verified !== true) reasons.push("unverified");
+  if (input.containssecrets === true) reasons.push("secrets");
+  if (input.containsprivate === true) reasons.push("private-data");
+  if (input.environmentbound === true) reasons.push("environment-bound");
+  if (input.partial === true) reasons.push("partial");
+  return Object.freeze({ eligible: reasons.length === 0, reasons: Object.freeze(reasons) });
+}
+
 /** Runs a transformation only through an injected isolated adapter and verifies declared output digests. */
 export async function executeisolated(plan, adapter) {
   if (typeof adapter?.execute !== "function") throw transformerror("ISOLATED_EXECUTION_UNAVAILABLE", "isolated transformation adapter is required");
