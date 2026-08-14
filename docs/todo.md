@@ -703,6 +703,6 @@ The following blocks are the execution order for the complete ecosystem. A block
 
 ### Authorized execution order
 
-- [ ] Execute the selected 1.8.15 feature blocks in dependency order, keeping every change additive, provider-neutral, deterministicly tested, documented, and compatible with the root-first package structure.
-- [ ] Complete the 1.8.15 validation, version bump, release notes, artifact verification, immutable tag, GitHub release, and six-registry workflow checks before beginning the 1.8.16 research sample.
+- [x] Execute the selected 1.8.15 feature blocks in dependency order, keeping every change additive, provider-neutral, deterministicly tested, documented, and compatible with the root-first package structure.
+- [x] Complete the 1.8.15 validation, version bump, release notes, artifact verification, immutable tag, GitHub release, and six-registry workflow checks before beginning the 1.8.16 research sample; v1.8.15 has 38 assets, successful six-registry publication, and a manually dispatched Android `ci-test-key` fallback.
 - [ ] Start the 1.8.16 comparative research only after 1.8.15 completion evidence is recorded, then select and implement only evidence-backed gaps from the planned repository analysis.

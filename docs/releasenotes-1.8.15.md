@@ -31,6 +31,10 @@ The release workflows derive artifact names and package versions from `v1.8.15`.
 
 The six registry workflows publish from the same validated release tag, in container-first order: GHCR, GitHub Packages npm, public npmjs, Maven, NuGet GitHub Packages and RubyGems. GHCR must build, scan, push, pull, inspect its OCI version label and complete a smoke check. Production signing remains caller-owned; the release does not claim SignPath approval, Apple notarization or a production Android signing key unless a workflow reports those states.
 
+## Verified publication results
+
+The v1.8.15 release has **38 attached assets** after the desktop rerun completed. GHCR, GitHub Packages npm, npmjs, Maven, NuGet and RubyGems completed successfully from the release event. The initial release-event Android job correctly failed because no production signing secrets were present; manual run `31835215420` completed with the explicitly labeled `ci-test-key` fallback. The desktop rerun completed after a transient macOS asset-attachment failure, without changing the tag or claiming notarization.
+
 ## References
 
 [1]: https://github.com/wenathlan/saddle "Saddle source repository"
