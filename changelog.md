@@ -13,6 +13,11 @@
 	  ## [1.8.13] - 2026-08-14
 
 	    - Added caller-owned persistent queue leases, visibility timeouts, renewals, attempt accounting and idempotency keys.
+	    - Added schema-neutral structured extraction with field provenance, bounded UTF-8 payloads and injected parsers.
+	    - Added allowlisted browser snapshot projection with stable references and deterministic context byte budgets.
+	    - Added resumable workflow cancellation reasons and caller-owned idempotent compensation callbacks.
+	    - Added deterministic artifact retention policies and keep/prune decisions without implicit deletion.
+	    - Expanded the 1.8.21 comparative research matrix to 60 public repositories and documented the selected implementation boundaries.
 	    - Aligned active package, native, extension and crawler metadata to `1.8.13`.
 	    - Added the canonical [1.8.13 release notes](docs/releasenotes-1.8.13.md) while preserving the historical 1.8.12 record.
 
