@@ -84,6 +84,19 @@ Multiple independent sources support a potential **isolation capability receipt*
 
 The sample supports a future **release verification receipt** that binds a release tag, artifact digest, optional SBOM digest, expected workflow identity and evidence status. It must preserve the difference among absent, generated, downloaded and independently verified evidence. It cannot manufacture an attestation, signature or certificate, and no release-engineering implementation is selected until the workflow and registry sample is complete.
 
+## Extension, PWA, and Mini App evidence
+
+| Candidate | Primary source | Evidence observed | Relevance to Saddle | Disposition |
+|---|---|---|---|---|
+| `nanobrowser/nanobrowser` | [repository][25] | The Apache-2.0 extension runs in the user browser and emphasizes user-supplied LLM keys, local credential retention, settings and side-panel workflows. | It corroborates Saddle's extension-as-adapter surface and caller-owned credentials. | Consider a declarative extension capability report only; reject key storage, browser control or autonomous multi-agent execution in core. |
+| `GoogleChrome/chrome-extensions-samples` | [repository][26] | Official Apache-2.0 samples separate individual extension APIs and functional examples, including manifest-version migration materials. | It reinforces explicit manifest/permission documentation and adapter-specific tests. | Use as a compatibility reference; do not add permissions without an extension-specific implementation and user-facing rationale. |
+| `GoogleChrome/workbox` | [repository][27] | The MIT PWA toolkit handles caching strategies, service-worker lifecycle and offline behavior. | It corroborates treating PWA as a delivery adapter, not an engine runtime service. | Retain the 1.8.15 declarative PWA plan; no service-worker registration or cache mutation from the library. |
+| `Telegram-Mini-Apps/tma.js` | [repository][28] | The MIT TypeScript monorepo separates platform packages and documents client/backend development boundaries. | It corroborates keeping Mini App validation and platform SDK work outside a generic engine. | Consider a validated surface requirement descriptor only; do not embed Telegram SDK, secrets or platform validation. |
+
+## Surface disposition
+
+The evidence reinforces 1.8.15's declarative PWA, extension, DNS and Mini App requirements. No additional core implementation is selected: any future work must be an opt-in adapter package with a platform-specific permission review, a deterministic capability report and no implicit registration, credential flow or remote mutation.
+
 ## References
 
 [1]: https://github.com/browser-use/browser-use "browser-use/browser-use"
@@ -110,3 +123,7 @@ The sample supports a future **release verification receipt** that binds a relea
 [22]: https://github.com/sigstore/cosign "sigstore/cosign"
 [23]: https://github.com/anchore/syft "anchore/syft"
 [24]: https://github.com/aquasecurity/trivy "aquasecurity/trivy"
+[25]: https://github.com/nanobrowser/nanobrowser "nanobrowser/nanobrowser"
+[26]: https://github.com/GoogleChrome/chrome-extensions-samples "GoogleChrome/chrome-extensions-samples"
+[27]: https://github.com/GoogleChrome/workbox "GoogleChrome/workbox"
+[28]: https://github.com/Telegram-Mini-Apps/tma.js "Telegram-Mini-Apps/tma.js"
