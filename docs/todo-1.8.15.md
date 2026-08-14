@@ -46,7 +46,7 @@
 - [x] Define a provider-neutral storage-pool descriptor composed only of caller-supplied storage adapters and explicit read/write policies.
 - [x] Define a storage-pool member descriptor with identifier, priority, capability report, authority state, availability state, and health evidence.
 - [ ] Define a storage-pool read policy supporting first-healthy, verified-first, priority-first, and caller-provided selection strategies.
-- [ ] Define a storage-pool write policy supporting primary-only, best-effort mirror, quorum, and explicit fan-out modes.
+- [x] Define a storage-pool write policy supporting primary-only, best-effort mirror, quorum, and explicit fan-out modes.
 - [x] Define a storage-pool repair policy that can plan a missing-replica repair without performing it implicitly.
 - [ ] Define a storage-pool conflict policy that preserves version identity and never overwrites concurrent data without caller authorization.
 - [x] Define a storage-pool capability report that distinguishes range reads, strong checksums, list pagination, conditional writes, delete support, and object size limits.
@@ -78,8 +78,8 @@
 - [x] Test an unavailable primary with a verified secondary read path.
 - [x] Test a corrupt primary with a verified secondary read path.
 - [x] Test a digest mismatch that fails closed when strict verification is enabled.
-- [ ] Test a mirror write that records one success and one failure without falsely reporting quorum success.
-- [ ] Test a quorum write that succeeds only when the configured minimum is met.
+- [x] Test a mirror write that records one success and one failure without falsely reporting quorum success.
+- [x] Test a quorum write that succeeds only when the configured minimum is met.
 - [ ] Test a cancellation signal that stops remaining writes without inventing rollback success.
 - [x] Test a repair plan that does not mutate any adapter until the caller executes it.
 - [ ] Test pagination with deterministic continuation tokens and a hard page limit.

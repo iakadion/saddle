@@ -48,7 +48,7 @@ export function storagepool(options = {}) {
     const key = requiredkey(input.key);
     const data = await collectbytes(input.data);
     const digest = sha256(data);
-    const selected = selectable(members, options.memberids);
+    const selected = writeselection(selectable(members, options.memberids), options.mode);
     const budget = operationbudget(options.budget, selected.length);
     if (data.byteLength > budget.maxbytes) throw poolerror("STORAGE_POOL_BYTE_BUDGET", "storage pool write byte budget was exceeded", { key, maxbytes: budget.maxbytes, sizebytes: data.byteLength });
     const quorum = positiveinteger(options.quorum ?? 1, "storage pool quorum");
@@ -69,7 +69,7 @@ export function storagepool(options = {}) {
     const written = results.filter((result) => result.state === "written");
     metrics.bytes += data.byteLength * written.length;
     metrics.elapsedms += elapsed(clock, startedat);
-    const output = Object.freeze({ version: 1, key, sha256: digest, sizebytes: data.byteLength, quorum, state: written.length === selected.length ? "complete" : "partial", results: Object.freeze(results), written: written.length, budget, writtenat: Number(clock()) });
+    const output = Object.freeze({ version: 1, key, sha256: digest, sizebytes: data.byteLength, mode: options.mode ?? "fanout", quorum, state: written.length === selected.length ? "complete" : "partial", results: Object.freeze(results), written: written.length, budget, writtenat: Number(clock()) });
     if (written.length < quorum) throw poolerror("STORAGE_POOL_QUORUM_FAILED", "storage pool write quorum was not met", output);
     return output;
   }
@@ -145,6 +145,12 @@ function selectable(members, ids) {
   const selected = members.filter((member) => expected.has(member.id));
   if (selected.length !== expected.size) throw new TypeError("storage pool memberids include an unknown member");
   return selected;
+}
+
+function writeselection(members, mode = "fanout") {
+  const normalized = String(mode);
+  if (!new Set(["primary", "mirror", "fanout"]).has(normalized)) throw new TypeError("storage pool write mode is invalid");
+  return normalized === "primary" ? members.slice(0, 1) : members;
 }
 
 async function optionalhead(storage, key) { return typeof storage.head === "function" ? await storage.head(key) : null; }

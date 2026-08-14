@@ -1100,6 +1100,18 @@ test("records quorum writes and keeps repair planning side-effect free", async (
   await assert.rejects(() => pool.put({ key: "next.bin", data: new Uint8Array([4]) }, { quorum: 2 }), (error) => error.code === "STORAGE_POOL_QUORUM_FAILED");
 });
 
+test("selects primary, mirror, or fan-out storage writes explicitly", async () => {
+  const { memorystorage } = await import("../storage/memory.js");
+  const primary = memorystorage();
+  const secondary = memorystorage();
+  const pool = storagepool({ members: [{ id: "primary", storage: primary }, { id: "secondary", storage: secondary }] });
+  const primaryonly = await pool.put({ key: "primary.bin", data: new Uint8Array([1]) }, { mode: "primary" });
+  assert.equal(primaryonly.mode, "primary");
+  assert.equal(await primary.get("primary.bin").then((data) => data.byteLength), 1);
+  await assert.rejects(() => secondary.get("primary.bin"));
+  assert.equal((await pool.put({ key: "fanout.bin", data: new Uint8Array([2]) }, { mode: "fanout" })).written, 2);
+});
+
 test("enforces storage-pool operation budgets without background retries", async () => {
   const { memorystorage } = await import("../storage/memory.js");
   const storage = memorystorage();
