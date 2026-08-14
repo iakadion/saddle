@@ -1,5 +1,6 @@
 # Saddle - CODEOWNERS
-# Valid repository owners, August 2026
+# Repository organization: @wenathlan
+# Valid individual owners with repository write access, August 2026
 # Project: Saddle
-# All repository paths are jointly owned by the listed valid GitHub accounts.
-* @iakadion @wenathlan @inathlan @aasblor @nasblor
+# All repository paths are jointly owned by the listed individual GitHub accounts.
+* @iakadion @inathlan @aasblor @nasblor

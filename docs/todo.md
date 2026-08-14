@@ -688,5 +688,6 @@ The following blocks are the execution order for the complete ecosystem. A block
 
 - [x] Move this checklist from the repository root to `docs/todo.md` and update every active reference.
 - [x] Prevent future operational checklists from being created at the repository root.
-- [x] Replace invalid GitHub owners in CODEOWNERS, READMEs and documentation with only `@iakadion`, `@wenathlan`, `@inathlan`, `@aasblor` and `@nasblor`.
+- [x] Replace invalid GitHub owners in CODEOWNERS, READMEs and documentation with `@iakadion`, `@inathlan`, `@aasblor` and `@nasblor`; retain `@wenathlan` only as the repository organization and published package owner.
 - [x] Validate that no active CODEOWNERS entry references legacy invalid owner handles.
+- [ ] Inspect the GitHub CODEOWNERS API error and retain only valid accounts that the repository accepts as owners with write access.
