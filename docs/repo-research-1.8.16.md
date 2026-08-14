@@ -136,6 +136,19 @@ The completed sources reinforce the existing 1.8.15 chain capability model. A fu
 
 The sources validate the current Saddle approach rather than reveal a safe missing engine primitive: manifests and release notes must describe targets, artifacts and verification evidence; platform toolchains must build and sign outside the shared library. No 1.8.16 implementation is selected from this category.
 
+## Additional forge and runner evidence
+
+| Candidate | Primary source | Evidence observed | Relevance to Saddle | Disposition |
+|---|---|---|---|---|
+| `woodpecker-ci/woodpecker` | [repository][41] | The Apache-2.0 CI engine separates server, agent, pipeline and plugin surfaces and is used by a public forge. | It corroborates that CI controller, executor and plugin lifecycle belong outside a portable library contract. | Consider provider/plugin capability vocabulary only; do not embed a CI engine. |
+| `actions/actions-runner-controller` | [repository][42] | The Apache-2.0 Kubernetes controller orchestrates and scales self-hosted runner scale sets, including ephemeral container-backed runners. | It reinforces that runner scaling and lifecycle are deployment/operator responsibilities. | Consider ephemeral-runner evidence in adapter reports; do not introduce Kubernetes control-plane dependencies. |
+| Forgejo Actions administrator guide | [documentation][43] | Forgejo explicitly states that it relies on separately installed/configured runners; logs and artifacts are server-retained while cache stays on the runner. | It corroborates separating provider-owned retention and cache location in artifact reports. | Consider retention/capability facts from an adapter; do not assume workflow compatibility or provision runners. |
+| Forgejo Actions reference | [documentation][44] | Forgejo documents partial GitHub Actions compatibility and warns that `pull_request_target` with untrusted code can expose tokens and cache contents. | It corroborates requiring explicit trust and credential boundaries for any multi-forge workflow adapter. | Add this as a negative test criterion for future workflow-rendering work; no execution integration is selected. |
+
+## Additional CI disposition
+
+The independent sources strengthen a future adapter-level **runner provenance receipt**: it may report provider, workflow dialect, labels, runner scope, cache locality, artifact retention and an explicit trust boundary. It must not claim GitHub/Forgejo compatibility without a provider test, and it must reject a request that combines elevated credentials with untrusted checkout unless the caller records an explicit policy override.
+
 ## References
 
 [1]: https://github.com/browser-use/browser-use "browser-use/browser-use"
@@ -178,3 +191,7 @@ The sources validate the current Saddle approach rather than reveal a safe missi
 [38]: https://github.com/jreleaser/jreleaser "jreleaser/jreleaser"
 [39]: https://github.com/tauri-apps/tauri "tauri-apps/tauri"
 [40]: https://github.com/ionic-team/capacitor "ionic-team/capacitor"
+[41]: https://github.com/woodpecker-ci/woodpecker "woodpecker-ci/woodpecker"
+[42]: https://github.com/actions/actions-runner-controller "actions/actions-runner-controller"
+[43]: https://forgejo.org/docs/v15.0/admin/actions/ "Forgejo Actions administrator guide"
+[44]: https://forgejo.org/docs/v15.0/user/actions/reference/ "Forgejo Actions reference"
