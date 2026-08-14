@@ -651,3 +651,5 @@ The following blocks are the execution order for the complete ecosystem. A block
 - [ ] Run the complete local release gate immediately before creating each authorized tag or release.
 - [ ] Create only the confirmed missing tags and GitHub releases; do not publish unsigned binaries as trusted artifacts.
 - [ ] Verify each remote release, asset list, checksum manifest and workflow result after creation.
+- [ ] Make release-time Android fallback behavior explicit: use a CI test key only when production signing secrets are absent, label the resulting manifest `ci-test-key`, and never imply store trust.
+- [ ] Resolve Android SDK tool paths explicitly for `apksigner` and keep AAB/APK verification fail-closed without assuming the tool is on `PATH`.

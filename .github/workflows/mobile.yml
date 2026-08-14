@@ -133,7 +133,10 @@ jobs:
           test -n "$apk_source" && test -n "$aab_source"
           cp "$apk_source" "build/release-assets/android/${apk}"
           cp "$aab_source" "build/release-assets/android/${aab}"
-          apksigner verify --verbose "build/release-assets/android/${apk}"
+          sdk_root="${ANDROID_HOME:-${ANDROID_SDK_ROOT:-}}"
+          apksigner_path="$(find "$sdk_root/build-tools" -type f -name apksigner -perm -u+x -print 2>/dev/null | sort -V | tail -n 1)"
+          test -n "$apksigner_path"
+          "$apksigner_path" verify --verbose "build/release-assets/android/${apk}"
           jarsigner -verify -verbose -certs "build/release-assets/android/${aab}" >/dev/null
           sha256sum "build/release-assets/android/${apk}" "build/release-assets/android/${aab}" | sed 's#build/release-assets/android/##' > "build/release-assets/android/${checksums}"
           printf '{\n  "version": "%s",\n  "platform": "android",\n  "signing": "%s",\n  "optimization": "r8-and-resource-shrinking",\n  "files": ["%s", "%s"]\n}\n' "$version" "${SADDLE_SIGNING:-unknown}" "$apk" "$aab" > "build/release-assets/android/${manifest}"
