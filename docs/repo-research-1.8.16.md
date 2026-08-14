@@ -58,6 +58,19 @@ The initial workflow sample reinforces existing 1.8.15 behavior rather than sele
 
 The evidence favors a small, additive **provider mutation precondition receipt**: a caller can obtain a deterministic record that a requested write, restore or repair requires conditional-write support, expected digest evidence and declared size limits. It must neither mount a filesystem nor perform storage I/O. A second independent source has corroborated the conditional-write boundary, but implementation remains deferred until the research sample is broadened and the public naming is reviewed.
 
+## Sandbox, WASM, container, and binary isolation evidence
+
+| Candidate | Primary source | Evidence observed | Relevance to Saddle | Disposition |
+|---|---|---|---|---|
+| `ciresnave/wasm-sandbox` | [repository][17] | The MIT project models runtime, capability and resource-limit layers, including memory, CPU, filesystem and network boundaries. | It corroborates Saddle's planned WASM budget and injected-isolation-adapter contracts. | Consider a normalized capability/limit receipt; do not create a default executor or compile untrusted input. |
+| `aayushadhikari7/aegis` | [repository][18] | The dual MIT/Apache project uses zero permissions by default, explicit filesystem/clock/logging grants, fuel, memory, timeout and module validation. | It independently corroborates deny-by-default capabilities and pre-execution validation. | Consider explicit requested-versus-granted capability comparison; keep actual execution caller-owned. |
+| `anthropic-experimental/sandbox-runtime` | [repository][19] | The Apache-2.0 preview documents allow-only network egress, allow-only writes, platform-specific OS sandboxes and violation attribution. | It supports preserving denial reasons and per-invocation provenance in a future adapter contract. | Consider adapter result provenance only; do not ship OS sandbox commands, proxy setup or mutable host configuration. |
+| `opensandbox-group/OpenSandbox` | [repository][20] | The Apache-2.0 platform separates lifecycle APIs, command/file operations, egress policy, credential vault and container/microVM runtimes. | It corroborates a separation between core planning and an external sandbox service. | Consider generic capability-report fields; reject platform lifecycle management and secret injection from Saddle core. |
+
+## Isolation disposition
+
+Multiple independent sources support a potential **isolation capability receipt** that compares a requested operation against caller-reported resource, filesystem and network permissions. The receipt must declare `eligible`, `denied`, or `adapter-required`; it must not spawn a process, create a container, configure a proxy, or authorize network access. Implementation remains pending broader sampling and a review of existing `binary/transform.ts` exports.
+
 ## References
 
 [1]: https://github.com/browser-use/browser-use "browser-use/browser-use"
@@ -76,3 +89,7 @@ The evidence favors a small, additive **provider mutation precondition receipt**
 [14]: https://github.com/Barre/zerofs "Barre/ZeroFS"
 [15]: https://github.com/veged/omniFUSE "veged/omniFUSE"
 [16]: https://github.com/dennwc/cas "dennwc/cas"
+[17]: https://github.com/ciresnave/wasm-sandbox "ciresnave/wasm-sandbox"
+[18]: https://github.com/aayushadhikari7/aegis "aayushadhikari7/aegis"
+[19]: https://github.com/anthropic-experimental/sandbox-runtime "anthropic-experimental/sandbox-runtime"
+[20]: https://github.com/opensandbox-group/OpenSandbox "opensandbox-group/OpenSandbox"
