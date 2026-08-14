@@ -305,6 +305,19 @@ The sources support a future **storage identity and capability receipt** with `c
 
 The evidence supports a future **tool capability receipt** with `protocolVersion`, `schemaDigest`, `transportKind`, `requestedToolsets`, `allowedToolsets`, `readOnly`, `credentialOwner`, `consentRequired` and `adapterRequired`. It must not open a transport, spawn a server, acquire credentials, contact an API or treat a declared allow-list as an authorization grant.
 
+## Additional agent orchestration and observability evidence
+
+| Candidate | Primary source | Evidence observed | Relevance to Saddle | Disposition |
+|---|---|---|---|---|
+| `langchain-ai/langgraph` | [repository][93] | The MIT framework presents durable state, human oversight, memory and runtime visibility for long-running agents. | It corroborates serializable state transitions and approval points. | Consider a generic state-transition/approval receipt; do not add an agent runtime, persistence service or model integration. |
+| `microsoft/autogen` | [repository][94] | The code is MIT but the repository is in maintenance mode and includes model clients, MCP servers, code execution and multi-agent runtime layers. | It is both evidence for layered boundaries and a warning against depending on a maintenance-mode orchestration framework. | Record as an emergent-to-maintenance comparison; reject model, MCP process, code execution and credential flows. |
+| `PrefectHQ/prefect` | [repository][95] | The Apache-2.0 framework performs scheduling, retries, caching, event automation and tracking through a server or cloud service. | It reinforces that durable orchestration needs a declared operator and persistence authority. | Consider scheduled-work capability claims only; do not add a scheduler, service, retry loop or cloud client. |
+| `langfuse/langfuse` | [repository][96] | The MIT project offers LLM traces, evaluations and observability via hosted/self-hosted services, SDKs and credentials. | It corroborates trace identity and privacy-aware instrumentation boundaries. | Consider low-cardinality trace receipt metadata; do not add telemetry, prompts, evaluations, databases or external APIs. |
+
+## Additional agent disposition
+
+The evidence supports a future **execution trace receipt** with `runIdentity`, `stateDigest`, `transition`, `approvalState`, `toolCallIdentity`, `traceDigest`, `telemetryOwner`, `retentionOwner` and `redactionStatus`. It must not capture prompt content, store user data, invoke models, schedule work, retry tools or report a run as completed without an adapter-produced confirmation.
+
 ## References
 
 [1]: https://github.com/browser-use/browser-use "browser-use/browser-use"
@@ -399,3 +412,7 @@ The evidence supports a future **tool capability receipt** with `protocolVersion
 [90]: https://github.com/modelcontextprotocol/typescript-sdk "modelcontextprotocol/typescript-sdk"
 [91]: https://github.com/modelcontextprotocol/servers "modelcontextprotocol/servers"
 [92]: https://github.com/github/github-mcp-server "github/github-mcp-server"
+[93]: https://github.com/langchain-ai/langgraph "langchain-ai/langgraph"
+[94]: https://github.com/microsoft/autogen "microsoft/autogen"
+[95]: https://github.com/PrefectHQ/prefect "PrefectHQ/prefect"
+[96]: https://github.com/langfuse/langfuse "langfuse/langfuse"
