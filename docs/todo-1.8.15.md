@@ -1,0 +1,483 @@
+# Saddle 1.8.15 — implementation checklist
+
+> This plan translates the supplied vision documents into bounded, lawful, provider-neutral library work. It does not authorize account farming, quota circumvention, credential collection, hidden background execution, third-party binary execution, or claims that storage is physically equivalent to RAM or VRAM.
+
+## Completion rule
+
+- [ ] Treat a checklist item as complete only after its contract, implementation, deterministic tests, documentation impact, security review, and release impact are recorded.
+- [ ] Keep the active code version at 1.8.14 until every selected 1.8.15 feature has passed the full validation matrix.
+- [ ] Select features by demonstrable value, safety, compatibility, and testability rather than by the literal order of either scope reference.
+- [ ] Reject or defer speculative features that require untrusted native execution, hidden persistence, unauthorized provider automation, quota evasion, or unverifiable infrastructure claims.
+
+## 1. Governance, baseline, and feasibility
+
+- [ ] Keep the scope references unchanged and treat them as non-deterministic objectives rather than executable instructions.
+- [ ] Preserve the root-first layout and reject new project-owned src directories.
+- [ ] Keep the transport-neutral core independent from Node-only, browser-only, Docker-only, and provider-specific imports.
+- [ ] Require caller-owned credentials, explicit consent, bounded quotas, and no secret values in source, logs, tests, or release notes.
+- [ ] Do not use CI, package registries, static hosts, repositories, accounts, or storage providers to evade their terms, quotas, or acceptable-use policies.
+- [ ] Do not represent remote storage as RAM, VRAM, an always-on runner, or an executable environment when its physical latency and provider policy make that claim false.
+- [ ] Keep binary execution opt-in, isolated, capability-negotiated, and denied by default when a runtime cannot prove the requested boundary.
+- [ ] Use deterministic fake transports and fixtures for all provider, network, filesystem, runner, and binary tests.
+- [ ] Keep artifacts lowercase and dot-separated, derive versions from release tags, and never commit generated dist output.
+- [ ] State unsupported, caller-owned, privileged, or paid capabilities explicitly instead of implementing placeholder claims.
+- [ ] Capture the current commit, active tags, package version, package export map, lockfile state, and working-tree state.
+- [ ] Run the active engine, legacy, format, flat-native, web typecheck, web build, package dry-run, and audit gates before selecting the release delta.
+- [ ] Create a 1.8.15 baseline note listing every public module that already covers storage, memory, browser, queue, runner, packaging, extension, and release concerns.
+- [ ] Classify every proposal from the scope references as implemented, partial, candidate, deferred, unsafe-by-design, or caller-owned.
+- [ ] Verify that existing structured extraction, browser context budgets, cancellation compensation, and retention policies remain stable before changing adjacent contracts.
+- [ ] Identify all current test fixtures and generated outputs that must remain unchanged during the planning-only phase.
+- [ ] Verify that no proposed feature needs a new runtime dependency before proving that Node or the existing codebase cannot supply the required primitive.
+- [ ] Define the 1.8.15 public compatibility policy for additive exports, optional capabilities, and error-code stability.
+- [ ] Define a rejection criterion for any feature that cannot be tested without a real account, credential, paid service, privileged runner, or unsafe executable.
+- [ ] Review the GPL-3.0-only, package provenance, registry, and signing constraints before writing new documentation claims.
+- [ ] Record which 1.8.15 interfaces remain planning contracts rather than operational infrastructure.
+- [ ] Verify that no new plan assumes Netlify Functions, Vercel Functions, a fixed host, a fixed port, or a local SQLite production database.
+- [ ] Add a documented decision log entry for every proposal rejected because it violates provider terms, security boundaries, or physical constraints.
+- [ ] Establish a release-specific threat model covering supply chain, binary inputs, archive extraction, remote fetches, untrusted manifests, and capability escalation.
+- [ ] Establish a release-specific performance model distinguishing local working-set latency from remote object retrieval latency.
+- [ ] Establish a release-specific data ownership model that requires explicit caller authorization for every remote backend.
+- [ ] Establish a release-specific retention model that aligns with the existing deterministic artifact-retention contract.
+- [ ] Establish a release-specific observability model that never logs credentials, complete payloads, or private user data by default.
+- [ ] Confirm that all comments, exported JSDoc, error messages, and documentation additions are English and third-person where the repository convention requires it.
+
+## 2. Storage aggregation and working-set topology
+
+- [ ] Define a provider-neutral storage-pool descriptor composed only of caller-supplied storage adapters and explicit read/write policies.
+- [ ] Define a storage-pool member descriptor with identifier, priority, capability report, authority state, availability state, and health evidence.
+- [ ] Define a storage-pool read policy supporting first-healthy, verified-first, priority-first, and caller-provided selection strategies.
+- [ ] Define a storage-pool write policy supporting primary-only, best-effort mirror, quorum, and explicit fan-out modes.
+- [ ] Define a storage-pool repair policy that can plan a missing-replica repair without performing it implicitly.
+- [ ] Define a storage-pool conflict policy that preserves version identity and never overwrites concurrent data without caller authorization.
+- [ ] Define a storage-pool capability report that distinguishes range reads, strong checksums, list pagination, conditional writes, delete support, and object size limits.
+- [ ] Define a storage-pool error model that reports per-provider evidence without leaking endpoint secrets or internal object paths.
+- [ ] Define a storage-pool health model with bounded probes and injected clocks; do not add background polling to the library core.
+- [ ] Define a storage-pool operation budget for attempts, bytes, elapsed time, and parallelism.
+- [ ] Define a storage-pool immutable manifest that records replica outcomes, content digest, size, creation time, and caller-provided metadata.
+- [ ] Define a storage-pool restore plan that selects verified sources before secondary candidates.
+- [ ] Define how the pool uses existing chunk manifests, checksums, range reads, partial synchronization, and content-addressed indexes.
+- [ ] Define how the pool interoperates with existing local, GitHub Contents, file-hosting, and S3-compatible adapters without adding vendor SDKs to core.
+- [ ] Define a fake multi-backend transport with deterministic availability, corruption, latency, pagination, and conditional-write scenarios.
+- [ ] Implement a serializable storage-pool input validator with unknown-key rejection at the public boundary.
+- [ ] Implement capability negotiation that excludes unsupported members before an operation begins.
+- [ ] Implement deterministic member ordering with stable tie breakers and no random provider selection.
+- [ ] Implement a bounded read plan generator that produces candidate order, byte budget, and verification steps.
+- [ ] Implement a bounded write plan generator that produces primary, mirror, quorum, and repair intents without automatic external side effects.
+- [ ] Implement a verified read executor using injected adapters and mandatory checksum comparison where a digest is available.
+- [ ] Implement a write executor with explicit per-member outcomes and caller-selected compensation behavior.
+- [ ] Implement a repair-plan generator that only proposes missing or stale replicas after digest comparison.
+- [ ] Implement a deterministic object-location report that never claims availability after a failed write.
+- [ ] Implement pagination pass-through without collecting an unbounded backend listing into memory.
+- [ ] Implement range-read validation with offset, length, total-size, and digest-boundary checks.
+- [ ] Implement a fail-closed mode when a read response does not meet the expected size or digest.
+- [ ] Implement a best-effort mode that returns all evidence but remains explicit that replica verification failed.
+- [ ] Implement a pool metrics snapshot with low-cardinality counters for attempts, hits, misses, mismatches, bytes, and elapsed time.
+- [ ] Implement clear unsupported-capability errors for conditional writes, ranges, deletions, or repairs not offered by a selected adapter.
+- [ ] Test an empty pool rejection path.
+- [ ] Test a duplicate member identifier rejection path.
+- [ ] Test an unavailable primary with a verified secondary read path.
+- [ ] Test a corrupt primary with a verified secondary read path.
+- [ ] Test a digest mismatch that fails closed when strict verification is enabled.
+- [ ] Test a mirror write that records one success and one failure without falsely reporting quorum success.
+- [ ] Test a quorum write that succeeds only when the configured minimum is met.
+- [ ] Test a cancellation signal that stops remaining writes without inventing rollback success.
+- [ ] Test a repair plan that does not mutate any adapter until the caller executes it.
+- [ ] Test pagination with deterministic continuation tokens and a hard page limit.
+- [ ] Test range reads that reject negative offsets, unsafe lengths, and overrun ranges.
+- [ ] Test metrics that remain bounded across repeated pool operations.
+- [ ] Test serialization and cloning of every public storage-pool record.
+- [ ] Document how a caller can combine authorized object stores without suggesting account pooling, registry abuse, or quota circumvention.
+- [ ] Document the physical distinction between remote object storage, local cache, process memory, and GPU memory.
+- [ ] Expose the storage-pool contract through an explicit additive export only after package-import validation passes.
+
+## 3. Memory tiers and storage-to-working-set bridge
+
+- [ ] Define a tier descriptor for L1 process memory, L2 caller-provided accelerator memory, L3 local working-set storage, and L4 authorized remote storage.
+- [ ] Define the tier descriptor as a capability model rather than a claim that every environment offers every tier.
+- [ ] Define a working-set budget with bytes, object count, age, transfer budget, and caller-selected eviction strategy.
+- [ ] Define a bridge plan that differentiates in-process buffering, temporary local files, memory-mapped files, tmpfs, compressed RAM disks, and swap as host-owned capabilities.
+- [ ] Define privileged-host operation descriptors for fallocate, mkswap, swapon, tmpfs, zram, mount, and cleanup without executing shell commands in the transport-neutral core.
+- [ ] Define precondition evidence for every privileged-host operation, including platform, privilege, free space, mount namespace, user consent, and rollback plan.
+- [ ] Define a denial result for a host operation when the adapter cannot prove that it is permitted and reversible.
+- [ ] Define a host-plan result that lets a CLI, runner, or privileged adapter decide whether to execute a plan.
+- [ ] Define a memory-admission policy that considers object size, checksum, priority, cache age, estimated transfer cost, and remaining budget.
+- [ ] Define an eviction policy contract for LRU, size-aware, TTL-first, and caller-supplied ranking without unbounded metadata.
+- [ ] Define a materialization record that links a remote object digest to its local working-set representation and cleanup state.
+- [ ] Define a bridge cleanup plan that safely removes only resources created and identified by the caller-owned adapter.
+- [ ] Implement input validators for tier descriptors, budgets, host operation descriptors, and materialization records.
+- [ ] Implement a capability-based tier resolver that never probes the host from the shared core.
+- [ ] Implement a deterministic working-set admission planner that returns admitted, deferred, rejected, and evicted candidates.
+- [ ] Implement a bridge planner that selects only capabilities declared by the injected adapter.
+- [ ] Implement a materialization ledger that maintains digest, size, tier, state, timestamps, and bounded reason codes.
+- [ ] Implement cleanup-plan generation that can be invoked after success, cancellation, failure, or expiry.
+- [ ] Implement an explicit no-op bridge for runtimes without privileged storage or memory controls.
+- [ ] Implement a fake host adapter that simulates tmpfs, zram, swap, mmap, cleanup errors, and permission denials without running shell commands.
+- [ ] Test admission under an exact byte budget.
+- [ ] Test admission rejection for an oversize object.
+- [ ] Test eviction order under LRU and TTL-first policies.
+- [ ] Test an adapter with no privileged capabilities.
+- [ ] Test a tmpfs plan that requires an explicit caller-owned execution adapter.
+- [ ] Test a swap plan that records rollback requirements without invoking swapon.
+- [ ] Test a zram plan that rejects unsupported host capabilities.
+- [ ] Test materialization ledger updates across prepare, verify, use, release, and cleanup states.
+- [ ] Test cleanup idempotency when a target has already been removed.
+- [ ] Test failure cleanup when materialization completes only partially.
+- [ ] Test cancellation cleanup when an AbortSignal interrupts a transfer.
+- [ ] Test that storage latency cannot be labeled as RAM or VRAM in capability reports.
+- [ ] Test that L2 accelerator memory remains caller-owned and unavailable by default.
+- [ ] Document safe adapter patterns for a local CLI or authorized runner to execute privileged plans.
+- [ ] Document why the library cannot create host swap, tmpfs, or zram in browser, extension, package, or transport-neutral contexts.
+- [ ] Expose only serializable plans and fake-adapter-tested contracts from the public library surface.
+
+## 4. WASM and binary transformation contracts
+
+- [ ] Define an executable-input descriptor with media type, magic-byte evidence, digest, declared size, origin, ownership, and expected output contract.
+- [ ] Define a wasm-module descriptor with source format, import policy, memory limit, fuel or time budget, output limit, and integrity metadata.
+- [ ] Define a wasm-capability descriptor for compile, instantiate, streaming instantiation, threads, SIMD, WASI, and host import support.
+- [ ] Define a binary-transformation request as a plan that requires an injected compiler, emulator, container, or sandbox adapter.
+- [ ] Define a binary-execution request that is rejected by default unless an explicit isolated execution adapter accepts it.
+- [ ] Define a result record that distinguishes transformation, compilation, execution, rendering, cache retrieval, timeout, policy denial, and adapter unavailability.
+- [ ] Define import allowlists and host-function deny lists for WASM contracts.
+- [ ] Define CPU, wall-clock, memory, output-byte, file-count, and network capability budgets as portable request constraints.
+- [ ] Define a content-addressed transformation key derived from input digest, normalized options, compiler identity, target descriptor, and policy version.
+- [ ] Define a binary-cache manifest with source digest, transformation key, output digests, adapter identity, policy version, timestamp, and verification state.
+- [ ] Define a cache eligibility policy that prohibits caching outputs that contain secrets, personal data, unstable environment state, or unverified executable output.
+- [ ] Define a cache retrieval policy that revalidates toolchain identity and output checksums before reuse.
+- [ ] Define archive extraction limits for entry count, depth, path traversal, expansion ratio, output size, and executable-bit preservation.
+- [ ] Define a rendering-result contract for headless tasks that returns only caller-authorized artifacts and provenance.
+- [ ] Implement validators for executable inputs, WASM modules, sandbox budgets, transformation keys, binary cache manifests, and archive limits.
+- [ ] Implement magic-byte classification for allowed binary and archive formats without trusting filename extensions.
+- [ ] Implement a deterministic transformation-key generator using canonicalized inputs.
+- [ ] Implement a binary-cache lookup planner that verifies keys, digests, expiry, policy version, and adapter identity.
+- [ ] Implement a binary-cache commit planner that is side-effect-free until a caller-owned storage adapter persists the manifest and artifacts.
+- [ ] Implement a WASM plan builder that requires declared imports and resource budgets.
+- [ ] Implement an unavailable-execution result for browser, serverless, extension, or non-isolated environments.
+- [ ] Implement a fake WASM adapter that simulates compile, instantiate, output, trap, timeout, denied import, and checksum mismatch paths.
+- [ ] Implement a fake binary sandbox adapter that simulates artifact output and cancellation without starting a process or container.
+- [ ] Implement a fake archive adapter that returns bounded entries and traversal violations without reading untrusted archives.
+- [ ] Test magic-byte precedence over a misleading filename extension.
+- [ ] Test an unknown binary format denial path.
+- [ ] Test a WASM request with an undeclared import denial path.
+- [ ] Test a WASM request with a resource budget denial path.
+- [ ] Test a successful fake WASM transformation with output digest verification.
+- [ ] Test a fake WASM trap result with normalized error evidence.
+- [ ] Test a transformation cache hit with an exact matching key and adapter identity.
+- [ ] Test a cache miss after policy version changes.
+- [ ] Test a cache miss after compiler or emulator identity changes.
+- [ ] Test cache refusal for secret-bearing or unverified outputs.
+- [ ] Test archive entry-count, depth, expansion, and traversal limits.
+- [ ] Test cancellation that marks a partial transformation non-cacheable.
+- [ ] Test that no binary request causes a process, Docker container, shell command, network request, or host mount in the shared-core tests.
+- [ ] Document that WASM is a portable execution format but not a general permission to execute arbitrary uploaded binaries.
+- [ ] Document the caller-owned responsibility for container, microVM, emulator, compiler, and native-binary isolation adapters.
+- [ ] Expose the contracts through an additive explicit export only after every package target import remains valid.
+
+## 5. Compute provider and V4 execution planning
+
+- [ ] Define a provider-chain request with caller-authorized providers, required capabilities, optional preferences, execution budget, and cancellation semantics.
+- [ ] Define a provider capability report for architecture, operating system, container support, WASM support, network policy, storage policy, timeout, memory, CPU, and artifact policy.
+- [ ] Define a provider eligibility evaluator that never assumes a public CI service is unlimited, persistent, or authorized for arbitrary workloads.
+- [ ] Define a provider selection explanation with selected candidate, excluded candidates, reasons, capability evidence, and stable tie breakers.
+- [ ] Define a dry-run dispatch plan that can be rendered as GitHub, GitLab, Forgejo, Gitea, Codeberg, local CLI, or caller-owned runner payloads without sending any request.
+- [ ] Define an execution lease record compatible with the existing resumable workflow and persistent queue contracts.
+- [ ] Define an artifact handoff record from runner to authorized storage pool with integrity and retention boundaries.
+- [ ] Define a repository-as-processor vocabulary only as an orchestration abstraction; do not claim repository files execute without a real runner.
+- [ ] Define static control-plane artifacts as data and status surfaces, not as a covert compute or storage mechanism.
+- [ ] Define a Pages or CDN delivery plan that supports public immutable manifests without publishing private artifacts or credentials.
+- [ ] Implement validator coverage for provider-chain requests, reports, budgets, dispatch plans, leases, and handoff records.
+- [ ] Implement deterministic provider eligibility filtering based on declared reports.
+- [ ] Implement stable provider scoring with transparent caller-configured weights and no provider-specific hardcoding.
+- [ ] Implement a selection report preserving rejected-provider reasons.
+- [ ] Implement dry-run dispatch payload builders as injected forge adapters.
+- [ ] Implement a runner-to-storage handoff planner that requires output digests and explicit retention selection.
+- [ ] Implement a provider-chain cancellation planner that delegates actual remote cancellation to existing caller-owned adapters.
+- [ ] Implement fake provider adapters for unavailable, quota-exhausted, incompatible, slow, canceled, successful, and artifact-mismatch outcomes.
+- [ ] Test a chain with no eligible providers.
+- [ ] Test stable selection under equal provider scores.
+- [ ] Test a provider rejected for missing required container capability.
+- [ ] Test a provider rejected for a smaller declared time or memory budget.
+- [ ] Test a caller preference that changes selection only among otherwise eligible providers.
+- [ ] Test a dry-run plan that cannot dispatch without an injected adapter.
+- [ ] Test a cancellation plan that retains unknown remote state rather than claiming completed cleanup.
+- [ ] Test an artifact handoff rejected for absent digest or retention policy.
+- [ ] Test a provider report with an unsupported field rejection.
+- [ ] Test low-cardinality selection metrics and bounded selection evidence.
+- [ ] Document the difference between an authorized runner, a workflow trigger, a static host, and a repository.
+- [ ] Document that scheduled or event-driven execution must be configured by the deployer and not started by importing the library.
+- [ ] Document that container orchestration, server uptime, Kubernetes, cron, systemd, and fixed infrastructure belong to caller-owned deployment adapters.
+- [ ] Expose the provider-chain contract without changing existing scheduler semantics until compatibility tests are complete.
+
+## 6. Delivery, web adapters, and application surfaces
+
+- [ ] Define a chunk-delivery manifest for verified JavaScript, WASM, binary-derived, and static artifacts with media type, digest, size, order, and integrity metadata.
+- [ ] Define a delivery policy that prohibits dynamic code execution through chunk metadata and requires content-addressed immutable references.
+- [ ] Define a CDN capability report for immutable caching, purge support, range delivery, integrity headers, CORS policy, and public/private visibility.
+- [ ] Define PWA integration as a caller-owned web adapter with offline scope, cache policy, update policy, and permission boundaries.
+- [ ] Define service-worker integration as an optional host surface and never as a long-lived library background worker.
+- [ ] Define a Telegram Mini App adapter contract that carries caller-supplied validation, origin policy, capability reports, and no embedded bot token.
+- [ ] Define an application-bridge record that maps browser, desktop, mobile, extension, and mini-app capability reports without selecting a vendor.
+- [ ] Define a subdomain and DNS requirement descriptor that records ownership, DNS provider, DNSSEC support, HTTPS ownership, and explicit user configuration.
+- [ ] Define no-op outcomes when a host lacks PWA, service-worker, mini-app, DNS, or CDN capabilities.
+- [ ] Implement validators for delivery manifests, CDN reports, PWA policies, mini-app descriptors, bridge records, and DNS requirement descriptors.
+- [ ] Implement integrity manifest generation using existing hash primitives and content-type allowlists.
+- [ ] Implement chunk sequence verification with missing, duplicate, out-of-order, digest mismatch, and size mismatch errors.
+- [ ] Implement a host-neutral PWA planning helper that returns declarative resources without registering a service worker.
+- [ ] Implement a host-neutral Mini App planning helper that returns validation requirements without accepting opaque platform tokens in the library.
+- [ ] Implement a host-neutral DNS planning helper that distinguishes contract documentation from any real registrar or DNS mutation.
+- [ ] Implement fake delivery, PWA, Mini App, and DNS adapters for deterministic success and failure paths.
+- [ ] Test chunk manifests with supported and unsupported content types.
+- [ ] Test chunk order and total-size validation.
+- [ ] Test integrity metadata serialization and verification.
+- [ ] Test a PWA plan with offline caching disabled.
+- [ ] Test a PWA plan that requires explicit update behavior.
+- [ ] Test a Mini App plan that rejects missing origin or caller validation configuration.
+- [ ] Test that service-worker registration is never performed by importing or invoking a planning helper.
+- [ ] Test that DNS planning cannot mutate any zone or registrar without a caller-owned adapter.
+- [ ] Document content-delivery limitations, especially that static delivery does not execute containers or native binaries in a browser.
+- [ ] Document optional PWA, Mini App, extension, desktop, and mobile adapter ownership boundaries.
+- [ ] Document domain, DNSSEC, Anycast, certificate, and registrar work as deployer decisions with no automatic purchase, registration, or change operation.
+- [ ] Expose delivery planning through an additive export only after browser-safe export graph checks pass.
+
+## 7. Detailed cross-domain execution matrix
+
+- [ ] For storage-pool membership and capabilities, reconcile the existing public API and identify compatibility constraints.
+- [ ] For storage-pool membership and capabilities, write a strict serializable input schema with an unknown-key rejection path.
+- [ ] For storage-pool membership and capabilities, write a normalized result schema with stable reason codes.
+- [ ] For storage-pool membership and capabilities, define explicit capability negotiation and unsupported-capability behavior.
+- [ ] For storage-pool membership and capabilities, define caller-owned authority, consent, and secret-boundary requirements.
+- [ ] For storage-pool membership and capabilities, implement the transport-neutral planner or validator without remote side effects.
+- [ ] For storage-pool membership and capabilities, implement the injected-adapter boundary with a no-op or unavailable fallback.
+- [ ] For storage-pool membership and capabilities, implement digest, size, and version evidence validation where data crosses a boundary.
+- [ ] For storage-pool membership and capabilities, implement AbortSignal, timeout, byte, operation, and concurrency budget behavior.
+- [ ] For storage-pool membership and capabilities, add a deterministic fake-adapter success-path test.
+- [ ] For storage-pool membership and capabilities, add a deterministic fake-adapter denial, mismatch, or unavailable-path test.
+- [ ] For storage-pool membership and capabilities, add a cancellation and partial-state regression test.
+- [ ] For storage-pool membership and capabilities, add a serialization, structuredClone, and package-export regression test.
+- [ ] For storage-pool membership and capabilities, add a redaction and low-cardinality metrics regression test.
+- [ ] For storage-pool membership and capabilities, review browser-safe and Node-only import boundaries for the domain.
+- [ ] For storage-pool membership and capabilities, update English JSDoc and capability documentation with the actual safety boundary.
+- [ ] For replica integrity and repair planning, reconcile the existing public API and identify compatibility constraints.
+- [ ] For replica integrity and repair planning, write a strict serializable input schema with an unknown-key rejection path.
+- [ ] For replica integrity and repair planning, write a normalized result schema with stable reason codes.
+- [ ] For replica integrity and repair planning, define explicit capability negotiation and unsupported-capability behavior.
+- [ ] For replica integrity and repair planning, define caller-owned authority, consent, and secret-boundary requirements.
+- [ ] For replica integrity and repair planning, implement the transport-neutral planner or validator without remote side effects.
+- [ ] For replica integrity and repair planning, implement the injected-adapter boundary with a no-op or unavailable fallback.
+- [ ] For replica integrity and repair planning, implement digest, size, and version evidence validation where data crosses a boundary.
+- [ ] For replica integrity and repair planning, implement AbortSignal, timeout, byte, operation, and concurrency budget behavior.
+- [ ] For replica integrity and repair planning, add a deterministic fake-adapter success-path test.
+- [ ] For replica integrity and repair planning, add a deterministic fake-adapter denial, mismatch, or unavailable-path test.
+- [ ] For replica integrity and repair planning, add a cancellation and partial-state regression test.
+- [ ] For replica integrity and repair planning, add a serialization, structuredClone, and package-export regression test.
+- [ ] For replica integrity and repair planning, add a redaction and low-cardinality metrics regression test.
+- [ ] For replica integrity and repair planning, review browser-safe and Node-only import boundaries for the domain.
+- [ ] For replica integrity and repair planning, update English JSDoc and capability documentation with the actual safety boundary.
+- [ ] For range reads and chunk manifest boundaries, reconcile the existing public API and identify compatibility constraints.
+- [ ] For range reads and chunk manifest boundaries, write a strict serializable input schema with an unknown-key rejection path.
+- [ ] For range reads and chunk manifest boundaries, write a normalized result schema with stable reason codes.
+- [ ] For range reads and chunk manifest boundaries, define explicit capability negotiation and unsupported-capability behavior.
+- [ ] For range reads and chunk manifest boundaries, define caller-owned authority, consent, and secret-boundary requirements.
+- [ ] For range reads and chunk manifest boundaries, implement the transport-neutral planner or validator without remote side effects.
+- [ ] For range reads and chunk manifest boundaries, implement the injected-adapter boundary with a no-op or unavailable fallback.
+- [ ] For range reads and chunk manifest boundaries, implement digest, size, and version evidence validation where data crosses a boundary.
+- [ ] For range reads and chunk manifest boundaries, implement AbortSignal, timeout, byte, operation, and concurrency budget behavior.
+- [ ] For range reads and chunk manifest boundaries, add a deterministic fake-adapter success-path test.
+- [ ] For range reads and chunk manifest boundaries, add a deterministic fake-adapter denial, mismatch, or unavailable-path test.
+- [ ] For range reads and chunk manifest boundaries, add a cancellation and partial-state regression test.
+- [ ] For range reads and chunk manifest boundaries, add a serialization, structuredClone, and package-export regression test.
+- [ ] For range reads and chunk manifest boundaries, add a redaction and low-cardinality metrics regression test.
+- [ ] For range reads and chunk manifest boundaries, review browser-safe and Node-only import boundaries for the domain.
+- [ ] For range reads and chunk manifest boundaries, update English JSDoc and capability documentation with the actual safety boundary.
+- [ ] For working-set admission and eviction, reconcile the existing public API and identify compatibility constraints.
+- [ ] For working-set admission and eviction, write a strict serializable input schema with an unknown-key rejection path.
+- [ ] For working-set admission and eviction, write a normalized result schema with stable reason codes.
+- [ ] For working-set admission and eviction, define explicit capability negotiation and unsupported-capability behavior.
+- [ ] For working-set admission and eviction, define caller-owned authority, consent, and secret-boundary requirements.
+- [ ] For working-set admission and eviction, implement the transport-neutral planner or validator without remote side effects.
+- [ ] For working-set admission and eviction, implement the injected-adapter boundary with a no-op or unavailable fallback.
+- [ ] For working-set admission and eviction, implement digest, size, and version evidence validation where data crosses a boundary.
+- [ ] For working-set admission and eviction, implement AbortSignal, timeout, byte, operation, and concurrency budget behavior.
+- [ ] For working-set admission and eviction, add a deterministic fake-adapter success-path test.
+- [ ] For working-set admission and eviction, add a deterministic fake-adapter denial, mismatch, or unavailable-path test.
+- [ ] For working-set admission and eviction, add a cancellation and partial-state regression test.
+- [ ] For working-set admission and eviction, add a serialization, structuredClone, and package-export regression test.
+- [ ] For working-set admission and eviction, add a redaction and low-cardinality metrics regression test.
+- [ ] For working-set admission and eviction, review browser-safe and Node-only import boundaries for the domain.
+- [ ] For working-set admission and eviction, update English JSDoc and capability documentation with the actual safety boundary.
+- [ ] For privileged host bridge planning, reconcile the existing public API and identify compatibility constraints.
+- [ ] For privileged host bridge planning, write a strict serializable input schema with an unknown-key rejection path.
+- [ ] For privileged host bridge planning, write a normalized result schema with stable reason codes.
+- [ ] For privileged host bridge planning, define explicit capability negotiation and unsupported-capability behavior.
+- [ ] For privileged host bridge planning, define caller-owned authority, consent, and secret-boundary requirements.
+- [ ] For privileged host bridge planning, implement the transport-neutral planner or validator without remote side effects.
+- [ ] For privileged host bridge planning, implement the injected-adapter boundary with a no-op or unavailable fallback.
+- [ ] For privileged host bridge planning, implement digest, size, and version evidence validation where data crosses a boundary.
+- [ ] For privileged host bridge planning, implement AbortSignal, timeout, byte, operation, and concurrency budget behavior.
+- [ ] For privileged host bridge planning, add a deterministic fake-adapter success-path test.
+- [ ] For privileged host bridge planning, add a deterministic fake-adapter denial, mismatch, or unavailable-path test.
+- [ ] For privileged host bridge planning, add a cancellation and partial-state regression test.
+- [ ] For privileged host bridge planning, add a serialization, structuredClone, and package-export regression test.
+- [ ] For privileged host bridge planning, add a redaction and low-cardinality metrics regression test.
+- [ ] For privileged host bridge planning, review browser-safe and Node-only import boundaries for the domain.
+- [ ] For privileged host bridge planning, update English JSDoc and capability documentation with the actual safety boundary.
+- [ ] For WASM request policy and fake execution, reconcile the existing public API and identify compatibility constraints.
+- [ ] For WASM request policy and fake execution, write a strict serializable input schema with an unknown-key rejection path.
+- [ ] For WASM request policy and fake execution, write a normalized result schema with stable reason codes.
+- [ ] For WASM request policy and fake execution, define explicit capability negotiation and unsupported-capability behavior.
+- [ ] For WASM request policy and fake execution, define caller-owned authority, consent, and secret-boundary requirements.
+- [ ] For WASM request policy and fake execution, implement the transport-neutral planner or validator without remote side effects.
+- [ ] For WASM request policy and fake execution, implement the injected-adapter boundary with a no-op or unavailable fallback.
+- [ ] For WASM request policy and fake execution, implement digest, size, and version evidence validation where data crosses a boundary.
+- [ ] For WASM request policy and fake execution, implement AbortSignal, timeout, byte, operation, and concurrency budget behavior.
+- [ ] For WASM request policy and fake execution, add a deterministic fake-adapter success-path test.
+- [ ] For WASM request policy and fake execution, add a deterministic fake-adapter denial, mismatch, or unavailable-path test.
+- [ ] For WASM request policy and fake execution, add a cancellation and partial-state regression test.
+- [ ] For WASM request policy and fake execution, add a serialization, structuredClone, and package-export regression test.
+- [ ] For WASM request policy and fake execution, add a redaction and low-cardinality metrics regression test.
+- [ ] For WASM request policy and fake execution, review browser-safe and Node-only import boundaries for the domain.
+- [ ] For WASM request policy and fake execution, update English JSDoc and capability documentation with the actual safety boundary.
+- [ ] For binary transformation cache eligibility, reconcile the existing public API and identify compatibility constraints.
+- [ ] For binary transformation cache eligibility, write a strict serializable input schema with an unknown-key rejection path.
+- [ ] For binary transformation cache eligibility, write a normalized result schema with stable reason codes.
+- [ ] For binary transformation cache eligibility, define explicit capability negotiation and unsupported-capability behavior.
+- [ ] For binary transformation cache eligibility, define caller-owned authority, consent, and secret-boundary requirements.
+- [ ] For binary transformation cache eligibility, implement the transport-neutral planner or validator without remote side effects.
+- [ ] For binary transformation cache eligibility, implement the injected-adapter boundary with a no-op or unavailable fallback.
+- [ ] For binary transformation cache eligibility, implement digest, size, and version evidence validation where data crosses a boundary.
+- [ ] For binary transformation cache eligibility, implement AbortSignal, timeout, byte, operation, and concurrency budget behavior.
+- [ ] For binary transformation cache eligibility, add a deterministic fake-adapter success-path test.
+- [ ] For binary transformation cache eligibility, add a deterministic fake-adapter denial, mismatch, or unavailable-path test.
+- [ ] For binary transformation cache eligibility, add a cancellation and partial-state regression test.
+- [ ] For binary transformation cache eligibility, add a serialization, structuredClone, and package-export regression test.
+- [ ] For binary transformation cache eligibility, add a redaction and low-cardinality metrics regression test.
+- [ ] For binary transformation cache eligibility, review browser-safe and Node-only import boundaries for the domain.
+- [ ] For binary transformation cache eligibility, update English JSDoc and capability documentation with the actual safety boundary.
+- [ ] For archive intake and bounded extraction, reconcile the existing public API and identify compatibility constraints.
+- [ ] For archive intake and bounded extraction, write a strict serializable input schema with an unknown-key rejection path.
+- [ ] For archive intake and bounded extraction, write a normalized result schema with stable reason codes.
+- [ ] For archive intake and bounded extraction, define explicit capability negotiation and unsupported-capability behavior.
+- [ ] For archive intake and bounded extraction, define caller-owned authority, consent, and secret-boundary requirements.
+- [ ] For archive intake and bounded extraction, implement the transport-neutral planner or validator without remote side effects.
+- [ ] For archive intake and bounded extraction, implement the injected-adapter boundary with a no-op or unavailable fallback.
+- [ ] For archive intake and bounded extraction, implement digest, size, and version evidence validation where data crosses a boundary.
+- [ ] For archive intake and bounded extraction, implement AbortSignal, timeout, byte, operation, and concurrency budget behavior.
+- [ ] For archive intake and bounded extraction, add a deterministic fake-adapter success-path test.
+- [ ] For archive intake and bounded extraction, add a deterministic fake-adapter denial, mismatch, or unavailable-path test.
+- [ ] For archive intake and bounded extraction, add a cancellation and partial-state regression test.
+- [ ] For archive intake and bounded extraction, add a serialization, structuredClone, and package-export regression test.
+- [ ] For archive intake and bounded extraction, add a redaction and low-cardinality metrics regression test.
+- [ ] For archive intake and bounded extraction, review browser-safe and Node-only import boundaries for the domain.
+- [ ] For archive intake and bounded extraction, update English JSDoc and capability documentation with the actual safety boundary.
+- [ ] For provider-chain eligibility and selection, reconcile the existing public API and identify compatibility constraints.
+- [ ] For provider-chain eligibility and selection, write a strict serializable input schema with an unknown-key rejection path.
+- [ ] For provider-chain eligibility and selection, write a normalized result schema with stable reason codes.
+- [ ] For provider-chain eligibility and selection, define explicit capability negotiation and unsupported-capability behavior.
+- [ ] For provider-chain eligibility and selection, define caller-owned authority, consent, and secret-boundary requirements.
+- [ ] For provider-chain eligibility and selection, implement the transport-neutral planner or validator without remote side effects.
+- [ ] For provider-chain eligibility and selection, implement the injected-adapter boundary with a no-op or unavailable fallback.
+- [ ] For provider-chain eligibility and selection, implement digest, size, and version evidence validation where data crosses a boundary.
+- [ ] For provider-chain eligibility and selection, implement AbortSignal, timeout, byte, operation, and concurrency budget behavior.
+- [ ] For provider-chain eligibility and selection, add a deterministic fake-adapter success-path test.
+- [ ] For provider-chain eligibility and selection, add a deterministic fake-adapter denial, mismatch, or unavailable-path test.
+- [ ] For provider-chain eligibility and selection, add a cancellation and partial-state regression test.
+- [ ] For provider-chain eligibility and selection, add a serialization, structuredClone, and package-export regression test.
+- [ ] For provider-chain eligibility and selection, add a redaction and low-cardinality metrics regression test.
+- [ ] For provider-chain eligibility and selection, review browser-safe and Node-only import boundaries for the domain.
+- [ ] For provider-chain eligibility and selection, update English JSDoc and capability documentation with the actual safety boundary.
+- [ ] For runner handoff and cancellation evidence, reconcile the existing public API and identify compatibility constraints.
+- [ ] For runner handoff and cancellation evidence, write a strict serializable input schema with an unknown-key rejection path.
+- [ ] For runner handoff and cancellation evidence, write a normalized result schema with stable reason codes.
+- [ ] For runner handoff and cancellation evidence, define explicit capability negotiation and unsupported-capability behavior.
+- [ ] For runner handoff and cancellation evidence, define caller-owned authority, consent, and secret-boundary requirements.
+- [ ] For runner handoff and cancellation evidence, implement the transport-neutral planner or validator without remote side effects.
+- [ ] For runner handoff and cancellation evidence, implement the injected-adapter boundary with a no-op or unavailable fallback.
+- [ ] For runner handoff and cancellation evidence, implement digest, size, and version evidence validation where data crosses a boundary.
+- [ ] For runner handoff and cancellation evidence, implement AbortSignal, timeout, byte, operation, and concurrency budget behavior.
+- [ ] For runner handoff and cancellation evidence, add a deterministic fake-adapter success-path test.
+- [ ] For runner handoff and cancellation evidence, add a deterministic fake-adapter denial, mismatch, or unavailable-path test.
+- [ ] For runner handoff and cancellation evidence, add a cancellation and partial-state regression test.
+- [ ] For runner handoff and cancellation evidence, add a serialization, structuredClone, and package-export regression test.
+- [ ] For runner handoff and cancellation evidence, add a redaction and low-cardinality metrics regression test.
+- [ ] For runner handoff and cancellation evidence, review browser-safe and Node-only import boundaries for the domain.
+- [ ] For runner handoff and cancellation evidence, update English JSDoc and capability documentation with the actual safety boundary.
+- [ ] For chunk delivery and integrity manifests, reconcile the existing public API and identify compatibility constraints.
+- [ ] For chunk delivery and integrity manifests, write a strict serializable input schema with an unknown-key rejection path.
+- [ ] For chunk delivery and integrity manifests, write a normalized result schema with stable reason codes.
+- [ ] For chunk delivery and integrity manifests, define explicit capability negotiation and unsupported-capability behavior.
+- [ ] For chunk delivery and integrity manifests, define caller-owned authority, consent, and secret-boundary requirements.
+- [ ] For chunk delivery and integrity manifests, implement the transport-neutral planner or validator without remote side effects.
+- [ ] For chunk delivery and integrity manifests, implement the injected-adapter boundary with a no-op or unavailable fallback.
+- [ ] For chunk delivery and integrity manifests, implement digest, size, and version evidence validation where data crosses a boundary.
+- [ ] For chunk delivery and integrity manifests, implement AbortSignal, timeout, byte, operation, and concurrency budget behavior.
+- [ ] For chunk delivery and integrity manifests, add a deterministic fake-adapter success-path test.
+- [ ] For chunk delivery and integrity manifests, add a deterministic fake-adapter denial, mismatch, or unavailable-path test.
+- [ ] For chunk delivery and integrity manifests, add a cancellation and partial-state regression test.
+- [ ] For chunk delivery and integrity manifests, add a serialization, structuredClone, and package-export regression test.
+- [ ] For chunk delivery and integrity manifests, add a redaction and low-cardinality metrics regression test.
+- [ ] For chunk delivery and integrity manifests, review browser-safe and Node-only import boundaries for the domain.
+- [ ] For chunk delivery and integrity manifests, update English JSDoc and capability documentation with the actual safety boundary.
+- [ ] For PWA, Mini App, and application-bridge planning, reconcile the existing public API and identify compatibility constraints.
+- [ ] For PWA, Mini App, and application-bridge planning, write a strict serializable input schema with an unknown-key rejection path.
+- [ ] For PWA, Mini App, and application-bridge planning, write a normalized result schema with stable reason codes.
+- [ ] For PWA, Mini App, and application-bridge planning, define explicit capability negotiation and unsupported-capability behavior.
+- [ ] For PWA, Mini App, and application-bridge planning, define caller-owned authority, consent, and secret-boundary requirements.
+- [ ] For PWA, Mini App, and application-bridge planning, implement the transport-neutral planner or validator without remote side effects.
+- [ ] For PWA, Mini App, and application-bridge planning, implement the injected-adapter boundary with a no-op or unavailable fallback.
+- [ ] For PWA, Mini App, and application-bridge planning, implement digest, size, and version evidence validation where data crosses a boundary.
+- [ ] For PWA, Mini App, and application-bridge planning, implement AbortSignal, timeout, byte, operation, and concurrency budget behavior.
+- [ ] For PWA, Mini App, and application-bridge planning, add a deterministic fake-adapter success-path test.
+- [ ] For PWA, Mini App, and application-bridge planning, add a deterministic fake-adapter denial, mismatch, or unavailable-path test.
+- [ ] For PWA, Mini App, and application-bridge planning, add a cancellation and partial-state regression test.
+- [ ] For PWA, Mini App, and application-bridge planning, add a serialization, structuredClone, and package-export regression test.
+- [ ] For PWA, Mini App, and application-bridge planning, add a redaction and low-cardinality metrics regression test.
+- [ ] For PWA, Mini App, and application-bridge planning, review browser-safe and Node-only import boundaries for the domain.
+- [ ] For PWA, Mini App, and application-bridge planning, update English JSDoc and capability documentation with the actual safety boundary.
+
+## 8. API, protocol, security, and documentation
+
+- [ ] Review the existing HTTP, JSON, NDJSON, SSE, content negotiation, SSRF, authorization, webhook, and idempotency contracts before extending any protocol type.
+- [ ] Define new request and response envelopes with versioning, request identifiers, bounded diagnostics, and content-type-specific validation.
+- [ ] Define an allowlist for binary-related media types and an explicit denial for ambiguous, executable, or unsupported payloads.
+- [ ] Define protocol limits for header count, header bytes, URL length, request bytes, response bytes, streamed chunks, and event backlog.
+- [ ] Define error codes for storage-pool, working-set, WASM-plan, binary-cache, provider-chain, delivery, PWA, Mini App, and DNS planning failures.
+- [ ] Define redaction rules for URLs, tokens, authorization headers, signed URLs, object keys, provider messages, and binary paths.
+- [ ] Implement schema and JSON serialization tests for every new public record.
+- [ ] Implement content negotiation tests for supported JSON, NDJSON, SSE, text, binary-manifest, and unsupported media types.
+- [ ] Implement SSRF regression tests for any newly accepted remote manifest or artifact URL.
+- [ ] Implement cancellation and timeout tests for every operation that accepts an AbortSignal.
+- [ ] Implement bounded observability tests ensuring no high-cardinality object contents enter metric labels.
+- [ ] Implement redaction tests for sensitive headers and provider errors.
+- [ ] Update API documentation and package export documentation for every accepted new surface.
+- [ ] Update the capability matrix with implemented, deferred, caller-owned, unsupported, and unsafe-by-design status.
+- [ ] Update the architecture document with the storage-versus-memory physical boundary and adapter responsibility model.
+- [ ] Update operator guidance with explicit user authorization and data-retention requirements.
+- [ ] Add release-note candidates only after the final implemented API surface is known.
+
+## 9. Full verification and release execution
+
+- [ ] Run focused deterministic tests after each completed feature block.
+- [ ] Run the active engine test suite after each public contract change.
+- [ ] Run legacy tests after any shared utility, scrape, cache, token, proxy, or middleware change.
+- [ ] Run package import tests after every export-map update.
+- [ ] Run browser-safe export graph checks after every browser, PWA, or delivery export update.
+- [ ] Run the flat-native validation after every file move or native-surface documentation update.
+- [ ] Run web typecheck and static build after any PWA or web adapter integration change.
+- [ ] Run format validation before every commit candidate.
+- [ ] Run npm pack dry-run and inspect the tarball contents before version bumping.
+- [ ] Run npm audit at high severity and document any accepted external advisory using the fail-closed policy.
+- [ ] Run workflow syntax and release manifest validation without publishing.
+- [ ] Review the complete diff for secrets, generated output, fixed hosts, fixed ports, invalid filenames, unbounded loops, and scope-document modifications.
+- [ ] Verify all active version manifests remain at 1.8.14 until implementation and release notes are ready.
+- [ ] Bump all active version manifests to 1.8.15 only after the release candidate is validated.
+- [ ] Update the iOS build number to 1008015 only as part of the validated version bump.
+- [ ] Create docs/releasenotes-1.8.15.md from verified claims and the real generated artifact inventory.
+- [ ] Update changelog.md with concise, evidence-backed 1.8.15 entries.
+- [ ] Update docs/artifactavailability.md using only post-build and post-release evidence.
+- [ ] Create a commit authored as iakadion after the full local gate passes.
+- [ ] Push main only after a reviewed clean working tree is confirmed.
+- [ ] Create tag v1.8.15 only after the validated release commit is remote and immutable-tag checks pass.
+- [ ] Create the GitHub release only after verifying release notes, artifact names, signing labels, and package identity.
+- [ ] Verify GHCR first, then GitHub Packages npm, npmjs, Maven, NuGet, and RubyGems using remote evidence.
+- [ ] Verify the post-push container pull, OCI version label, and smoke test from the release workflow evidence.
+- [ ] Record every unavailable artifact or caller-owned signing prerequisite instead of presenting a successful release claim.
+- [ ] Mark completed 1.8.15 checklist items only after each corresponding evidence link or test result is recorded.

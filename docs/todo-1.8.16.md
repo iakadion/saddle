@@ -1,0 +1,651 @@
+# Saddle 1.8.16 — comparative research and implementation checklist
+
+> This plan requires a source-driven comparative study before feature selection. It evaluates public repositories for ideas and evidence only; it does not copy source code, reuse credentials, imitate identities, evade service policy, or convert research claims directly into production behavior.
+
+## Completion rule
+
+- [ ] Complete a research item only after preserving primary-source evidence and a written relevance rationale.
+- [ ] Complete an implementation item only after a concrete gap, additive contract, deterministic test, documentation update, and security review are all present.
+- [ ] Keep version 1.8.16 planning separate from version 1.8.15 implementation; no comparison-derived feature enters the release before 1.8.15 has passed its release gates.
+- [ ] Stop and reject any research-derived pattern that depends on unauthorized automation, stealth bypass, token harvesting, quota evasion, unsafe sandboxing, or false infrastructure claims.
+
+## 1. Research governance and sampling
+
+- [ ] Confirm the target sample range is 100–300 public repositories and record the selected final count before detailed comparison begins.
+- [ ] Use primary repository source, maintained documentation, package metadata, tests, issue policy, and release evidence before third-party summaries.
+- [ ] Require each selected repository to have a publicly accessible canonical URL and enough source or documentation evidence to inspect a concrete pattern.
+- [ ] Record the reason for every excluded candidate, including abandoned activity, incompatible license, missing tests, proprietary-only implementation, unsafe design, or lack of relevance.
+- [ ] Separate well-known mature projects, emerging projects, and smaller focused projects in every category.
+- [ ] Avoid assigning correctness from star count, download count, marketing claims, or social discussion alone.
+- [ ] Record licenses and preserve a no-copy rule for all source inspection.
+- [ ] Record versions or commit identifiers used for evidence so later refreshes can detect drift.
+- [ ] Store research only as summaries, citations, permitted excerpts, and links; never vendor competitor code into Saddle.
+- [ ] Define a de-duplication rule for forks, templates, mirrors, abandoned renames, and same-code multi-repositories.
+- [ ] Define a conflict-of-interest rule that flags projects connected to a selected provider, maintainer, or platform before recommendations.
+- [ ] Define a research evidence schema with category, repository, capability, source path, evidence quality, compatibility, risk, and proposed disposition.
+- [ ] Define an implementation threshold requiring corroboration from at least two independent repositories or an official standard when a public contract is changed.
+- [ ] Define a lower threshold for a bug fix only when Saddle’s own tests reproduce the issue deterministically.
+- [ ] Define a security escalation path for research findings involving RCE, sandbox escape, credential leakage, SSRF, package compromise, or provider policy violation.
+- [ ] Define a cadence for refreshing time-sensitive findings before release without turning the core library into an automated crawler.
+
+## 2. Comparative repository discovery (130 planned candidates)
+
+- [ ] Establish the selection rubric for the browser agent and computer use category: public source, active implementation evidence, license review, current activity, test visibility, and relevance to an existing Saddle contract.
+- [ ] Inspect the selected browser-agent or computer-use repository for adapter boundaries, session lifecycle, snapshots, action safety, and deterministic test strategy; record it as comparative candidate 001 in the browser agent and computer use category.
+- [ ] Inspect the selected browser-agent or computer-use repository for adapter boundaries, session lifecycle, snapshots, action safety, and deterministic test strategy; record it as comparative candidate 002 in the browser agent and computer use category.
+- [ ] Inspect the selected browser-agent or computer-use repository for adapter boundaries, session lifecycle, snapshots, action safety, and deterministic test strategy; record it as comparative candidate 003 in the browser agent and computer use category.
+- [ ] Inspect the selected browser-agent or computer-use repository for adapter boundaries, session lifecycle, snapshots, action safety, and deterministic test strategy; record it as comparative candidate 004 in the browser agent and computer use category.
+- [ ] Inspect the selected browser-agent or computer-use repository for adapter boundaries, session lifecycle, snapshots, action safety, and deterministic test strategy; record it as comparative candidate 005 in the browser agent and computer use category.
+- [ ] Inspect the selected browser-agent or computer-use repository for adapter boundaries, session lifecycle, snapshots, action safety, and deterministic test strategy; record it as comparative candidate 006 in the browser agent and computer use category.
+- [ ] Inspect the selected browser-agent or computer-use repository for adapter boundaries, session lifecycle, snapshots, action safety, and deterministic test strategy; record it as comparative candidate 007 in the browser agent and computer use category.
+- [ ] Inspect the selected browser-agent or computer-use repository for adapter boundaries, session lifecycle, snapshots, action safety, and deterministic test strategy; record it as comparative candidate 008 in the browser agent and computer use category.
+- [ ] Inspect the selected browser-agent or computer-use repository for adapter boundaries, session lifecycle, snapshots, action safety, and deterministic test strategy; record it as comparative candidate 009 in the browser agent and computer use category.
+- [ ] Inspect the selected browser-agent or computer-use repository for adapter boundaries, session lifecycle, snapshots, action safety, and deterministic test strategy; record it as comparative candidate 010 in the browser agent and computer use category.
+- [ ] Inspect the selected browser-agent or computer-use repository for adapter boundaries, session lifecycle, snapshots, action safety, and deterministic test strategy; record it as comparative candidate 011 in the browser agent and computer use category.
+- [ ] Inspect the selected browser-agent or computer-use repository for adapter boundaries, session lifecycle, snapshots, action safety, and deterministic test strategy; record it as comparative candidate 012 in the browser agent and computer use category.
+- [ ] Inspect the selected browser-agent or computer-use repository for adapter boundaries, session lifecycle, snapshots, action safety, and deterministic test strategy; record it as comparative candidate 013 in the browser agent and computer use category.
+- [ ] Inspect the selected browser-agent or computer-use repository for adapter boundaries, session lifecycle, snapshots, action safety, and deterministic test strategy; record it as comparative candidate 014 in the browser agent and computer use category.
+- [ ] Inspect the selected browser-agent or computer-use repository for adapter boundaries, session lifecycle, snapshots, action safety, and deterministic test strategy; record it as comparative candidate 015 in the browser agent and computer use category.
+- [ ] Inspect the selected browser-agent or computer-use repository for adapter boundaries, session lifecycle, snapshots, action safety, and deterministic test strategy; record it as comparative candidate 016 in the browser agent and computer use category.
+- [ ] Validate that the final browser agent and computer use sample contains maintained, emergent, and established projects without treating popularity as proof of correctness.
+- [ ] Establish the selection rubric for the browser extensions and WebExtensions category: public source, active implementation evidence, license review, current activity, test visibility, and relevance to an existing Saddle contract.
+- [ ] Inspect the selected browser-extension repository for manifest permissions, service-worker persistence, message protocol, cross-browser compatibility, and packaging evidence; record it as comparative candidate 017 in the browser extensions and WebExtensions category.
+- [ ] Inspect the selected browser-extension repository for manifest permissions, service-worker persistence, message protocol, cross-browser compatibility, and packaging evidence; record it as comparative candidate 018 in the browser extensions and WebExtensions category.
+- [ ] Inspect the selected browser-extension repository for manifest permissions, service-worker persistence, message protocol, cross-browser compatibility, and packaging evidence; record it as comparative candidate 019 in the browser extensions and WebExtensions category.
+- [ ] Inspect the selected browser-extension repository for manifest permissions, service-worker persistence, message protocol, cross-browser compatibility, and packaging evidence; record it as comparative candidate 020 in the browser extensions and WebExtensions category.
+- [ ] Inspect the selected browser-extension repository for manifest permissions, service-worker persistence, message protocol, cross-browser compatibility, and packaging evidence; record it as comparative candidate 021 in the browser extensions and WebExtensions category.
+- [ ] Inspect the selected browser-extension repository for manifest permissions, service-worker persistence, message protocol, cross-browser compatibility, and packaging evidence; record it as comparative candidate 022 in the browser extensions and WebExtensions category.
+- [ ] Inspect the selected browser-extension repository for manifest permissions, service-worker persistence, message protocol, cross-browser compatibility, and packaging evidence; record it as comparative candidate 023 in the browser extensions and WebExtensions category.
+- [ ] Inspect the selected browser-extension repository for manifest permissions, service-worker persistence, message protocol, cross-browser compatibility, and packaging evidence; record it as comparative candidate 024 in the browser extensions and WebExtensions category.
+- [ ] Inspect the selected browser-extension repository for manifest permissions, service-worker persistence, message protocol, cross-browser compatibility, and packaging evidence; record it as comparative candidate 025 in the browser extensions and WebExtensions category.
+- [ ] Inspect the selected browser-extension repository for manifest permissions, service-worker persistence, message protocol, cross-browser compatibility, and packaging evidence; record it as comparative candidate 026 in the browser extensions and WebExtensions category.
+- [ ] Validate that the final browser extensions and WebExtensions sample contains maintained, emergent, and established projects without treating popularity as proof of correctness.
+- [ ] Establish the selection rubric for the scraping, crawling, and extraction category: public source, active implementation evidence, license review, current activity, test visibility, and relevance to an existing Saddle contract.
+- [ ] Inspect the selected scraping or crawling repository for fetch/browser escalation, robots compliance, frontier persistence, extraction provenance, and bounded concurrency; record it as comparative candidate 027 in the scraping, crawling, and extraction category.
+- [ ] Inspect the selected scraping or crawling repository for fetch/browser escalation, robots compliance, frontier persistence, extraction provenance, and bounded concurrency; record it as comparative candidate 028 in the scraping, crawling, and extraction category.
+- [ ] Inspect the selected scraping or crawling repository for fetch/browser escalation, robots compliance, frontier persistence, extraction provenance, and bounded concurrency; record it as comparative candidate 029 in the scraping, crawling, and extraction category.
+- [ ] Inspect the selected scraping or crawling repository for fetch/browser escalation, robots compliance, frontier persistence, extraction provenance, and bounded concurrency; record it as comparative candidate 030 in the scraping, crawling, and extraction category.
+- [ ] Inspect the selected scraping or crawling repository for fetch/browser escalation, robots compliance, frontier persistence, extraction provenance, and bounded concurrency; record it as comparative candidate 031 in the scraping, crawling, and extraction category.
+- [ ] Inspect the selected scraping or crawling repository for fetch/browser escalation, robots compliance, frontier persistence, extraction provenance, and bounded concurrency; record it as comparative candidate 032 in the scraping, crawling, and extraction category.
+- [ ] Inspect the selected scraping or crawling repository for fetch/browser escalation, robots compliance, frontier persistence, extraction provenance, and bounded concurrency; record it as comparative candidate 033 in the scraping, crawling, and extraction category.
+- [ ] Inspect the selected scraping or crawling repository for fetch/browser escalation, robots compliance, frontier persistence, extraction provenance, and bounded concurrency; record it as comparative candidate 034 in the scraping, crawling, and extraction category.
+- [ ] Inspect the selected scraping or crawling repository for fetch/browser escalation, robots compliance, frontier persistence, extraction provenance, and bounded concurrency; record it as comparative candidate 035 in the scraping, crawling, and extraction category.
+- [ ] Inspect the selected scraping or crawling repository for fetch/browser escalation, robots compliance, frontier persistence, extraction provenance, and bounded concurrency; record it as comparative candidate 036 in the scraping, crawling, and extraction category.
+- [ ] Inspect the selected scraping or crawling repository for fetch/browser escalation, robots compliance, frontier persistence, extraction provenance, and bounded concurrency; record it as comparative candidate 037 in the scraping, crawling, and extraction category.
+- [ ] Inspect the selected scraping or crawling repository for fetch/browser escalation, robots compliance, frontier persistence, extraction provenance, and bounded concurrency; record it as comparative candidate 038 in the scraping, crawling, and extraction category.
+- [ ] Inspect the selected scraping or crawling repository for fetch/browser escalation, robots compliance, frontier persistence, extraction provenance, and bounded concurrency; record it as comparative candidate 039 in the scraping, crawling, and extraction category.
+- [ ] Inspect the selected scraping or crawling repository for fetch/browser escalation, robots compliance, frontier persistence, extraction provenance, and bounded concurrency; record it as comparative candidate 040 in the scraping, crawling, and extraction category.
+- [ ] Inspect the selected scraping or crawling repository for fetch/browser escalation, robots compliance, frontier persistence, extraction provenance, and bounded concurrency; record it as comparative candidate 041 in the scraping, crawling, and extraction category.
+- [ ] Inspect the selected scraping or crawling repository for fetch/browser escalation, robots compliance, frontier persistence, extraction provenance, and bounded concurrency; record it as comparative candidate 042 in the scraping, crawling, and extraction category.
+- [ ] Validate that the final scraping, crawling, and extraction sample contains maintained, emergent, and established projects without treating popularity as proof of correctness.
+- [ ] Establish the selection rubric for the workflow, queue, and orchestration category: public source, active implementation evidence, license review, current activity, test visibility, and relevance to an existing Saddle contract.
+- [ ] Inspect the selected workflow, queue, or orchestration repository for leases, idempotency, cancellation, compensation, scheduling, and recovery semantics; record it as comparative candidate 043 in the workflow, queue, and orchestration category.
+- [ ] Inspect the selected workflow, queue, or orchestration repository for leases, idempotency, cancellation, compensation, scheduling, and recovery semantics; record it as comparative candidate 044 in the workflow, queue, and orchestration category.
+- [ ] Inspect the selected workflow, queue, or orchestration repository for leases, idempotency, cancellation, compensation, scheduling, and recovery semantics; record it as comparative candidate 045 in the workflow, queue, and orchestration category.
+- [ ] Inspect the selected workflow, queue, or orchestration repository for leases, idempotency, cancellation, compensation, scheduling, and recovery semantics; record it as comparative candidate 046 in the workflow, queue, and orchestration category.
+- [ ] Inspect the selected workflow, queue, or orchestration repository for leases, idempotency, cancellation, compensation, scheduling, and recovery semantics; record it as comparative candidate 047 in the workflow, queue, and orchestration category.
+- [ ] Inspect the selected workflow, queue, or orchestration repository for leases, idempotency, cancellation, compensation, scheduling, and recovery semantics; record it as comparative candidate 048 in the workflow, queue, and orchestration category.
+- [ ] Inspect the selected workflow, queue, or orchestration repository for leases, idempotency, cancellation, compensation, scheduling, and recovery semantics; record it as comparative candidate 049 in the workflow, queue, and orchestration category.
+- [ ] Inspect the selected workflow, queue, or orchestration repository for leases, idempotency, cancellation, compensation, scheduling, and recovery semantics; record it as comparative candidate 050 in the workflow, queue, and orchestration category.
+- [ ] Inspect the selected workflow, queue, or orchestration repository for leases, idempotency, cancellation, compensation, scheduling, and recovery semantics; record it as comparative candidate 051 in the workflow, queue, and orchestration category.
+- [ ] Inspect the selected workflow, queue, or orchestration repository for leases, idempotency, cancellation, compensation, scheduling, and recovery semantics; record it as comparative candidate 052 in the workflow, queue, and orchestration category.
+- [ ] Inspect the selected workflow, queue, or orchestration repository for leases, idempotency, cancellation, compensation, scheduling, and recovery semantics; record it as comparative candidate 053 in the workflow, queue, and orchestration category.
+- [ ] Inspect the selected workflow, queue, or orchestration repository for leases, idempotency, cancellation, compensation, scheduling, and recovery semantics; record it as comparative candidate 054 in the workflow, queue, and orchestration category.
+- [ ] Inspect the selected workflow, queue, or orchestration repository for leases, idempotency, cancellation, compensation, scheduling, and recovery semantics; record it as comparative candidate 055 in the workflow, queue, and orchestration category.
+- [ ] Inspect the selected workflow, queue, or orchestration repository for leases, idempotency, cancellation, compensation, scheduling, and recovery semantics; record it as comparative candidate 056 in the workflow, queue, and orchestration category.
+- [ ] Validate that the final workflow, queue, and orchestration sample contains maintained, emergent, and established projects without treating popularity as proof of correctness.
+- [ ] Establish the selection rubric for the storage, virtual filesystem, and caching category: public source, active implementation evidence, license review, current activity, test visibility, and relevance to an existing Saddle contract.
+- [ ] Inspect the selected storage, virtual filesystem, object-store, or caching repository for content addressing, range reads, replication, integrity, working-set, and capability negotiation patterns; record it as comparative candidate 057 in the storage, virtual filesystem, and caching category.
+- [ ] Inspect the selected storage, virtual filesystem, object-store, or caching repository for content addressing, range reads, replication, integrity, working-set, and capability negotiation patterns; record it as comparative candidate 058 in the storage, virtual filesystem, and caching category.
+- [ ] Inspect the selected storage, virtual filesystem, object-store, or caching repository for content addressing, range reads, replication, integrity, working-set, and capability negotiation patterns; record it as comparative candidate 059 in the storage, virtual filesystem, and caching category.
+- [ ] Inspect the selected storage, virtual filesystem, object-store, or caching repository for content addressing, range reads, replication, integrity, working-set, and capability negotiation patterns; record it as comparative candidate 060 in the storage, virtual filesystem, and caching category.
+- [ ] Inspect the selected storage, virtual filesystem, object-store, or caching repository for content addressing, range reads, replication, integrity, working-set, and capability negotiation patterns; record it as comparative candidate 061 in the storage, virtual filesystem, and caching category.
+- [ ] Inspect the selected storage, virtual filesystem, object-store, or caching repository for content addressing, range reads, replication, integrity, working-set, and capability negotiation patterns; record it as comparative candidate 062 in the storage, virtual filesystem, and caching category.
+- [ ] Inspect the selected storage, virtual filesystem, object-store, or caching repository for content addressing, range reads, replication, integrity, working-set, and capability negotiation patterns; record it as comparative candidate 063 in the storage, virtual filesystem, and caching category.
+- [ ] Inspect the selected storage, virtual filesystem, object-store, or caching repository for content addressing, range reads, replication, integrity, working-set, and capability negotiation patterns; record it as comparative candidate 064 in the storage, virtual filesystem, and caching category.
+- [ ] Inspect the selected storage, virtual filesystem, object-store, or caching repository for content addressing, range reads, replication, integrity, working-set, and capability negotiation patterns; record it as comparative candidate 065 in the storage, virtual filesystem, and caching category.
+- [ ] Inspect the selected storage, virtual filesystem, object-store, or caching repository for content addressing, range reads, replication, integrity, working-set, and capability negotiation patterns; record it as comparative candidate 066 in the storage, virtual filesystem, and caching category.
+- [ ] Inspect the selected storage, virtual filesystem, object-store, or caching repository for content addressing, range reads, replication, integrity, working-set, and capability negotiation patterns; record it as comparative candidate 067 in the storage, virtual filesystem, and caching category.
+- [ ] Inspect the selected storage, virtual filesystem, object-store, or caching repository for content addressing, range reads, replication, integrity, working-set, and capability negotiation patterns; record it as comparative candidate 068 in the storage, virtual filesystem, and caching category.
+- [ ] Inspect the selected storage, virtual filesystem, object-store, or caching repository for content addressing, range reads, replication, integrity, working-set, and capability negotiation patterns; record it as comparative candidate 069 in the storage, virtual filesystem, and caching category.
+- [ ] Inspect the selected storage, virtual filesystem, object-store, or caching repository for content addressing, range reads, replication, integrity, working-set, and capability negotiation patterns; record it as comparative candidate 070 in the storage, virtual filesystem, and caching category.
+- [ ] Validate that the final storage, virtual filesystem, and caching sample contains maintained, emergent, and established projects without treating popularity as proof of correctness.
+- [ ] Establish the selection rubric for the sandbox, WASM, container, and binary isolation category: public source, active implementation evidence, license review, current activity, test visibility, and relevance to an existing Saddle contract.
+- [ ] Inspect the selected sandbox, WASM, container, microVM, or binary-isolation repository for permission boundaries, resource budgets, artifact handling, and safe unsupported states; record it as comparative candidate 071 in the sandbox, WASM, container, and binary isolation category.
+- [ ] Inspect the selected sandbox, WASM, container, microVM, or binary-isolation repository for permission boundaries, resource budgets, artifact handling, and safe unsupported states; record it as comparative candidate 072 in the sandbox, WASM, container, and binary isolation category.
+- [ ] Inspect the selected sandbox, WASM, container, microVM, or binary-isolation repository for permission boundaries, resource budgets, artifact handling, and safe unsupported states; record it as comparative candidate 073 in the sandbox, WASM, container, and binary isolation category.
+- [ ] Inspect the selected sandbox, WASM, container, microVM, or binary-isolation repository for permission boundaries, resource budgets, artifact handling, and safe unsupported states; record it as comparative candidate 074 in the sandbox, WASM, container, and binary isolation category.
+- [ ] Inspect the selected sandbox, WASM, container, microVM, or binary-isolation repository for permission boundaries, resource budgets, artifact handling, and safe unsupported states; record it as comparative candidate 075 in the sandbox, WASM, container, and binary isolation category.
+- [ ] Inspect the selected sandbox, WASM, container, microVM, or binary-isolation repository for permission boundaries, resource budgets, artifact handling, and safe unsupported states; record it as comparative candidate 076 in the sandbox, WASM, container, and binary isolation category.
+- [ ] Inspect the selected sandbox, WASM, container, microVM, or binary-isolation repository for permission boundaries, resource budgets, artifact handling, and safe unsupported states; record it as comparative candidate 077 in the sandbox, WASM, container, and binary isolation category.
+- [ ] Inspect the selected sandbox, WASM, container, microVM, or binary-isolation repository for permission boundaries, resource budgets, artifact handling, and safe unsupported states; record it as comparative candidate 078 in the sandbox, WASM, container, and binary isolation category.
+- [ ] Inspect the selected sandbox, WASM, container, microVM, or binary-isolation repository for permission boundaries, resource budgets, artifact handling, and safe unsupported states; record it as comparative candidate 079 in the sandbox, WASM, container, and binary isolation category.
+- [ ] Inspect the selected sandbox, WASM, container, microVM, or binary-isolation repository for permission boundaries, resource budgets, artifact handling, and safe unsupported states; record it as comparative candidate 080 in the sandbox, WASM, container, and binary isolation category.
+- [ ] Inspect the selected sandbox, WASM, container, microVM, or binary-isolation repository for permission boundaries, resource budgets, artifact handling, and safe unsupported states; record it as comparative candidate 081 in the sandbox, WASM, container, and binary isolation category.
+- [ ] Inspect the selected sandbox, WASM, container, microVM, or binary-isolation repository for permission boundaries, resource budgets, artifact handling, and safe unsupported states; record it as comparative candidate 082 in the sandbox, WASM, container, and binary isolation category.
+- [ ] Validate that the final sandbox, WASM, container, and binary isolation sample contains maintained, emergent, and established projects without treating popularity as proof of correctness.
+- [ ] Establish the selection rubric for the cross-runtime, packaging, and supply chain category: public source, active implementation evidence, license review, current activity, test visibility, and relevance to an existing Saddle contract.
+- [ ] Inspect the selected runtime, packager, release, provenance, or signing repository for portable contracts, reproducibility, artifact verification, and secure publication patterns; record it as comparative candidate 083 in the cross-runtime, packaging, and supply chain category.
+- [ ] Inspect the selected runtime, packager, release, provenance, or signing repository for portable contracts, reproducibility, artifact verification, and secure publication patterns; record it as comparative candidate 084 in the cross-runtime, packaging, and supply chain category.
+- [ ] Inspect the selected runtime, packager, release, provenance, or signing repository for portable contracts, reproducibility, artifact verification, and secure publication patterns; record it as comparative candidate 085 in the cross-runtime, packaging, and supply chain category.
+- [ ] Inspect the selected runtime, packager, release, provenance, or signing repository for portable contracts, reproducibility, artifact verification, and secure publication patterns; record it as comparative candidate 086 in the cross-runtime, packaging, and supply chain category.
+- [ ] Inspect the selected runtime, packager, release, provenance, or signing repository for portable contracts, reproducibility, artifact verification, and secure publication patterns; record it as comparative candidate 087 in the cross-runtime, packaging, and supply chain category.
+- [ ] Inspect the selected runtime, packager, release, provenance, or signing repository for portable contracts, reproducibility, artifact verification, and secure publication patterns; record it as comparative candidate 088 in the cross-runtime, packaging, and supply chain category.
+- [ ] Inspect the selected runtime, packager, release, provenance, or signing repository for portable contracts, reproducibility, artifact verification, and secure publication patterns; record it as comparative candidate 089 in the cross-runtime, packaging, and supply chain category.
+- [ ] Inspect the selected runtime, packager, release, provenance, or signing repository for portable contracts, reproducibility, artifact verification, and secure publication patterns; record it as comparative candidate 090 in the cross-runtime, packaging, and supply chain category.
+- [ ] Inspect the selected runtime, packager, release, provenance, or signing repository for portable contracts, reproducibility, artifact verification, and secure publication patterns; record it as comparative candidate 091 in the cross-runtime, packaging, and supply chain category.
+- [ ] Inspect the selected runtime, packager, release, provenance, or signing repository for portable contracts, reproducibility, artifact verification, and secure publication patterns; record it as comparative candidate 092 in the cross-runtime, packaging, and supply chain category.
+- [ ] Inspect the selected runtime, packager, release, provenance, or signing repository for portable contracts, reproducibility, artifact verification, and secure publication patterns; record it as comparative candidate 093 in the cross-runtime, packaging, and supply chain category.
+- [ ] Inspect the selected runtime, packager, release, provenance, or signing repository for portable contracts, reproducibility, artifact verification, and secure publication patterns; record it as comparative candidate 094 in the cross-runtime, packaging, and supply chain category.
+- [ ] Validate that the final cross-runtime, packaging, and supply chain sample contains maintained, emergent, and established projects without treating popularity as proof of correctness.
+- [ ] Establish the selection rubric for the multi-forge, CI, and deployment category: public source, active implementation evidence, license review, current activity, test visibility, and relevance to an existing Saddle contract.
+- [ ] Inspect the selected forge, CI, deployment, or infrastructure repository for provider-neutral dispatch, credential boundaries, workflow portability, and policy compliance; record it as comparative candidate 095 in the multi-forge, CI, and deployment category.
+- [ ] Inspect the selected forge, CI, deployment, or infrastructure repository for provider-neutral dispatch, credential boundaries, workflow portability, and policy compliance; record it as comparative candidate 096 in the multi-forge, CI, and deployment category.
+- [ ] Inspect the selected forge, CI, deployment, or infrastructure repository for provider-neutral dispatch, credential boundaries, workflow portability, and policy compliance; record it as comparative candidate 097 in the multi-forge, CI, and deployment category.
+- [ ] Inspect the selected forge, CI, deployment, or infrastructure repository for provider-neutral dispatch, credential boundaries, workflow portability, and policy compliance; record it as comparative candidate 098 in the multi-forge, CI, and deployment category.
+- [ ] Inspect the selected forge, CI, deployment, or infrastructure repository for provider-neutral dispatch, credential boundaries, workflow portability, and policy compliance; record it as comparative candidate 099 in the multi-forge, CI, and deployment category.
+- [ ] Inspect the selected forge, CI, deployment, or infrastructure repository for provider-neutral dispatch, credential boundaries, workflow portability, and policy compliance; record it as comparative candidate 100 in the multi-forge, CI, and deployment category.
+- [ ] Inspect the selected forge, CI, deployment, or infrastructure repository for provider-neutral dispatch, credential boundaries, workflow portability, and policy compliance; record it as comparative candidate 101 in the multi-forge, CI, and deployment category.
+- [ ] Inspect the selected forge, CI, deployment, or infrastructure repository for provider-neutral dispatch, credential boundaries, workflow portability, and policy compliance; record it as comparative candidate 102 in the multi-forge, CI, and deployment category.
+- [ ] Inspect the selected forge, CI, deployment, or infrastructure repository for provider-neutral dispatch, credential boundaries, workflow portability, and policy compliance; record it as comparative candidate 103 in the multi-forge, CI, and deployment category.
+- [ ] Inspect the selected forge, CI, deployment, or infrastructure repository for provider-neutral dispatch, credential boundaries, workflow portability, and policy compliance; record it as comparative candidate 104 in the multi-forge, CI, and deployment category.
+- [ ] Inspect the selected forge, CI, deployment, or infrastructure repository for provider-neutral dispatch, credential boundaries, workflow portability, and policy compliance; record it as comparative candidate 105 in the multi-forge, CI, and deployment category.
+- [ ] Inspect the selected forge, CI, deployment, or infrastructure repository for provider-neutral dispatch, credential boundaries, workflow portability, and policy compliance; record it as comparative candidate 106 in the multi-forge, CI, and deployment category.
+- [ ] Validate that the final multi-forge, CI, and deployment sample contains maintained, emergent, and established projects without treating popularity as proof of correctness.
+- [ ] Establish the selection rubric for the PWA, mobile, Mini App, and application bridges category: public source, active implementation evidence, license review, current activity, test visibility, and relevance to an existing Saddle contract.
+- [ ] Inspect the selected PWA, mobile, Mini App, or application-bridge repository for capability negotiation, offline behavior, update policy, and platform token handling; record it as comparative candidate 107 in the PWA, mobile, Mini App, and application bridges category.
+- [ ] Inspect the selected PWA, mobile, Mini App, or application-bridge repository for capability negotiation, offline behavior, update policy, and platform token handling; record it as comparative candidate 108 in the PWA, mobile, Mini App, and application bridges category.
+- [ ] Inspect the selected PWA, mobile, Mini App, or application-bridge repository for capability negotiation, offline behavior, update policy, and platform token handling; record it as comparative candidate 109 in the PWA, mobile, Mini App, and application bridges category.
+- [ ] Inspect the selected PWA, mobile, Mini App, or application-bridge repository for capability negotiation, offline behavior, update policy, and platform token handling; record it as comparative candidate 110 in the PWA, mobile, Mini App, and application bridges category.
+- [ ] Inspect the selected PWA, mobile, Mini App, or application-bridge repository for capability negotiation, offline behavior, update policy, and platform token handling; record it as comparative candidate 111 in the PWA, mobile, Mini App, and application bridges category.
+- [ ] Inspect the selected PWA, mobile, Mini App, or application-bridge repository for capability negotiation, offline behavior, update policy, and platform token handling; record it as comparative candidate 112 in the PWA, mobile, Mini App, and application bridges category.
+- [ ] Inspect the selected PWA, mobile, Mini App, or application-bridge repository for capability negotiation, offline behavior, update policy, and platform token handling; record it as comparative candidate 113 in the PWA, mobile, Mini App, and application bridges category.
+- [ ] Inspect the selected PWA, mobile, Mini App, or application-bridge repository for capability negotiation, offline behavior, update policy, and platform token handling; record it as comparative candidate 114 in the PWA, mobile, Mini App, and application bridges category.
+- [ ] Validate that the final PWA, mobile, Mini App, and application bridges sample contains maintained, emergent, and established projects without treating popularity as proof of correctness.
+- [ ] Establish the selection rubric for the MCP, RAG, agents, and protocol tooling category: public source, active implementation evidence, license review, current activity, test visibility, and relevance to an existing Saddle contract.
+- [ ] Inspect the selected MCP, RAG, agent, or protocol repository for schema design, tool safety, context budgets, provenance, and transport-neutral compatibility; record it as comparative candidate 115 in the MCP, RAG, agents, and protocol tooling category.
+- [ ] Inspect the selected MCP, RAG, agent, or protocol repository for schema design, tool safety, context budgets, provenance, and transport-neutral compatibility; record it as comparative candidate 116 in the MCP, RAG, agents, and protocol tooling category.
+- [ ] Inspect the selected MCP, RAG, agent, or protocol repository for schema design, tool safety, context budgets, provenance, and transport-neutral compatibility; record it as comparative candidate 117 in the MCP, RAG, agents, and protocol tooling category.
+- [ ] Inspect the selected MCP, RAG, agent, or protocol repository for schema design, tool safety, context budgets, provenance, and transport-neutral compatibility; record it as comparative candidate 118 in the MCP, RAG, agents, and protocol tooling category.
+- [ ] Inspect the selected MCP, RAG, agent, or protocol repository for schema design, tool safety, context budgets, provenance, and transport-neutral compatibility; record it as comparative candidate 119 in the MCP, RAG, agents, and protocol tooling category.
+- [ ] Inspect the selected MCP, RAG, agent, or protocol repository for schema design, tool safety, context budgets, provenance, and transport-neutral compatibility; record it as comparative candidate 120 in the MCP, RAG, agents, and protocol tooling category.
+- [ ] Inspect the selected MCP, RAG, agent, or protocol repository for schema design, tool safety, context budgets, provenance, and transport-neutral compatibility; record it as comparative candidate 121 in the MCP, RAG, agents, and protocol tooling category.
+- [ ] Inspect the selected MCP, RAG, agent, or protocol repository for schema design, tool safety, context budgets, provenance, and transport-neutral compatibility; record it as comparative candidate 122 in the MCP, RAG, agents, and protocol tooling category.
+- [ ] Inspect the selected MCP, RAG, agent, or protocol repository for schema design, tool safety, context budgets, provenance, and transport-neutral compatibility; record it as comparative candidate 123 in the MCP, RAG, agents, and protocol tooling category.
+- [ ] Inspect the selected MCP, RAG, agent, or protocol repository for schema design, tool safety, context budgets, provenance, and transport-neutral compatibility; record it as comparative candidate 124 in the MCP, RAG, agents, and protocol tooling category.
+- [ ] Inspect the selected MCP, RAG, agent, or protocol repository for schema design, tool safety, context budgets, provenance, and transport-neutral compatibility; record it as comparative candidate 125 in the MCP, RAG, agents, and protocol tooling category.
+- [ ] Inspect the selected MCP, RAG, agent, or protocol repository for schema design, tool safety, context budgets, provenance, and transport-neutral compatibility; record it as comparative candidate 126 in the MCP, RAG, agents, and protocol tooling category.
+- [ ] Inspect the selected MCP, RAG, agent, or protocol repository for schema design, tool safety, context budgets, provenance, and transport-neutral compatibility; record it as comparative candidate 127 in the MCP, RAG, agents, and protocol tooling category.
+- [ ] Inspect the selected MCP, RAG, agent, or protocol repository for schema design, tool safety, context budgets, provenance, and transport-neutral compatibility; record it as comparative candidate 128 in the MCP, RAG, agents, and protocol tooling category.
+- [ ] Inspect the selected MCP, RAG, agent, or protocol repository for schema design, tool safety, context budgets, provenance, and transport-neutral compatibility; record it as comparative candidate 129 in the MCP, RAG, agents, and protocol tooling category.
+- [ ] Inspect the selected MCP, RAG, agent, or protocol repository for schema design, tool safety, context budgets, provenance, and transport-neutral compatibility; record it as comparative candidate 130 in the MCP, RAG, agents, and protocol tooling category.
+- [ ] Validate that the final MCP, RAG, agents, and protocol tooling sample contains maintained, emergent, and established projects without treating popularity as proof of correctness.
+
+## 3. Evidence capture for 130 candidates
+
+- [ ] For candidate 001, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 002, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 003, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 004, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 005, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 006, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 007, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 008, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 009, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 010, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 011, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 012, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 013, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 014, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 015, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 016, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 017, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 018, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 019, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 020, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 021, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 022, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 023, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 024, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 025, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 026, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 027, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 028, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 029, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 030, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 031, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 032, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 033, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 034, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 035, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 036, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 037, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 038, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 039, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 040, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 041, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 042, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 043, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 044, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 045, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 046, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 047, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 048, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 049, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 050, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 051, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 052, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 053, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 054, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 055, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 056, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 057, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 058, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 059, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 060, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 061, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 062, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 063, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 064, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 065, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 066, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 067, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 068, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 069, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 070, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 071, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 072, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 073, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 074, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 075, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 076, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 077, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 078, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 079, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 080, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 081, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 082, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 083, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 084, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 085, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 086, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 087, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 088, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 089, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 090, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 091, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 092, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 093, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 094, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 095, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 096, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 097, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 098, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 099, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 100, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 101, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 102, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 103, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 104, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 105, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 106, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 107, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 108, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 109, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 110, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 111, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 112, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 113, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 114, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 115, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 116, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 117, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 118, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 119, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 120, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 121, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 122, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 123, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 124, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 125, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 126, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 127, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 128, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 129, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+- [ ] For candidate 130, record canonical URL, owner, license, latest visible activity, supported runtimes, test location, relevant source paths, and a citation-quality evidence excerpt.
+
+## 4. Gap mapping for 130 candidates
+
+- [ ] For candidate 001, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 002, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 003, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 004, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 005, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 006, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 007, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 008, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 009, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 010, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 011, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 012, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 013, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 014, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 015, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 016, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 017, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 018, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 019, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 020, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 021, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 022, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 023, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 024, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 025, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 026, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 027, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 028, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 029, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 030, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 031, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 032, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 033, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 034, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 035, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 036, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 037, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 038, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 039, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 040, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 041, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 042, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 043, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 044, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 045, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 046, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 047, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 048, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 049, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 050, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 051, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 052, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 053, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 054, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 055, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 056, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 057, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 058, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 059, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 060, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 061, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 062, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 063, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 064, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 065, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 066, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 067, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 068, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 069, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 070, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 071, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 072, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 073, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 074, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 075, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 076, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 077, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 078, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 079, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 080, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 081, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 082, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 083, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 084, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 085, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 086, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 087, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 088, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 089, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 090, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 091, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 092, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 093, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 094, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 095, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 096, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 097, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 098, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 099, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 100, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 101, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 102, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 103, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 104, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 105, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 106, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 107, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 108, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 109, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 110, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 111, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 112, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 113, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 114, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 115, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 116, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 117, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 118, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 119, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 120, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 121, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 122, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 123, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 124, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 125, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 126, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 127, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 128, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 129, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+- [ ] For candidate 130, map each relevant implementation pattern to Saddle as adopt, adapt, reject, defer, or already-covered, with an explicit compatibility and security rationale.
+
+## 5. Comparative synthesis and feature selection
+
+- [ ] Group every candidate finding by existing Saddle domain: browser, extension, scrape, queue, storage, memory, runner, runtime, protocol, packaging, release, web, desktop, mobile, and bot.
+- [ ] Deduplicate equivalent patterns across categories before counting them as independent product gaps.
+- [ ] Identify the smallest safe additive contract for each recurring gap.
+- [ ] Identify all gaps already fully covered by Saddle and mark them as no-change evidence.
+- [ ] Identify all gaps that should remain caller-owned because they need credentials, privileged operating-system access, external billing, legal registration, or persistent hosting.
+- [ ] Identify all gaps that must be rejected because they encourage service abuse, opaque automation, untrusted code execution, or inaccurate capabilities.
+- [ ] Prioritize accepted gaps by security benefit, compatibility, user value, testability, operational cost, and maintenance burden.
+- [ ] Publish a comparative synthesis document with evidence tables, rejected patterns, accepted patterns, and rationale before implementation begins.
+- [ ] Publish a machine-readable analysis record with repository metadata, category, evidence link, disposition, and selected gap mapping.
+- [ ] Review the synthesis for unsupported factual claims and stale sources before using it as a release input.
+- [ ] Select no more than the release can implement and fully verify without weakening existing contracts.
+- [ ] Create a 1.8.16 acceptance matrix that maps every selected gap to contract, owner, tests, documentation, and release impact.
+
+## 6. Comparative-gap implementation families
+
+- [ ] Derive the 1.8.16 contract for browser action determinism only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 validator for browser action determinism only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 adapter for browser action determinism only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 test fixture for browser action determinism only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 error model for browser action determinism only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 documentation for browser action determinism only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 contract for cross-browser extension portability only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 permission matrix for cross-browser extension portability only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 adapter for cross-browser extension portability only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 packaging check for cross-browser extension portability only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 test fixture for cross-browser extension portability only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 documentation for cross-browser extension portability only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 contract for crawl frontier resilience only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 persistence policy for crawl frontier resilience only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 budget policy for crawl frontier resilience only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 test fixture for crawl frontier resilience only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 metrics for crawl frontier resilience only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 documentation for crawl frontier resilience only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 contract for storage replica verification only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 capability negotiation for storage replica verification only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 repair planner for storage replica verification only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 test fixture for storage replica verification only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 error model for storage replica verification only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 documentation for storage replica verification only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 contract for working-set materialization only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 budget planner for working-set materialization only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 host adapter boundary for working-set materialization only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 test fixture for working-set materialization only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 cleanup policy for working-set materialization only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 documentation for working-set materialization only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 contract for WASM and artifact isolation only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 capability report for WASM and artifact isolation only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 policy validator for WASM and artifact isolation only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 fake adapter for WASM and artifact isolation only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 security test for WASM and artifact isolation only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 documentation for WASM and artifact isolation only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 contract for provider-chain dispatch only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 selection model for provider-chain dispatch only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 dry-run adapter for provider-chain dispatch only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 test fixture for provider-chain dispatch only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 audit record for provider-chain dispatch only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 documentation for provider-chain dispatch only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 contract for workflow recovery only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 lease policy for workflow recovery only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 compensation policy for workflow recovery only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 test fixture for workflow recovery only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 metrics for workflow recovery only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 documentation for workflow recovery only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 contract for MCP tool safety only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 input schema for MCP tool safety only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 transport test for MCP tool safety only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 redaction policy for MCP tool safety only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 abuse test for MCP tool safety only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 documentation for MCP tool safety only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 contract for RAG provenance and context only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 budget policy for RAG provenance and context only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 retrieval evidence for RAG provenance and context only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 test fixture for RAG provenance and context only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 metrics for RAG provenance and context only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 documentation for RAG provenance and context only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 contract for delivery integrity only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 manifest validator for delivery integrity only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 CDN capability boundary for delivery integrity only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 test fixture for delivery integrity only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 error model for delivery integrity only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 documentation for delivery integrity only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 contract for PWA and Mini App bridge only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 capability boundary for PWA and Mini App bridge only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 host plan for PWA and Mini App bridge only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 test fixture for PWA and Mini App bridge only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 permission policy for PWA and Mini App bridge only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 documentation for PWA and Mini App bridge only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 contract for release evidence only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 artifact inventory for release evidence only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 verification check for release evidence only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 workflow test for release evidence only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 failure policy for release evidence only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 documentation for release evidence only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 contract for cross-runtime compatibility only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 capability matrix for cross-runtime compatibility only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 import graph audit for cross-runtime compatibility only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 test fixture for cross-runtime compatibility only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 unsupported state for cross-runtime compatibility only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 documentation for cross-runtime compatibility only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 contract for observability and retention only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 bounded metric schema for observability and retention only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 retention policy for observability and retention only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 test fixture for observability and retention only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 redaction test for observability and retention only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 documentation for observability and retention only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 contract for operator authorization only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 consent model for operator authorization only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 scope validator for operator authorization only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 test fixture for operator authorization only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 audit event for operator authorization only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [ ] Derive the 1.8.16 documentation for operator authorization only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+
+## 7. Cross-cutting validation matrix
+
+- [ ] Write and run a focused 1.8.16 schema validation regression test for every accepted comparative gap before integrating it with an existing public contract.
+- [ ] Write and run a focused 1.8.16 schema validation negative-path test that demonstrates failure is explicit, bounded, and free of hidden side effects.
+- [ ] Review 1.8.16 schema validation test fixtures for credentials, real network dependencies, unstable clocks, generated artifacts, and provider-specific coupling.
+- [ ] Write and run a focused 1.8.16 serialization regression test for every accepted comparative gap before integrating it with an existing public contract.
+- [ ] Write and run a focused 1.8.16 serialization negative-path test that demonstrates failure is explicit, bounded, and free of hidden side effects.
+- [ ] Review 1.8.16 serialization test fixtures for credentials, real network dependencies, unstable clocks, generated artifacts, and provider-specific coupling.
+- [ ] Write and run a focused 1.8.16 cross-runtime imports regression test for every accepted comparative gap before integrating it with an existing public contract.
+- [ ] Write and run a focused 1.8.16 cross-runtime imports negative-path test that demonstrates failure is explicit, bounded, and free of hidden side effects.
+- [ ] Review 1.8.16 cross-runtime imports test fixtures for credentials, real network dependencies, unstable clocks, generated artifacts, and provider-specific coupling.
+- [ ] Write and run a focused 1.8.16 transport neutrality regression test for every accepted comparative gap before integrating it with an existing public contract.
+- [ ] Write and run a focused 1.8.16 transport neutrality negative-path test that demonstrates failure is explicit, bounded, and free of hidden side effects.
+- [ ] Review 1.8.16 transport neutrality test fixtures for credentials, real network dependencies, unstable clocks, generated artifacts, and provider-specific coupling.
+- [ ] Write and run a focused 1.8.16 fake storage regression test for every accepted comparative gap before integrating it with an existing public contract.
+- [ ] Write and run a focused 1.8.16 fake storage negative-path test that demonstrates failure is explicit, bounded, and free of hidden side effects.
+- [ ] Review 1.8.16 fake storage test fixtures for credentials, real network dependencies, unstable clocks, generated artifacts, and provider-specific coupling.
+- [ ] Write and run a focused 1.8.16 fake provider regression test for every accepted comparative gap before integrating it with an existing public contract.
+- [ ] Write and run a focused 1.8.16 fake provider negative-path test that demonstrates failure is explicit, bounded, and free of hidden side effects.
+- [ ] Review 1.8.16 fake provider test fixtures for credentials, real network dependencies, unstable clocks, generated artifacts, and provider-specific coupling.
+- [ ] Write and run a focused 1.8.16 fake browser regression test for every accepted comparative gap before integrating it with an existing public contract.
+- [ ] Write and run a focused 1.8.16 fake browser negative-path test that demonstrates failure is explicit, bounded, and free of hidden side effects.
+- [ ] Review 1.8.16 fake browser test fixtures for credentials, real network dependencies, unstable clocks, generated artifacts, and provider-specific coupling.
+- [ ] Write and run a focused 1.8.16 fake sandbox regression test for every accepted comparative gap before integrating it with an existing public contract.
+- [ ] Write and run a focused 1.8.16 fake sandbox negative-path test that demonstrates failure is explicit, bounded, and free of hidden side effects.
+- [ ] Review 1.8.16 fake sandbox test fixtures for credentials, real network dependencies, unstable clocks, generated artifacts, and provider-specific coupling.
+- [ ] Write and run a focused 1.8.16 cancellation regression test for every accepted comparative gap before integrating it with an existing public contract.
+- [ ] Write and run a focused 1.8.16 cancellation negative-path test that demonstrates failure is explicit, bounded, and free of hidden side effects.
+- [ ] Review 1.8.16 cancellation test fixtures for credentials, real network dependencies, unstable clocks, generated artifacts, and provider-specific coupling.
+- [ ] Write and run a focused 1.8.16 timeout regression test for every accepted comparative gap before integrating it with an existing public contract.
+- [ ] Write and run a focused 1.8.16 timeout negative-path test that demonstrates failure is explicit, bounded, and free of hidden side effects.
+- [ ] Review 1.8.16 timeout test fixtures for credentials, real network dependencies, unstable clocks, generated artifacts, and provider-specific coupling.
+- [ ] Write and run a focused 1.8.16 quota budget regression test for every accepted comparative gap before integrating it with an existing public contract.
+- [ ] Write and run a focused 1.8.16 quota budget negative-path test that demonstrates failure is explicit, bounded, and free of hidden side effects.
+- [ ] Review 1.8.16 quota budget test fixtures for credentials, real network dependencies, unstable clocks, generated artifacts, and provider-specific coupling.
+- [ ] Write and run a focused 1.8.16 integrity mismatch regression test for every accepted comparative gap before integrating it with an existing public contract.
+- [ ] Write and run a focused 1.8.16 integrity mismatch negative-path test that demonstrates failure is explicit, bounded, and free of hidden side effects.
+- [ ] Review 1.8.16 integrity mismatch test fixtures for credentials, real network dependencies, unstable clocks, generated artifacts, and provider-specific coupling.
+- [ ] Write and run a focused 1.8.16 SSRF regression test for every accepted comparative gap before integrating it with an existing public contract.
+- [ ] Write and run a focused 1.8.16 SSRF negative-path test that demonstrates failure is explicit, bounded, and free of hidden side effects.
+- [ ] Review 1.8.16 SSRF test fixtures for credentials, real network dependencies, unstable clocks, generated artifacts, and provider-specific coupling.
+- [ ] Write and run a focused 1.8.16 permission escalation regression test for every accepted comparative gap before integrating it with an existing public contract.
+- [ ] Write and run a focused 1.8.16 permission escalation negative-path test that demonstrates failure is explicit, bounded, and free of hidden side effects.
+- [ ] Review 1.8.16 permission escalation test fixtures for credentials, real network dependencies, unstable clocks, generated artifacts, and provider-specific coupling.
+- [ ] Write and run a focused 1.8.16 redaction regression test for every accepted comparative gap before integrating it with an existing public contract.
+- [ ] Write and run a focused 1.8.16 redaction negative-path test that demonstrates failure is explicit, bounded, and free of hidden side effects.
+- [ ] Review 1.8.16 redaction test fixtures for credentials, real network dependencies, unstable clocks, generated artifacts, and provider-specific coupling.
+- [ ] Write and run a focused 1.8.16 metrics cardinality regression test for every accepted comparative gap before integrating it with an existing public contract.
+- [ ] Write and run a focused 1.8.16 metrics cardinality negative-path test that demonstrates failure is explicit, bounded, and free of hidden side effects.
+- [ ] Review 1.8.16 metrics cardinality test fixtures for credentials, real network dependencies, unstable clocks, generated artifacts, and provider-specific coupling.
+- [ ] Write and run a focused 1.8.16 package contents regression test for every accepted comparative gap before integrating it with an existing public contract.
+- [ ] Write and run a focused 1.8.16 package contents negative-path test that demonstrates failure is explicit, bounded, and free of hidden side effects.
+- [ ] Review 1.8.16 package contents test fixtures for credentials, real network dependencies, unstable clocks, generated artifacts, and provider-specific coupling.
+- [ ] Write and run a focused 1.8.16 artifact naming regression test for every accepted comparative gap before integrating it with an existing public contract.
+- [ ] Write and run a focused 1.8.16 artifact naming negative-path test that demonstrates failure is explicit, bounded, and free of hidden side effects.
+- [ ] Review 1.8.16 artifact naming test fixtures for credentials, real network dependencies, unstable clocks, generated artifacts, and provider-specific coupling.
+- [ ] Write and run a focused 1.8.16 release verification regression test for every accepted comparative gap before integrating it with an existing public contract.
+- [ ] Write and run a focused 1.8.16 release verification negative-path test that demonstrates failure is explicit, bounded, and free of hidden side effects.
+- [ ] Review 1.8.16 release verification test fixtures for credentials, real network dependencies, unstable clocks, generated artifacts, and provider-specific coupling.
+- [ ] Write and run a focused 1.8.16 documentation links regression test for every accepted comparative gap before integrating it with an existing public contract.
+- [ ] Write and run a focused 1.8.16 documentation links negative-path test that demonstrates failure is explicit, bounded, and free of hidden side effects.
+- [ ] Review 1.8.16 documentation links test fixtures for credentials, real network dependencies, unstable clocks, generated artifacts, and provider-specific coupling.
+
+## 8. Documentation, compatibility, and release execution
+
+- [ ] Update docs/repo-research-1.8.16.md with the complete selected repository inventory and source evidence.
+- [ ] Update docs/repo-analysis-1.8.16.json with structured metadata, classification, source paths, and implementation disposition for every analyzed repository.
+- [ ] Update docs/repo-synthesis-1.8.16.md with feature-gap rankings, accepted patterns, rejected patterns, and implementation rationale.
+- [ ] Update docs/gapmatrix.md only after comparing the implemented result against the final 1.8.16 code and tests.
+- [ ] Update README claims only when a corresponding capability is public, tested, documented, and not caller-owned or speculative.
+- [ ] Update package exports only for stable, explicitly documented additive contracts.
+- [ ] Update type declarations and package-import tests for every export-map change.
+- [ ] Update changelog.md from verified completed work rather than the original research hypothesis.
+- [ ] Create docs/releasenotes-1.8.16.md only after artifact inventory, signing status, workflows, and registry results are known.
+- [ ] Update docs/artifactavailability.md only from generated and remotely verified release evidence.
+- [ ] Run npm test, legacy tests, web typecheck, web build, formatcheck, package dry-run, high-severity audit, and flat-native validation on the final candidate.
+- [ ] Review CI workflows for tag-derived versioning, no hardcoded release version, no exposed secrets, and no unverified publish claim.
+- [ ] Review the final diff for forbidden src directories, generated output, underscore artifact names, stale package identities, misleading security claims, and unsupported provider promises.
+- [ ] Bump all active manifests to 1.8.16 only after all selected features and gates are complete.
+- [ ] Update the iOS build number to 1008016 only during the validated 1.8.16 manifest bump.
+- [ ] Create the 1.8.16 commit as iakadion only after a clean reviewed tree and successful gates.
+- [ ] Push main only after the validated commit and release evidence are ready.
+- [ ] Create immutable tag v1.8.16 only after confirming no historical tag is changed.
+- [ ] Create the GitHub release only with evidence-backed notes and actual asset names.
+- [ ] Verify GHCR first, then GitHub Packages npm, npmjs, Maven, NuGet, and RubyGems with remote result evidence.
+- [ ] Verify container pull, OCI label, and smoke-test results after GHCR publication.
+- [ ] Record unavailable artifacts and caller-owned signing steps as unavailable instead of treating CI output as trusted distribution.
+- [ ] Mark each completed 1.8.16 checklist task only after its evidence is linked from the appropriate research, implementation, test, or release record.

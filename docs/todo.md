@@ -691,3 +691,12 @@ The following blocks are the execution order for the complete ecosystem. A block
 - [x] Replace invalid GitHub owners in CODEOWNERS, READMEs and documentation with `@iakadion`, `@inathlan`, `@aasblor` and `@nasblor`; retain `@wenathlan` only as the repository organization and published package owner.
 - [x] Validate that no active CODEOWNERS entry references legacy invalid owner handles.
 - [x] Inspect the GitHub CODEOWNERS API error and retain only valid accounts that the repository accepts as owners with write access; the API now reports zero errors.
+
+### Planning releases 1.8.15 and 1.8.16
+
+- [x] Read the supplied scope references in full, distinguish verified constraints from aspirational proposals, and preserve both files unchanged.
+- [x] Map the active 1.8.14 engine, exports, tests, package surfaces and release rules against the realistic 1.8.15 opportunity set.
+- [x] Create `docs/todo-1.8.15.md` with more than 400 individually checkable research, contract, implementation, test, documentation, validation and release steps.
+- [ ] Define a public-repository research rubric and category quota for the 1.8.16 comparative analysis, targeting 100–300 relevant repositories without treating any external implementation as a copy source.
+- [x] Create `docs/todo-1.8.16.md` with 600–900 individually checkable steps covering repository research, evidence capture, gap selection, implementation, tests, documentation, release and post-release verification.
+- [x] Review both versioned plans for architectural constraints, security, feasibility, feature ownership and release-gate dependencies before beginning implementation.
