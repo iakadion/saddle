@@ -45,6 +45,19 @@ The sources support a narrow next comparison question: whether Saddle should add
 
 The initial workflow sample reinforces existing 1.8.15 behavior rather than selecting a new feature. The strongest candidate for later evidence is a **terminal-state receipt** that records whether a cancellation, compensation, or cleanup is confirmed, requested, unavailable, or remains externally unknown. It must remain serializable and must not start timers, reapers, workers, or external dispatch loops.
 
+## Storage, virtual filesystem, and cache evidence
+
+| Candidate | Primary source | Evidence observed | Relevance to Saddle | Disposition |
+|---|---|---|---|---|
+| `seaweedfs/seaweedfs` | [repository][13] | The Apache-2.0 storage system distinguishes volumes, metadata, replication levels, range/ETag support and configured hot/warm tiers. | It corroborates that tiers describe storage location and latency, not virtual RAM or compute. | Consider a declarative replica locality/cost evidence field; do not implement a storage server. |
+| `Barre/ZeroFS` | [repository][14] | The AGPL project combines S3-backed VFS, explicit memory/disk caches, conditional writes, epoch fencing and deterministic fault simulation. | Its refusal to degrade unsafe writes corroborates Saddle's explicit capability rejection model. | Consider conditional-write evidence and cache-tier provenance only; reject kernel, mount, daemon and AGPL-derived implementation. |
+| `veged/omniFUSE` | [repository][15] | The MIT virtual filesystem declares backend-specific concurrency semantics, refuses unsafe providers without conditional writes and keeps host credentials outside an agent sandbox. | It validates caller-owned credentials and provider capability checks. | Consider conflict/outcome receipts for adapters; do not mount paths or synchronize in the shared library. |
+| `dennwc/cas` | [repository][16] | The Apache-2.0 CAS emphasizes immutable hashes, large archives, remote indexing and pipeline caches. | It corroborates Saddle's hash-addressed transform and artifact cache keys. | Consider explicit cache lineage metadata; do not introduce a second CAS implementation. |
+
+## Storage disposition
+
+The evidence favors a small, additive **provider mutation precondition receipt**: a caller can obtain a deterministic record that a requested write, restore or repair requires conditional-write support, expected digest evidence and declared size limits. It must neither mount a filesystem nor perform storage I/O. A second independent source has corroborated the conditional-write boundary, but implementation remains deferred until the research sample is broadened and the public naming is reviewed.
+
 ## References
 
 [1]: https://github.com/browser-use/browser-use "browser-use/browser-use"
@@ -59,3 +72,7 @@ The initial workflow sample reinforces existing 1.8.15 behavior rather than sele
 [10]: https://github.com/platformatic/job-queue "platformatic/job-queue"
 [11]: https://github.com/rails/solid_queue "rails/solid_queue"
 [12]: https://github.com/danielgerlag/workflow-core "danielgerlag/workflow-core"
+[13]: https://github.com/seaweedfs/seaweedfs "seaweedfs/seaweedfs"
+[14]: https://github.com/Barre/zerofs "Barre/ZeroFS"
+[15]: https://github.com/veged/omniFUSE "veged/omniFUSE"
+[16]: https://github.com/dennwc/cas "dennwc/cas"
