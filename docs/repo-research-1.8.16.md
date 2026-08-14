@@ -214,6 +214,19 @@ The evidence supports a future **crawl policy receipt** containing a normalized 
 
 The source set supports a future **isolation attestation input** with `runtimeKind`, `hostAuthority`, `filesystemPolicy`, `networkPolicy`, `cpuBudget`, `memoryBudget`, `processBudget`, `timeoutBudget`, `imageOrModuleDigest` and `evidenceStatus`. A caller-provided attestation can be validated for completeness but cannot establish that a host is isolated, privileged operations are allowed or a workload was executed.
 
+## Additional document ingestion and RAG evidence
+
+| Candidate | Primary source | Evidence observed | Relevance to Saddle | Disposition |
+|---|---|---|---|---|
+| `docling-project/docling` | [repository][65] | The MIT tool provides a unified document representation with format-specific conversion, local execution and optional OCR/model/service integrations. | It corroborates the need to preserve content format, transform identity and output provenance. | Consider document-transform receipt fields only; do not add OCR, model, converter or service dependencies. |
+| `Unstructured-IO/unstructured` | [repository][66] | The Apache-2.0 library partitions multiple document types with optional system dependencies, container use and connectors. | It reinforces that parsing capability depends on explicit installed toolchains and source types. | Consider an adapter-reported parser capability matrix; do not run parsers or include optional toolchains in core. |
+| `deepset-ai/haystack` | [repository][67] | The Apache-2.0 framework exposes retrieval, routing, memory, generation and tool lifecycle with telemetry and integrations. | It corroborates a bounded, inspectable context pipeline but also demonstrates scope that belongs outside a portable engine. | Consider a context selection/audit receipt; reject models, embeddings, telemetry and agent runtime integrations. |
+| `run-llama/llama_index` | [repository][68] | The MIT framework separates core from numerous integrations and documents storage, retrieval and build-asset attestation. | It corroborates split core/adapter architecture and independent asset verification. | Consider source/integration identity fields; do not add vector index, LLM, connector or disk persistence. |
+
+## Additional document disposition
+
+The sources support a potential **context provenance envelope** with `sourceDigest`, `sourceLocator`, `retrievalMethod`, `transformIdentity`, `transformDigest`, `chunkIdentity`, `citationRange`, `contextBudget` and `adapterRequired`. The envelope must distinguish caller claims from independently verified data and must not assert document understanding, citation correctness, embedding quality or durable storage without an external adapter.
+
 ## References
 
 [1]: https://github.com/browser-use/browser-use "browser-use/browser-use"
@@ -280,3 +293,7 @@ The source set supports a future **isolation attestation input** with `runtimeKi
 [62]: https://github.com/google/nsjail "google/nsjail"
 [63]: https://github.com/firecracker-microvm/firecracker "firecracker-microvm/firecracker"
 [64]: https://github.com/gvisor/gvisor "gvisor/gvisor"
+[65]: https://github.com/docling-project/docling "docling-project/docling"
+[66]: https://github.com/Unstructured-IO/unstructured "Unstructured-IO/unstructured"
+[67]: https://github.com/deepset-ai/haystack "deepset-ai/haystack"
+[68]: https://github.com/run-llama/llama_index "run-llama/llama_index"
