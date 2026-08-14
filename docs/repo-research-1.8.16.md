@@ -292,6 +292,19 @@ The evidence supports a future **surface capability receipt** with `surfaceKind`
 
 The sources support a future **storage identity and capability receipt** with `contentIdentity`, `chunkIndexDigest`, `rangeRead`, `integrityMethod`, `replicationEvidence`, `tier`, `metadataAuthority`, `mountRequired`, `daemonRequired`, `networkAuthority` and `credentialOwner`. It must make each remote dependency visible and cannot imply that a remote bucket, cache, VFS or distributed store provides local RAM, local POSIX semantics, free egress or persistent compute.
 
+## Additional protocol and tool-server evidence
+
+| Candidate | Primary source | Evidence observed | Relevance to Saddle | Disposition |
+|---|---|---|---|---|
+| `modelcontextprotocol/modelcontextprotocol` | [repository][89] | The MIT repository maintains the MCP specification and a TypeScript-first schema also published as JSON Schema. | It corroborates schema-first interoperable contracts independent from a server runtime. | Consider optional schema identity/digest references; do not implement a transport or client/server runtime. |
+| `modelcontextprotocol/typescript-sdk` | [repository][90] | The SDK separates core client/server libraries and intentionally thin HTTP framework middleware. | It reinforces thin adapter layers with no business logic. | Consider pure adapter capability declarations; do not depend on MCP packages, OAuth helpers or middleware. |
+| `modelcontextprotocol/servers` | [repository][91] | Reference servers are expressly educational rather than production-ready and expose filesystem, Git, memory and fetch capabilities. | It corroborates that tools require a threat model and scoped access policy. | Consider a tool capability/allow-list receipt; do not run reference servers or expose local filesystem/Git/network tools. |
+| `github/github-mcp-server` | [repository][92] | The MIT server uses toolsets and read-only restrictions, but supports OAuth/PAT authentication and GitHub mutations when enabled. | It corroborates least-privilege tool selection and explicit read-only mode. | Consider declarative requested/allowed toolsets; reject token handling, OAuth, HTTP/Docker serving and GitHub API operations. |
+
+## Additional protocol disposition
+
+The evidence supports a future **tool capability receipt** with `protocolVersion`, `schemaDigest`, `transportKind`, `requestedToolsets`, `allowedToolsets`, `readOnly`, `credentialOwner`, `consentRequired` and `adapterRequired`. It must not open a transport, spawn a server, acquire credentials, contact an API or treat a declared allow-list as an authorization grant.
+
 ## References
 
 [1]: https://github.com/browser-use/browser-use "browser-use/browser-use"
@@ -382,3 +395,7 @@ The sources support a future **storage identity and capability receipt** with `c
 [86]: https://github.com/seaweedfs/seaweedfs "seaweedfs/seaweedfs"
 [87]: https://github.com/juicedata/juicefs "juicedata/juicefs"
 [88]: https://github.com/ipfs/kubo "ipfs/kubo"
+[89]: https://github.com/modelcontextprotocol/modelcontextprotocol "modelcontextprotocol/modelcontextprotocol"
+[90]: https://github.com/modelcontextprotocol/typescript-sdk "modelcontextprotocol/typescript-sdk"
+[91]: https://github.com/modelcontextprotocol/servers "modelcontextprotocol/servers"
+[92]: https://github.com/github/github-mcp-server "github/github-mcp-server"
