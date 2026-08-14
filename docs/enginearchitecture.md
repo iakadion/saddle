@@ -45,6 +45,8 @@ The public contract uses plain objects and factory functions. The engine never r
 
 `workingadmission` selects serializable candidates against byte and entry budgets without reading data. `bridgeplan` can describe `temporaryfile`, `mmap`, `tmpfs`, `zram`, or `swap` only when a caller declares the capability. A returned `caller-executes` result contains preconditions and cleanup ownership; an unsupported capability is reported without a probe or side effect.
 
+`materializationledger` records only validated materialization transitions and produces a `caller-cleans` plan. It does not unlink a file, unmount a volume, modify swap, or delete a remote replica.
+
 `magicbytes`, `wasmplan`, `transformationkey`, `transformationcache`, and `executeisolated` define a separate binary boundary. The module classifies verified byte prefixes, plans bounded WASM work, invalidates cache reuse when source, compiler, key, or policy differ, and calls an injected isolated adapter only. It never creates a process, a container, a filesystem mount, or a network connection by itself.
 
 `archivelimits` and `archiveinspection` validate a caller-provided archive inventory before extraction. The contract rejects excess entry count, nested depth, output bytes, decompression ratio, absolute paths, and traversal paths. `extractarchive` requires an accepted inspection and an injected adapter, so the core neither opens an archive nor writes an extracted file.

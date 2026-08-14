@@ -108,8 +108,8 @@
 - [x] Implement a capability-based tier resolver that never probes the host from the shared core.
 - [x] Implement a deterministic working-set admission planner that returns admitted, deferred, rejected, and evicted candidates.
 - [x] Implement a bridge planner that selects only capabilities declared by the injected adapter.
-- [ ] Implement a materialization ledger that maintains digest, size, tier, state, timestamps, and bounded reason codes.
-- [ ] Implement cleanup-plan generation that can be invoked after success, cancellation, failure, or expiry.
+- [x] Implement a materialization ledger that maintains digest, size, tier, state, timestamps, and bounded reason codes.
+- [x] Implement cleanup-plan generation that can be invoked after success, cancellation, failure, or expiry.
 - [ ] Implement an explicit no-op bridge for runtimes without privileged storage or memory controls.
 - [ ] Implement a fake host adapter that simulates tmpfs, zram, swap, mmap, cleanup errors, and permission denials without running shell commands.
 - [x] Test admission under an exact byte budget.
@@ -119,7 +119,7 @@
 - [ ] Test a tmpfs plan that requires an explicit caller-owned execution adapter.
 - [ ] Test a swap plan that records rollback requirements without invoking swapon.
 - [ ] Test a zram plan that rejects unsupported host capabilities.
-- [ ] Test materialization ledger updates across prepare, verify, use, release, and cleanup states.
+- [x] Test materialization ledger updates across prepare, verify, use, release, and cleanup states.
 - [ ] Test cleanup idempotency when a target has already been removed.
 - [ ] Test failure cleanup when materialization completes only partially.
 - [ ] Test cancellation cleanup when an AbortSignal interrupts a transfer.

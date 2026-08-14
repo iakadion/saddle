@@ -21,7 +21,7 @@ import { s3compatible } from "../storage/s3compatible.js";
 import { tieredcache } from "../storage/cache.js";
 import { comparemanifests, objectmanifest, storagecapabilities, syncobject } from "../storage/sync.js";
 import { storagepool } from "../storage/pool.js";
-import { bridgeplan, materializationrecord, workingadmission } from "../memory/planner.js";
+import { bridgeplan, materializationledger, materializationrecord, workingadmission } from "../memory/planner.js";
 import { cachedecision, executeisolated, magicbytes, transformationcache, transformationkey, wasmplan } from "../binary/transform.js";
 import { archiveinspection, extractarchive } from "../binary/archive.js";
 import { artifacthandoff, cancellationplan, providerchain } from "../runners/chain.js";
@@ -1148,6 +1148,17 @@ test("keeps host-memory bridge operations declarative and capability gated", () 
   const record = materializationrecord({ id: "object1", sha256: "a".repeat(64), sizebytes: 1, tier: "l3" });
   assert.equal(record.state, "planned");
   assert.throws(() => workingadmission([{ id: "same", sizebytes: 1 }, { id: "same", sizebytes: 1 }]), /unique/);
+});
+
+test("tracks materialization transitions and emits cleanup plans without deletion", () => {
+  let now = 10;
+  const ledger = materializationledger({ clock: () => now });
+  ledger.add({ id: "object1", sha256: "a".repeat(64), sizebytes: 1, tier: "l3", createdat: 1 });
+  assert.equal(ledger.transition("object1", "prepared").state, "prepared");
+  now = 11;
+  assert.equal(ledger.transition("object1", "verified").updatedat, 11);
+  assert.equal(ledger.cleanupplan("object1").state, "caller-cleans");
+  assert.throws(() => ledger.transition("object1", "cleaned"), /transition/);
 });
 
 test("plans WASM transformations from magic bytes with reproducible cache identity", () => {

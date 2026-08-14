@@ -47,6 +47,16 @@ export function materializationrecord(input = {}) {
   return Object.freeze({ version: 1, id, sha256, sizebytes: positive(input.sizebytes, "working-set materialization sizebytes"), tier: validtier(input.tier ?? "l3"), state: validstate(input.state ?? "planned"), createdat: nonnegative(input.createdat ?? Date.now(), "working-set materialization createdat") });
 }
 
+/** Tracks materialization transitions and emits caller-owned cleanup plans without deleting resources. */
+export function materializationledger(input = {}) {
+  const records = new Map();
+  const clock = typeof input.clock === "function" ? input.clock : () => Date.now();
+  function add(record) { const normalized = materializationrecord(record); if (records.has(normalized.id)) throw new TypeError(`working-set materialization id is duplicated: ${normalized.id}`); records.set(normalized.id, normalized); return normalized; }
+  function transition(id, state) { const current = records.get(String(id)); if (!current) throw new TypeError("working-set materialization is unknown"); const next = validstate(state); if (!allowedtransition(current.state, next)) throw new TypeError(`working-set materialization transition is invalid: ${current.state} to ${next}`); const output = Object.freeze({ ...current, state: next, updatedat: nonnegative(clock(), "working-set materialization updatedat") }); records.set(output.id, output); return output; }
+  function cleanupplan(id) { const current = records.get(String(id)); if (!current) throw new TypeError("working-set materialization is unknown"); return Object.freeze({ version: 1, id: current.id, sha256: current.sha256, state: "caller-cleans", reason: current.state === "cleaned" ? "already-cleaned" : "release-working-set" }); }
+  return Object.freeze({ add, transition, cleanupplan, list: () => Object.freeze([...records.values()]) });
+}
+
 const bridgeoperations = Object.freeze(["temporaryfile", "mmap", "tmpfs", "zram", "swap"]);
 const policies = new Set(["lru", "sizeaware", "ttlfirst"]);
 const tiers = new Set(["l1", "l2", "l3", "l4"]);
@@ -79,3 +89,4 @@ function optionalnonnegative(value, name) { return value === undefined ? null : 
 function validpolicy(value) { if (!policies.has(value)) throw new TypeError("working-set policy is invalid"); return value; }
 function validtier(value) { if (!tiers.has(value)) throw new TypeError("working-set tier is invalid"); return value; }
 function validstate(value) { if (!states.has(value)) throw new TypeError("working-set materialization state is invalid"); return value; }
+function allowedtransition(current, next) { if (next === "failed") return current !== "cleaned"; return new Set(["planned:prepared", "prepared:verified", "verified:released", "released:cleaned"]).has(`${current}:${next}`); }
