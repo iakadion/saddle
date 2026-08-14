@@ -679,4 +679,7 @@ The following blocks are the execution order for the complete ecosystem. A block
 - [x] Set commit author identity to `iakadion` only when the authenticated user confirms that identity in Git configuration.
 - [x] Update all active manifests, release notes, artifact examples and workflow metadata from `1.8.13` to `1.8.14`.
 - [x] Run the complete local validation matrix and create the 1.8.14 commits without rewriting historical tags.
-- [ ] Create and verify the 1.8.14 release and its six registry workflows after authorization is available.
+- [x] Create and verify the 1.8.14 release and its six registry workflows after authorization is available.
+- [x] Diagnose the desktop artifact workflow still in progress for v1.8.14 and confirm all expected desktop assets are uploaded.
+- [x] Diagnose the mobile artifact workflow failure for v1.8.14, rerun it with the corrected Android signing/tool-path behavior and record the actual result.
+- [x] Replace the prepared 1.8.14 asset table with the remotely verified asset list and counts only after desktop/mobile verification completes.

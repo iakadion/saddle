@@ -117,7 +117,7 @@ Each surface also emits `sha256.*.1.8.13`, `manifest.*.1.8.13.json` and, where e
 
 ## 1.8.14 release matrix
 
-Version 1.8.14 keeps the release-tag-derived matrix and adds post-push container pull and smoke validation. The implementation records retention policy and keep/prune decisions but never removes caller-owned files. The release is expected to contain the same 38-asset family; iOS remains unavailable until caller-owned Apple signing and provisioning are configured.
+Version 1.8.14 keeps the release-tag-derived matrix and adds post-push container pull and smoke validation. The implementation records retention policy and keep/prune decisions but never removes caller-owned files. The release contains 38 verified assets; iOS remains unavailable until caller-owned Apple signing and provisioning are configured.
 
 | Surface | Architectures | Artifact naming contract |
 | --- | --- | --- |
@@ -130,3 +130,5 @@ Version 1.8.14 keeps the release-tag-derived matrix and adds post-push container
 | Browser extension | Manifest V3 | `saddle.extension.1.8.14.zip` |
 
 Each surface also emits `sha256.*.1.8.14`, `manifest.*.1.8.14.json` and, where enabled by the release path, SBOM and provenance metadata. The Android manifest records `ci-test-key`, desktop manifests record `unsigned` and the container manifest records `caller-owned`. The container image additionally records `org.opencontainers.image.version=1.8.14`; the post-push workflow pulls that exact version and runs the CLI help smoke test.
+
+The verified 1.8.14 release contains six Linux assets, six Windows assets, four macOS assets, two Android assets, one container archive, one browser extension, nine manifests and nine checksum files. The release-event mobile job did not bypass missing production credentials; the successful manual rerun used the explicit `ci-test-key` path.
