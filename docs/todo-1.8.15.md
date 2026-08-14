@@ -188,7 +188,7 @@
 - [x] Implement deterministic provider eligibility filtering based on declared reports.
 - [ ] Implement stable provider scoring with transparent caller-configured weights and no provider-specific hardcoding.
 - [x] Implement a selection report preserving rejected-provider reasons.
-- [ ] Implement dry-run dispatch payload builders as injected forge adapters.
+- [x] Implement dry-run dispatch payload builders as injected forge adapters.
 - [x] Implement a runner-to-storage handoff planner that requires output digests and explicit retention selection.
 - [x] Implement a provider-chain cancellation planner that delegates actual remote cancellation to existing caller-owned adapters.
 - [ ] Implement fake provider adapters for unavailable, quota-exhausted, incompatible, slow, canceled, successful, and artifact-mismatch outcomes.
@@ -197,7 +197,7 @@
 - [x] Test a provider rejected for missing required container capability.
 - [x] Test a provider rejected for a smaller declared time or memory budget.
 - [ ] Test a caller preference that changes selection only among otherwise eligible providers.
-- [ ] Test a dry-run plan that cannot dispatch without an injected adapter.
+- [x] Test a dry-run plan that cannot dispatch without an injected adapter.
 - [x] Test a cancellation plan that retains unknown remote state rather than claiming completed cleanup.
 - [x] Test an artifact handoff rejected for absent digest or retention policy.
 - [ ] Test a provider report with an unsupported field rejection.

@@ -41,6 +41,13 @@ export function cancellationplan(input = {}) {
   return Object.freeze({ version: 1, runid, providerid, reason, state: "caller-cancels", remotestate: "unknown", compensation: input.compensation === true ? "caller-evaluates" : "not-requested" });
 }
 
+/** Renders a caller-dispatches plan through an injected forge adapter without sending it. */
+export async function renderdispatch(plan, adapter) {
+  if (plan?.state !== "caller-dispatches") throw new TypeError("provider dispatch plan is invalid");
+  if (typeof adapter?.render !== "function") throw chainerror("PROVIDER_DISPATCH_RENDER_UNAVAILABLE", "provider dispatch render adapter is required");
+  return adapter.render(Object.freeze({ ...plan }));
+}
+
 function normalizeproviders(input) {
   if (!Array.isArray(input) || input.length === 0) throw new TypeError("provider chain providers must be a non-empty array");
   const ids = new Set();

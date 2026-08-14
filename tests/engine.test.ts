@@ -24,7 +24,7 @@ import { storagepool } from "../storage/pool.js";
 import { bridgeplan, materializationledger, materializationrecord, workingadmission } from "../memory/planner.js";
 import { cachedecision, cacheeligibility, executeisolated, magicbytes, transformationcache, transformationkey, wasmplan } from "../binary/transform.js";
 import { archiveinspection, extractarchive } from "../binary/archive.js";
-import { artifacthandoff, cancellationplan, providerchain } from "../runners/chain.js";
+import { artifacthandoff, cancellationplan, providerchain, renderdispatch } from "../runners/chain.js";
 import { deliverymanifest, pwaplan, verifydelivery } from "../delivery/manifest.js";
 import { applicationbridge, dnsplan, miniappplan } from "../surfaces/requirements.js";
 import { validatesession } from "../domain/sessions.js";
@@ -1204,6 +1204,12 @@ test("selects an eligible provider deterministically and leaves dispatch caller-
   assert.equal(plan.rejected[0].id, "small");
   assert.equal(plan.provider.architecture, "x64");
   assert.throws(() => chain.select({ capabilities: ["gpu"] }), (error) => error.code === "PROVIDER_CHAIN_UNAVAILABLE");
+});
+
+test("renders provider dispatch plans only through injected adapters", async () => {
+  const plan = { state: "caller-dispatches", provider: { id: "worker" }, request: {} };
+  assert.deepEqual(await renderdispatch(plan, { render: async (value) => ({ provider: value.provider.id }) }), { provider: "worker" });
+  await assert.rejects(() => renderdispatch(plan), (error) => error.code === "PROVIDER_DISPATCH_RENDER_UNAVAILABLE");
 });
 
 test("requires verified evidence before an artifact handoff can be transferred", () => {

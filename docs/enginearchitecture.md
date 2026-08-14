@@ -55,6 +55,8 @@ The public contract uses plain objects and factory functions. The engine never r
 
 `providerchain` consumes only explicit provider reports. It rejects unavailable, under-capacity, or capability-incompatible candidates with evidence, chooses the remaining candidate by stable priority, and emits a `caller-dispatches` plan rather than a remote request. `artifacthandoff` requires an artifact digest, size, provider identity, and retention choice before a caller transfers output to storage.
 
+`renderdispatch` can serialize an existing dispatch plan only through an injected adapter. It does not post to a forge, create a workflow run, or own an authentication token.
+
 `cancellationplan` represents a caller request to cancel a remote run. It deliberately reports the remote state as `unknown` until the selected provider adapter confirms an outcome, and it leaves any compensation decision to the caller.
 
 `deliverymanifest` keeps ordered chunks immutable through content type, size, and SHA-256 metadata. `verifydelivery` checks received bytes without evaluating JavaScript or WASM. `pwaplan` only describes scope, offline intent, update policy, and declared service-worker support; the host decides whether to register anything.
