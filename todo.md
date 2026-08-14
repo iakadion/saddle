@@ -653,3 +653,5 @@ The following blocks are the execution order for the complete ecosystem. A block
 - [ ] Verify each remote release, asset list, checksum manifest and workflow result after creation.
 - [ ] Make release-time Android fallback behavior explicit: use a CI test key only when production signing secrets are absent, label the resulting manifest `ci-test-key`, and never imply store trust.
 - [ ] Resolve Android SDK tool paths explicitly for `apksigner` and keep AAB/APK verification fail-closed without assuming the tool is on `PATH`.
+- [ ] Diagnose the failed security workflow for v1.8.12 and v1.8.13, preserving the accepted glib advisory only when the failure matches the documented exception.
+- [ ] Diagnose GHCR publication failures for v1.8.12 and v1.8.13, then rerun only after permissions, image metadata and registry inputs are verified.

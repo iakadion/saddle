@@ -128,7 +128,7 @@ jobs:
       - name: trufflehog
         uses: trufflesecurity/trufflehog@v3.96.0
         with:
-          extra_args: --results=verified,unknown
+          extra_args: --results=verified
 
   filesystem-scan:
     name: filesystem vulnerability scan
