@@ -47,6 +47,8 @@ The public contract uses plain objects and factory functions. The engine never r
 
 `magicbytes`, `wasmplan`, `transformationkey`, `transformationcache`, and `executeisolated` define a separate binary boundary. The module classifies verified byte prefixes, plans bounded WASM work, invalidates cache reuse when source, compiler, key, or policy differ, and calls an injected isolated adapter only. It never creates a process, a container, a filesystem mount, or a network connection by itself.
 
+`archivelimits` and `archiveinspection` validate a caller-provided archive inventory before extraction. The contract rejects excess entry count, nested depth, output bytes, decompression ratio, absolute paths, and traversal paths. `extractarchive` requires an accepted inspection and an injected adapter, so the core neither opens an archive nor writes an extracted file.
+
 `providerchain` consumes only explicit provider reports. It rejects unavailable, under-capacity, or capability-incompatible candidates with evidence, chooses the remaining candidate by stable priority, and emits a `caller-dispatches` plan rather than a remote request. `artifacthandoff` requires an artifact digest, size, provider identity, and retention choice before a caller transfers output to storage.
 
 `deliverymanifest` keeps ordered chunks immutable through content type, size, and SHA-256 metadata. `verifydelivery` checks received bytes without evaluating JavaScript or WASM. `pwaplan` only describes scope, offline intent, update policy, and declared service-worker support; the host decides whether to register anything.

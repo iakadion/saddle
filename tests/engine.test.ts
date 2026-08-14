@@ -23,6 +23,7 @@ import { comparemanifests, objectmanifest, storagecapabilities, syncobject } fro
 import { storagepool } from "../storage/pool.js";
 import { bridgeplan, materializationrecord, workingadmission } from "../memory/planner.js";
 import { cachedecision, executeisolated, magicbytes, transformationcache, transformationkey, wasmplan } from "../binary/transform.js";
+import { archiveinspection, extractarchive } from "../binary/archive.js";
 import { artifacthandoff, providerchain } from "../runners/chain.js";
 import { deliverymanifest, pwaplan, verifydelivery } from "../delivery/manifest.js";
 import { validatesession } from "../domain/sessions.js";
@@ -1146,6 +1147,15 @@ test("executes transformations only through injected isolated adapters and verif
   assert.equal(output.outputs[0].sizebytes, 4);
   await assert.rejects(() => executeisolated(plan), (error) => error.code === "ISOLATED_EXECUTION_UNAVAILABLE");
   await assert.rejects(() => executeisolated(plan, { execute: async () => ({ outputs: [{ name: "wrong", data, sha256: "f".repeat(64) }] }) }), (error) => error.code === "ISOLATED_EXECUTION_DIGEST_MISMATCH");
+});
+
+test("inspects archive metadata before a caller-owned extraction adapter runs", async () => {
+  const accepted = archiveinspection({ limits: { maxentries: 2, maxdepth: 2, maxoutputbytes: 10, maxratio: 4 }, entries: [{ path: "safe/file.txt", sizebytes: 3, compressedbytes: 2 }] });
+  assert.equal(accepted.state, "accepted");
+  assert.equal(await extractarchive(accepted, { extract: async (value) => value.entries.length }), 1);
+  const denied = archiveinspection({ limits: { maxentries: 2, maxdepth: 2, maxoutputbytes: 10, maxratio: 4 }, entries: [{ path: "../unsafe", sizebytes: 9, compressedbytes: 1 }] });
+  assert.equal(denied.state, "denied");
+  await assert.rejects(() => extractarchive(denied, { extract: async () => {} }), (error) => error.code === "ARCHIVE_POLICY_DENIED");
 });
 
 test("selects an eligible provider deterministically and leaves dispatch caller-owned", () => {

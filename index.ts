@@ -112,6 +112,7 @@ export * from "./api/security.js";
 export * from "./modes/matrix.js";
 export * from "./modes/resolve.js";
 export * from "./binary/build.js";
+export * from "./binary/archive.js";
 export * from "./binary/transform.js";
 export * from "./api/rate.js";
 export * from "./api/http.js";

@@ -143,7 +143,7 @@
 - [x] Define a binary-cache manifest with source digest, transformation key, output digests, adapter identity, policy version, timestamp, and verification state.
 - [ ] Define a cache eligibility policy that prohibits caching outputs that contain secrets, personal data, unstable environment state, or unverified executable output.
 - [ ] Define a cache retrieval policy that revalidates toolchain identity and output checksums before reuse.
-- [ ] Define archive extraction limits for entry count, depth, path traversal, expansion ratio, output size, and executable-bit preservation.
+- [x] Define archive extraction limits for entry count, depth, path traversal, expansion ratio, output size, and executable-bit preservation.
 - [ ] Define a rendering-result contract for headless tasks that returns only caller-authorized artifacts and provenance.
 - [ ] Implement validators for executable inputs, WASM modules, sandbox budgets, transformation keys, binary cache manifests, and archive limits.
 - [x] Implement magic-byte classification for allowed binary and archive formats without trusting filename extensions.
@@ -154,7 +154,7 @@
 - [x] Implement an unavailable-execution result for browser, serverless, extension, or non-isolated environments.
 - [ ] Implement a fake WASM adapter that simulates compile, instantiate, output, trap, timeout, denied import, and checksum mismatch paths.
 - [ ] Implement a fake binary sandbox adapter that simulates artifact output and cancellation without starting a process or container.
-- [ ] Implement a fake archive adapter that returns bounded entries and traversal violations without reading untrusted archives.
+- [x] Implement a fake archive adapter that returns bounded entries and traversal violations without reading untrusted archives.
 - [ ] Test magic-byte precedence over a misleading filename extension.
 - [ ] Test an unknown binary format denial path.
 - [ ] Test a WASM request with an undeclared import denial path.
@@ -165,9 +165,9 @@
 - [x] Test a cache miss after policy version changes.
 - [ ] Test a cache miss after compiler or emulator identity changes.
 - [ ] Test cache refusal for secret-bearing or unverified outputs.
-- [ ] Test archive entry-count, depth, expansion, and traversal limits.
+- [x] Test archive entry-count, depth, expansion, and traversal limits.
 - [ ] Test cancellation that marks a partial transformation non-cacheable.
-- [ ] Test that no binary request causes a process, Docker container, shell command, network request, or host mount in the shared-core tests.
+- [x] Test that no binary request causes a process, Docker container, shell command, network request, or host mount in the shared-core tests.
 - [x] Document that WASM is a portable execution format but not a general permission to execute arbitrary uploaded binaries.
 - [x] Document the caller-owned responsibility for container, microVM, emulator, compiler, and native-binary isolation adapters.
 - [x] Expose the contracts through an additive explicit export only after every package target import remains valid.
