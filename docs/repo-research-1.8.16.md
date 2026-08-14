@@ -71,6 +71,19 @@ The evidence favors a small, additive **provider mutation precondition receipt**
 
 Multiple independent sources support a potential **isolation capability receipt** that compares a requested operation against caller-reported resource, filesystem and network permissions. The receipt must declare `eligible`, `denied`, or `adapter-required`; it must not spawn a process, create a container, configure a proxy, or authorize network access. Implementation remains pending broader sampling and a review of existing `binary/transform.ts` exports.
 
+## Release engineering, provenance, and SBOM evidence
+
+| Candidate | Primary source | Evidence observed | Relevance to Saddle | Disposition |
+|---|---|---|---|---|
+| `slsa-framework/slsa-github-generator` | [repository][21] | The Apache-2.0 generator documents provenance boundaries and explicitly directs new users to GitHub artifact attestations because the project is no longer actively maintained. | It confirms that a verifier and an attestation generator are distinct concerns. | Prefer native GitHub attestation verification where available; do not add the unmaintained generator. |
+| `sigstore/cosign` | [repository][22] | The Apache-2.0 project verifies signatures against expected identity and issuer and emphasizes signing OCI subjects by digest, not mutable tags. | It corroborates Saddle's immutable-digest verification and claim-check ordering. | Consider a portable expected-identity verification input; never claim signed status without verified evidence. |
+| `anchore/syft` | [repository][23] | The Apache-2.0 SBOM tool covers filesystems, archives and container images with SPDX/CycloneDX outputs and signed attestations. | It demonstrates format breadth that should remain a release-tool responsibility, not engine runtime behavior. | Consider a release receipt that references an externally generated SBOM digest; do not embed a scanner. |
+| `aquasecurity/trivy` | [repository][24] | The Apache-2.0 scanner distinguishes scan targets from scanners and covers vulnerabilities, secrets, SBOM and misconfiguration. | It corroborates Saddle's separation between advisory findings and blocking release policy. | Retain external security gates; avoid making library consumers depend on a scanner runtime. |
+
+## Release disposition
+
+The sample supports a future **release verification receipt** that binds a release tag, artifact digest, optional SBOM digest, expected workflow identity and evidence status. It must preserve the difference among absent, generated, downloaded and independently verified evidence. It cannot manufacture an attestation, signature or certificate, and no release-engineering implementation is selected until the workflow and registry sample is complete.
+
 ## References
 
 [1]: https://github.com/browser-use/browser-use "browser-use/browser-use"
@@ -93,3 +106,7 @@ Multiple independent sources support a potential **isolation capability receipt*
 [18]: https://github.com/aayushadhikari7/aegis "aayushadhikari7/aegis"
 [19]: https://github.com/anthropic-experimental/sandbox-runtime "anthropic-experimental/sandbox-runtime"
 [20]: https://github.com/opensandbox-group/OpenSandbox "opensandbox-group/OpenSandbox"
+[21]: https://github.com/slsa-framework/slsa-github-generator "slsa-framework/slsa-github-generator"
+[22]: https://github.com/sigstore/cosign "sigstore/cosign"
+[23]: https://github.com/anchore/syft "anchore/syft"
+[24]: https://github.com/aquasecurity/trivy "aquasecurity/trivy"
