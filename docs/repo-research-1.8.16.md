@@ -123,6 +123,19 @@ The sample corroborates one candidate for later implementation: an **origin-bear
 
 The completed sources reinforce the existing 1.8.15 chain capability model. A future **runner attestation input** may bind a caller-reported runner label set, operating system, architecture, ephemeral status and policy identifiers to a dispatch plan. It must not imply that the runner is owned, reachable, authenticated, isolated or safe without adapter-provided evidence.
 
+## Packaging and cross-platform distribution evidence
+
+| Candidate | Primary source | Evidence observed | Relevance to Saddle | Disposition |
+|---|---|---|---|---|
+| `goreleaser/goreleaser` | [repository][37] | The MIT release-engineering tool targets multiple language ecosystems and delegates complexity to local or CI release configuration. | It corroborates keeping distribution policy in versioned release configuration and workflows. | Use as a release-automation comparison only; do not add GoReleaser as a dependency. |
+| `jreleaser/jreleaser` | [repository][38] | The Apache-2.0 tool supports Java and non-Java projects with publication to multiple package managers. | It corroborates a manifest-driven, multi-registry release matrix. | Keep Saddle's existing per-registry workflows; do not replace established package pipelines with a new orchestrator. |
+| `tauri-apps/tauri` | [repository][39] | The dual-licensed framework maps a web frontend to platform-native bundle formats and treats its Rust host as the application boundary. | It reinforces the existing desktop packaging separation and artifact naming matrix. | Retain current desktop workflow and flat project layout; no new desktop framework work is selected. |
+| `ionic-team/capacitor` | [repository][40] | The MIT framework distinguishes cross-platform web/native APIs and treats native projects as source artifacts. | It corroborates the existing Capacitor-based Android/iOS surfaces and explicit native plugin boundary. | Retain current mobile model; do not embed native APIs in the engine. |
+
+## Packaging disposition
+
+The sources validate the current Saddle approach rather than reveal a safe missing engine primitive: manifests and release notes must describe targets, artifacts and verification evidence; platform toolchains must build and sign outside the shared library. No 1.8.16 implementation is selected from this category.
+
 ## References
 
 [1]: https://github.com/browser-use/browser-use "browser-use/browser-use"
@@ -161,3 +174,7 @@ The completed sources reinforce the existing 1.8.15 chain capability model. A fu
 [34]: https://github.com/cisco-open/forge "cisco-open/forge"
 [35]: https://github.com/forgejo/forgejo "forgejo/forgejo"
 [36]: https://github.com/forgejo/runner "forgejo/runner"
+[37]: https://github.com/goreleaser/goreleaser "goreleaser/goreleaser"
+[38]: https://github.com/jreleaser/jreleaser "jreleaser/jreleaser"
+[39]: https://github.com/tauri-apps/tauri "tauri-apps/tauri"
+[40]: https://github.com/ionic-team/capacitor "ionic-team/capacitor"
