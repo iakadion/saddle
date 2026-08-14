@@ -279,6 +279,19 @@ The sources support a future **runner environment receipt** with `forgeKind`, `w
 
 The evidence supports a future **surface capability receipt** with `surfaceKind`, `manifestVersion`, `declaredPermissions`, `backgroundLifecycle`, `cacheStrategy`, `platformValidationRequired`, `credentialOwner` and `deploymentOwner`. It may validate contradictory requirements, but cannot register workers, request browser permissions, contact a Mini App platform or publish an extension.
 
+## Additional storage synchronization and VFS evidence
+
+| Candidate | Primary source | Evidence observed | Relevance to Saddle | Disposition |
+|---|---|---|---|---|
+| `systemd/casync` | [repository][85] | The LGPL-2.1 tool combines content-defined chunks, strong digests, chunk indexes and reproducible serialization for transfer and storage. | It corroborates manifests that bind chunk identity and ordered reconstruction. | Consider a format-agnostic chunk-index evidence model; do not add compression, mounting, extraction or transfer tooling. |
+| `seaweedfs/seaweedfs` | [repository][86] | The Apache-2.0 system offers object/file services, replication, ranges, tiers, metadata stores, cloud integration and mount options. | It reinforces that tiering and remote object access require an active distributed service and credentials. | Consider provider capability claims for ranges/replication/tier; reject server, mount, keys, metadata and cloud-sync operations. |
+| `juicedata/juicefs` | [repository][87] | The Apache-2.0 filesystem combines object storage with a metadata engine, client mounts, caching and fixed block/chunk structure. | It demonstrates that POSIX semantics over object storage require a specialized client, metadata authority and mounted host. | Keep this as negative evidence against claiming remote storage is native RAM/POSIX; do not add FUSE, database or mount support. |
+| `ipfs/kubo` | [repository][88] | The dual-licensed node serves content-addressed data with daemon, gateway, RPC, routing and optional FUSE mounts. | It corroborates content identity and trustless retrieval concepts while showing runtime/network requirements. | Consider CID-style external identity as an adapter field; reject node, peer routing, gateway, RPC and FUSE integration. |
+
+## Additional storage disposition
+
+The sources support a future **storage identity and capability receipt** with `contentIdentity`, `chunkIndexDigest`, `rangeRead`, `integrityMethod`, `replicationEvidence`, `tier`, `metadataAuthority`, `mountRequired`, `daemonRequired`, `networkAuthority` and `credentialOwner`. It must make each remote dependency visible and cannot imply that a remote bucket, cache, VFS or distributed store provides local RAM, local POSIX semantics, free egress or persistent compute.
+
 ## References
 
 [1]: https://github.com/browser-use/browser-use "browser-use/browser-use"
@@ -365,3 +378,7 @@ The evidence supports a future **surface capability receipt** with `surfaceKind`
 [82]: https://github.com/PlasmoHQ/plasmo "PlasmoHQ/plasmo"
 [83]: https://github.com/vite-pwa/vite-plugin-pwa "vite-pwa/vite-plugin-pwa"
 [84]: https://github.com/Telegram-Mini-Apps/telegram-apps "Telegram-Mini-Apps/tma.js"
+[85]: https://github.com/systemd/casync "systemd/casync"
+[86]: https://github.com/seaweedfs/seaweedfs "seaweedfs/seaweedfs"
+[87]: https://github.com/juicedata/juicefs "juicedata/juicefs"
+[88]: https://github.com/ipfs/kubo "ipfs/kubo"
