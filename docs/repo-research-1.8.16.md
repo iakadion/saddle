@@ -253,6 +253,19 @@ The combined evidence supports a future **evidence policy result** with `subject
 
 The sources support a future **release readiness receipt** with `sourceTag`, `manifestVersions`, `requiredGates`, `artifactPlanDigest`, `publicationTargets`, `credentialOwner`, `signingStatus` and `verificationRequirements`. It must remain descriptive: it cannot create tags, alter version files, trigger CI, publish, sign or assert artifact availability.
 
+## Additional runner and CI evidence
+
+| Candidate | Primary source | Evidence observed | Relevance to Saddle | Disposition |
+|---|---|---|---|---|
+| `actions/runner-images` | [repository][77] | The MIT repository documents runner image labels, exact OS/architecture choices, image lifecycle and deprecation policy. | It corroborates selecting immutable or explicit runner capability facts instead of relying on a `latest` label. | Consider runner-image identity and lifecycle fields in capability reports; do not assume image contents or provision VMs. |
+| `forgejo/forgejo` | [repository][78] | The Forgejo candidate was selected to evaluate Actions-compatible workflow hosting, but primary page extraction did not return usable content in this run. | It remains pending evidence. | Do not claim compatibility or derive implementation until a primary source is captured. |
+| `woodpecker-ci/woodpecker` | [repository][79] | The Apache-2.0 CI engine separates server, agents, plugins and persistence and is used by Codeberg. | It corroborates an externally operated CI/agent boundary. | Consider an operator/agent capability declaration; do not add a CI database, agent, plugin or execution server. |
+| `nektos/act` | [repository][80] | The MIT local runner reads workflow files, resolves dependencies and uses Docker to pull/build images and execute containers. | It demonstrates that local workflow compatibility carries Docker and filesystem side effects. | Retain offline target-plan validation only; do not run workflows, images or Docker from the core. |
+
+## Additional runner disposition
+
+The sources support a future **runner environment receipt** with `forgeKind`, `workflowDialect`, `runnerImage`, `os`, `architecture`, `toolchainEvidence`, `executionBoundary`, `ephemeralClaim`, `networkAuthority` and `credentialOwner`. A receipt may identify declared compatibility, but must not claim an action will run, an image is available or a runner is isolated without operator-provided evidence.
+
 ## References
 
 [1]: https://github.com/browser-use/browser-use "browser-use/browser-use"
@@ -331,3 +344,7 @@ The sources support a future **release readiness receipt** with `sourceTag`, `ma
 [74]: https://github.com/googleapis/release-please "googleapis/release-please"
 [75]: https://github.com/changesets/changesets "changesets/changesets"
 [76]: https://github.com/goreleaser/goreleaser "goreleaser/goreleaser"
+[77]: https://github.com/actions/runner-images "actions/runner-images"
+[78]: https://github.com/forgejo/forgejo "forgejo/forgejo"
+[79]: https://github.com/woodpecker-ci/woodpecker "woodpecker-ci/woodpecker"
+[80]: https://github.com/nektos/act "nektos/act"
