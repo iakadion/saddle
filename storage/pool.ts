@@ -74,6 +74,36 @@ export function storagepool(options = {}) {
     return output;
   }
 
+  async function readrange(key, start, end, options = {}) {
+    const normalizedkey = requiredkey(key);
+    const range = validrange(start, end);
+    const expectedsha = optionalsha(options.sha256);
+    const attempts = [];
+    const selected = selectable(members, options.memberids);
+    const budget = operationbudget(options.budget, selected.length);
+    const startedat = Number(clock());
+    metrics.reads += 1;
+    for (const member of selected.slice(0, budget.maxattempts)) {
+      if (options.signal?.aborted) throw poolerror("STORAGE_POOL_ABORTED", "storage pool range read was aborted", { key: normalizedkey, range, attempts });
+      if (elapsed(clock, startedat) > budget.maxmilliseconds) throw poolerror("STORAGE_POOL_TIME_BUDGET", "storage pool range read time budget was exceeded", { key: normalizedkey, range, attempts });
+      if (typeof member.storage.getrange !== "function") { attempts.push({ memberid: member.id, code: "STORAGE_POOL_RANGE_UNSUPPORTED", message: "storage pool member does not support range reads" }); continue; }
+      try {
+        metrics.attempts += 1;
+        const data = await collectbytes(await member.storage.getrange(normalizedkey, range.start, range.end));
+        if (data.byteLength !== range.end - range.start) throw poolerror("STORAGE_POOL_RANGE_SIZE", "storage pool range result size did not match", { key: normalizedkey, range, memberid: member.id, sizebytes: data.byteLength });
+        const actualsha = sha256(data);
+        if (expectedsha && actualsha !== expectedsha) throw poolerror("STORAGE_POOL_DIGEST_MISMATCH", "storage pool range digest did not match", { key: normalizedkey, range, memberid: member.id, expectedsha, actualsha });
+        metrics.hits += 1;
+        metrics.bytes += data.byteLength;
+        metrics.elapsedms += elapsed(clock, startedat);
+        return Object.freeze({ version: 1, key: normalizedkey, range, memberid: member.id, data, sha256: actualsha, verified: Boolean(expectedsha), attempts: Object.freeze(attempts), budget, readat: Number(clock()) });
+      } catch (error) { attempts.push(attempt(member.id, error)); }
+    }
+    metrics.misses += 1;
+    metrics.elapsedms += elapsed(clock, startedat);
+    throw poolerror("STORAGE_POOL_RANGE_FAILED", "storage pool could not read the requested range", { key: normalizedkey, range, attempts });
+  }
+
   function repairplan(key, options = {}) {
     const normalizedkey = requiredkey(key);
     const sourceid = String(options.sourceid ?? "");
@@ -81,7 +111,7 @@ export function storagepool(options = {}) {
     return Object.freeze({ version: 1, key: normalizedkey, sourceid, sha256: optionalsha(options.sha256), targets: selectable(members, options.memberids).filter((member) => member.id !== sourceid).map((member) => member.id), action: "caller-executes" });
   }
 
-  return Object.freeze({ read, put, repairplan, members: () => members.map(describe), capabilities: () => members.map((member) => ({ id: member.id, priority: member.priority, capabilities: storagecapabilities(member.storage) })), metrics: () => ({ ...metrics }) });
+  return Object.freeze({ read, readrange, put, repairplan, members: () => members.map(describe), capabilities: () => members.map((member) => ({ id: member.id, priority: member.priority, capabilities: storagecapabilities(member.storage) })), metrics: () => ({ ...metrics }) });
 }
 
 function normalizemembers(input) {
@@ -117,5 +147,6 @@ function positiveinteger(value, name) { const numeric = Number(value); if (!Numb
 function operationbudget(input = {}, fallbackattempts) { const budget = input ?? {}; return Object.freeze({ maxattempts: positiveinteger(budget.maxattempts ?? fallbackattempts, "storage pool budget maxattempts"), maxbytes: nonnegativebudget(budget.maxbytes, "storage pool budget maxbytes"), maxmilliseconds: nonnegativebudget(budget.maxmilliseconds, "storage pool budget maxmilliseconds") }); }
 function nonnegativebudget(value, name) { if (value === undefined) return Infinity; const numeric = Number(value); if (!Number.isSafeInteger(numeric) || numeric < 0) throw new TypeError(`${name} must be a non-negative safe integer`); return numeric; }
 function elapsed(clock, startedat) { return Math.max(0, Number(clock()) - startedat); }
+function validrange(start, end) { const from = nonnegativebudget(start, "storage pool range start"); const to = nonnegativebudget(end, "storage pool range end"); if (!Number.isFinite(from) || !Number.isFinite(to) || to < from) throw new TypeError("storage pool range is invalid"); return Object.freeze({ start: from, end: to }); }
 function attempt(memberid, error) { return { memberid, code: error?.code ?? "STORAGE_POOL_READ_FAILED", message: String(error?.message ?? error) }; }
 function poolerror(code, message, detail) { const error = new Error(message); error.code = code; error.detail = detail; return error; }

@@ -1109,6 +1109,17 @@ test("enforces storage-pool operation budgets without background retries", async
   assert.equal(pool.metrics().attempts, 1);
 });
 
+test("reads verified storage ranges only from members that declare range support", async () => {
+  const data = new Uint8Array([1, 2, 3, 4]);
+  const primary = { async get() { throw new Error("unused"); }, async put() {} };
+  const secondary = { async get() { return data; }, async put() {}, async getrange(_key, start, end) { return data.slice(start, end); } };
+  const pool = storagepool({ members: [{ id: "primary", storage: primary }, { id: "secondary", storage: secondary }] });
+  const output = await pool.readrange("range.bin", 1, 3, { sha256: sha256(new Uint8Array([2, 3])) });
+  assert.equal(output.memberid, "secondary");
+  assert.deepEqual([...output.data], [2, 3]);
+  await assert.rejects(() => pool.readrange("range.bin", 3, 2), /range/);
+});
+
 test("rejects ambiguous storage-pool membership and exposes capability evidence", () => {
   const storage = { async get() {}, async put() {} };
   assert.throws(() => storagepool({ members: [] }), /non-empty/);

@@ -68,7 +68,7 @@
 - [x] Implement a repair-plan generator that only proposes missing or stale replicas after digest comparison.
 - [ ] Implement a deterministic object-location report that never claims availability after a failed write.
 - [ ] Implement pagination pass-through without collecting an unbounded backend listing into memory.
-- [ ] Implement range-read validation with offset, length, total-size, and digest-boundary checks.
+- [x] Implement range-read validation with offset, length, total-size, and digest-boundary checks.
 - [x] Implement a fail-closed mode when a read response does not meet the expected size or digest.
 - [ ] Implement a best-effort mode that returns all evidence but remains explicit that replica verification failed.
 - [x] Implement a pool metrics snapshot with low-cardinality counters for attempts, hits, misses, mismatches, bytes, and elapsed time.
@@ -83,7 +83,7 @@
 - [ ] Test a cancellation signal that stops remaining writes without inventing rollback success.
 - [x] Test a repair plan that does not mutate any adapter until the caller executes it.
 - [ ] Test pagination with deterministic continuation tokens and a hard page limit.
-- [ ] Test range reads that reject negative offsets, unsafe lengths, and overrun ranges.
+- [x] Test range reads that reject negative offsets, unsafe lengths, and overrun ranges.
 - [x] Test metrics that remain bounded across repeated pool operations.
 - [ ] Test serialization and cloning of every public storage-pool record.
 - [ ] Document how a caller can combine authorized object stores without suggesting account pooling, registry abuse, or quota circumvention.
