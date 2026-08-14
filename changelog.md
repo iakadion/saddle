@@ -10,6 +10,15 @@
 
 	    - Future changes will be recorded here after the 1.8.11 release.
 
+	  ## [1.8.15] - 2026-08-14
+
+	    - Added verified storage pools with quorum writes, explicit write modes, bounded operations, range reads, repair plans and restoration plans.
+	    - Added bounded working-set admission, capability-gated bridge plans, materialization ledgers and caller-owned cleanup plans.
+	    - Added WASM and binary transformation contracts, isolated execution adapters, archive inspection limits and sensitive-cache eligibility controls.
+	    - Added declarative provider selection, capability evidence, cancellation and dispatch rendering, immutable delivery manifests, PWA/CDN plans, and Mini App/DNS surface requirements.
+	    - Aligned all active package, native, extension, crawler and iOS build metadata to `1.8.15`.
+	    - Added the canonical [1.8.15 release notes](docs/releasenotes-1.8.15.md).
+
 	  ## [1.8.14] - 2026-08-14
 
 	    - Bumped active npm, lockfile, Maven, NuGet, RubyGems, desktop, mobile, extension and crawler metadata to `1.8.14`.
