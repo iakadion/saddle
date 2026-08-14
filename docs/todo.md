@@ -289,7 +289,7 @@ The following blocks are the execution order for the complete ecosystem. A block
 - [ ] Audit `.github` for duplicated release logic and unify only the shared version, checkout and validation path.
 - [x] Centralize package installation, deterministic gates and tarball validation in `.github/actions/validatepackage`.
 - [ ] Continue the next library feature block with tests, documentation and release-aware metadata.
-- [x] Migrate all canonical package identity references from `@devthink/saddle` to `@wenathlan/saddle`.
+- [x] Migrate all canonical package identity references from `@wenathlan/saddle` to `@wenathlan/saddle`.
 - [x] Create a follow-up release after the package identity migration; do not reuse the existing v1.8.0 tag.
 - [x] Align package metadata and release notes to follow-up version `1.8.1`.
 - [x] Create tag `v1.8.1` only after the scoped npm identity migration passes all gates.
@@ -683,3 +683,10 @@ The following blocks are the execution order for the complete ecosystem. A block
 - [x] Diagnose the desktop artifact workflow still in progress for v1.8.14 and confirm all expected desktop assets are uploaded.
 - [x] Diagnose the mobile artifact workflow failure for v1.8.14, rerun it with the corrected Android signing/tool-path behavior and record the actual result.
 - [x] Replace the prepared 1.8.14 asset table with the remotely verified asset list and counts only after desktop/mobile verification completes.
+
+### Documentation location and repository owners
+
+- [x] Move this checklist from the repository root to `docs/todo.md` and update every active reference.
+- [x] Prevent future operational checklists from being created at the repository root.
+- [x] Replace invalid GitHub owners in CODEOWNERS, READMEs and documentation with only `@iakadion`, `@wenathlan`, `@inathlan`, `@aasblor` and `@nasblor`.
+- [x] Validate that no active CODEOWNERS entry references legacy invalid owner handles.

@@ -22,13 +22,13 @@ Saddle is a **JavaScript ESM engine** for jobs that move data between storage, a
 Saddle requires **Node.js 22 or newer**.
 
 ```bash
-npm install @devthink/saddle
+npm install @wenathlan/saddle
 ```
 
 The public API uses injected transports. A caller can use the built-in `fetch`, a custom fetcher, a browser adapter, a storage backend or a runner without changing the core contracts.
 
 ```js
-import { scrapeurl, formatforagent } from "@devthink/saddle";
+import { scrapeurl, formatforagent } from "@wenathlan/saddle";
 
 const result = await scrapeurl("https://example.com", {
   format: "markdown"
@@ -95,7 +95,7 @@ import {
   localmemory,
   localstorage,
   scheduler
-} from "@devthink/saddle";
+} from "@wenathlan/saddle";
 
 const events = eventbus();
 const run = engine({
@@ -155,7 +155,7 @@ The release is distributed through the following GitHub Packages registries.
 | NuGet | `Saddle 1.0.0` | [`publishnuget.yml`](.github/workflows/publishnuget.yml) |
 | RubyGems | `saddle 1.0.0` | [`publishrubygems.yml`](.github/workflows/publishrubygems.yml) |
 
-The canonical JavaScript package name remains `@devthink/saddle` for the public npmjs workflow. GitHub Packages uses `@iakadion/saddle` because the GitHub Actions token is authorized for the repository owner namespace.
+The canonical JavaScript package name remains `@wenathlan/saddle` for the public npmjs workflow. GitHub Packages uses `@iakadion/saddle` because the GitHub Actions token is authorized for the repository owner namespace.
 
 ## Development
 

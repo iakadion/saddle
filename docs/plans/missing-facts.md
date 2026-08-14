@@ -118,7 +118,7 @@ FILE: 40.npm.publish.md
 - Pre-publish checklist
 - As library (npm install) and CLI (npm install -g, saddle --command)
 - Binary entry point: saddle.js
-- Scoped package structure: @devthinking/saddle/
+- Scoped package structure: @wenathlaning/saddle/
 - Versioning strategy: semver (patch/minor/major)
 - 10-step pre-publish checklist
 - No mention of these npm details

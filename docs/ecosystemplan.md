@@ -46,7 +46,7 @@ Each block follows the same loop:
 3. Define the smallest transport-neutral contract.
 4. Implement grouped logic in the domain folder without adding a vendor dependency unless required.
 5. Add deterministic tests with fake transports and no real credentials.
-6. Update API docs, README claims, changelog and `todo.md`.
+6. Update API docs, README claims, changelog and `docs/todo.md`.
 7. Run format, syntax, tests, package and security checks.
 8. Commit and push the block before starting the next one.
 

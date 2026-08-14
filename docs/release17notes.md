@@ -21,4 +21,4 @@ The release was prepared with the deterministic Node test runner, format checks,
 
 ## Registry targets
 
-The release workflows target GitHub Packages npm, npmjs through OIDC Trusted Publishing, GHCR, Maven, NuGet and RubyGems. Each package is verified from its workflow result before being reported as published. npmjs publication remains conditional on the one-time Trusted Publisher configuration for `@devthink/saddle`.
+The release workflows target GitHub Packages npm, npmjs through OIDC Trusted Publishing, GHCR, Maven, NuGet and RubyGems. Each package is verified from its workflow result before being reported as published. npmjs publication remains conditional on the one-time Trusted Publisher configuration for `@wenathlan/saddle`.

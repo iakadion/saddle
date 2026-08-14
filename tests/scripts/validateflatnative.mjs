@@ -20,12 +20,18 @@ async function validateFlatNative() {
     join(repositoryRoot, "android", "app"),
     join(repositoryRoot, "android", "src"),
     join(repositoryRoot, "ios", "src"),
+    join(repositoryRoot, "todo.md"),
   ];
 
   for (const path of forbidden) {
     if (await exists(path)) {
       throw new Error(`Forbidden project-owned native path exists: ${path}`);
     }
+  }
+
+  const canonicalTodo = join(repositoryRoot, "docs", "todo.md");
+  if (!(await exists(canonicalTodo))) {
+    throw new Error(`Canonical operational checklist is missing: ${canonicalTodo}`);
   }
 }
 

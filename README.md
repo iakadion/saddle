@@ -14,7 +14,7 @@
 
 Saddle is a **TypeScript-first ESM engine** compiled to JavaScript, declarations and source maps for jobs that move data between storage, a bounded working set, a caller-injected runner and durable artifacts. It is also a virtual machine published as a package: the caller can run it on GitHub Actions, Forgejo, Gitea, GitLab, Codeberg, Docker or another third-party compute surface. The engine does not require the operator's local machine, does not embed credentials and does not choose a mandatory cloud provider.
 
-The canonical JavaScript package is `@wenathlan/saddle`. GitHub Packages npm, Maven and GHCR use the `wenathlan` owner namespace; NuGet and RubyGems retain their ecosystem package names. Older `@devthink`, `@iakadion` and `io.devthink` references in archived documents are historical records, not current package identities.
+The canonical JavaScript package is `@wenathlan/saddle`. GitHub Packages npm, Maven and GHCR use the `wenathlan` owner namespace; NuGet and RubyGems retain their ecosystem package names. Older `@wenathlan`, `@iakadion` and `io.devthink` references in archived documents are historical records, not current package identities.
 
 ## Start here
 
@@ -245,7 +245,7 @@ The engine is TypeScript-first ESM with English JSDoc comments and a generated J
 
 ## Historical documentation
 
-Earlier root README snapshots and platform READMEs remain in `docs/plans/README.md`, `docs/talks9/README.md`, `docs/talks9/README (2).md`, `android/README.md`, `browser/README.md`, `desktop/README.md`, `extension/README.md` and `ios/README.md` as archival or surface-specific evidence. Their useful architecture ideas were consolidated here, while stale `@devthink`, `@iakadion`, `io.devthink`, Node 20/22, `client/src`, speculative provider quotas and unimplemented hosted services were not copied into the canonical contract.
+Earlier root README snapshots and platform READMEs remain in `docs/plans/README.md`, `docs/talks9/README.md`, `docs/talks9/README (2).md`, `android/README.md`, `browser/README.md`, `desktop/README.md`, `extension/README.md` and `ios/README.md` as archival or surface-specific evidence. Their useful architecture ideas were consolidated here, while stale `@wenathlan`, `@iakadion`, `io.devthink`, Node 20/22, `client/src`, speculative provider quotas and unimplemented hosted services were not copied into the canonical contract.
 
 ## Current scope
 

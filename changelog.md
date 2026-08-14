@@ -181,7 +181,7 @@
     - Added service worker routing with session state persistence
     - Added a narrow popup for user initiated snapshots and page reads
     - Added deterministic extension tests without browser credentials or network access
-    - Added the `@devthink/saddle/extension` package export
+    - Added the `@wenathlan/saddle/extension` package export
 
   ## [1.0.0] - 2026-08-11
 
