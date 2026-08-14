@@ -188,6 +188,19 @@ The combined sources support a later **durability capability receipt** with decl
 
 The evidence supports a future **browser interaction receipt** that records snapshot identity, reference scope, session isolation claim, trace artifact digest and an explicit `userContextProvided` flag. It must expire refs when a snapshot changes, avoid carrying cookie or credential contents, require user confirmation for sensitive browser actions and forbid any stealth, CAPTCHA, fingerprint or anti-bot bypass mode.
 
+## Additional crawling and extraction evidence
+
+| Candidate | Primary source | Evidence observed | Relevance to Saddle | Disposition |
+|---|---|---|---|---|
+| `scrapy/scrapy` | [repository][57] | The BSD-3-Clause framework is a structured-data crawler with extensive documentation and tests. | It corroborates a clear crawler/extractor boundary rather than implicit browser behavior. | Use as an architecture reference only; do not add a Python crawler runtime. |
+| `unclecode/crawl4AI` | [repository][58] | The Apache-2.0 crawler documents structured extraction, schema strategies, resume state and secure-by-default Docker changes, but also profiles, proxies, user scripts and stealth mode. | It provides both useful extraction-state patterns and explicit negative patterns for Saddle. | Consider bounded extraction/continuation receipts; reject stealth, proxying, custom page scripts, stored profiles and built-in service deployment. |
+| `scrapinghub/frontera` | [repository][59] | The BSD-3-Clause project separates frontier policy from pluggable backend and transport implementations and provides breadth/depth discovery strategies. | It corroborates an explicit frontier plan whose queue and transport remain externally supplied. | Consider immutable frontier decision records; do not implement distributed crawling or message buses. |
+| `crawler-commons/crawler-commons` | [repository][60] | The Apache-2.0 components focus on reusable robots and sitemap parsing, including RFC 9309-aligned robots behavior and parser hardening. | It corroborates policy parsing and strict input validation as separate from fetch execution. | Consider a validated robots/sitemap evidence envelope; no Java dependency or fetcher is selected. |
+
+## Additional crawling disposition
+
+The evidence supports a future **crawl policy receipt** containing a normalized origin, robots decision and source, sitemap discovery evidence, request budget, parser limits and explicit `fetchAdapterRequired` status. It must not fetch, crawl, execute scripts, store cookies, bypass access controls or claim a resource was permitted unless the caller provides the source and parser evidence.
+
 ## References
 
 [1]: https://github.com/browser-use/browser-use "browser-use/browser-use"
@@ -246,3 +259,7 @@ The evidence supports a future **browser interaction receipt** that records snap
 [54]: https://github.com/puppeteer/puppeteer "puppeteer/puppeteer"
 [55]: https://github.com/browser-use/browser-use "browser-use/browser-use"
 [56]: https://github.com/vercel-labs/agent-browser "vercel-labs/agent-browser"
+[57]: https://github.com/scrapy/scrapy "scrapy/scrapy"
+[58]: https://github.com/unclecode/crawl4AI "unclecode/crawl4AI"
+[59]: https://github.com/scrapinghub/frontera "scrapinghub/frontera"
+[60]: https://github.com/crawler-commons/crawler-commons "crawler-commons/crawler-commons"
