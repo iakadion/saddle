@@ -80,7 +80,9 @@ jobs:
 
             printf 'candidate id=%s ref=%s family=%s reason=%s key=%s\n' "$cache_id" "$ref" "$family" "$delete_reason" "$key"
             if [ "$APPLY" = "true" ]; then
-              gh api --method DELETE "repos/${GH_REPO}/actions/caches/${cache_id}"
+              if ! gh api --method DELETE "repos/${GH_REPO}/actions/caches/${cache_id}"; then
+                echo "cache id=${cache_id} was already unavailable; continuing retention."
+              fi
             fi
           done < <(gh api --paginate "repos/${GH_REPO}/actions/caches?per_page=100&sort=last_accessed_at&direction=desc" --jq '.actions_caches[] | [.id, .last_accessed_at, .ref, .key] | @tsv')
 

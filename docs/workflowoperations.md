@@ -23,6 +23,8 @@ The policy is intentionally bounded because GitHub cache entries are mutable acc
 
 Release-only target planning and GitHub Packages npm publication explicitly disable the Node package-manager cache. Those jobs receive little benefit from a tag-scoped cache and otherwise create entries that cannot be reused by the default branch.
 
+Cache deletion is idempotent: a cache may expire or be evicted between the list and delete requests. A `404` for such an entry is logged and does not stop retention of the remaining candidates.
+
 ## References
 
 [1]: https://docs.github.com/actions/using-workflows/workflow-syntax-for-github-actions "Workflow syntax for GitHub Actions"
