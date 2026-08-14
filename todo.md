@@ -664,3 +664,11 @@ The following blocks are the execution order for the complete ecosystem. A block
 - [x] Verify NuGet metadata and publication workflow derive `1.8.13` from the release tag and package metadata.
 - [x] Verify the six package publication workflows derive the same release version and do not rely on manually edited version constants.
 - [x] Run the complete local and workflow validation matrix, then publish the corrective NuGet 1.8.13 package only if the remote metadata is still stale.
+
+### Historical workflow reconstruction
+
+- [x] Enumerate all 169 commits with Git and inspect container/NuGet workflow changes through `git show`, `git rev-list` and related Git commands.
+- [x] Identify the historical version source, package ordering and container download-validation steps without treating old release tags as mutable.
+- [ ] Confirm the intended NuGet target version before publication because the request contains both `1.8.3` and the active `1.8.13`.
+- [ ] Restore deterministic container-first package ordering and a real download/run validation for the published container.
+- [ ] Align NuGet and container version derivation to the release tag and rerun both workflows after the correction.

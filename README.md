@@ -173,9 +173,9 @@ Workflows use the release tag and the local `releaseversion` action. They do not
 
 | Registry | Artifact | Workflow |
 | --- | --- | --- |
+| GHCR | `ghcr.io/wenathlan/saddle:<version>` | `publishghcr.yml` |
 | GitHub Packages npm | `@wenathlan/saddle@<version>` | `publishgithubnpm.yml` |
 | Public npmjs | `@wenathlan/saddle@<version>` | `publishnpmjs.yml` |
-| GHCR | `ghcr.io/wenathlan/saddle:<version>` | `publishghcr.yml` |
 | Maven | `io.wenathlan:saddle:<version>` | `publishmaven.yml` |
 | NuGet | `Saddle.<version>.nupkg` | `publishnuget.yml` |
 | RubyGems | `saddle <version>` | `publishrubygems.yml` |

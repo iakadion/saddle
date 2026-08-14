@@ -1,14 +1,29 @@
 FROM node:26.7.0-alpine
-FROM node:26.7.0-bookworm-slim
+FROM node:26.7.0-bookworm-slim AS build
 
-LABEL org.opencontainers.image.source="https://github.com/wenathlan/saddle"
+ARG SADDLE_VERSION
+WORKDIR /app
+
+ENV NPM_CONFIG_LEGACY_PEER_DEPS=true
+
+COPY package.json package-lock.json ./
+RUN npm ci --ignore-scripts --legacy-peer-deps
+COPY . .
+RUN npm run build:engine \
+    && node --check dist/cli/main.js
+
+FROM node:26.7.0-bookworm-slim AS runtime
+
+ARG SADDLE_VERSION
+LABEL org.opencontainers.image.source="https://github.com/wenathlan/saddle" \
+      org.opencontainers.image.version="$SADDLE_VERSION"
 
 WORKDIR /app
 
 ENV NODE_ENV=production \
     NPM_CONFIG_LEGACY_PEER_DEPS=true
 
-COPY package.json package-lock.json ./
+COPY --from=build /app/package.json /app/package-lock.json ./
 RUN apt-get update \
     && apt-get upgrade -y \
     && rm -rf /var/lib/apt/lists/* \
@@ -22,11 +37,11 @@ RUN apt-get update \
     && rm -rf "$tempdir" \
     && cd /app \
     && npm ci --omit=dev --ignore-scripts --legacy-peer-deps
-COPY . .
+COPY --from=build /app/dist ./dist
 
 USER node
 
-HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 CMD ["node", "cli/main.js", "help"]
+HEALTHCHECK --interval=30s --timeout=5s --start-period=5s --retries=3 CMD ["node", "dist/cli/main.js", "help"]
 
-ENTRYPOINT ["node", "cli/main.js"]
+ENTRYPOINT ["node", "dist/cli/main.js"]
 CMD ["help"]

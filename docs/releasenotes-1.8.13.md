@@ -52,9 +52,9 @@ The six registry workflows derive the version from the same `v1.8.13` release ta
 
 | Registry | Workflow | Verified version | Result |
 |---|---|---:|---|
+| GHCR | `publishghcr.yml` | `1.8.13` | success after corrected rerun |
 | GitHub Packages npm | `publishgithubnpm.yml` | `1.8.13` | success |
 | Public npmjs | `publishnpmjs.yml` | `1.8.13` | success |
-| GHCR | `publishghcr.yml` | `1.8.13` | success after corrected rerun |
 | Maven GitHub Packages | `publishmaven.yml` | `1.8.13` | success |
 | NuGet GitHub Packages | `publishnuget.yml` | `1.8.13` | success after explicit rerun |
 | RubyGems GitHub Packages | `publishrubygems.yml` | `1.8.13` | success |

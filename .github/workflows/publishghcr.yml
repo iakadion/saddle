@@ -63,6 +63,8 @@ jobs:
           file: dockerfile.saddle
           load: true
           tags: saddle:scan-${{ steps.release.outputs.version }}
+          build-args: |
+            SADDLE_VERSION=${{ steps.release.outputs.version }}
       - name: scan container image
         uses: aquasecurity/trivy-action@v0.36.0
         with:
@@ -78,5 +80,16 @@ jobs:
           file: dockerfile.saddle
           push: true
           tags: ${{ steps.metadata.outputs.tags }}
+          build-args: |
+            SADDLE_VERSION=${{ steps.release.outputs.version }}
           provenance: mode=max
           sbom: true
+      - name: pull and smoke test published image
+        shell: bash
+        run: |
+          set -euo pipefail
+          image_ref="${image}:${{ steps.release.outputs.version }}"
+          docker pull --quiet "${image_ref}"
+          actual_version="$(docker image inspect "${image_ref}" --format '{{ index .Config.Labels "org.opencontainers.image.version" }}')"
+          test "${actual_version}" = "${{ steps.release.outputs.version }}"
+          docker run --rm "${image_ref}" help
