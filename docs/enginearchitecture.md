@@ -63,6 +63,8 @@ The public contract uses plain objects and factory functions. The engine never r
 
 `cdncapabilities` records only caller-reported delivery properties such as immutable caching, purge support, range delivery, integrity headers, CORS, and visibility. It never performs a CDN probe, purge, upload, or configuration mutation.
 
+`releaseevidence` evaluates caller-supplied supply-chain and release metadata as data. It normalizes a subject digest, producer, workflow, evidence kind, verification method, timestamp and explicit status. `evaluateevidence` produces only `accepted`, `rejected`, or `insufficient` with stable reason codes; it never treats an unchecked declaration as a signature, trust decision, compliance result, or vulnerability assessment. `releasereadiness` binds a source tag, observed manifest versions, gates, artifact-plan digest, publication targets, signing state, and evidence result into a serializable receipt. It does not edit versions, create a tag, trigger a workflow, publish, sign, scan, download, or contact a registry.
+
 `miniappplan`, `dnsplan`, and `applicationbridge` add deployment-neutral application requirements. Mini App plans reject token-bearing input and require an HTTPS origin plus a caller-selected validation method. DNS records list ownership, DNSSEC and HTTPS requirements but cannot buy a domain, change a zone, or obtain a certificate. Surface bridges only report declared capabilities for browser, desktop, mobile, extension, and Mini App targets.
 
 ## execution lifecycle

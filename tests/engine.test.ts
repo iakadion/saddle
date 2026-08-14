@@ -119,10 +119,40 @@ import { resumablerun, runrecord, transitionrun } from "../dispatch/resumable.js
 import { controlservice } from "../api/control.js";
 import { hmacsha256, sha256 } from "../core/hash.js";
 import { workerbridge } from "../runtime/worker.js";
+import { evaluateevidence, releaseevidence, releasereadiness } from "../release/evidence.js";
 
 test("keeps the Playwright provider optional and explicit", async () => {
   const { createplaywrightsession } = await import("../browser/playwright.js");
   await assert.rejects(() => createplaywrightsession(), (error) => error.code === "OPTIONAL_DEPENDENCY_MISSING" || error.code === "ERR_MODULE_NOT_FOUND");
+});
+
+test("evaluates release evidence without turning declarations into trust claims", () => {
+  const digest = "a".repeat(64);
+  const verified = releaseevidence({ kind: "provenance", status: "verified", subjectdigest: digest, producer: "https://github.com/wenathlan/saddle", workflow: "release.yml", verificationmethod: "offline-bundle", verifiedat: 100 });
+  const accepted = evaluateevidence({ subjectdigest: digest, evidence: [verified], policy: { requiredkinds: ["provenance"], allowedstatuses: ["verified"], expectedproducer: { provenance: "https://github.com/wenathlan/saddle" }, expectedworkflow: { provenance: "release.yml" } } });
+  assert.equal(accepted.decision, "accepted");
+  assert.deepEqual(accepted.reasons, []);
+  const insufficient = evaluateevidence({ subjectdigest: digest, evidence: [{ kind: "sbom", status: "declared" }], policy: { requiredkinds: ["provenance"] } });
+  assert.equal(insufficient.decision, "insufficient");
+  assert.deepEqual(insufficient.reasons, ["required-evidence-missing:provenance"]);
+});
+
+test("rejects release evidence that mismatches the requested producer or subject", () => {
+  const evidence = releaseevidence({ kind: "provenance", status: "verified", subjectdigest: "a".repeat(64), producer: "unexpected", verificationmethod: "fixture", verifiedat: 1 });
+  const result = evaluateevidence({ subjectdigest: "b".repeat(64), evidence: [evidence], policy: { requiredkinds: ["provenance"], expectedproducer: { provenance: "expected" } } });
+  assert.equal(result.decision, "rejected");
+  assert.deepEqual(result.reasons, ["producer-mismatch:provenance", "required-evidence-unsatisfied:provenance", "subject-mismatch:provenance"]);
+});
+
+test("creates a release readiness receipt without performing release actions", () => {
+  const digest = "c".repeat(64);
+  const ready = releasereadiness({ sourcetag: "v1.8.16", manifestversions: { npm: "1.8.16", maven: "1.8.16" }, requiredgates: { tests: "passed", format: "passed" }, artifactplandigest: digest, targets: ["ghcr", "npmjs"], signingstatus: "caller-configured", evaluation: { evidence: [{ kind: "provenance", status: "verified", subjectdigest: digest, producer: "release", verificationmethod: "fixture", verifiedat: 1 }], subjectdigest: digest, policy: { requiredkinds: ["provenance"], expectedproducer: { provenance: "release" } } } });
+  assert.equal(ready.ready, true);
+  assert.equal(ready.decision, "accepted");
+  const incomplete = releasereadiness({ sourcetag: "v1.8.16", manifestversions: { npm: "1.8.15" }, requiredgates: { tests: "failed" }, targets: [], evaluation: {} });
+  assert.equal(incomplete.ready, false);
+  assert.equal(incomplete.decision, "insufficient");
+  assert.deepEqual(incomplete.reasons, ["artifact-plan-digest-missing", "manifest-version-mismatch", "publication-targets-missing", "required-gate-not-passed:tests", "signing-status-unknown"]);
 });
 
 test("runs a job through prepare process sync and commit", async () => {

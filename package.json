@@ -78,6 +78,7 @@
     "./hash": "./dist/core/hash.js",
     "./release-assets": "./dist/release/assets.js",
     "./release-verify": "./dist/release/verify.js",
+    "./release-evidence": "./dist/release/evidence.js",
     "./delivery": "./dist/delivery/manifest.js",
     "./surface-requirements": "./dist/surfaces/requirements.js",
     "./worker": "./dist/runtime/worker.js",

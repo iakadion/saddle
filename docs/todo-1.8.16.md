@@ -536,12 +536,12 @@
 - [ ] Derive the 1.8.16 test fixture for PWA and Mini App bridge only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
 - [ ] Derive the 1.8.16 permission policy for PWA and Mini App bridge only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
 - [ ] Derive the 1.8.16 documentation for PWA and Mini App bridge only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
-- [ ] Derive the 1.8.16 contract for release evidence only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [x] Derive the 1.8.16 contract for release evidence only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability. Completed by `release/evidence.ts`: data-only normalization, policy evaluation, and readiness receipt; no external effects.
 - [ ] Derive the 1.8.16 artifact inventory for release evidence only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
-- [ ] Derive the 1.8.16 verification check for release evidence only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [x] Derive the 1.8.16 verification check for release evidence only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability. Completed by deterministic acceptance, insufficiency, mismatch, and readiness tests in `tests/engine.test.ts`.
 - [ ] Derive the 1.8.16 workflow test for release evidence only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
-- [ ] Derive the 1.8.16 failure policy for release evidence only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
-- [ ] Derive the 1.8.16 documentation for release evidence only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
+- [x] Derive the 1.8.16 failure policy for release evidence only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability. Completed by ordered `rejected` and `insufficient` reason codes without positive assurance claims.
+- [x] Derive the 1.8.16 documentation for release evidence only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability. Completed in `docs/enginearchitecture.md` and `docs/repo-synthesis-1.8.16.md`.
 - [ ] Derive the 1.8.16 contract for cross-runtime compatibility only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
 - [ ] Derive the 1.8.16 capability matrix for cross-runtime compatibility only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
 - [ ] Derive the 1.8.16 import graph audit for cross-runtime compatibility only after comparative evidence identifies a concrete gap that does not duplicate an existing Saddle capability.
