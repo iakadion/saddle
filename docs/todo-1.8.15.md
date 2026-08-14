@@ -54,7 +54,7 @@
 - [ ] Define a storage-pool health model with bounded probes and injected clocks; do not add background polling to the library core.
 - [x] Define a storage-pool operation budget for attempts, bytes, elapsed time, and parallelism.
 - [ ] Define a storage-pool immutable manifest that records replica outcomes, content digest, size, creation time, and caller-provided metadata.
-- [ ] Define a storage-pool restore plan that selects verified sources before secondary candidates.
+- [x] Define a storage-pool restore plan that selects verified sources before secondary candidates.
 - [ ] Define how the pool uses existing chunk manifests, checksums, range reads, partial synchronization, and content-addressed indexes.
 - [ ] Define how the pool interoperates with existing local, GitHub Contents, file-hosting, and S3-compatible adapters without adding vendor SDKs to core.
 - [ ] Define a fake multi-backend transport with deterministic availability, corruption, latency, pagination, and conditional-write scenarios.

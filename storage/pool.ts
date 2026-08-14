@@ -111,7 +111,15 @@ export function storagepool(options = {}) {
     return Object.freeze({ version: 1, key: normalizedkey, sourceid, sha256: optionalsha(options.sha256), targets: selectable(members, options.memberids).filter((member) => member.id !== sourceid).map((member) => member.id), action: "caller-executes" });
   }
 
-  return Object.freeze({ read, readrange, put, repairplan, members: () => members.map(describe), capabilities: () => members.map((member) => ({ id: member.id, priority: member.priority, capabilities: storagecapabilities(member.storage) })), metrics: () => ({ ...metrics }) });
+  function restoreplan(key, options = {}) {
+    const normalizedkey = requiredkey(key);
+    const selected = selectable(members, options.memberids);
+    const evidence = new Map((options.replicas ?? []).map((value) => [String(value?.memberid ?? ""), value?.verified === true]));
+    const candidates = selected.map((member) => ({ memberid: member.id, verified: evidence.get(member.id) === true })).sort((left, right) => Number(right.verified) - Number(left.verified) || left.memberid.localeCompare(right.memberid));
+    return Object.freeze({ version: 1, key: normalizedkey, sha256: optionalsha(options.sha256), action: "caller-restores", candidates: Object.freeze(candidates) });
+  }
+
+  return Object.freeze({ read, readrange, put, repairplan, restoreplan, members: () => members.map(describe), capabilities: () => members.map((member) => ({ id: member.id, priority: member.priority, capabilities: storagecapabilities(member.storage) })), metrics: () => ({ ...metrics }) });
 }
 
 function normalizemembers(input) {

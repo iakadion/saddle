@@ -1095,6 +1095,7 @@ test("records quorum writes and keeps repair planning side-effect free", async (
   assert.equal(output.state, "partial");
   assert.equal(output.written, 1);
   assert.deepEqual(pool.repairplan("result.bin", { sourceid: "first", sha256: output.sha256 }).targets, ["offline"]);
+  assert.deepEqual(pool.restoreplan("result.bin", { replicas: [{ memberid: "offline", verified: true }] }).candidates.map((candidate) => candidate.memberid), ["offline", "first"]);
   assert.equal(await first.get("result.bin").then((value) => value.byteLength), 3);
   await assert.rejects(() => pool.put({ key: "next.bin", data: new Uint8Array([4]) }, { quorum: 2 }), (error) => error.code === "STORAGE_POOL_QUORUM_FAILED");
 });
