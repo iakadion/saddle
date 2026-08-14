@@ -642,3 +642,12 @@ The following blocks are the execution order for the complete ecosystem. A block
 - [x] Add or update the canonical 1.8.12 release notes with generated artifact contracts and actual signing status.
 - [x] Keep the uploaded README and SKILL as non-deterministic scope and architecture references; do not rewrite them as an execution script.
 - [x] Complete the 60-repository code and feature analysis, then select independent implementation gaps for 1.8.21.
+
+### Pending releases after signing configuration
+
+- [ ] Audit existing remote tags and releases before creating any immutable release reference.
+- [ ] Confirm the exact missing release sequence and ensure each tag points to a validated commit without rewriting historical tags.
+- [ ] Prepare release notes and artifact manifests with `unsigned` or `caller-owned` signing status until the user configures a signing provider.
+- [ ] Run the complete local release gate immediately before creating each authorized tag or release.
+- [ ] Create only the confirmed missing tags and GitHub releases; do not publish unsigned binaries as trusted artifacts.
+- [ ] Verify each remote release, asset list, checksum manifest and workflow result after creation.
