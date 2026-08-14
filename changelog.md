@@ -10,6 +10,13 @@
 
 	    - Future changes will be recorded here after the 1.8.11 release.
 
+	  ## [1.8.14] - 2026-08-14
+
+	    - Bumped active npm, lockfile, Maven, NuGet, RubyGems, desktop, mobile, extension and crawler metadata to `1.8.14`.
+	    - Restored container-first package ordering in the canonical documentation and release matrix.
+	    - Added OCI version labels, build-stage engine compilation and post-push pull/label/CLI smoke validation for GHCR images.
+	    - Added the canonical [1.8.14 release notes](docs/releasenotes-1.8.14.md) while preserving the historical 1.8.13 record.
+
 	  ## [1.8.13] - 2026-08-14
 
 	    - Added caller-owned persistent queue leases, visibility timeouts, renewals, attempt accounting and idempotency keys.

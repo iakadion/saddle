@@ -79,14 +79,14 @@ test("verifies release checksums and explicit signing status", async () => {
 test("records deterministic retention metadata without deleting caller artifacts", async () => {
   const directory = await mkdtemp(join(tmpdir(), "saddle-release-retention-"));
   try {
-    const artifact = join(directory, "saddle.browser.1.8.13.x64.exe");
+    const artifact = join(directory, "saddle.browser.1.8.14.x64.exe");
     const output = join(directory, "assets");
     const packagefile = join(directory, "package.json");
     const lockfile = join(directory, "package-lock.json");
     await writeFile(artifact, "retained artifact\n");
-    await writeFile(packagefile, JSON.stringify({ name: "@wenathlan/example", version: "1.8.13" }));
+    await writeFile(packagefile, JSON.stringify({ name: "@wenathlan/example", version: "1.8.14" }));
     await writeFile(lockfile, JSON.stringify({ packages: { "": {} } }));
-    const created = await createassets({ packagefile, lockfile, output, artifactroot: directory, artifacts: [artifact], version: "1.8.13", surface: "desktop.windows.x64", retention: { maxcount: 1, evaluatedat: 100 } });
+    const created = await createassets({ packagefile, lockfile, output, artifactroot: directory, artifacts: [artifact], version: "1.8.14", surface: "desktop.windows.x64", retention: { maxcount: 1, evaluatedat: 100 } });
     const manifest = JSON.parse(await readFile(created.files.manifest, "utf8"));
     assert.equal(manifest.retention.maxcount, 1);
     assert.equal(manifest.retentionplan[0].action, "keep");

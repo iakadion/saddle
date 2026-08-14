@@ -669,6 +669,14 @@ The following blocks are the execution order for the complete ecosystem. A block
 
 - [x] Enumerate all 169 commits with Git and inspect container/NuGet workflow changes through `git show`, `git rev-list` and related Git commands.
 - [x] Identify the historical version source, package ordering and container download-validation steps without treating old release tags as mutable.
-- [ ] Confirm the intended NuGet target version before publication because the request contains both `1.8.3` and the active `1.8.13`.
+- [x] Confirm the intended NuGet target version as `1.8.14`; the earlier `1.8.3` mention was superseded by the explicit 1.8.14 request.
 - [ ] Restore deterministic container-first package ordering and a real download/run validation for the published container.
 - [ ] Align NuGet and container version derivation to the release tag and rerun both workflows after the correction.
+
+### Version 1.8.14
+
+- [x] Recover the GitHub authorization flow through the authenticated browser without exposing or storing a token in the repository.
+- [x] Set commit author identity to `iakadion` only when the authenticated user confirms that identity in Git configuration.
+- [x] Update all active manifests, release notes, artifact examples and workflow metadata from `1.8.13` to `1.8.14`.
+- [x] Run the complete local validation matrix and create the 1.8.14 commits without rewriting historical tags.
+- [ ] Create and verify the 1.8.14 release and its six registry workflows after authorization is available.

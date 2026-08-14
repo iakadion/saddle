@@ -6,7 +6,7 @@
   <strong>Storage-backed jobs, scraping contracts and portable runners for Node.js.</strong><br/>
   <strong>Binary computing engine, agent browser, scraper and packager.</strong><br/>
   <a href="https://github.com/wenathlan/saddle/actions/workflows/ci.yml"><img src="https://github.com/wenathlan/saddle/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
-  <a href="https://github.com/wenathlan/saddle/releases/tag/v1.8.13"><img src="https://img.shields.io/badge/release-v1.8.13-d35d3d" alt="Release 1.8.13" /></a>
+  <a href="https://github.com/wenathlan/saddle/releases/tag/v1.8.14"><img src="https://img.shields.io/badge/release-v1.8.14-d35d3d" alt="Release 1.8.14" /></a>
   <a href="https://github.com/wenathlan/saddle/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-GPL--3.0--only-202a2f" alt="GPL 3.0 only license" /></a>
 </p>
 
@@ -165,7 +165,7 @@ The base permission set is `activeTab`, `scripting` and `storage`. It does not r
 | Failure | retry, circuit breaker, idempotency and resume are configurable |
 | Releases | version comes from the `vX.Y.Z` tag and must match `package.json` |
 
-Version 1.8.13 carries the TypeScript-first source into the current release and keeps public JavaScript package paths stable. It includes release-derived package metadata, queue leases, bounded structured extraction with provenance, browser context budgets, explicit workflow cancellation with caller-owned compensation and deterministic artifact retention decisions. The dynamic debug collector is intentionally an unchecked browser boundary because it monkey-patches browser APIs; the rest of the web surface remains strictly typechecked. See [`docs/reorganization-1.8.9.md`](docs/reorganization-1.8.9.md), [`docs/toolchainresearch-1.8.9.md`](docs/toolchainresearch-1.8.9.md), [`docs/releasenotes-1.8.12.md`](docs/releasenotes-1.8.12.md) and [`docs/releasenotes-1.8.13.md`](docs/releasenotes-1.8.13.md).
+Version 1.8.14 carries the TypeScript-first source into the current release and keeps public JavaScript package paths stable. It includes release-derived package metadata, queue leases, bounded structured extraction with provenance, browser context budgets, explicit workflow cancellation with caller-owned compensation, deterministic artifact retention decisions and a post-push container pull/smoke validation. The dynamic debug collector is intentionally an unchecked browser boundary because it monkey-patches browser APIs; the rest of the web surface remains strictly typechecked. See [`docs/reorganization-1.8.9.md`](docs/reorganization-1.8.9.md), [`docs/toolchainresearch-1.8.9.md`](docs/toolchainresearch-1.8.9.md), [`docs/releasenotes-1.8.12.md`](docs/releasenotes-1.8.12.md), [`docs/releasenotes-1.8.13.md`](docs/releasenotes-1.8.13.md) and [`docs/releasenotes-1.8.14.md`](docs/releasenotes-1.8.14.md).
 
 ## Package surfaces and release automation
 
@@ -249,7 +249,7 @@ Earlier root README snapshots and platform READMEs remain in `docs/plans/README.
 
 ## Current scope
 
-Version 1.8.13 extends the TypeScript-first engine with flat project-owned desktop, Android and iOS build surfaces, explicit Capacitor staging boundaries, dotted release asset naming, helper-binary rejection, structured extraction provenance, browser context budgets, resumable workflow compensation and retention metadata. Browser binaries, provider credentials, n8n host registration, persistent databases, captcha solvers and production deployment remain caller-selected adapters. Future work should extend contracts without coupling the core to one forge, registry, browser or storage vendor.
+Version 1.8.14 extends the TypeScript-first engine with flat project-owned desktop, Android and iOS build surfaces, explicit Capacitor staging boundaries, dotted release asset naming, helper-binary rejection, structured extraction provenance, browser context budgets, resumable workflow compensation, retention metadata and a container image that is pulled and smoke-tested after publication. Browser binaries, provider credentials, n8n host registration, persistent databases, captcha solvers and production deployment remain caller-selected adapters. Future work should extend contracts without coupling the core to one forge, registry, browser or storage vendor.
 
 ## License
 

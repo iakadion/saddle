@@ -114,3 +114,19 @@ Version 1.8.13 keeps the release-tag-derived matrix and adds deterministic reten
 | Browser extension | Manifest V3 | `saddle.extension.1.8.13.zip` |
 
 Each surface also emits `sha256.*.1.8.13`, `manifest.*.1.8.13.json` and, where enabled by the release path, SBOM and provenance metadata. The Android manifest records `ci-test-key`, desktop manifests record `unsigned` and the container manifest records `caller-owned`. The manifest may additionally carry `retention`, `retentionplan` and `retentionevaluatedat`; these fields are advisory execution decisions and do not imply deletion or publication.
+
+## 1.8.14 release matrix
+
+Version 1.8.14 keeps the release-tag-derived matrix and adds post-push container pull and smoke validation. The implementation records retention policy and keep/prune decisions but never removes caller-owned files. The release is expected to contain the same 38-asset family; iOS remains unavailable until caller-owned Apple signing and provisioning are configured.
+
+| Surface | Architectures | Artifact naming contract |
+| --- | --- | --- |
+| Linux desktop browser | x64, arm64 | `saddle.browser.1.8.14.<architecture>.deb`, `.rpm`, `.appimage` |
+| Windows desktop browser | x86, x64, arm64 | `saddle.browser.1.8.14.<architecture>.exe`, `.msi` |
+| macOS desktop browser | x64, arm64 | `saddle.browser.1.8.14.<architecture>.dmg`, `.app.zip` |
+| Android | caller-configured signing | `saddle.apk.1.8.14.apk`, `saddle.aab.1.8.14.aab` |
+| iOS | caller-configured signing and provisioning | `saddle.ipa.1.8.14.ipa`, `saddle.app.1.8.14.app.zip` |
+| Container | OCI | `saddle.container.1.8.14.tar.gz` |
+| Browser extension | Manifest V3 | `saddle.extension.1.8.14.zip` |
+
+Each surface also emits `sha256.*.1.8.14`, `manifest.*.1.8.14.json` and, where enabled by the release path, SBOM and provenance metadata. The Android manifest records `ci-test-key`, desktop manifests record `unsigned` and the container manifest records `caller-owned`. The container image additionally records `org.opencontainers.image.version=1.8.14`; the post-push workflow pulls that exact version and runs the CLI help smoke test.
