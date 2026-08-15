@@ -712,3 +712,17 @@
 - [x] Update any discovered active metadata to 1.8.17 while preserving tests, historical records, and scope references. No old Saddle product metadata remained; the Android build-variable match is an AndroidX dependency.
 - [x] Expand the external consolidation with the complete classification and durable historical behavior, without direct links to internal materials.
 - [x] Validate and commit the whole-repository version audit without reworking the README scope document. The only excluded non-product token is an AndroidX dependency version.
+
+## 15. Direct README re-evaluation request
+
+- [ ] Inventory the README's release badge, current-scope statements, historical sections, and direct internal references.
+- [ ] Compare every affected section with all historical root README revisions before deciding whether it can represent 1.8.17 truthfully.
+- [ ] Identify the exact set of active release references that could be updated without rewriting the preserved scope document or corrupting historical evidence.
+- [ ] Validate and record the direct README re-evaluation outcome.
+
+## 16. npm distribution and 1.8.18 planning base
+
+- [x] Inspect the package dry-run contents to confirm which README the npm package distributes and whether a separate distribution document exists. The package contains the root README and the extension README; no separate distribution README exists.
+- [x] Map each durable capability from the 41 historical README revisions into the consolidated planning base for 1.8.18.
+- [x] Record any permitted active metadata alignment separately from the immutable README scope reference.
+- [x] Validate and commit the 1.8.18 planning base without replacing the README scope document.
