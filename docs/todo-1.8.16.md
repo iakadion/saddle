@@ -726,3 +726,10 @@
 - [x] Map each durable capability from the 41 historical README revisions into the consolidated planning base for 1.8.18.
 - [x] Record any permitted active metadata alignment separately from the immutable README scope reference.
 - [x] Validate and commit the 1.8.18 planning base without replacing the README scope document.
+
+## 17. README publication consolidation request
+
+- [x] Build a section-by-section matrix across the 41 root README revisions and the current README.
+- [x] Identify all release references that describe the active package rather than historical evidence or fixture state.
+- [x] Consolidate the README into foundation, engine, productization, API, extension, security, package, development, CLI, repository, history and current-scope sections while preserving historical evidence accurately.
+- [x] Validate the README-facing update through `npm pack --dry-run`; the resulting `@wenathlan/saddle@1.8.17` package contains the root README.

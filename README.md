@@ -6,7 +6,7 @@
   <strong>Storage-backed jobs, scraping contracts and portable runners for Node.js.</strong><br/>
   <strong>Binary computing engine, agent browser, scraper and packager.</strong><br/>
   <a href="https://github.com/wenathlan/saddle/actions/workflows/ci.yml"><img src="https://github.com/wenathlan/saddle/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
-  <a href="https://github.com/wenathlan/saddle/releases/tag/v1.8.14"><img src="https://img.shields.io/badge/release-v1.8.14-d35d3d" alt="Release 1.8.14" /></a>
+  <a href="https://github.com/wenathlan/saddle/releases/tag/v1.8.17"><img src="https://img.shields.io/badge/release-v1.8.17-d35d3d" alt="Release 1.8.17" /></a>
   <a href="https://github.com/wenathlan/saddle/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-GPL--3.0--only-202a2f" alt="GPL 3.0 only license" /></a>
 </p>
 
@@ -40,17 +40,19 @@ node --import tsx examples/publicapi.ts
 npm test
 ```
 
-## Progressive architecture
+## Foundation
 
-The project documentation follows a progressive arc. The foundation describes the storage and runner model; the engine describes the contracts that make the model executable; productization describes the package, extension, workflow and web surfaces.
+Saddle is organized as a progressive architecture. **Foundation** defines the storage, runner and working-set model. **Engine** defines the contracts that make that model executable. **Productization** exposes the same contracts through package, extension, workflow, native and web surfaces without creating a second source of truth.
 
-### Foundation: storage, runners and working sets
+### Storage, runners and working sets
 
 Saddle treats a repository, bucket or object store as durable state and a third-party runner as a replaceable processor. GitHub Actions is one adapter, not the core. Forgejo, Gitea, GitLab, Codeberg, Docker and caller-owned runners can implement the same runner contracts.
 
 The physical limit remains explicit: remote storage is not VRAM. A storage-to-RAM bridge can stage a bounded working set through a local filesystem, tmpfs, mmap, cache or caller-owned storage adapter, but it cannot remove network latency or create the bandwidth of a GPU bus. The engine exposes that distinction instead of hiding it behind marketing language.
 
-The execution model is:
+### The execution model
+
+The execution model is intentionally small and explicit:
 
 ```text
 repository or bucket -> runner working set -> process -> durable artifact
@@ -74,7 +76,11 @@ The historical design treats the repository and its runner as a **virtual proces
 
 The engine keeps these boundaries explicit. It does not silently install a browser, mount a bucket as VRAM, create a database, choose a proxy, or transfer credentials to a provider.
 
-### Engine: contracts instead of vendor lock-in
+## Engine
+
+The engine coordinates serializable contracts rather than hiding providers. The caller composes storage, working-set, runner, protocol and delivery adapters around a durable artifact boundary. Remote effects remain adapter-owned; the transport-neutral root does not require a cloud account, database, browser binary or secret.
+
+### What is included
 
 | Area | Contracts shipped | Result |
 | --- | --- | --- |
@@ -101,7 +107,9 @@ The protocol layer accepts JSON request/response envelopes, NDJSON append-only e
 
 The root entry point is transport-neutral. Node filesystem, HTTP server, persistent sessions and Playwright are explicit subpaths or optional adapters. The library accepts caller-provided fetchers, browser transports, storage adapters, persistence, proxy pools, captcha evidence handlers, webhook secrets and remote credentials.
 
-### Productization: one engine, many shells
+## Productization
+
+### One engine, many shells
 
 The same contracts can be surfaced as an npm library, application archive, computer runtime, desktop installer, Android APK/AAB, iOS IPA, CLI, binary, browser package, Manifest V3 extension, web/PWA artifact, LibreOffice OXT, VSIX, webhook server, MCP transport, workflow action, container image, Maven package, NuGet package or RubyGem. These surfaces are declarative target plans and caller-owned adapters around the engine; they are not separate sources of truth.
 
@@ -135,8 +143,10 @@ Saddle can be connected to GitHub, GitLab, Forgejo, Gitea, Codeberg, Docker or a
 | `nodeserver` | Web Request/Response handler |
 | `engine` / `scheduler` | job lifecycle and runner dispatch |
 | `release-assets` | SHA256SUMS, SBOM and provenance metadata for caller-selected artifacts |
+| `releaseevidence` / `evaluateevidence` | serializable release-evidence creation and evaluation |
+| `releasereadiness` / `evidencefromverification` | readiness assessment from caller-supplied verification evidence |
 
-The complete export map is documented in [`docs/libraryapi.md`](docs/libraryapi.md). The product index is in [`docs/productindex.md`](docs/productindex.md), and runnable examples are in [`docs/usage.md`](docs/usage.md).
+The package export map is defined by the root manifest. Runnable public examples, API reference material and technical records ship with the package, while the root entry point remains the recommended starting surface for applications that do not need a platform-specific adapter.
 
 ## Browser extension
 
@@ -165,7 +175,7 @@ The base permission set is `activeTab`, `scripting` and `storage`. It does not r
 | Failure | retry, circuit breaker, idempotency and resume are configurable |
 | Releases | version comes from the `vX.Y.Z` tag and must match `package.json` |
 
-Version 1.8.14 carries the TypeScript-first source into the current release and keeps public JavaScript package paths stable. It includes release-derived package metadata, queue leases, bounded structured extraction with provenance, browser context budgets, explicit workflow cancellation with caller-owned compensation, deterministic artifact retention decisions and a post-push container pull/smoke validation. The dynamic debug collector is intentionally an unchecked browser boundary because it monkey-patches browser APIs; the rest of the web surface remains strictly typechecked. See [`docs/reorganization-1.8.9.md`](docs/reorganization-1.8.9.md), [`docs/toolchainresearch-1.8.9.md`](docs/toolchainresearch-1.8.9.md), [`docs/releasenotes-1.8.12.md`](docs/releasenotes-1.8.12.md), [`docs/releasenotes-1.8.13.md`](docs/releasenotes-1.8.13.md) and [`docs/releasenotes-1.8.14.md`](docs/releasenotes-1.8.14.md).
+Version 1.8.17 keeps the TypeScript-first public package paths stable and brings the release surface through the evidence contracts introduced in 1.8.16 and the multi-platform container delivery introduced in 1.8.17. The current container targets `linux/amd64`, `linux/arm64` and `linux/ppc64le`; release evidence, readiness and verification remain serializable and caller-owned. Release workflows also include cache-retention operations and an automatic mobile artifact fallback that is identified according to its actual signing state. The dynamic debug collector remains an unchecked browser boundary because it monkey-patches browser APIs; the rest of the web surface remains strictly typechecked.
 
 ## Package surfaces and release automation
 
@@ -201,7 +211,7 @@ VITE_BASE_PATH=/saddle npm run web:build:pages
 
 Small public configuration and visual assets live under `web/public/`. The development collector is TypeScript source at `web/lib/debugcollector.ts`, injected only in development, and uses `/debuglogs`; it is not part of the production build. The obsolete `web/public/__manus__` directory is intentionally absent.
 
-## Development and release gates
+## Development
 
 ```bash
 npm ci
@@ -215,6 +225,19 @@ VITE_BASE_PATH=/saddle npm run web:build:pages
 ```
 
 The engine test suite is deterministic and does not require real credentials or network access. The release path is: update `package.json` and the manifest files, update `changelog.md` and release notes, run all gates, create `v<package-version>`, push the tag and create the GitHub release. Registry workflows then derive the same version from that release tag. A package metadata change alone does not publish anything; the release tag is the intentional publication boundary.
+
+## CLI
+
+The published `saddle` executable is a local, adapter-oriented inspection surface. It intentionally lists only stable commands and does not turn a local invocation into remote dispatch.
+
+| Command | Purpose | External effect |
+| --- | --- | --- |
+| `saddle help` | list the stable command surface | none |
+| `saddle modes` | print the mode catalog as JSON | none |
+| `saddle runexample` | execute a temporary local engine example | temporary local storage only |
+| `saddle mcp` | print the available MCP tool declarations | none |
+
+Remote execution, provider credentials, browser transport, persistence, proxy selection, captcha evidence handling and webhook dispatch remain caller-provided adapters. The CLI is therefore a way to inspect or exercise local contracts, not a substitute for an operator-owned deployment policy.
 
 ## Repository map
 
@@ -245,11 +268,11 @@ The engine is TypeScript-first ESM with English JSDoc comments and a generated J
 
 ## Historical documentation
 
-Earlier root README snapshots and platform READMEs remain in `docs/plans/README.md`, `docs/talks9/README.md`, `docs/talks9/README (2).md`, `android/README.md`, `browser/README.md`, `desktop/README.md`, `extension/README.md` and `ios/README.md` as archival or surface-specific evidence. Their useful architecture ideas were consolidated here, while stale `@wenathlan`, `@iakadion`, `io.devthink`, Node 20/22, `client/src`, speculative provider quotas and unimplemented hosted services were not copied into the canonical contract.
+The repository history contains 41 root README revisions and several surface-specific records. Their durable ideas are consolidated here: storage-backed execution, bounded working sets, replaceable runners, content extraction, browser actions, workflow delivery, multi-registry packaging, explicit recovery contracts and caller-owned integrations. Historical references that describe superseded identities, obsolete Node baselines, speculative provider quotas, unavailable hosted services or removed layouts remain historical evidence rather than current promises.
 
 ## Current scope
 
-Version 1.8.14 extends the TypeScript-first engine with flat project-owned desktop, Android and iOS build surfaces, explicit Capacitor staging boundaries, dotted release asset naming, helper-binary rejection, structured extraction provenance, browser context budgets, resumable workflow compensation, retention metadata and a container image that is pulled and smoke-tested after publication. Browser binaries, provider credentials, n8n host registration, persistent databases, captcha solvers and production deployment remain caller-selected adapters. Future work should extend contracts without coupling the core to one forge, registry, browser or storage vendor.
+Version 1.8.17 extends the TypeScript-first engine with flat project-owned desktop, Android and iOS build surfaces; explicit Capacitor staging boundaries; dotted release asset naming; helper-binary rejection; structured extraction provenance; browser context budgets; resumable workflow compensation; retention metadata; release-evidence contracts; and a container image validated after publication for three Linux platforms. Browser binaries, provider credentials, hosted automation registration, persistent databases, captcha solvers and production deployment remain caller-selected adapters. Future work should extend contracts without coupling the core to one forge, registry, browser or storage vendor.
 
 ## License
 
