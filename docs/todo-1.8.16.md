@@ -690,3 +690,9 @@
 - [x] Create and verify the requested encrypted archive only after the passphrase and archive scope are explicit. The verified list contains 199 files and 13 directory entries with unrelated assets excluded.
 - [x] Preserve the current README as a non-deterministic scope reference; record the historical consolidation and active 1.8.17 reference matrix outside that file.
 - [x] Build the encrypted package from `docs/logs`, `docs/plans`, `docs/sources`, and `docs/talks1` through `docs/talks9`, excluding unrelated `docs/assets` content and the generated archive itself.
+
+## 12. Encrypted documentation relocation
+
+- [x] Move the verified encrypted package from the repository root into `docs/` without changing its bytes.
+- [x] Remove only `docs/logs`, `docs/plans`, `docs/sources`, and `docs/talks1` through `docs/talks9` after the package is present at its destination.
+- [x] Verify that `docs/assets` and all remaining top-level documentation files survive the removal before committing.
