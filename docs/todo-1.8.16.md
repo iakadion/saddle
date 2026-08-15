@@ -704,3 +704,11 @@
 - [x] Preserve the current README as a scope reference while recording the complete capability consolidation outside it.
 - [x] Ensure the external consolidation uses the active 1.8.17 matrix and does not contain direct links to materials inside `docs/`.
 - [x] Validate and commit the version-reference audit without rewriting the README scope document.
+
+## 14. Whole-repository active-version audit
+
+- [x] Enumerate every tracked current-file reference to a pre-1.8.17 version and classify it as active metadata, test fixture, changelog, release evidence, research, or scope text.
+- [x] Inspect every historical root README revision for durable behavior not yet represented in the external consolidation.
+- [x] Update any discovered active metadata to 1.8.17 while preserving tests, historical records, and scope references. No old Saddle product metadata remained; the Android build-variable match is an AndroidX dependency.
+- [x] Expand the external consolidation with the complete classification and durable historical behavior, without direct links to internal materials.
+- [x] Validate and commit the whole-repository version audit without reworking the README scope document. The only excluded non-product token is an AndroidX dependency version.

@@ -25,6 +25,27 @@ The current README contains legacy 1.8.14 statements and direct references to in
 
 The external consolidation has no direct links to materials under `docs/`. It is the active reference for the 1.8.17 matrix while the repository README remains the preserved scope reference.
 
+## Whole-repository audit
+
+The current tracked tree was searched for pre-1.8.17 version tokens with numeric boundaries. All product manifests resolve to 1.8.17. The only non-product match outside preserved historical material is an AndroidX dependency version in the Android build variables; it is a library dependency and not a Saddle release version.
+
+The remaining version references belong to historical release evidence, changelog entries, archival research, deterministic test fixtures, automation assertions, or preserved README scope text. They must retain their original values because replacing them would make the evidence, fixture assertions, and historical descriptions false.
+
+## Historical behavior disposition
+
+The historical README review identified the following enduring themes and records how each is represented in the active consolidation.
+
+| Historical theme                                                       | Active disposition                                                                                                                |
+| ---------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------- |
+| Storage as compute, file-as-compute, memory engine, and memory tiers   | Represented by the storage-backed working-set, memory modes, objects, transforms, planner, and bounded materialization contracts. |
+| Repo-as-CPU, multi-forge operation, and distributed execution          | Represented by caller-owned, replaceable runners and transport-neutral job, workflow, and delivery contracts.                     |
+| Content types, API communication, extraction, crawling, and cache      | Represented by JSON-family protocols, bounded scraping, normalization, schema, robots, crawling, and cache contracts.             |
+| Request strategies, validation, concurrency, and recovery              | Represented by retry, queue, idempotency, saga, abort, compatibility, worker, and circuit-breaker boundaries.                     |
+| Browser context, fingerprinting, proxy, captcha, and stealth proposals | Retained only as caller-owned boundaries; the active record makes no bypass, provider, or anti-detection guarantee.               |
+| Database and SQL proposals                                             | Retained as historical proposals. The active engine does not provision or require a database.                                     |
+
+The review intentionally excludes historical secret names, provider-specific credentials, speculative dependencies, and unimplemented hosted-service claims from the active record.
+
 ## Active 1.8.17 reference matrix
 
 | Surface                         | Active metadata                                                                       |
