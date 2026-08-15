@@ -678,3 +678,15 @@
 - [x] Update release notes, changelog, registry and artifact documentation with an accurate platform matrix and no unverified image claims.
 - [x] Validate YAML formatting, package and engine gates, workflow logic, package dry-run, high-severity audit, flat-native validation, and whitespace before creating the 1.8.17 tag.
 - [x] Publish and inspect the 1.8.17 release, all registry workflows, container manifest platforms, post-push label checks, and smoke-test results. The public release contains 38 assets; GHCR run `31847952976` verified `linux/amd64`, `linux/arm64`, and `linux/ppc64le` and completed the amd64 label and CLI smoke checks.
+
+## 11. Version 1.8.17 README consolidation and archival request
+
+- [x] Inventory every historical `README.md` revision with Git before selecting durable content for the current README. The root history contains 41 revisions and separate platform README paths.
+- [x] Consolidate still-relevant capabilities, installation paths, modes, packaging surfaces, and limits into an external consolidation record while preserving the README scope reference.
+- [x] Update active release references to `1.8.17` while preserving historical release records as history rather than overwriting them.
+- [ ] Remove direct links or filename references to documents inside `docs/` from the README; retain only appropriate root-document references.
+- [x] Inventory the exact user-requested documentation range before any archive operation and exclude the archive itself from recursive inputs.
+- [x] Receive a user-supplied passphrase before creating an encrypted archive; do not generate an unrecoverable undocumented credential.
+- [x] Create and verify the requested encrypted archive only after the passphrase and archive scope are explicit. The verified list contains 199 files and 13 directory entries with unrelated assets excluded.
+- [x] Preserve the current README as a non-deterministic scope reference; record the historical consolidation and active 1.8.17 reference matrix outside that file.
+- [x] Build the encrypted package from `docs/logs`, `docs/plans`, `docs/sources`, and `docs/talks1` through `docs/talks9`, excluding unrelated `docs/assets` content and the generated archive itself.
