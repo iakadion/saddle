@@ -696,3 +696,11 @@
 - [x] Move the verified encrypted package from the repository root into `docs/` without changing its bytes.
 - [x] Remove only `docs/logs`, `docs/plans`, `docs/sources`, and `docs/talks1` through `docs/talks9` after the package is present at its destination.
 - [x] Verify that `docs/assets` and all remaining top-level documentation files survive the removal before committing.
+
+## 13. README version-reference audit
+
+- [x] Enumerate every version reference in the current README and every historical root README revision with Git. The root history contains 41 revisions and the current README retains 1.8.14 scope statements.
+- [x] Distinguish active metadata from immutable historical release evidence and identify stale version statements.
+- [x] Preserve the current README as a scope reference while recording the complete capability consolidation outside it.
+- [x] Ensure the external consolidation uses the active 1.8.17 matrix and does not contain direct links to materials inside `docs/`.
+- [x] Validate and commit the version-reference audit without rewriting the README scope document.

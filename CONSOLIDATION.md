@@ -10,6 +10,21 @@ The review inspected all 41 historical revisions of the root README available th
 
 The consolidation does not promote speculative provider capabilities, hosted-service assumptions, obsolete package identities, or older runtime requirements into active commitments. Historical release records remain historical evidence rather than current metadata.
 
+## Version-reference audit
+
+The Git review inspected the 41 historical root README revisions and their version references. Those revisions preserve an evolving record spanning earlier 1.8 releases; their version strings are historical evidence and must not be rewritten as if they described the current release.
+
+The current README contains legacy 1.8.14 statements and direct references to internal material. It is intentionally retained unchanged because it remains the repository scope reference. The active-version statement is therefore provided by this record and the manifest matrix below rather than by editing historical text in place.
+
+| Reference class                                                    | Handling                                                                                                                      |
+| ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------- |
+| Active package, native, crawler, extension, and container metadata | Must resolve to `1.8.17`.                                                                                                     |
+| Release notes, changelog, artifact records, and historical READMEs | Retained as immutable evidence for their own release period.                                                                  |
+| Deterministic test fixtures                                        | Retained with their fixture versions; they do not select a package or registry version.                                       |
+| Current README scope text                                          | Preserved unchanged; its stale version and internal-reference findings are recorded here instead of being silently rewritten. |
+
+The external consolidation has no direct links to materials under `docs/`. It is the active reference for the 1.8.17 matrix while the repository README remains the preserved scope reference.
+
 ## Active 1.8.17 reference matrix
 
 | Surface                         | Active metadata                                                                       |
