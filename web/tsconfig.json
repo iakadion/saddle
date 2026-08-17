@@ -18,7 +18,8 @@
     "resolveJsonModule": true,
     "types": ["node", "vite/client"],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@saddle/isolation": ["../isolation/contracts.ts"]
     }
   }
 }

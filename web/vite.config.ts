@@ -219,6 +219,7 @@ export default defineConfig({
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname),
+      "@saddle/isolation": path.resolve(import.meta.dirname, "..", "isolation", "contracts.ts"),
       "@shared": path.resolve(import.meta.dirname, "shared"),
       "@assets": path.resolve(import.meta.dirname, "attached_assets"),
     },

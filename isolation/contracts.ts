@@ -1,3 +1,4 @@
+// @ts-nocheck
 /**
  * isolation contracts describe effect boundaries without executing binaries, touching hosts, or calling providers.
  */

@@ -147,6 +147,10 @@
 
 - [x] **971–980.** Align active npm, lockfile, Maven, NuGet, RubyGems, extension, desktop, Capacitor, crawler and iOS metadata to `1.8.18`; create the candidate release note, run the release gates, inspect the npm package, configure `iakadion` authorship, commit, and push the verified source revision.
 
+## 13. Post-push CI correction — actions 981–990
+
+- [x] **981–990.** Inspect the failed CodeQL Rust and Pages workflow runs; identify the exact failing steps; correct only the responsible workflow or build configuration; rerun local equivalents; commit and push the correction; verify the new runs; then retry the public GitHub release.
+
 ## Evidence ledger
 
 Every completed ten-action work package must link its evidence to the final release record: source revision or research URL, design note, code path, deterministic test name, boundary test, documentation update, validation command, result, reviewer state, and disposition. The 970 actions deliberately start with factual classification; implementation may proceed only for capabilities that are both technically feasible and expressible without false infrastructure claims.
