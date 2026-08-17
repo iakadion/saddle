@@ -25,6 +25,7 @@ import { bridgeplan, materializationledger, materializationrecord, workingadmiss
 import { cachedecision, cacheeligibility, executeisolated, magicbytes, transformationcache, transformationkey, wasmplan } from "../binary/transform.js";
 import { archiveinspection, extractarchive } from "../binary/archive.js";
 import { executiondecision, executionhandoff, executionrequest, internalapi } from "../isolation/contracts.js";
+import { virtualbrowserdecision, virtualbrowserhandoff, virtualbrowserreceipt, virtualbrowserrequest } from "../browser/virtual.js";
 import { artifacthandoff, cancellationplan, providerchain, renderdispatch } from "../runners/chain.js";
 import { cdncapabilities, deliverymanifest, pwaplan, verifydelivery } from "../delivery/manifest.js";
 import { applicationbridge, dnsplan, miniappplan } from "../surfaces/requirements.js";
@@ -1265,6 +1266,24 @@ test("keeps local, provider, browser, and undeclared URL requests denied and eff
   }
   const normalized = executionrequest({ id: "remote1", effect: "remote-dispatch", target: "remote", source, endpoint: "https://example.invalid", budget: { maxbytes: 1, maxmilliseconds: 1 } });
   assert.equal("endpoint" in normalized, false);
+});
+
+test("plans a virtual browser session without launching or reading a user browser", () => {
+  const request = virtualbrowserrequest({ id: "virtualbrowser1", source: "a".repeat(64), engine: "chromium", distribution: "chromium", display: "webrtc", storage: "ephemeral", budget: { maxbytes: 8, maxmilliseconds: 10 } });
+  assert.deepEqual(request.localaccess, { browser: false, filesystem: false, storage: false, process: false });
+  assert.deepEqual(request.effects, []);
+  const denied = virtualbrowserdecision(request);
+  assert.equal(denied.state, "denied");
+  assert.equal(denied.reasons.includes("adapter-engine"), true);
+  const configuration = { policy: { alloweffects: ["browser-session"], allowtargets: ["remote"] }, approval: { effects: ["browser-session"], targets: ["remote"] }, adapter: { owner: "operator", capabilities: ["browser-session"], engines: ["chromium"], distributions: ["chromium"] } };
+  const delegated = virtualbrowserdecision(request, configuration);
+  assert.equal(delegated.state, "caller-delegates");
+  assert.equal(virtualbrowserhandoff({ request, configuration }).code, "REMOTE_BROWSER_ADAPTER_REQUIRED");
+  assert.equal(virtualbrowserhandoff({ request }).code, "VIRTUAL_BROWSER_POLICY_DENIED");
+  const receipt = virtualbrowserreceipt({ request, adapterid: "fixture-remote-browser", image: "registry.example/saddle/chromium@sha256:fixture", capabilities: ["navigate", "screenshot"] });
+  assert.equal(receipt.state, "declared");
+  assert.deepEqual(receipt.effects, []);
+  assert.throws(() => virtualbrowserrequest({ id: "invalidbrowser", source: "b".repeat(64), engine: "gecko", distribution: "chrome", budget: { maxbytes: 1, maxmilliseconds: 1 } }), /does not match/);
 });
 
 test("inspects archive metadata before a caller-owned extraction adapter runs", async () => {

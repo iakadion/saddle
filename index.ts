@@ -88,6 +88,7 @@ export * from "./packager/publish.js";
 export * from "./browser/fingerprint.js";
 export * from "./browser/session.js";
 export * from "./browser/index.js";
+export * from "./browser/virtual.js";
 export * from "./proxy/pool.js";
 export * from "./captcha/contract.js";
 export * from "./captcha/guard.js";
