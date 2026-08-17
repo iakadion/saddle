@@ -184,3 +184,11 @@ Every completed package must link its source material, design record, source pat
 - [ ] **R005.** Configure caller-owned Apple distribution certificate, password, provisioning profile, keychain password and provisioning-profile name before attempting an iOS IPA.
 - [x] **R006.** Added the serializable virtual-browser request, decision, handoff and receipt contracts with default-deny tests and no runtime adapter.
 - [ ] **R007.** Extend virtual browser storage, remote display and micro-VM contracts after the next review gate.
+
+## Documentation centralization ledger
+
+- [x] **D001.** Inventory root-level Markdown and text documents, including package, workflow and link dependencies.
+- [x] **D002.** Preserve only required root entrypoints for package publication, licensing and repository architecture.
+- [x] **D003.** Move eligible planning, research, operations and consolidation documents into `docs/`.
+- [x] **D004.** Update all repository-relative links, workflow references and package metadata affected by the move.
+- [x] **D005.** Validate the repository documentation map and commit the centralization change.
