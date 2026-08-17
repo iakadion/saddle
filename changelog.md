@@ -10,6 +10,15 @@
 
 	    - Future changes will be recorded here after the 1.8.11 release.
 
+		  ## [1.8.18] - 2026-08-17
+
+		    - Added serializable `executionrequest`, `executiondecision`, `executionhandoff`, `internalenvelope`, and `internalapi` contracts for privileged-effect planning without implicit runtime effects.
+		    - Added explicit default denial for binary execution, host bridging, remote dispatch, provider access, local storage, browser sessions, databases and network effects until policy, approval and caller-owned adapter declarations agree.
+		    - Added the `@wenathlan/saddle/isolation` package export and deterministic tests that cover missing adapters, local targets, provider targets, browser targets and ignored undeclared URLs.
+		    - Added the unified `web/` playground route that visualizes typed internal API boundaries and the difference between a denied request and a non-executing caller handoff.
+		    - Aligned active package, registry, native, extension, crawler, Capacitor and iOS metadata to `1.8.18`, with iOS build number `1008018`.
+		    - Added the canonical [1.8.18 release notes](docs/releasenotes-1.8.18.md).
+
 		  ## [1.8.17] - 2026-08-14
 
 		    - Expanded the GHCR Linux OCI manifest target to `linux/amd64`, `linux/arm64`, and `linux/ppc64le` with QEMU-enabled Buildx publication.

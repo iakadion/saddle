@@ -8,6 +8,7 @@ const navItems = [
   { href: "/architecture", label: "Architecture" },
   { href: "/agent-browser", label: "Agent Browser" },
   { href: "/compute", label: "Compute" },
+  { href: "/playground", label: "Playground" },
   { href: "/integrations", label: "Integrations" },
   { href: "/docs", label: "Docs" },
 ];

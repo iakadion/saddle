@@ -6,7 +6,7 @@
   <strong>Storage-backed jobs, scraping contracts and portable runners for Node.js.</strong><br/>
   <strong>Binary computing engine, agent browser, scraper and packager.</strong><br/>
   <a href="https://github.com/wenathlan/saddle/actions/workflows/ci.yml"><img src="https://github.com/wenathlan/saddle/actions/workflows/ci.yml/badge.svg" alt="CI" /></a>
-  <a href="https://github.com/wenathlan/saddle/releases/tag/v1.8.17"><img src="https://img.shields.io/badge/release-v1.8.17-d35d3d" alt="Release 1.8.17" /></a>
+  <a href="https://github.com/wenathlan/saddle/releases/tag/v1.8.18"><img src="https://img.shields.io/badge/release-v1.8.18-d35d3d" alt="Release 1.8.18" /></a>
   <a href="https://github.com/wenathlan/saddle/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-GPL--3.0--only-202a2f" alt="GPL 3.0 only license" /></a>
 </p>
 
@@ -145,6 +145,8 @@ Saddle can be connected to GitHub, GitLab, Forgejo, Gitea, Codeberg, Docker or a
 | `release-assets` | SHA256SUMS, SBOM and provenance metadata for caller-selected artifacts |
 | `releaseevidence` / `evaluateevidence` | serializable release-evidence creation and evaluation |
 | `releasereadiness` / `evidencefromverification` | readiness assessment from caller-supplied verification evidence |
+| `executionrequest` / `executiondecision` / `executionhandoff` | denied-by-default privileged-effect planning and caller-owned handoff projection |
+| `internalenvelope` / `internalapi` | pure typed envelopes for a unified web gateway, plan, policy, materialization, execution, persistence and evidence boundary |
 
 The package export map is defined by the root manifest. Runnable public examples, API reference material and technical records ship with the package, while the root entry point remains the recommended starting surface for applications that do not need a platform-specific adapter.
 
@@ -175,7 +177,7 @@ The base permission set is `activeTab`, `scripting` and `storage`. It does not r
 | Failure | retry, circuit breaker, idempotency and resume are configurable |
 | Releases | version comes from the `vX.Y.Z` tag and must match `package.json` |
 
-Version 1.8.17 keeps the TypeScript-first public package paths stable and brings the release surface through the evidence contracts introduced in 1.8.16 and the multi-platform container delivery introduced in 1.8.17. The current container targets `linux/amd64`, `linux/arm64` and `linux/ppc64le`; release evidence, readiness and verification remain serializable and caller-owned. Release workflows also include cache-retention operations and an automatic mobile artifact fallback that is identified according to its actual signing state. The dynamic debug collector remains an unchecked browser boundary because it monkey-patches browser APIs; the rest of the web surface remains strictly typechecked.
+Version 1.8.18 keeps the TypeScript-first public package paths stable and adds serializable, denied-by-default execution intent, policy decision, handoff and internal-API contracts. They do not read a file, start a process, create a worker, instantiate WebAssembly, open a browser, call a provider, allocate host memory, write a database or dispatch remotely. An operator may supply a separately approved adapter later; the initial result remains a plan or a receipt. The current container targets `linux/amd64`, `linux/arm64` and `linux/ppc64le`; release evidence, readiness and verification remain serializable and caller-owned. Release workflows also include cache-retention operations and an automatic mobile artifact fallback that is identified according to its actual signing state. The dynamic debug collector remains an unchecked browser boundary because it monkey-patches browser APIs; the rest of the web surface remains strictly typechecked.
 
 ## Package surfaces and release automation
 
@@ -202,7 +204,7 @@ The core program will not transfer information to other networked systems unless
 
 ## GitHub Pages web surface
 
-The marketing site lives under [`web/`](web/) with a root-based TypeScript/React layout. It has no `client/` or `src/` subdirectory. Vite normalizes the base path and all visual assets resolve through a shared helper, so the same build works at `/` and `/saddle/`.
+The marketing site lives under [`web/`](web/) with a root-based TypeScript/React layout. It has no `client/` or `src/` subdirectory. Vite normalizes the base path and all visual assets resolve through a shared helper, so the same build works at `/` and `/saddle/`. Its `/playground` route projects the unified internal API boundaries with a fixed safe fixture; it is not a binary executor, service host, persistent store, remote browser or hidden backend.
 
 ```bash
 npm run web:check
@@ -272,7 +274,7 @@ The repository history contains 41 root README revisions and several surface-spe
 
 ## Current scope
 
-Version 1.8.17 extends the TypeScript-first engine with flat project-owned desktop, Android and iOS build surfaces; explicit Capacitor staging boundaries; dotted release asset naming; helper-binary rejection; structured extraction provenance; browser context budgets; resumable workflow compensation; retention metadata; release-evidence contracts; and a container image validated after publication for three Linux platforms. Browser binaries, provider credentials, hosted automation registration, persistent databases, captcha solvers and production deployment remain caller-selected adapters. Future work should extend contracts without coupling the core to one forge, registry, browser or storage vendor.
+Version 1.8.18 extends the TypeScript-first engine with flat project-owned desktop, Android and iOS build surfaces; explicit Capacitor staging boundaries; dotted release asset naming; helper-binary rejection; structured extraction provenance; browser context budgets; resumable workflow compensation; retention metadata; release-evidence contracts; and pure internal API execution-policy contracts. The web playground demonstrates request, policy and handoff states using a fixed fixture with no operational adapter. Browser binaries, provider credentials, hosted automation registration, persistent databases, captcha solvers, remote execution and production deployment remain caller-selected adapters. Future work should extend contracts without coupling the core to one forge, registry, browser or storage vendor.
 
 ## License
 

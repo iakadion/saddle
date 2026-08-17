@@ -115,6 +115,7 @@ export * from "./modes/resolve.js";
 export * from "./binary/build.js";
 export * from "./binary/archive.js";
 export * from "./binary/transform.js";
+export * from "./isolation/contracts.js";
 export * from "./api/rate.js";
 export * from "./api/http.js";
 export * from "./api/service.js";

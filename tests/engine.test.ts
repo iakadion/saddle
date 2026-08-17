@@ -24,6 +24,7 @@ import { storagepool } from "../storage/pool.js";
 import { bridgeplan, materializationledger, materializationrecord, workingadmission } from "../memory/planner.js";
 import { cachedecision, cacheeligibility, executeisolated, magicbytes, transformationcache, transformationkey, wasmplan } from "../binary/transform.js";
 import { archiveinspection, extractarchive } from "../binary/archive.js";
+import { executiondecision, executionhandoff, executionrequest, internalapi } from "../isolation/contracts.js";
 import { artifacthandoff, cancellationplan, providerchain, renderdispatch } from "../runners/chain.js";
 import { cdncapabilities, deliverymanifest, pwaplan, verifydelivery } from "../delivery/manifest.js";
 import { applicationbridge, dnsplan, miniappplan } from "../surfaces/requirements.js";
@@ -1224,6 +1225,46 @@ test("executes transformations only through injected isolated adapters and verif
   assert.equal(output.outputs[0].sizebytes, 4);
   await assert.rejects(() => executeisolated(plan), (error) => error.code === "ISOLATED_EXECUTION_UNAVAILABLE");
   await assert.rejects(() => executeisolated(plan, { execute: async () => ({ outputs: [{ name: "wrong", data, sha256: "f".repeat(64) }] }) }), (error) => error.code === "ISOLATED_EXECUTION_DIGEST_MISMATCH");
+});
+
+test("denies execution effects until policy, approval, and caller adapter declarations agree", () => {
+  const request = executionrequest({ id: "binary1", effect: "binary-execution", target: "remote", source: "d".repeat(64), budget: { maxbytes: 8, maxmilliseconds: 10 } });
+  const denied = executiondecision(request);
+  assert.equal(denied.state, "denied");
+  assert.deepEqual(denied.effects, []);
+  assert.equal(denied.reasons.includes("adapter-capability"), true);
+  const delegated = executiondecision(request, { policy: { alloweffects: ["binary-execution"], allowtargets: ["remote"] }, approval: { effects: ["binary-execution"], targets: ["remote"] }, adapter: { owner: "operator", capabilities: ["binary-execution"] } });
+  assert.equal(delegated.state, "caller-delegates");
+  assert.equal(executionhandoff({ request }).state, "execution-disabled");
+  assert.equal(executionhandoff({ request, configuration: { policy: { alloweffects: ["binary-execution"], allowtargets: ["remote"] }, approval: { effects: ["binary-execution"], targets: ["remote"] }, adapter: { owner: "operator", capabilities: ["binary-execution"] } } }).state, "caller-delegates");
+});
+
+test("projects unified internal API boundaries without transport, persistence, or execution side effects", () => {
+  const api = internalapi();
+  const request = { id: "binary2", effect: "binary-execution", target: "remote", source: "e".repeat(64), budget: { maxbytes: 8, maxmilliseconds: 10 } };
+  const policy = api.handle({ boundary: "policy", requestid: "request1", payload: { request } });
+  assert.equal(policy.data.decision.state, "denied");
+  const execution = api.handle({ boundary: "execution", requestid: "request2", payload: { request } });
+  assert.equal(execution.data.handoff.code, "EXECUTION_POLICY_DENIED");
+  assert.deepEqual(execution.effects, []);
+  assert.equal(api.handle({ boundary: "persistence", requestid: "request3", payload: {} }).data.state, "ephemeral-fixture");
+  assert.throws(() => api.handle({ boundary: "unknown", requestid: "request4", payload: {} }), /boundary/);
+});
+
+test("keeps local, provider, browser, and undeclared URL requests denied and effect-free", () => {
+  const source = "f".repeat(64);
+  const requests = [
+    { id: "local1", effect: "host-bridge", target: "local", source },
+    { id: "provider1", effect: "provider-access", target: "provider", source },
+    { id: "browser1", effect: "browser-session", target: "browser", source },
+  ];
+  for (const input of requests) {
+    const decision = executiondecision({ ...input, budget: { maxbytes: 1, maxmilliseconds: 1 } });
+    assert.equal(decision.state, "denied");
+    assert.deepEqual(decision.effects, []);
+  }
+  const normalized = executionrequest({ id: "remote1", effect: "remote-dispatch", target: "remote", source, endpoint: "https://example.invalid", budget: { maxbytes: 1, maxmilliseconds: 1 } });
+  assert.equal("endpoint" in normalized, false);
 });
 
 test("inspects archive metadata before a caller-owned extraction adapter runs", async () => {

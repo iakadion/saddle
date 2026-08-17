@@ -1,6 +1,6 @@
 [package]
 name = "saddle-desktop"
-version = "1.8.17"
+version = "1.8.18"
 description = "Saddle desktop browser shell"
 authors = ["wenathlan"]
 edition = "2021"
