@@ -151,6 +151,14 @@
 
 - [x] **981–990.** Inspect the failed CodeQL Rust and Pages workflow runs; identify the exact failing steps; correct only the responsible workflow or build configuration; rerun local equivalents; commit and push the correction; verify the new runs; then retry the public GitHub release.
 
+## 14. Current deployment and scanner remediation — actions 991–1000
+
+- [x] **991–1000.** Inspect the current failing Pages deploy, filesystem vulnerability scan, and OSV scan jobs; classify each as configuration, dependency, policy, or upstream availability; apply the minimal correction; validate locally when possible; push the verified remediation; and record the resulting workflow state without suppressing security findings.
+
+## 15. Push revalidation commit — actions 1001–1010
+
+- [x] **1001–1010.** Confirm the fixed source alias and Pages workflow trigger; add a concise evidence record for the recovered deployment; create and push a non-versioned revalidation commit; verify the new push Pages deployment and security checks; preserve the immutable `v1.8.18` tag and published registry packages.
+
 ## Evidence ledger
 
 Every completed ten-action work package must link its evidence to the final release record: source revision or research URL, design note, code path, deterministic test name, boundary test, documentation update, validation command, result, reviewer state, and disposition. The 970 actions deliberately start with factual classification; implementation may proceed only for capabilities that are both technically feasible and expressible without false infrastructure claims.
