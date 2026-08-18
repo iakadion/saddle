@@ -19,7 +19,7 @@ jobs:
         runtime: [node, bun, deno]
     steps:
       - name: checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
       - name: setup node
         uses: actions/setup-node@v5
         with:
@@ -50,7 +50,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: checkout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v7
       - name: setup node
         uses: actions/setup-node@v5
         with:
