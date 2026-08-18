@@ -192,3 +192,11 @@ Every completed package must link its source material, design record, source pat
 - [x] **D003.** Move eligible planning, research, operations and consolidation documents into `docs/`.
 - [x] **D004.** Update all repository-relative links, workflow references and package metadata affected by the move.
 - [x] **D005.** Validate the repository documentation map and commit the centralization change.
+
+## Branch and pull request archive ledger
+
+- [x] **B001.** Inventory every open or closed pull request and every remote branch other than `main`.
+- [x] **B002.** Capture immutable commit references and create recovery tags for each non-main branch.
+- [x] **B003.** Close pull requests only after their branch head is represented by a recovery tag.
+- [x] **B004.** Delete every remote branch other than `main` after closing its associated pull request.
+- [x] **B005.** Verify that `main` is the only remaining branch and publish the archival manifest in the cleanup commit.
