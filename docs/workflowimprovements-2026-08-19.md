@@ -18,7 +18,7 @@ GitHub exposes starter workflows as a catalog that can be filtered by category; 
 
 ## Implemented improvement
 
-The repository now includes `workflow lint`. It runs only when workflow or local composite-action files change, uses a read-only token, and checks workflow syntax, expressions, action inputs, reusable workflow calls, cron syntax and common workflow-security errors. `actionlint` performs these checks without running project code, making it an appropriate low-cost complement to CodeQL's broader Actions analysis.[2]
+The repository now includes `workflow lint`. It runs only for pull requests that change workflow or local composite-action files, uses a read-only token, and checks workflow syntax, expressions, action inputs, reusable workflow calls, cron syntax and common workflow-security errors. `actionlint` performs these checks without running project code, making it an appropriate low-cost complement to CodeQL's broader Actions analysis.[2]
 
 The action references are pinned to full commit SHAs. GitHub identifies full SHA pinning as the immutable form of action reference and recommends least-privilege workflow tokens.[3] The new workflow has only `contents: read`; it introduces no secrets, package publishing, network credentials or self-hosted runner.
 

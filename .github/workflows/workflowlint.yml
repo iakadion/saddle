@@ -2,17 +2,11 @@
 name: workflow lint
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - ".github/workflows/**"
-      - ".github/actions/**"
   pull_request:
     branches: [main]
     paths:
       - ".github/workflows/**"
       - ".github/actions/**"
-  workflow_dispatch:
 
 permissions:
   contents: read
@@ -28,5 +22,5 @@ jobs:
       - name: lint workflows
         uses: reviewdog/action-actionlint@723b43e281169876cbcd247431484753fb341f0d
         with:
-          reporter: github-actions
+          reporter: github-pr-check
           fail_level: error
