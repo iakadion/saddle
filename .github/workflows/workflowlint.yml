@@ -1,0 +1,32 @@
+# Verifies GitHub Actions syntax, expressions, action inputs and reusable workflow calls.
+name: workflow lint
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/**"
+      - ".github/actions/**"
+  pull_request:
+    branches: [main]
+    paths:
+      - ".github/workflows/**"
+      - ".github/actions/**"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    name: workflow syntax and policy lint
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - name: checkout
+        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09
+      - name: lint workflows
+        uses: reviewdog/action-actionlint@723b43e281169876cbcd247431484753fb341f0d
+        with:
+          reporter: github-actions
+          fail_level: error

@@ -200,3 +200,13 @@ Every completed package must link its source material, design record, source pat
 - [x] **B003.** Close pull requests only after their branch head is represented by a recovery tag.
 - [x] **B004.** Delete every remote branch other than `main` after closing its associated pull request.
 - [x] **B005.** Verify that `main` is the only remaining branch and publish the archival manifest in the cleanup commit.
+
+## Workflow improvement audit ledger
+
+- [x] **W001.** Inventory every tracked workflow, reusable action and trigger in the repository.
+- [x] **W002.** Classify current coverage across CI, security, releases, deployment, maintenance and automation.
+- [x] **W003.** Compare the current set with the official workflow categories supplied by the user.
+- [x] **W004.** Identify duplicate, overlapping, inactive and missing controls with their operating costs.
+- [x] **W005.** Evaluate candidate workflows against the no-secret-in-source, tag-derived-release and minimal-cache policies.
+- [x] **W006.** Implement only low-risk workflow improvements with deterministic validation and no new external credentials.
+- [x] **W007.** Publish a workflow-improvement assessment with evidence, trade-offs, deferred work and operating requirements.
